@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.UvvPunkteGruppen" 
+    table="UVV_PUNKTE_GRUPPEN"
+>
+
+    <id
+        name="idUvvPunkteGruppen"
+        type="java.lang.Integer"
+        column="ID_UVV_PUNKTE_GRUPPEN"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="idUvvArt"
+        type="int"
+        column="ID_UVV_ART"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="gruppe"
+        type="int"
+        column="GRUPPE"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="text"
+        type="java.lang.String"
+        column="TEXT"
+        length="255"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="1">
+                <h:outputLabel value="Interne Nr." for="interneNr" />
+                <h:inputText value="#{anlageEdit.interneNr}" />
+                <h:message for="interneNr" />
+
+                <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
+                <h:inputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" required="false" />
+                <h:message for="fabrikationsnr" />
+
+                <h:outputLabel value="Hersteller" for="selectableHersteller" />
+                <h:selectOneMenu id="selectableHersteller" value="#{anlageEdit.idHersteller}" required="true">
+                    <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                </h:selectOneMenu>
+                <h:message for="selectableHersteller" />    
+            </h:panelGrid>
+
+            <h:commandButton action="#{anlageEdit.update}" value="Speichern"/>
+        </h:form>
+
+
+        <h:dataTable id="resultaten" value="#{anlageSearch.selectableAnlagen}" var="anlage" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" first="0" width="100%" dir="LTR" frame="hsides" rules="all">
+
+            <f:facet name="header">
+                <h:outputText value="Search results" />
+            </f:facet> 
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Interne ID" />
+                </f:facet> 
+                <h:outputText binding="#{anlageSearch.idSingleAnlagen}" value="#{anlage[0].interneNr}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Art" />
+                </f:facet> 
+                <h:outputText  value="#{anlage[1].art}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Holen" />
+                </f:facet> 
+
+                <h:form>
+                    <h:commandButton action="#{anlageSearch.fetchEdit}" value="Holen"/>
+                </h:form>
+
+            </h:column>        
+        </h:dataTable>
+        <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
+
+    </h:body>
+</html>

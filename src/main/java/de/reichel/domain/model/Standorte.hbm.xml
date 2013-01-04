@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.Standorte" 
+    table="STANDORTE"
+>
+
+    <id
+        name="idStandorte"
+        type="java.lang.Integer"
+        column="ID_STANDORTE"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="idBetreiber"
+        type="java.lang.Integer"
+        column="ID_BETREIBER"
+        length="10"
+    />
+    <property
+        name="idEntsorger"
+        type="java.lang.Integer"
+        column="ID_ENTSORGER"
+        length="10"
+    />
+    <property
+        name="strasseNr"
+        type="java.lang.String"
+        column="STRASSE_NR"
+        length="200"
+    />
+    <property
+        name="plz"
+        type="java.lang.String"
+        column="PLZ"
+        length="200"
+    />
+    <property
+        name="ort"
+        type="java.lang.String"
+        column="ORT"
+        length="200"
+    />
+    <property
+        name="land"
+        type="java.lang.String"
+        column="LAND"
+        length="200"
+    />
+    <property
+        name="besonderheiten"
+        type="java.lang.String"
+        column="BESONDERHEITEN"
+        length="200"
+    />
+    <property
+        name="ansprechpartner"
+        type="java.lang.String"
+        column="ANSPRECHPARTNER"
+        length="200"
+    />
+    <property
+        name="telefon"
+        type="java.lang.String"
+        column="TELEFON"
+        length="200"
+    />
+    <property
+        name="interneNotiz"
+        type="java.lang.String"
+        column="INTERNE_NOTIZ"
+        length="40"
+    />
+    <property
+        name="bemerkung"
+        type="java.lang.String"
+        column="BEMERKUNG"
+        length="200"
+    />
+    <property
+        name="standortname"
+        type="java.lang.String"
+        column="STANDORTNAME"
+        length="200"
+    />
+    <property
+        name="fax"
+        type="java.lang.String"
+        column="FAX"
+        length="200"
+    />
+    <property
+        name="faxGsm"
+        type="java.lang.String"
+        column="FAX_GSM"
+        length="200"
+    />
+    <property
+        name="idEntsorgerFraktion1"
+        type="java.lang.Integer"
+        column="ID_ENTSORGER_FRAKTION1"
+        length="10"
+    />
+    <property
+        name="idEntsorgerFraktion2"
+        type="java.lang.Integer"
+        column="ID_ENTSORGER_FRAKTION2"
+        length="10"
+    />
+    <property
+        name="idEntsorgerFraktion3"
+        type="java.lang.Integer"
+        column="ID_ENTSORGER_FRAKTION3"
+        length="10"
+    />
+    <property
+        name="idEntsorgerFraktion4"
+        type="java.lang.Integer"
+        column="ID_ENTSORGER_FRAKTION4"
+        length="10"
+    />
+    <property
+        name="email"
+        type="java.lang.String"
+        column="EMAIL"
+        length="200"
+    />
+    <property
+        name="emailGsm"
+        type="java.lang.String"
+        column="EMAIL_GSM"
+        length="200"
+    />
+    <property
+        name="anfahrtspauschale"
+        type="java.lang.Short"
+        column="ANFAHRTSPAUSCHALE"
+        length="5"
+    />
+    <property
+        name="anfahrtspauschaleBetrag"
+        type="java.lang.Double"
+        column="ANFAHRTSPAUSCHALE_BETRAG"
+        length="22"
+    />
+    <property
+        name="kilometerpauschale"
+        type="java.lang.Short"
+        column="KILOMETERPAUSCHALE"
+        length="5"
+    />
+    <property
+        name="kilometerpauschaleBetrag"
+        type="java.lang.Double"
+        column="KILOMETERPAUSCHALE_BETRAG"
+        length="22"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

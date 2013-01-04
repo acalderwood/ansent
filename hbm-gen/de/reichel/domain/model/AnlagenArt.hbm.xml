@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.AnlagenArt" 
+    table="ANLAGEN_ART"
+>
+
+    <id
+        name="idAnlagenArt"
+        type="java.lang.Integer"
+        column="ID_ANLAGEN_ART"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="art"
+        type="java.lang.String"
+        column="ART"
+        length="200"
+    />
+    <property
+        name="repBetrag"
+        type="java.lang.Integer"
+        column="REP_BETRAG"
+        length="10"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

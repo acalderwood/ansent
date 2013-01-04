@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <!-- Edit Kunde -->
+        <h:form>
+            <h:panelGrid columns="1">
+                <h:outputLabel value="Firmenname:" for="firmenname" />
+                <h:inputText value="#{kundenEdit.firmenname}" />
+                <h:inputText value="#{kundenEdit.idKunden}" rendered="false"/>
+            </h:panelGrid>
+
+            <h:commandButton action="#{kundenEdit.update}" value="Speichern"/>
+        </h:form>
+
+        <!-- Search for edit -->
+
+        <h:dataTable id="resultaten" value="#{kundenSearch.selectableKunden}" var="kunde" styleClass="search">
+
+            <f:facet name="header">
+                <h:outputText value="Search results" />
+            </f:facet> 
+
+            <h:outputText binding="#{kundenSearch.idSingleKunden}" value="#{kunde.idKunden}" rendered="false"></h:outputText>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Firmenname:" />
+                </f:facet> 
+                <h:outputText value="#{kunde.firmenname}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <h:form>
+                    <h:commandButton action="#{kundenSearch.fetchEdit}" value="Holen"/>
+                </h:form>
+            </h:column>    
+
+        </h:dataTable>
+        <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
+    </h:body>
+</html>

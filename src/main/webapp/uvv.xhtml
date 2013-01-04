@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <f:view>
+            <h4>Neue UVV</h4>
+            <h:form id="anlageSummary">
+                <h:panelGrid columns="1">
+
+                    <h:selectOneMenu value="#{uvvSearch.idAnlagenForUvv}">
+                        <f:selectItems value="#{uvvSearch.allAnlagen}" var="anlage" itemValue="#{anlage[0].idAnlagen}" itemLabel="#{anlage[0].interneNr}"/>
+                        <f:ajax listener="#{uvvSearch.processSelectedAnlagen}" render="betreiberort auswahlUvv"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Ort" for="betreiberort" />
+                    <h:outputText id="betreiberort" value="#{uvvSearch.betreiber.ort}"/>
+
+                </h:panelGrid>
+            </h:form>
+
+            <h:form  id="auswahlUvv">
+                <h:panelGrid columns="1">
+
+                    <h:selectOneMenu value="#{uvvSearch.idUvv}">
+                        <f:selectItems value="#{uvvSearch.selectableUvv}" var="uvv" itemValue="#{uvv.idUvv}" itemLabel="#{uvv.pruefdatum}"/>
+                        <f:ajax listener="#{uvvSearch.processSelectedUvv}" render="ergebnis nextUvv prufer" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Ergebnis:" for="ergebnis" />
+                    <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '1'}" value="Erstprüfung IO" id="ergebnis"/>
+
+                    <h:outputLabel value="Nächste UVV:" for="nextUvv" />
+                    <h:outputText value="#{uvvSearch.uvv[0].nextUvv}" id="nextUvv"/>
+
+                    <h:outputLabel value="Prüfer:" for="prufer" />
+                    <h:outputText value="#{uvvSearch.uvv[0].pruefer}" id="prufer"/>
+
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

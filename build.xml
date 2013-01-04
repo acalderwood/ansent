@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<project name="Hibernate3" basedir=".">
+
+    <property file="build.properties"/>
+
+    <path id="lib.class.path">
+        <pathelement path="${basedir}/lib/middlegen-2.1.jar" />
+        <pathelement path="${basedir}/lib/log4j-1.2.17.jar" />
+        <pathelement path="${basedir}/lib/velocity-1.5.jar" />
+        <pathelement path="${basedir}/lib/middlegen-hibernate-plugin-2.1.jar" />
+        <pathelement path="${basedir}/lib/mysql-connector-java-5.1.22.jar" />
+        <pathelement path="${basedir}/lib/commons-collections-3.2.1.jar" />
+        <pathelement path="${basedir}/lib/commons-lang-2.6.jar" />
+        <pathelement path="${basedir}/lib/hibernate-tools-3.2.3.GA.jar" />
+    </path>
+    
+    <target name="middlegen" description="Generate Hibernate mapping files" >
+    
+        <taskdef
+            name="middlegen"
+            classname="middlegen.MiddlegenTask"
+            classpathref="lib.class.path"/>
+
+        <middlegen appname="Hibernate-Spring" gui="false" databaseurl="${jdbc.url}" driver="${jdbc.driver}" username="${database.username}" password="${database.password}" schema="${database.schema}">
+            <table name="ANLAGEN" pktable="ID_ANLAGEN" />
+            <table name="ANLAGEN_ART" pktable="ID_ANLAGEN_ART" />
+            <table name="ANLAGEN_HERSTELLER" pktable="ID_ANLAGEN_HERSTELLER" />
+            <table name="ANLAGEN_STANDORTE" pktable="ID_ANLAGEN_STANDORTE" />
+            <table name="BETREIBER" pktable="ID_BETREIBER" />
+            <table name="EMAILS" pktable="ID_ENTSORGER" />
+            <table name="ENTSORGER" pktable="ID_ENTSORGER" />
+            <table name="FIRMEN" pktable="ID_FIRMA" />
+            <table name="FRAKTIONEN" pktable="ID_FRAKTION" />
+            <table name="GSM_SYSTEME" pktable="ID_GSM" />
+            <table name="HISTORY" pktable="ID_HISTORY" />
+            <table name="KFZ" pktable="KFZ_ID" />
+            <table name="KUNDEN" pktable="ID_KUNDEN" />
+            <table name="MAILUSER" pktable="ID_MAILUSER" />
+            <table name="REPAIR" pktable="ID_REPAIR" />
+            <table name="REPAIR_TEILE" pktable="ID_REPAIR_TEILE" />
+            <table name="Rechnungen_TE" pktable="ID" />
+            <table name="Rechnungspositionen_TE" pktable="ID" />
+            <table name="SAETZE" pktable="ID_SATZ" />
+            <table name="STANDORTE" pktable="ID_STANDORTE" />
+            <table name="SUBS" pktable="ID_SUB" />
+            <table name="TECHNIKER" pktable="ID_TECHNIKER" />
+            <table name="TECHNIKER_EINSATZ" pktable="TECHNIKER_EINSATZ_ID" />
+            <table name="TEILE" pktable="ID" />
+            <table name="TEILE_GRUPPE" pktable="ID" />
+            <table name="TEILE_GRUPPEN" pktable="ID" />
+            <table name="USER_TABLE" pktable="ID_USER" />
+            <table name="UVV_ART" pktable="ID_UVV_ART" />
+            <table name="UVV_MANGEL" pktable="ID_UVV_MANGEL" />
+            <table name="UVV_PUNKTE" pktable="ID_UVV_PUNKTE" />
+            <table name="UVV_PUNKTE_GRUPPEN" pktable="ID_UVV_PUNKTE_GRUPPEN" />
+            
+            <hibernate destination="${hbm.gen}" package="${package.name}" javaTypeMapper="middlegen.plugins.hibernate.HibernateJavaTypeMapper"/>
+            
+        </middlegen>
+        
+    </target>
+
+</project>

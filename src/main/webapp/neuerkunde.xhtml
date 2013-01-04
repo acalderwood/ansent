@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <f:view>
+            <h4>Neuer Kunde</h4>
+            <h:form id="neuerKunde">
+                <h:panelGrid columns="1">
+
+                    <h:outputLabel value="Firmenname:" for="firmenname" />
+                    <h:inputText id="firmenname" value="#{kundenNew.firmenname}" required="true" />
+                    <h:message for="firmenname" />
+
+                    <h:outputLabel value="Ansprechpartner:" for="ansprechpartner" />
+                    <h:inputText id="ansprechpartner" value="#{kundenNew.ansprechpartner}" required="false" />
+                    <h:message for="ansprechpartner" />
+
+                    <h:outputLabel value="Strasse, Nr,:" for="strasseNr" />
+                    <h:inputText id="strasseNr" value="#{kundenNew.strasseNr}" required="true" />
+                    <h:message for="strasseNr" />
+
+                    <h:outputLabel value="PLZ:" for="plz" />
+                    <h:inputText id="plz" value="#{kundenNew.plz}" required="true" />
+                    <h:message for="plz" />
+
+                    <h:outputLabel value="Ort:" for="ort" />
+                    <h:inputText id="ort" value="#{kundenNew.ort}" required="true" />
+                    <h:message for="ort" />
+
+                    <h:outputLabel value="Land:" for="land" />
+                    <h:inputText id="land" value="#{kundenNew.land}" required="false" />
+                    <h:message for="land" />
+
+                    <h:outputLabel value="Fax:" for="firmenname" />
+                    <h:inputText id="fax" value="#{kundenNew.firmenname}" required="false" />
+                    <h:message for="fax" />
+
+                    <h:outputLabel value="Telefon:" for="telefon" />
+                    <h:inputText id="telefon" value="#{kundenNew.telefon}" required="false" />
+                    <h:message for="telefon" />
+
+                    <h:outputLabel value="E-Mail:" for="email" />
+                    <h:inputText id="email" value="#{kundenNew.email}" required="false" />
+                    <h:message for="email" />
+
+                    <h:outputLabel value="Bemerkung:" for="bemerkung" />
+                    <h:inputTextarea id="bemerkung" value="#{kundenNew.bemerkung}" required="false" />
+                    <h:message for="bemerkung" />
+
+                    <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
+                    <h:inputTextarea id="interneNotiz" value="#{kundenNew.interneNotiz}" required="false" />
+                    <h:message for="interneNotiz" />
+
+                    <h:commandButton action="#{kundenNew.add}" value="Hinzufügen" />
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+    <h:body>
+</html>

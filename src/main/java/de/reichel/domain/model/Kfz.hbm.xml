@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.Kfz" 
+    table="KFZ"
+>
+
+    <id
+        name="kfzId"
+        type="java.lang.Integer"
+        column="KFZ_ID"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="kfzKennzeichen"
+        type="java.lang.String"
+        column="KFZ_KENNZEICHEN"
+        length="8"
+    />
+    <property
+        name="hersteller"
+        type="java.lang.String"
+        column="HERSTELLER"
+        length="20"
+    />
+    <property
+        name="typ"
+        type="java.lang.String"
+        column="TYP"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="variante"
+        type="java.lang.String"
+        column="VARIANTE"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="schluesselnr"
+        type="java.lang.String"
+        column="SCHLUESSELNR"
+        not-null="true"
+        length="20"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

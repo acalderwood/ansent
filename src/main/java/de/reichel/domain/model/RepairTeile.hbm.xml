@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.RepairTeile" 
+    table="REPAIR_TEILE"
+>
+
+    <id
+        name="idRepairTeile"
+        type="java.lang.Integer"
+        column="ID_REPAIR_TEILE"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="idTeile"
+        type="java.lang.Integer"
+        column="ID_TEILE"
+        length="10"
+    />
+    <property
+        name="idRepair"
+        type="java.lang.Integer"
+        column="ID_REPAIR"
+        length="10"
+    />
+    <property
+        name="anzahl"
+        type="java.lang.Double"
+        column="ANZAHL"
+        length="22"
+    />
+    <property
+        name="teileEinheit"
+        type="java.lang.String"
+        column="TEILE_EINHEIT"
+        length="50"
+    />
+    <property
+        name="teileName"
+        type="java.lang.String"
+        column="TEILE_NAME"
+        length="255"
+    />
+    <property
+        name="teilePreis"
+        type="java.lang.Double"
+        column="TEILE_PREIS"
+        length="22"
+    />
+    <property
+        name="teileRabatt"
+        type="java.lang.Double"
+        column="TEILE_RABATT"
+        length="22"
+    />
+    <property
+        name="teileEk"
+        type="java.lang.Double"
+        column="TEILE_EK"
+        length="22"
+    />
+    <property
+        name="idSub"
+        type="java.lang.Integer"
+        column="ID_SUB"
+        length="10"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

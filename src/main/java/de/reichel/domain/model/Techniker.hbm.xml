@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.Techniker" 
+    table="TECHNIKER"
+>
+
+    <id
+        name="idTechniker"
+        type="java.lang.Integer"
+        column="ID_TECHNIKER"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="firmaTechniker"
+        type="java.lang.String"
+        column="FIRMA_TECHNIKER"
+        length="40"
+    />
+    <property
+        name="nameTechniker"
+        type="java.lang.String"
+        column="NAME_TECHNIKER"
+        length="40"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>
