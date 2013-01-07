@@ -11,11 +11,11 @@
             <h:form id="newAnlageForm">
                 <h:panelGrid columns="1">
 
-                    <h:outputLabel value="Interne Nr." for="interneNr" />
+                    <h:outputLabel value="Interne Nummer:" for="interneNr" />
                     <h:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="true" />
                     <h:message for="interneNr" />
 
-                    <h:outputLabel value="Art" for="art" />
+                    <h:outputLabel value="Art:" for="art" />
                     <h:selectOneMenu id="art" value="#{anlageSearch.idArt}" required="true">
                         <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
                     </h:selectOneMenu>
@@ -27,24 +27,25 @@
                     </h:selectOneMenu>
                     <h:message for="hersteller" />
 
-                    <h:outputLabel value="Standort" for="standort" />
+                   <!-- <h:outputLabel value="Standort" for="standort" />
                     <h:selectOneMenu id="standort" value="#{anlageSearch.idStandort}" required="false">
                         <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
                     </h:selectOneMenu>
-                    <h:message for="standort" />                    
+                    <h:message for="standort" />  -->                  
 
                     <!-- TODO: ajax-->
-                    <h:outputLabel value="Kunden" for="kunden" />
+                   
+                    <!--<h:outputLabel value="Kunden" for="kunden" />
                     <h:selectOneMenu id="kunden" value="#{anlageSearch.idKunden}" required="false">
                         <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
                     </h:selectOneMenu>
-                    <h:message for="kunden" />    
+                    <h:message for="kunden" /> -->    
 
-                    <h:outputLabel value="Betreiber" for="betreiber" />
+                   <!-- <h:outputLabel value="Betreiber" for="betreiber" />
                     <h:selectOneMenu id="betreiber" value="#{anlageSearch.idBetreiber}" required="false">
                         <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
                     </h:selectOneMenu>
-                    <h:message for="betreiber" />    
+                    <h:message for="betreiber" />    -->
                     
                     <h:outputLabel value="Typ" for="typ" />
                     <h:inputText id="typ" value="#{anlageSearch.typ}" required="true" />
