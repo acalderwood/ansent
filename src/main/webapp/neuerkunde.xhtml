@@ -12,62 +12,62 @@
         <f:view>
             <h4>Neuer Kunde</h4>
             <h:form id="neuerKunde">
-                <h:panelGrid columns="3">
+                <p:panelGrid columns="3">
 
                     <h:outputLabel value="Firmenname:" for="firmenname" />
-                    <h:inputText id="firmenname" value="#{kundenNew.firmenname}" required="true" requiredMessage="Bitte geben Sie eine gultige Kundennamen ein" />
+                    <p:inputText id="firmenname" value="#{kundenNew.firmenname}" required="true" requiredMessage="Bitte geben Sie eine gultige Kundennamen ein" />
                     <h:message for="firmenname" errorStyle="color:red; display:block"/>
 
                     <h:outputLabel value="Ansprechpartner:" for="ansprechpartner" />
-                    <h:inputText id="ansprechpartner" value="#{kundenNew.ansprechpartner}" required="false" />
+                    <p:inputText id="ansprechpartner" value="#{kundenNew.ansprechpartner}" required="false" />
                     <h:message for="ansprechpartner" />
 
                     <h:outputLabel value="Strasse, Nr,:" for="strasseNr" />
-                    <h:inputText id="strasseNr" value="#{kundenNew.strasseNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Strasse, Nr ein"/>
+                    <p:inputText id="strasseNr" value="#{kundenNew.strasseNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Strasse, Nr ein"/>
                     <h:message for="strasseNr" errorStyle="color:red; display:block"/>
 
                     <h:outputLabel value="PLZ:" for="plz" />
-                    <h:inputText id="plz" value="#{kundenNew.plz}" required="true" requiredMessage="Bitte geben Sie eine gultige PLZ ein"/>
+                    <p:inputText id="plz" value="#{kundenNew.plz}" required="true" requiredMessage="Bitte geben Sie eine gultige PLZ ein"/>
                     <h:message for="plz" errorStyle="color:red; display:block"/>
 
                     <h:outputLabel value="Ort:" for="ort" />
-                    <h:inputText id="ort" value="#{kundenNew.ort}" required="true" requiredMessage="Bitte geben Sie eine gultige Ort ein"/>
+                    <p:inputText id="ort" value="#{kundenNew.ort}" required="true" requiredMessage="Bitte geben Sie eine gultige Ort ein"/>
                     <h:message for="ort" errorStyle="color:red; display:block"/>
 
                     <h:outputLabel value="Land:" for="land" />
-                    <h:inputText id="land" value="#{kundenNew.land}" required="false" />
+                    <p:inputText id="land" value="#{kundenNew.land}" required="false" />
                     <h:message for="land" />
 
                     <h:outputLabel value="Fax:" for="firmenname" />
-                    <h:inputText id="fax" value="#{kundenNew.firmenname}" required="false" />
+                    <p:inputText id="fax" value="#{kundenNew.firmenname}" required="false" />
                     <h:message for="fax" />
 
                     <h:outputLabel value="Telefon:" for="telefon" />
-                    <h:inputText id="telefon" value="#{kundenNew.telefon}" required="false" />
+                    <p:inputText id="telefon" value="#{kundenNew.telefon}" required="false" />
                     <h:message for="telefon" />
 
                     <h:outputLabel value="E-Mail:" for="email" />
-                    <h:inputText id="email" value="#{kundenNew.email}" required="false" />
+                    <p:inputText id="email" value="#{kundenNew.email}" required="false" />
                     <h:message for="email" />
 
                     <h:outputLabel value="Bemerkung:" for="bemerkung" />
-                    <h:inputTextarea id="bemerkung" value="#{kundenNew.bemerkung}" required="false" />
+                    <p:inputTextarea id="bemerkung" value="#{kundenNew.bemerkung}" required="false" />
                     <h:message for="bemerkung" />
 
                     <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
-                    <h:inputTextarea id="interneNotiz" value="#{kundenNew.interneNotiz}" required="false" />
+                    <p:inputTextarea id="interneNotiz" value="#{kundenNew.interneNotiz}" required="false" />
                     <h:message for="interneNotiz" />
                     
                     <h:outputLabel value="Buchungskreis:" for="buchungskreis" />
-                    <h:inputText id="buchungskreis" value="#{kundenNew.buchungskreis}" required="false" />
+                    <p:inputText id="buchungskreis" value="#{kundenNew.buchungskreis}" required="false" />
                     <h:message for="buchungskreis" />
                     
-                    <h:outputLabel value="Steuernr. / USt-IdNr." for="steuernummer" />
-                    <h:inputText id="steuernummer" value="#{kundenNew.steuernummer}" required="false" />
-                    <h:message for="steuernummer" />
+                    <h:outputLabel value="Steuernr. / USt-IdNr." for="steuerNr" />
+                    <p:inputText id="steuerNr" value="#{kundenNew.steuerNr}" required="false" />
+                    <h:message for="steuerNr" />
 
                     <h:commandButton action="#{kundenNew.add}" value="Hinzufügen" />
-                </h:panelGrid>
+                </p:panelGrid>
             </h:form>
         </f:view>
             </ui:define>
