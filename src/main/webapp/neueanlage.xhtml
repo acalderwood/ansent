@@ -17,51 +17,51 @@
                         </f:facet>  
 
                         <h:outputLabel value="Interne Nr." for="interneNr" />
-                        <p:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="true" />
+                        <p:inputText id="interneNr" value="#{anlageNew.interneNr}" required="true" />
                         <h:message for="interneNr" />
 
                         <h:outputLabel value="Art" for="art" />
-                        <h:selectOneMenu id="art" value="#{anlageSearch.idArt}" required="true">
-                            <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                        <h:selectOneMenu id="art" value="#{anlageNew.idArt}" required="true">
+                            <f:selectItems id="selectableArtList" value="#{anlageNew.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
                         </h:selectOneMenu>
                         <!-- EMPTY CELL -->
 
                         <h:outputLabel value="Hersteller" for="hersteller" />
-                        <h:selectOneMenu id="hersteller" value="#{anlageSearch.idHersteller}" required="true">
-                            <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                        <h:selectOneMenu id="hersteller" value="#{anlageNew.idHersteller}" required="true">
+                            <f:selectItems id="selectableHerstellerList" value="#{anlageNew.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
                         </h:selectOneMenu>
                         <!-- EMPTY CELL -->
 
                         <h:outputLabel value="Typ" for="typ" />
-                        <p:inputText id="typ" value="#{anlageSearch.typ}" required="true" />
+                        <p:inputText id="typ" value="#{anlageNew.typ}" required="true" />
                         <h:message for="typ" />
 
                         <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
-                        <p:inputText id="fabrikationsnr" value="#{anlageSearch.fabrikationsnr}" required="false" />
+                        <p:inputText id="fabrikationsnr" value="#{anlageNew.fabrikationsnr}" required="false" />
                         <h:message for="fabrikationsnr" />
 
                         <h:outputLabel value="Baujahr" for="baujahr" />
-                        <p:inputText id="baujahr" value="#{anlageSearch.baujahr}" required="false" />
+                        <p:inputText id="baujahr" value="#{anlageNew.baujahr}" required="false" />
                         <h:message for="baujahr" />
 
                         <h:outputLabel value="Bemerkung" for="bemerkung" />
-                        <p:inputText id="bemerkung" value="#{anlageSearch.bemerkung}" required="false" />
+                        <p:inputText id="bemerkung" value="#{anlageNew.bemerkung}" required="false" />
                         <h:message for="bemerkung" />
 
                         <h:outputLabel value="Interne Notiz" for="interneNotiz" />
-                        <p:inputText id="interneNotiz" value="#{anlageSearch.interneNotiz}" required="false" />
+                        <p:inputText id="interneNotiz" value="#{anlageNew.interneNotiz}" required="false" />
                         <h:message for="interneNotiz" />
 
                         <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                        <p:calendar value="#{anlageSearch.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de" />
+                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de" />
                         <h:message for="naechsteUVV" />
 
                         <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                        <p:inputText id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" required="false" />
+                        <p:calendar value="#{anlageNew.naechsteWartung}" id="naechsteWartung" showOn="button" locale="de" />
                         <h:message for="naechsteWartung" />
 
                         <f:facet name="footer">  
-                            <h:commandButton action="#{anlageSearch.add}" value="Hinzufügen" style="margin:0"/>
+                            <h:commandButton action="#{anlageNew.add}" value="Hinzufügen" style="margin:0"/>
                         </f:facet>
 
                     </p:panelGrid>

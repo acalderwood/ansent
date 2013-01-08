@@ -35,16 +35,11 @@ import org.springframework.stereotype.Controller;
 public class AnlageSearch extends AnlageBean {
 
     private static final Log log = LogFactory.getLog(AnlageSearch.class);
-    @Inject
-    private AnlagenDAO anlagenDAO;
     private HtmlOutputText idSingleAnlagen;
     private List<Integer> selectedArt;
     private List<Integer> selectedHersteller;
     private Object[] anlage;
     private List<Object[]> anlagen;
-    private Standorte standorte;
-    private Kunden kunden;
-    private Betreiber betreiber;
 
     public List<Object[]> getSelectableAnlagen() {
         return anlagenDAO.getAnlagen(this);
@@ -81,37 +76,12 @@ public class AnlageSearch extends AnlageBean {
         System.out.println("fetchView");
         FacesContext context = FacesContext.getCurrentInstance();
         AnlageView anlageView = (AnlageView) context.getApplication().evaluateExpressionGet(context, "#{anlageView}", AnlageView.class);
-      System.out.println(idSingleAnlagen.getValue());
-        
+        System.out.println(idSingleAnlagen.getValue());
+
         Object[] anlagenGraph = anlagenDAO.getAnlagen((String) idSingleAnlagen.getValue());
         anlageView.hydrate(anlagenGraph);
         System.out.println(anlageView.getInterneNr());
         return "ubersichtanlage";
-    }
-
-    public List<Integer> getSelectedArt() {
-        return selectedArt;
-    }
-
-    public void setSelectedArt(List<Integer> selectedArt) {
-        this.selectedArt = selectedArt;
-    }
-
-    //@TODO select all option?
-    public List<Integer> getSelectedHersteller() {
-        return selectedHersteller;
-    }
-
-    public void setSelectedHersteller(List<Integer> selectedHersteller) {
-        this.selectedHersteller = selectedHersteller;
-    }
-
-    public List<AnlagenArt> getSelectableArt() {
-        return anlagenDAO.getSelectableArt();
-    }
-
-    public List<AnlagenHersteller> getSelectableHersteller() {
-        return anlagenDAO.getSelectableHersteller();
     }
 
     public Object[] getAnlage() {
@@ -135,42 +105,6 @@ public class AnlageSearch extends AnlageBean {
         this.idSingleAnlagen = idSingleAnlagen;
     }
 
-    public List<Standorte> getSelectableStandort() {
-        return anlagenDAO.getSelectableStandort();
-    }
-
-    public List<Kunden> getSelectableKunden() {
-        return anlagenDAO.getSelectableKunden();
-    }
-
-    public List<Betreiber> getSelectableBetreiber() {
-        return anlagenDAO.getSelectableBetreiber();
-    }
-
-    public Standorte getStandorte() {
-        return standorte;
-    }
-
-    public void setStandorte(Standorte standorte) {
-        this.standorte = standorte;
-    }
-
-    public Kunden getKunden() {
-        return kunden;
-    }
-
-    public void setKunden(Kunden kunden) {
-        this.kunden = kunden;
-    }
-
-    public Betreiber getBetreiber() {
-        return betreiber;
-    }
-
-    public void setBetreiber(Betreiber betreiber) {
-        this.betreiber = betreiber;
-    }
-
     public void validateBaujahr(FacesContext context, UIComponent validate, Object value) throws ValidatorException {
         if (value != null && !((String) value).equals("")) {
             try {
@@ -182,5 +116,21 @@ public class AnlageSearch extends AnlageBean {
         }
     }
 
+    public List<Integer> getSelectedArt() {
+        return selectedArt;
+    }
+
+    public void setSelectedArt(List<Integer> selectedArt) {
+        this.selectedArt = selectedArt;
+    }
+
+    //@TODO select all option?
+    public List<Integer> getSelectedHersteller() {
+        return selectedHersteller;
+    }
+
+    public void setSelectedHersteller(List<Integer> selectedHersteller) {
+        this.selectedHersteller = selectedHersteller;
+    }
 
 }

@@ -4,12 +4,18 @@
  */
 package de.reichel.bean;
 
+import de.reichel.dao.AnlagenDAO;
 import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.AnlagenArt;
 import de.reichel.domain.model.AnlagenHersteller;
+import de.reichel.domain.model.Betreiber;
+import de.reichel.domain.model.Kunden;
+import de.reichel.domain.model.Standorte;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.inject.Inject;
 
 /**
  *
@@ -17,6 +23,8 @@ import java.text.SimpleDateFormat;
  */
 public class AnlageBean implements Serializable {
 
+    @Inject
+    protected AnlagenDAO anlagenDAO;
     public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
     private Integer idAnlagen;
@@ -35,6 +43,9 @@ public class AnlageBean implements Serializable {
     protected String interneNotiz;
     protected String naechsteUVV;
     protected String naechsteWartung;
+    protected Standorte standorte;
+    protected Kunden kunden;
+    protected Betreiber betreiber;
 
     public void hydrate(Object[] anlagenGraph) {
         Anlagen anlagen = (Anlagen) anlagenGraph[0];
@@ -208,5 +219,49 @@ public class AnlageBean implements Serializable {
      */
     public void setArt(String art) {
         this.art = art;
+    }
+    
+    public List<AnlagenArt> getSelectableArt() {
+        return anlagenDAO.getSelectableArt();
+    }
+
+    public List<AnlagenHersteller> getSelectableHersteller() {
+        return anlagenDAO.getSelectableHersteller();
+    }
+
+    public List<Standorte> getSelectableStandort() {
+        return anlagenDAO.getSelectableStandort();
+    }
+
+    public List<Kunden> getSelectableKunden() {
+        return anlagenDAO.getSelectableKunden();
+    }
+
+    public List<Betreiber> getSelectableBetreiber() {
+        return anlagenDAO.getSelectableBetreiber();
+    }
+
+    public Standorte getStandorte() {
+        return standorte;
+    }
+
+    public void setStandorte(Standorte standorte) {
+        this.standorte = standorte;
+    }
+
+    public Kunden getKunden() {
+        return kunden;
+    }
+
+    public void setKunden(Kunden kunden) {
+        this.kunden = kunden;
+    }
+
+    public Betreiber getBetreiber() {
+        return betreiber;
+    }
+
+    public void setBetreiber(Betreiber betreiber) {
+        this.betreiber = betreiber;
     }
 }
