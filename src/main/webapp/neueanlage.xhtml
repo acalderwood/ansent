@@ -17,12 +17,12 @@
                         </f:facet>  
 
                         <h:outputLabel value="Interne Nr." for="interneNr" />
-                        <p:inputText id="interneNr" value="#{anlageNew.interneNr}" required="true" />
-                        <h:message for="interneNr" />
+                        <p:inputText id="interneNr" value="#{anlageNew.interneNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Interne Nummer ein" />
+                        <h:message for="interneNr" errorStyle="color:red; display:block"/>
 
                         <h:outputLabel value="Art" for="art" />
-                        <h:selectOneMenu id="art" value="#{anlageNew.idArt}" required="true">
-                            <f:selectItems id="selectableArtList" value="#{anlageNew.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                        <h:selectOneMenu id="art" value="#{anlageNew.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
+                            <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
                         </h:selectOneMenu>
                         <!-- EMPTY CELL -->
 
@@ -33,8 +33,8 @@
                         <!-- EMPTY CELL -->
 
                         <h:outputLabel value="Typ" for="typ" />
-                        <p:inputText id="typ" value="#{anlageNew.typ}" required="true" />
-                        <h:message for="typ" />
+                        <p:inputText id="typ" value="#{anlageNew.typ}" required="true" requiredMessage="Bitte geben Sie eine gultige Typ ein"/>
+                        <h:message for="typ" errorStyle="color:red; display:block"/>
 
                         <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
                         <p:inputText id="fabrikationsnr" value="#{anlageNew.fabrikationsnr}" required="false" />
@@ -53,11 +53,11 @@
                         <h:message for="interneNotiz" />
 
                         <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de" />
+                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de"  />
                         <h:message for="naechsteUVV" />
 
                         <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                        <p:calendar value="#{anlageNew.naechsteWartung}" id="naechsteWartung" showOn="button" locale="de" />
+                        <p:calendar id="naechsteWartung" value="#{anlageNew.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd HH:mm:ss" />
                         <h:message for="naechsteWartung" />
 
                         <f:facet name="footer">  
