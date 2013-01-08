@@ -18,13 +18,13 @@
                         <h:message for="interneNr" />
 
                         <h:outputLabel value="Art" for="selectableArt" />
-                        <h:selectManyListbox id="selectableArt" value="#{anlageSearch.selectedArt}" required="false">
+                        <h:selectManyListbox id="selectableArt" value="#{anlageSearch.selectedArt}" required="false" size="10">
                             <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
                         </h:selectManyListbox>
                         <h:message for="selectableArt" />
 
                         <h:outputLabel value="Hersteller" for="selectableHersteller" />
-                        <h:selectManyListbox id="selectableHersteller" value="#{anlageSearch.selectedHersteller}" required="false">
+                        <h:selectManyListbox id="selectableHersteller" value="#{anlageSearch.selectedHersteller}" required="false" size="10">
                             <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
                         </h:selectManyListbox>
                         <h:message for="selectableHersteller" />                        
