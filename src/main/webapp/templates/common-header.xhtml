@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      >
+    <body>
+        <ui:composition>
+
+            <script type="text/javascript">
+                PrimeFaces.locales['de'] = {
+                    closeText: 'Schließen',
+                    prevText: 'Zurück',
+                    nextText: 'Weiter',
+                    monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                    monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                    dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                    dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+                    dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+                    weekHeader: 'Woche',
+                    FirstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'Nur Zeit',
+                    timeText: 'Zeit',
+                    hourText: 'Stunde',
+                    minuteText: 'Minute',
+                    secondText: 'Sekunde',
+                    currentText: 'Heute',
+                    ampm: false,
+                    month: 'Monat',
+                    week: 'Woche',
+                    day: 'Tag',
+                    allDayText: 'Ganzer Tag'
+                };
+            </script>
+
+            <p:menubar>  
+                <p:menuitem value="Übersicht" url="suchubersichtanlage.jsf" />
+
+                <p:submenu label="Neuanlage" >  
+                    <p:menuitem value="Anlage" url="neueanlage.jsf" />  
+                    <p:menuitem value="Kunde" url="neuerkunde.jsf" />  
+                    <p:menuitem value="Betreiber" url="#" />  
+                    <p:menuitem value="Standort" url="neuestandorte.jsf" />  
+                    <p:menuitem value="Entsorger" url="#" />
+                </p:submenu>  
+
+                <p:submenu label="Bearbeiten" >  
+                    <p:menuitem value="Anlage" url="bearbeitenanlage.jsf" />  
+                    <p:menuitem value="Kunde" url="bearbeitenkunde.jsf" />  
+                    <p:menuitem value="Betreiber" url="#" />  
+                    <p:menuitem value="Standort" url="bearbeitenstandorte.jsf" />  
+                    <p:menuitem value="Entsorger" url="#" />
+                </p:submenu>     
+
+                <p:menuitem value="UVV" url="uvv.jsf" />
+
+                <p:menuitem value="Reparaturauftrag" url="reparatur.jsf" />
+
+                <p:submenu label="Suche" >  
+                    <p:menuitem value="Anlage" url="#" />  
+                    <p:menuitem value="Kunde" url="ubersichtkunde.jsf" />  
+                    <p:menuitem value="Betreiber" url="#" />  
+                    <p:menuitem value="Standort" url="ubersichtstandorte.jsf" />  
+                    <p:menuitem value="Alles" url="#" />
+                </p:submenu>  
+
+                <p:menuitem value="Logout" url="#" />
+
+            </p:menubar>
+
+        </ui:composition>
+    </body>
+</html>
