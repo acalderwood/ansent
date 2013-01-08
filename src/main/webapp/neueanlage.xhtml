@@ -53,11 +53,11 @@
                         <h:message for="interneNotiz" />
 
                         <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                        <p:calendar value="#{anlageSearch.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de" />
+                        <p:calendar value="#{anlageSearch.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de"  />
                         <h:message for="naechsteUVV" />
 
                         <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                        <p:calendar id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" showOn="button" required="false" locale="de" />
+                        <p:calendar id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd HH:mm:ss" />
                         <h:message for="naechsteWartung" />
 
                         <f:facet name="footer">  
