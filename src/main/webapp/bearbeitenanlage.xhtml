@@ -20,6 +20,27 @@
                 <h:selectOneMenu id="selectableHersteller" value="#{anlageEdit.idHersteller}" required="true">
                     <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
                 </h:selectOneMenu>
+                
+                                  <!--                    <h:outputLabel value="Standort" for="standort" />
+                                            <h:selectOneMenu id="standort" value="{anlageSearch.idStandort}" required="false">
+                                                <f:selectItems id="selectableStandortList" value="{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
+                                            </h:selectOneMenu>
+                                            <h:message for="standort" />                    
+                        
+                                             TODO: ajax
+                                            <h:outputLabel value="Kunden" for="kunden" />
+                                            <h:selectOneMenu id="kunden" value="{anlageSearch.idKunden}" required="false">
+                                                <f:selectItems id="selectableKundenList" value="{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
+                                            </h:selectOneMenu>
+                                            <h:message for="kunden" />    
+                        
+                                            <h:outputLabel value="Betreiber" for="betreiber" />
+                                            <h:selectOneMenu id="betreiber" value="{anlageSearch.idBetreiber}" required="false">
+                                                <f:selectItems id="selectableBetreiberList" value="{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
+                                            </h:selectOneMenu>
+                                            <h:message for="betreiber" />    
+                        -->
+                        
                 <h:message for="selectableHersteller" />    
             </h:panelGrid>
 
