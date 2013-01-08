@@ -57,7 +57,7 @@
                         <h:message for="naechsteUVV" />
 
                         <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                        <p:inputText id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" required="false" />
+                        <p:calendar id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" showOn="button" required="false" locale="de" />
                         <h:message for="naechsteWartung" />
 
                         <f:facet name="footer">  
