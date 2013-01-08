@@ -17,11 +17,11 @@
                         </f:facet>  
 
                         <h:outputLabel value="Interne Nr." for="interneNr" />
-                        <p:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="true" />
-                        <h:message for="interneNr" />
+                        <p:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Interne Nummer ein" />
+                        <h:message for="interneNr" errorStyle="color:red; display:block"/>
 
                         <h:outputLabel value="Art" for="art" />
-                        <h:selectOneMenu id="art" value="#{anlageSearch.idArt}" required="true">
+                        <h:selectOneMenu id="art" value="#{anlageSearch.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
                             <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
                         </h:selectOneMenu>
                         <!-- EMPTY CELL -->
@@ -33,8 +33,8 @@
                         <!-- EMPTY CELL -->
 
                         <h:outputLabel value="Typ" for="typ" />
-                        <p:inputText id="typ" value="#{anlageSearch.typ}" required="true" />
-                        <h:message for="typ" />
+                        <p:inputText id="typ" value="#{anlageSearch.typ}" required="true" requiredMessage="Bitte geben Sie eine gultige Typ ein"/>
+                        <h:message for="typ" errorStyle="color:red; display:block"/>
 
                         <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
                         <p:inputText id="fabrikationsnr" value="#{anlageSearch.fabrikationsnr}" required="false" />
