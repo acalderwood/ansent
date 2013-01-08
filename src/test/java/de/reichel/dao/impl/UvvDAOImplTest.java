@@ -8,14 +8,12 @@ import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import de.reichel.dao.UvvDAO;
 import de.reichel.domain.model.Uvv;
 import de.reichel.domain.model.UvvArt;
-import de.reichel.domain.model.UvvMangel;
-import de.reichel.domain.model.UvvPunkte;
-import de.reichel.domain.model.UvvPunkteGruppen;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +59,7 @@ public class UvvDAOImplTest {
         uvvDAO = context.getBean(UvvDAOImpl.class);
     }
 
-    @Test
+    @Test @Ignore
     public void testGetUvv() {
         Object[] uvv = uvvDAO.getUvv(10);
 //        Assert.assertEquals(Anlagen.class, uvv[].getClass());
