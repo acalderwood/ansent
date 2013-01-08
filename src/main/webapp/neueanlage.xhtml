@@ -1,82 +1,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
-        <f:view>
-            <h4>Neue Anlage</h4>
-            <h:form id="newAnlageForm">
-                <h:panelGrid columns="1">
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <h:form id="newAnlageForm">
+                    <p:panelGrid columns="3">
 
-                    <h:outputLabel value="Interne Nr." for="interneNr" />
-                    <h:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="true" />
-                    <h:message for="interneNr" />
+                        <f:facet name="header">  
+                            Neuer Anlage  
+                        </f:facet>  
 
-                    <h:outputLabel value="Art" for="art" />
-                    <h:selectOneMenu id="art" value="#{anlageSearch.idArt}" required="true">
-                        <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
-                    </h:selectOneMenu>
-                    <h:message for="art" />
+                        <h:outputLabel value="Interne Nr." for="interneNr" />
+                        <p:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="true" />
+                        <h:message for="interneNr" />
 
-                    <h:outputLabel value="Hersteller" for="hersteller" />
-                    <h:selectOneMenu id="hersteller" value="#{anlageSearch.idHersteller}" required="true">
-                        <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
-                    </h:selectOneMenu>
-                    <h:message for="hersteller" />
+                        <h:outputLabel value="Art" for="art" />
+                        <h:selectOneMenu id="art" value="#{anlageSearch.idArt}" required="true">
+                            <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                        </h:selectOneMenu>
+                        <!-- EMPTY CELL -->
 
-                    <h:outputLabel value="Standort" for="standort" />
-                    <h:selectOneMenu id="standort" value="#{anlageSearch.idStandort}" required="false">
-                        <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
-                    </h:selectOneMenu>
-                    <h:message for="standort" />                    
+                        <h:outputLabel value="Hersteller" for="hersteller" />
+                        <h:selectOneMenu id="hersteller" value="#{anlageSearch.idHersteller}" required="true">
+                            <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                        </h:selectOneMenu>
+                        <!-- EMPTY CELL -->
 
-                    <!-- TODO: ajax-->
-                    <h:outputLabel value="Kunden" for="kunden" />
-                    <h:selectOneMenu id="kunden" value="#{anlageSearch.idKunden}" required="false">
-                        <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
-                    </h:selectOneMenu>
-                    <h:message for="kunden" />    
+                        <h:outputLabel value="Typ" for="typ" />
+                        <p:inputText id="typ" value="#{anlageSearch.typ}" required="true" />
+                        <h:message for="typ" />
 
-                    <h:outputLabel value="Betreiber" for="betreiber" />
-                    <h:selectOneMenu id="betreiber" value="#{anlageSearch.idBetreiber}" required="false">
-                        <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
-                    </h:selectOneMenu>
-                    <h:message for="betreiber" />    
-                    
-                    <h:outputLabel value="Typ" for="typ" />
-                    <h:inputText id="typ" value="#{anlageSearch.typ}" required="true" />
-                    <h:message for="typ" />
+                        <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
+                        <p:inputText id="fabrikationsnr" value="#{anlageSearch.fabrikationsnr}" required="false" />
+                        <h:message for="fabrikationsnr" />
 
-                    <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
-                    <h:inputText id="fabrikationsnr" value="#{anlageSearch.fabrikationsnr}" required="false" />
-                    <h:message for="fabrikationsnr" />
+                        <h:outputLabel value="Baujahr" for="baujahr" />
+                        <p:inputText id="baujahr" value="#{anlageSearch.baujahr}" required="false" />
+                        <h:message for="baujahr" />
 
-                    <h:outputLabel value="Baujahr" for="baujahr" />
-                    <h:inputText id="baujahr" value="#{anlageSearch.baujahr}" required="false" />
-                    <h:message for="baujahr" />
+                        <h:outputLabel value="Bemerkung" for="bemerkung" />
+                        <p:inputText id="bemerkung" value="#{anlageSearch.bemerkung}" required="false" />
+                        <h:message for="bemerkung" />
 
-                    <h:outputLabel value="Bemerkung" for="bemerkung" />
-                    <h:inputText id="bemerkung" value="#{anlageSearch.bemerkung}" required="false" />
-                    <h:message for="bemerkung" />
+                        <h:outputLabel value="Interne Notiz" for="interneNotiz" />
+                        <p:inputText id="interneNotiz" value="#{anlageSearch.interneNotiz}" required="false" />
+                        <h:message for="interneNotiz" />
 
-                    <h:outputLabel value="Interne Notiz" for="interneNotiz" />
-                    <h:inputText id="interneNotiz" value="#{anlageSearch.interneNotiz}" required="false" />
-                    <h:message for="interneNotiz" />
+                        <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
+                        <p:calendar value="#{anlageSearch.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de" />
+                        <h:message for="naechsteUVV" />
 
-                    <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                    <h:inputText id="naechsteUVV" value="#{anlageSearch.naechsteUVV}" required="false" />
-                    <h:message for="naechsteUVV" />
+                        <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
+                        <p:inputText id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" required="false" />
+                        <h:message for="naechsteWartung" />
 
-                    <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                    <h:inputText id="naechsteWartung" value="#{anlageSearch.naechsteWartung}" required="false" />
-                    <h:message for="naechsteWartung" />
+                        <f:facet name="footer">  
+                            <h:commandButton action="#{anlageSearch.add}" value="Hinzufügen" style="margin:0"/>
+                        </f:facet>
 
-                    <h:commandButton action="#{anlageSearch.add}" value="Hinzufügen" />
-                </h:panelGrid>
-            </h:form>
-        </f:view>
+                    </p:panelGrid>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
