@@ -91,12 +91,14 @@ public class KundenDAOImpl implements KundenDAO {
     }
     @Transactional(readOnly = true)
     public void loadKunden(KundenEdit backingBean) {
+        log.debug("Inside LoadKunden");
         Query query = entityManager.createQuery("from Kunden kunden where kunden.firmenname = :firmenname");
         query.setParameter("firmenname", backingBean.getFirmenname());
         log.debug("Query to run "+query.toString());
         Kunden kunden = (Kunden) query.getResultList().get(0);
         kunden.setAnsprechpartner(backingBean.getAnsprechpartner());
         kunden.setBemerkung(backingBean.getBemerkung());
+        log.debug("FirmenName :"+ kunden.getFirmenname());
         kunden.setBuchungskreis(backingBean.getBuchungskreis());
         kunden.setEmail(backingBean.getEmail());
         kunden.setFax(backingBean.getFax());

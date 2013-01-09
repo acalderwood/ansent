@@ -7,6 +7,7 @@ package de.reichel.bean;
 import de.reichel.dao.KundenDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.apache.commons.logging.Log;
@@ -30,10 +31,10 @@ public class KundenEdit extends KundenBean {
         return "index";
     }
     
-    public String load() {
+    public void load(ActionEvent e) {
         
         log.debug("Load Kunden is called");
         kundenDAO.loadKunden(this);
-        return "index";
+        //return "index";
     }
 }
