@@ -69,14 +69,30 @@ public class AnlagenDAOImpl implements AnlagenDAO {
     @Transactional(readOnly = false)
     public void addAnlagen(AnlageNew backingBean) {
         Anlagen anlagen = new Anlagen();
-        Calendar cal = new GregorianCalendar(Integer.parseInt(backingBean.getBaujahr()), 1, 6);
-        anlagen.setBaujahr(cal.getTime());
+        log.debug("New Anlagen is created");
+        
         anlagen.setBemerkung(backingBean.getBemerkung());
+        log.debug("Bemerkung is set: "+backingBean.getBemerkung());
+        
+        try{
+            Calendar cal = new GregorianCalendar(Integer.parseInt(backingBean.getBaujahr()), 1, 6);
+            anlagen.setBaujahr(cal.getTime());
+            log.debug("Baujahr is set");
+        }catch (Exception e) {
+            log.debug("Date was empty for Baujahr "+e.getMessage());
+        }
+        
+        
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
+        log.debug("Fabriknum is set");
         anlagen.setIdAnlagenArt(backingBean.getIdArt());
+        log.debug("ArtId is set");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
+        log.debug("Hersteller is set");
         anlagen.setInterneNotiz(backingBean.getInterneNotiz());
+        log.debug("InterneNotiz is set");
         anlagen.setInterneNr(backingBean.getInterneNr());
+        log.debug("InterneNum is set");
 
         //@TODO: validate and accept different formats
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
@@ -84,7 +100,8 @@ public class AnlagenDAOImpl implements AnlagenDAO {
             try {
                 Date nUvv = format.parse(backingBean.getNaechsteUVV());
                 anlagen.setNUvv(nUvv);
-            } catch (ParseException e) {
+                log.debug("NUvv is set");
+            } catch (Exception e) {
                 //already caught by validator?
             }
         }
@@ -93,12 +110,14 @@ public class AnlagenDAOImpl implements AnlagenDAO {
             try {
                 Date nWart = format.parse(backingBean.getNaechsteWartung());
                 anlagen.setNWart(nWart);
+                log.debug("NWart is set");
             } catch (ParseException e) {
                 //already caught by validator?
             }
         }
 
         anlagen.setTyp(backingBean.getTyp());
+        log.debug("Typ is set");
 
         this.entityManager.persist(anlagen);
 
