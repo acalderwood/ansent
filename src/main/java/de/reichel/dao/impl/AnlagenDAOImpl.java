@@ -48,12 +48,18 @@ public class AnlagenDAOImpl implements AnlagenDAO {
 
     @Transactional(readOnly = false)
     public void updateAnlagen(AnlageEdit backingBean) {
+        
         Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", backingBean.getIdAnlagen());
+        
         Anlagen anlagen = (Anlagen) query.getResultList().get(0);
+        log.debug("Anlagen successfully restored");
         anlagen.setInterneNr(backingBean.getInterneNr());
+        log.debug("Getting Internal Number");
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
+        log.debug("Getting Fabrikation Number");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
+        log.debug("Getting Hersteller ID");
         this.entityManager.merge(anlagen);
 //        this.entityManager.persist(anlagen);
         //@TODO: finish fields
