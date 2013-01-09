@@ -256,7 +256,7 @@ public class AnlagenDAOImpl implements AnlagenDAO {
 
     @Transactional(readOnly = true)
     public Object[] getAnlagen(int idAnlagen) {
-        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller and anlagen.idAnlagen = :idAnlagen");
+        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller and anlagen.idAnlagen = :idAnlagen order by anlagen.interneNr");
         query.setParameter("idAnlagen", idAnlagen);
         return (Object[]) query.getResultList().get(0);
     }
