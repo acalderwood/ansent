@@ -14,6 +14,7 @@ import de.reichel.domain.model.Standorte;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -38,19 +39,19 @@ public class AnlageBean implements Serializable {
     protected String interneNr;
     protected String typ;
     protected String fabrikationsnr;
-    protected String baujahr;
+    protected Date baujahr;
     protected String bemerkung;
     protected String interneNotiz;
-    protected String naechsteUVV;
-    protected String naechsteWartung;
+    protected Date naechsteUVV;
+    protected Date naechsteWartung;
     protected Standorte standorte;
     protected Kunden kunden;
     protected Betreiber betreiber;
 
     public void hydrate(Object[] anlagenGraph) {
         Anlagen anlagen = (Anlagen) anlagenGraph[0];
-        String year = yearFormat.format(anlagen.getBaujahr());
-        this.setBaujahr(year);
+        //String year = yearFormat.format(anlagen.getBaujahr());
+        this.setBaujahr(anlagen.getBaujahr());
         this.setBemerkung(anlagen.getBemerkung());
         this.setFabrikationsnr(anlagen.getFabrikationsnummer());
         this.setIdAnlagen(anlagen.getIdAnlagen());
@@ -59,12 +60,10 @@ public class AnlageBean implements Serializable {
         this.setInterneNotiz(anlagen.getInterneNotiz());
         this.setInterneNr(anlagen.getInterneNr());
         if (anlagen.getNUvv() != null) {
-            String nuvv = dateFormat.format(anlagen.getNUvv());
-            this.setNaechsteUVV(nuvv);
+            this.setNaechsteUVV(anlagen.getNUvv());
         }
         if (anlagen.getNWart() != null) {
-            String nwart = dateFormat.format(anlagen.getNWart());
-            this.setNaechsteWartung(nwart);
+            this.setNaechsteWartung(anlagen.getNWart());
         }
         this.setTyp(anlagen.getTyp());
 
@@ -107,11 +106,11 @@ public class AnlageBean implements Serializable {
         this.fabrikationsnr = fabrikationsnr;
     }
 
-    public String getBaujahr() {
+    public Date getBaujahr() {
         return baujahr;
     }
 
-    public void setBaujahr(String baujahr) {
+    public void setBaujahr(Date baujahr) {
         this.baujahr = baujahr;
     }
 
@@ -139,19 +138,19 @@ public class AnlageBean implements Serializable {
         this.interneNotiz = interneNotiz;
     }
 
-    public String getNaechsteUVV() {
+    public Date getNaechsteUVV() {
         return naechsteUVV;
     }
 
-    public void setNaechsteUVV(String naechsteUVV) {
+    public void setNaechsteUVV(Date naechsteUVV) {
         this.naechsteUVV = naechsteUVV;
     }
 
-    public String getNaechsteWartung() {
+    public Date getNaechsteWartung() {
         return naechsteWartung;
     }
 
-    public void setNaechsteWartung(String naechsteWartung) {
+    public void setNaechsteWartung(Date naechsteWartung) {
         this.naechsteWartung = naechsteWartung;
     }
 

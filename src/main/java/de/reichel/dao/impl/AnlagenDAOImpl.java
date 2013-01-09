@@ -37,8 +37,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public class AnlagenDAOImpl implements AnlagenDAO {
-
-    private static final Log log = LogFactory.getLog(AnlagenDAOImpl.class);
+    
+     private static final Log log = LogFactory.getLog(AnlagenDAOImpl.class);
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -48,12 +48,18 @@ public class AnlagenDAOImpl implements AnlagenDAO {
 
     @Transactional(readOnly = false)
     public void updateAnlagen(AnlageEdit backingBean) {
+        
         Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", backingBean.getIdAnlagen());
+        
         Anlagen anlagen = (Anlagen) query.getResultList().get(0);
+        log.debug("Anlagen successfully restored");
         anlagen.setInterneNr(backingBean.getInterneNr());
+        log.debug("Getting Internal Number");
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
+        log.debug("Getting Fabrikation Number");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
+        log.debug("Getting Hersteller ID");
         this.entityManager.merge(anlagen);
 //        this.entityManager.persist(anlagen);
         //@TODO: finish fields
@@ -74,17 +80,24 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         anlagen.setBemerkung(backingBean.getBemerkung());
         log.debug("Bemerkung is set: "+backingBean.getBemerkung());
         
-        try{
-            Calendar cal = new GregorianCalendar(Integer.parseInt(backingBean.getBaujahr()), 1, 6);
-            anlagen.setBaujahr(cal.getTime());
+        try{            
+            Date cal; 
+            if (backingBean.getBaujahr()==null){
+                Calendar calen = new GregorianCalendar(0,0,0,0,0,0);
+                cal = calen.getTime();
+            }
+            else{
+                cal = backingBean.getBaujahr();
+            }
             log.debug("Baujahr is set");
+            anlagen.setBaujahr(cal);
         }catch (Exception e) {
             log.debug("Date was empty for Baujahr "+e.getMessage());
         }
         
         
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
-        log.debug("Fabriknum is set");
+        log.debug("Fabriknum is set: "+backingBean.getFabrikationsnr());
         anlagen.setIdAnlagenArt(backingBean.getIdArt());
         log.debug("ArtId is set");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
@@ -95,26 +108,37 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         log.debug("InterneNum is set");
 
         //@TODO: validate and accept different formats
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        if (backingBean.getNaechsteUVV() != null && !backingBean.getNaechsteUVV().equals("")) {
-            try {
-                Date nUvv = format.parse(backingBean.getNaechsteUVV());
-                anlagen.setNUvv(nUvv);
-                log.debug("NUvv is set");
-            } catch (Exception e) {
-                //already caught by validator?
+        //DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            Date date;
+            if (backingBean.getNaechsteUVV()==null){
+                Calendar calen = new GregorianCalendar(0,0,0,0,0,0);
+                date = calen.getTime();
             }
+            else{
+                date = backingBean.getNaechsteUVV();
+            }
+            log.debug("NUvv is set");
+            anlagen.setNUvv(date);
+        }catch (Exception e) {
+            log.debug("Date was empty for NUvv "+e.getMessage());
         }
 
-        if (backingBean.getNaechsteWartung() != null && !backingBean.getNaechsteWartung().equals("")) {
-            try {
-                Date nWart = format.parse(backingBean.getNaechsteWartung());
-                anlagen.setNWart(nWart);
-                log.debug("NWart is set");
-            } catch (ParseException e) {
-                //already caught by validator?
+        try {
+                Date date;
+            if (backingBean.getNaechsteWartung()==null){
+                Calendar calen = new GregorianCalendar(0,0,0,0,0,0);
+                date = calen.getTime();
             }
+            else{
+                date = backingBean.getNaechsteWartung();
+            }
+            log.debug("NUvv is set");
+            anlagen.setNWart(date);
+        }catch (Exception e) {
+            log.debug("Date was empty for NUvv "+e.getMessage());
         }
+        
 
         anlagen.setTyp(backingBean.getTyp());
         log.debug("Typ is set");

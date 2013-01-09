@@ -6,6 +6,8 @@
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
         <h:form>
             <h:panelGrid columns="1">
                 <h:outputLabel value="Interne Nr." for="interneNr" />
@@ -44,7 +46,7 @@
                 <h:message for="selectableHersteller" />    
             </h:panelGrid>
 
-            <h:commandButton action="#{anlageEdit.update}" value="Speichern"/>
+            <h:commandButton action="#{anlageEdit.update}" value="Speichern" />
         </h:form>
 
 
@@ -80,6 +82,7 @@
             </h:column>        
         </h:dataTable>
         <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
-
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
