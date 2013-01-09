@@ -41,7 +41,7 @@
                         <h:message for="fabrikationsnr" />
 
                         <h:outputLabel value="Baujahr" for="baujahr" />
-                        <p:inputText id="baujahr" value="#{anlageNew.baujahr}" required="false" />
+                        <p:calendar id="baujahr" value="#{anlageNew.baujahr}" required="false" locale="de" pattern="yyyy"/>
                         <h:message for="baujahr" />
 
                         <h:outputLabel value="Bemerkung" for="bemerkung" />
@@ -53,11 +53,11 @@
                         <h:message for="interneNotiz" />
 
                         <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV" showOn="button" locale="de"  />
+                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="yyyy/MM/dd" />
                         <h:message for="naechsteUVV" />
 
                         <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                        <p:calendar id="naechsteWartung" value="#{anlageNew.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd HH:mm:ss" />
+                        <p:calendar id="naechsteWartung" value="#{anlageNew.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd" />
                         <h:message for="naechsteWartung" />
 
                         <f:facet name="footer">  
