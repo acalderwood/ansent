@@ -17,14 +17,14 @@
             <p:panel id="panel" header="Choose a Customer" style="margin-bottom:10px;"> 
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Firmenname:" for="selectableKundenList" />
-                    <h:selectOneMenu>
+                    <h:selectOneMenu value="#{kundenEdit.idKunden}">
                         <f:selectItems id="selectableKundenList" value="#{kundenSearch.selectableKunden}" var="kunde" itemValue="#{kunde.idKunden}" itemLabel="#{kunde.firmenname}" />
                     </h:selectOneMenu>
     
                 </h:panelGrid>
             </p:panel>
             <p:commandButton actionListener="#{kundenEdit.load}" update="display" value="Choose" id="ajax"/>
-                
+        
            <!-- Edit the customer -->
             <p:panel id="display" header="Information" style="margin-top:10px;"> 
                     <h:panelGrid columns="2">
