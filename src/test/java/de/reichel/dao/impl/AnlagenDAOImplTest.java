@@ -112,13 +112,13 @@ public class AnlagenDAOImplTest {
         AnlageNew backingBean = new AnlageNew();
         backingBean.setInterneNr("test" + Calendar.getInstance().getTimeInMillis());
         backingBean.setIdArt(1);
-        backingBean.setBaujahr("1988");
+//        backingBean.setBaujahr("1988");
         backingBean.setBemerkung("test test");
         backingBean.setFabrikationsnr("123");
         backingBean.setIdHersteller(1);
         backingBean.setInterneNotiz("test");
-        backingBean.setNaechsteUVV("01.10.2012");
-        backingBean.setNaechsteWartung("02.10.2012");
+      //  backingBean.setNaechsteUVV("01.10.2012");
+     //   backingBean.setNaechsteWartung("02.10.2012");
         backingBean.setTyp("FP 25");
         
         int sizeBefore = anlagenDAO.getAllAnlagen().size();

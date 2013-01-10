@@ -92,24 +92,20 @@ public class KundenDAOImpl implements KundenDAO {
     @Transactional(readOnly = true)
     public void loadKunden(KundenEdit backingBean) {
         log.debug("Inside LoadKunden");
-        Query query = entityManager.createQuery("from Kunden kunden where kunden.firmenname = :firmenname");
-        query.setParameter("firmenname", backingBean.getFirmenname());
+        Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
+        query.setParameter("idKunden", backingBean.getIdKunden());
         log.debug("Query to run "+query.toString());
         Kunden kunden = (Kunden) query.getResultList().get(0);
-        kunden.setAnsprechpartner(backingBean.getAnsprechpartner());
-        kunden.setBemerkung(backingBean.getBemerkung());
+        
         log.debug("FirmenName :"+ kunden.getFirmenname());
-        kunden.setBuchungskreis(backingBean.getBuchungskreis());
-        kunden.setEmail(backingBean.getEmail());
-        kunden.setFax(backingBean.getFax());
-        kunden.setFirmenname(backingBean.getFirmenname());
-        kunden.setInterneNotiz(backingBean.getInterneNotiz());
-        kunden.setLand(backingBean.getLand());
-        kunden.setOrt(backingBean.getOrt());
-        kunden.setPlz(backingBean.getPlz());
-        kunden.setSteuernummer(backingBean.getSteuerNr());
-        kunden.setStrasseNr(backingBean.getStrasseNr());
-        kunden.setTelefon(backingBean.getTelefon());
+        backingBean.setFirmenname(kunden.getFirmenname());
+        backingBean.setAnsprechpartner(kunden.getAnsprechpartner());
+        backingBean.setStrasseNr(kunden.getStrasseNr());
+        backingBean.setFirmenname(kunden.getFirmenname());
+        backingBean.setFirmenname(kunden.getFirmenname());
+        backingBean.setFirmenname(kunden.getFirmenname());
+        backingBean.setFirmenname(kunden.getFirmenname());
+        backingBean.setFirmenname(kunden.getFirmenname());
         kunden.setTimestamp(Calendar.getInstance().getTime());
         log.debug("Kunden Loaded!");
     }
