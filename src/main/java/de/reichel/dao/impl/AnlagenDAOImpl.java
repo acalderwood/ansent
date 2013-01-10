@@ -37,8 +37,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public class AnlagenDAOImpl implements AnlagenDAO {
-    
-     private static final Log log = LogFactory.getLog(AnlagenDAOImpl.class);
+
+    private static final Log log = LogFactory.getLog(AnlagenDAOImpl.class);
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -48,10 +48,10 @@ public class AnlagenDAOImpl implements AnlagenDAO {
 
     @Transactional(readOnly = false)
     public void updateAnlagen(AnlageEdit backingBean) {
-        
+
         Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", backingBean.getIdAnlagen());
-        
+
         Anlagen anlagen = (Anlagen) query.getResultList().get(0);
         log.debug("Anlagen successfully restored");
         anlagen.setInterneNr(backingBean.getInterneNr());
@@ -64,40 +64,39 @@ public class AnlagenDAOImpl implements AnlagenDAO {
 //        this.entityManager.persist(anlagen);
         //@TODO: finish fields
     }
-    
+
     @Transactional(readOnly = true)
     public long getNumberAnlagen(AnlageSearch anlageSearch) {
         Query query = entityManager.createQuery("select count(*) from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", anlageSearch.getIdAnlagen());
-        return (Long)query.getSingleResult();
+        return (Long) query.getSingleResult();
     }
 
     @Transactional(readOnly = false)
     public void addAnlagen(AnlageNew backingBean) {
         Anlagen anlagen = new Anlagen();
         log.debug("New Anlagen is created");
-        
+
         anlagen.setBemerkung(backingBean.getBemerkung());
-        log.debug("Bemerkung is set: "+backingBean.getBemerkung());
-        
-        try{            
-            Date cal; 
-            if (backingBean.getBaujahr()==null){
-                Calendar calen = new GregorianCalendar(0,0,0,0,0,0);
+        log.debug("Bemerkung is set: " + backingBean.getBemerkung());
+
+        try {
+            Date cal;
+            if (backingBean.getBaujahr() == null) {
+                Calendar calen = new GregorianCalendar(0, 0, 0, 0, 0, 0);
                 cal = calen.getTime();
-            }
-            else{
+            } else {
                 cal = backingBean.getBaujahr();
             }
             log.debug("Baujahr is set");
             anlagen.setBaujahr(cal);
-        }catch (Exception e) {
-            log.debug("Date was empty for Baujahr "+e.getMessage());
+        } catch (Exception e) {
+            log.debug("Date was empty for Baujahr " + e.getMessage());
         }
-        
-        
+
+
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
-        log.debug("Fabriknum is set: "+backingBean.getFabrikationsnr());
+        log.debug("Fabriknum is set: " + backingBean.getFabrikationsnr());
         anlagen.setIdAnlagenArt(backingBean.getIdArt());
         log.debug("ArtId is set");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
@@ -111,41 +110,39 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         //DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {
             Date date;
-            if (backingBean.getNaechsteUVV()==null){
-                Calendar calen = new GregorianCalendar(0,0,0,0,0,0);
+            if (backingBean.getNaechsteUVV() == null) {
+                Calendar calen = new GregorianCalendar(0, 0, 0, 0, 0, 0);
                 date = calen.getTime();
-            }
-            else{
+            } else {
                 date = backingBean.getNaechsteUVV();
             }
             log.debug("NUvv is set");
             anlagen.setNUvv(date);
-        }catch (Exception e) {
-            log.debug("Date was empty for NUvv "+e.getMessage());
+        } catch (Exception e) {
+            log.debug("Date was empty for NUvv " + e.getMessage());
         }
 
         try {
-                Date date;
-            if (backingBean.getNaechsteWartung()==null){
-                Calendar calen = new GregorianCalendar(0,0,0,0,0,0);
+            Date date;
+            if (backingBean.getNaechsteWartung() == null) {
+                Calendar calen = new GregorianCalendar(0, 0, 0, 0, 0, 0);
                 date = calen.getTime();
-            }
-            else{
+            } else {
                 date = backingBean.getNaechsteWartung();
             }
             log.debug("NUvv is set");
             anlagen.setNWart(date);
-        }catch (Exception e) {
-            log.debug("Date was empty for NUvv "+e.getMessage());
+        } catch (Exception e) {
+            log.debug("Date was empty for NUvv " + e.getMessage());
         }
-        
+
 
         anlagen.setTyp(backingBean.getTyp());
         log.debug("Typ is set");
 
         this.entityManager.persist(anlagen);
 
-        System.out.println(anlagen.getIdAnlagen());
+        log.debug("Persisted Anlagen with ID " + anlagen.getIdAnlagen());
 
         AnlagenStandorte anlagenStandort = new AnlagenStandorte();
         anlagenStandort.setIdAnlagen(anlagen.getIdAnlagen());
@@ -154,11 +151,13 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         anlagenStandort.setIdKunden(backingBean.getIdKunden());
 
         this.entityManager.persist(anlagenStandort);
+
+        log.debug("Persisted AnlagenStandorte with ID " + anlagenStandort.getIdAnlagenStandorte());
     }
 
     @Transactional(readOnly = true)
     public List<Object[]> getAllAnlagen() {
-        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller");
+        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller order by anlagen.interneNr");
         List<Object[]> result = query.getResultList();
         return result;
     }
@@ -280,7 +279,7 @@ public class AnlagenDAOImpl implements AnlagenDAO {
 
     @Transactional(readOnly = true)
     public Object[] getAnlagen(int idAnlagen) {
-        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller and anlagen.idAnlagen = :idAnlagen");
+        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller and anlagen.idAnlagen = :idAnlagen order by anlagen.interneNr");
         query.setParameter("idAnlagen", idAnlagen);
         return (Object[]) query.getResultList().get(0);
     }
