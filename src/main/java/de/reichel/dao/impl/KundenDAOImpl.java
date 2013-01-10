@@ -55,7 +55,7 @@ public class KundenDAOImpl implements KundenDAO {
     }
 
     @Transactional(readOnly = false)
-    public void udpateKunden(KundenEdit backingBean) {
+    public void updateKunden(KundenEdit backingBean) {
         Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
         query.setParameter("idKunden", backingBean.getIdKunden());
         Kunden kunden = (Kunden) query.getResultList().get(0);
