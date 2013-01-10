@@ -12,6 +12,7 @@ import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.AnlagenArt;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -112,13 +113,13 @@ public class AnlagenDAOImplTest {
         AnlageNew backingBean = new AnlageNew();
         backingBean.setInterneNr("test" + Calendar.getInstance().getTimeInMillis());
         backingBean.setIdArt(1);
-        backingBean.setBaujahr("1988");
+        backingBean.setBaujahr(new Date(1,1,20));
         backingBean.setBemerkung("test test");
         backingBean.setFabrikationsnr("123");
         backingBean.setIdHersteller(1);
         backingBean.setInterneNotiz("test");
-        backingBean.setNaechsteUVV("01.10.2012");
-        backingBean.setNaechsteWartung("02.10.2012");
+        backingBean.setNaechsteUVV(new Date(1,1,43));
+        backingBean.setNaechsteWartung(new Date(1,1,43));
         backingBean.setTyp("FP 25");
         
         int sizeBefore = anlagenDAO.getAllAnlagen().size();
