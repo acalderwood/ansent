@@ -53,7 +53,7 @@ public class UvvSearch implements Serializable {
         }
     }
 
-    public void processSelectedUvv(AjaxBehaviorEvent event) {
+    public void processSelectedUvv() {
         this.uvv = uvvDAO.getUvv(this.getIdUvv());
         this.setUvvPunkte(uvvDAO.getUvvPunkte(this.getIdUvv()));
         this.setUvvMangel(uvvDAO.getUvvMangel(this.getIdUvv()));
@@ -107,7 +107,7 @@ public class UvvSearch implements Serializable {
         this.anlage = anlage;
     }
 
-    public void processSelectedAnlagen(AjaxBehaviorEvent event) {
+    public void processSelectedAnlagen() {
         int id = this.getIdAnlagenForUvv();
         System.out.println("id=" + id);
 

@@ -4,37 +4,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
-    <h:body>
-        <ui:composition template="templates/common-layout.xhtml">
-            <ui:define name="content">
-        <!-- Edit Kunde -->
-        <h:panelGrid columns="2">
-            <h:column id="kundenEdit">
-                <h:form>
-                    <h:outputLabel value="Firmenname:" for="firmenname" />
-                    <h:inputText value="#{kundenEdit.firmenname}" />
-                    <h:inputText value="#{kundenEdit.idKunden}" rendered="false"/>
-                    <h:commandButton action="#{kundenEdit.update}" value="Speichern"/>
-                </h:form>
-            </h:column>
 
-            <!-- Search for edit -->
-            <h:column>
-                <h:outputLabel value="Kunden:" for="selectableKunden" />
-                <h:selectOneMenu onchange="submit();" immediate="true" valueChangeListener="#{kundenSearch.processSelectedKundenForEdit}">
-                    <f:selectItems id="selectableKundenList" value="#{kundenSearch.selectableKunden}" var="kunde" itemValue="#{kunde.idKunden}" itemLabel="#{kunde.firmenname}" />
-                    <f:ajax event="change" update="kundenEdit" />
-                </h:selectOneMenu>
-                <h:message for="selectableKunden" />   
 
-            <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
-            </h:column>
-        </h:panelGrid>
-        </ui:define>
-        </ui:composition>
-    </h:body>
+
+        <h:body>
+            <ui:composition template="templates/common-layout.xhtml">
+                <ui:define name="content">
+                    <!-- Edit Kunde -->
+
+                    <!-- Search for edit -->
+                    <h:form id="kunden">
+                        <p:panelGrid columns="1">
+
+                            <f:facet name="header">  
+                                Bearbeiten Kunden 
+                            </f:facet>  
+
+                            <h:outputLabel value="Kunden:" for="selectableKunden" />
+                            <h:selectOneMenu value="#{kundenSearch.idKunden}" id="selectableKunden">
+                                <f:selectItems id="selectableKundenList" value="#{kundenSearch.selectableKunden}" var="kunde" itemValue="#{kunde.idKunden}" itemLabel="#{kunde.firmenname}" />
+                                <p:ajax listener="#{kundenSearch.processSelectedKundenForEdit}" update="firmenname land"/>
+                            </h:selectOneMenu>
+                        </p:panelGrid>
+                        <h:panelGrid columns="2">
+                            
+                            <h:outputLabel value="Firmenname:" for="firmenname" />
+                            <h:inputText value="#{kundenEdit.firmenname}" id="firmenname"/>
+                            
+                            <h:outputLabel value="Land:" for="land" />
+                            <h:inputText value="#{kundenEdit.land}" id="land"/>
+                            
+                            <h:commandButton action="#{kundenEdit.update}" value="Speichern"/>
+                        </h:panelGrid>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
 </html>

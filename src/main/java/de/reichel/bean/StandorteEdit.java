@@ -4,23 +4,25 @@
  */
 package de.reichel.bean;
 
-import de.reichel.dao.AnlagenDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 /**
  *
- * @author alastair
+ * @author Alastair Calderwood
  */
-@ManagedBean(name = "anlageEdit")
+@ManagedBean(name = "standorteEdit")
 @RequestScoped
 @Controller
-public class AnlageEdit extends AnlageBean {
+public class StandorteEdit extends StandorteBean {
+
+    private static final Log log = LogFactory.getLog(KundenEdit.class);
 
     public String update() {
-        anlagenDAO.updateAnlagen(this);
+        standorteDAO.updateStandorte(this);
         return "index";
     }
 }

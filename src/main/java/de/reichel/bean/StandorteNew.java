@@ -4,7 +4,7 @@
  */
 package de.reichel.bean;
 
-import de.reichel.dao.AnlagenDAO;
+import de.reichel.dao.StandorteDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -12,15 +12,18 @@ import org.springframework.stereotype.Controller;
 
 /**
  *
- * @author alastair
+ * @author Alastair Calderwood
  */
-@ManagedBean(name = "anlageEdit")
+@ManagedBean(name = "standorteNew")
 @RequestScoped
 @Controller
-public class AnlageEdit extends AnlageBean {
+public class StandorteNew extends StandorteBean {
 
-    public String update() {
-        anlagenDAO.updateAnlagen(this);
+    @Inject
+    private StandorteDAO standorteDAO;
+
+    public String add() {
+        standorteDAO.addStandorte(this);
         return "index";
     }
 }

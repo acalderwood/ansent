@@ -21,12 +21,10 @@ import org.apache.commons.logging.LogFactory;
 @Controller
 public class KundenEdit extends KundenBean {
     private static final Log log = LogFactory.getLog(KundenEdit.class);
-    @Inject
-    private KundenDAO kundenDAO;
 
     public String update() {
         log.debug("Update Kunden is called");
-        kundenDAO.udpateKunden(this);
+        kundenDAO.updateKunden(this);
         return "index";
     }
     
