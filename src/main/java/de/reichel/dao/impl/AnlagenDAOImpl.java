@@ -317,10 +317,18 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         backingBean.setInterneNr(anlagen.getInterneNr());
         log.debug("Anlage Int Num :"+ anlagen.getInterneNr());
         backingBean.setIdAnlagen(anlagen.getIdAnlagen());
+        backingBean.setIdArt(anlagen.getIdAnlagenArt());
+        log.debug("Art id :"+anlagen.getIdAnlagenHersteller());
         backingBean.setIdHersteller(anlagen.getIdAnlagenHersteller());
         log.debug("Hersteller id :"+anlagen.getIdAnlagenHersteller());
         backingBean.setBemerkung(anlagen.getBemerkung());
-        log.debug("Anlage Bemerkung :"+ anlagen.getBemerkung());
+        log.debug("Bemerkung :"+ anlagen.getBemerkung());
+        backingBean.setTyp(anlagen.getTyp());
+        backingBean.setFabrikationsnr(anlagen.getFabrikationsnummer());
+        backingBean.setBaujahr(anlagen.getBaujahr());
+        backingBean.setInterneNotiz(anlagen.getInterneNotiz());
+        backingBean.setNaechsteUVV(anlagen.getNUvv());
+        backingBean.setNaechsteWartung(anlagen.getNWart());
         
     }
 }
