@@ -93,24 +93,24 @@ public class KundenDAOImpl implements KundenDAO {
 
     @Transactional(readOnly = true)
     public void loadKunden(KundenEdit backingBean) {
-        Query query = entityManager.createQuery("from Kunden kunden where kunden.firmenname = :firmenname");
-        query.setParameter("firmenname", backingBean.getFirmenname());
+        Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
+        query.setParameter("idKunden", backingBean.getIdKunden());
         log.debug("Query to run " + query.toString());
         Kunden kunden = (Kunden) query.getResultList().get(0);
-        kunden.setAnsprechpartner(backingBean.getAnsprechpartner());
-        kunden.setBemerkung(backingBean.getBemerkung());
-        kunden.setBuchungskreis(backingBean.getBuchungskreis());
-        kunden.setEmail(backingBean.getEmail());
-        kunden.setFax(backingBean.getFax());
-        kunden.setFirmenname(backingBean.getFirmenname());
-        kunden.setInterneNotiz(backingBean.getInterneNotiz());
-        kunden.setLand(backingBean.getLand());
-        kunden.setOrt(backingBean.getOrt());
-        kunden.setPlz(backingBean.getPlz());
-        kunden.setSteuernummer(backingBean.getSteuerNr());
-        kunden.setStrasseNr(backingBean.getStrasseNr());
-        kunden.setTelefon(backingBean.getTelefon());
-//        kunden.setTimestamp(Calendar.getInstance().getTime());
+        backingBean.setFirmenname(kunden.getFirmenname());
+        backingBean.setAnsprechpartner(kunden.getAnsprechpartner());
+        backingBean.setBemerkung(kunden.getBemerkung());
+        backingBean.setBuchungskreis(kunden.getBuchungskreis());
+        backingBean.setEmail(kunden.getEmail());
+        backingBean.setFax(kunden.getFax());
+        backingBean.setInterneNotiz(kunden.getInterneNotiz());
+        backingBean.setLand(kunden.getLand());
+        backingBean.setOrt(kunden.getOrt());
+        backingBean.setPlz(kunden.getPlz());
+        backingBean.setStrasseNr(kunden.getStrasseNr());
+        backingBean.setTelefon(kunden.getTelefon());
+        backingBean.setSteuerNr(kunden.getSteuernummer());
+        kunden.setTimestamp(Calendar.getInstance().getTime());
         log.debug("Kunden Loaded!");
     }
 }
