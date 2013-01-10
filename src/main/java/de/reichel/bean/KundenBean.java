@@ -4,8 +4,12 @@
  */
 package de.reichel.bean;
 
+import de.reichel.dao.KundenDAO;
 import de.reichel.domain.model.Kunden;
 import java.io.Serializable;
+import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -13,6 +17,9 @@ import java.io.Serializable;
  */
 public class KundenBean implements Serializable {
 
+    private static final Log log = LogFactory.getLog(KundenBean.class);
+    @Inject
+    protected KundenDAO kundenDAO;
     protected Integer idKunden;
     protected String firmenname;
     protected String ansprechpartner;
@@ -27,8 +34,9 @@ public class KundenBean implements Serializable {
     protected String interneNotiz;
     protected String buchungskreis;
     protected String steuerNr;
-    
+
     public void hydrate(Kunden kunden) {
+        log.debug("KundenBean:" + this);
         this.setIdKunden(kunden.getIdKunden());
         this.setAnsprechpartner(kunden.getAnsprechpartner());
         this.setBemerkung(kunden.getBemerkung());
@@ -44,6 +52,7 @@ public class KundenBean implements Serializable {
         this.setStrasseNr(kunden.getStrasseNr());
         this.setTelefon(kunden.getTelefon());
     }
+
     /**
      * @return the firmenname
      */
