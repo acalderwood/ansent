@@ -14,7 +14,7 @@
                     <p:panel id="panel" header="Choose a Machine" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Interne Nr." for="selectableAnlageList" />
-                            <h:selectOneMenu value="#{anlageEdit.interneNr}">
+                            <h:selectOneMenu value="#{anlageEdit.idAnlagen}">
                                 <f:selectItems id="selectableAnlageList" value="#{anlageSearch.selectableAnlagen}" var="anlange" itemValue="#{anlange.idAnlagen}" itemLabel="#{anlange.interneNr}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
@@ -24,49 +24,18 @@
                     
                     <p:panel id="display" header="Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">
+                            
                             <h:outputLabel value="Interne Nr." for="interneNr" />
-                        <p:inputText id="interneNr" value="#{anlageNew.interneNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Interne Nummer ein" />
-                        
-
-                        <h:outputLabel value="Art" for="art" />
-                        <h:selectOneMenu id="art" value="#{anlageNew.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
-                            <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
-                        </h:selectOneMenu>
-                        
-
-                        <h:outputLabel value="Hersteller" for="hersteller" />
-                        <h:selectOneMenu id="hersteller" value="#{anlageNew.idHersteller}" required="true">
-                            <f:selectItems id="selectableHerstellerList" value="#{anlageNew.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
-                        </h:selectOneMenu>
-                        
-
-                        <h:outputLabel value="Typ" for="typ" />
-                        <p:inputText id="typ" value="#{anlageNew.typ}" required="true" requiredMessage="Bitte geben Sie eine gultige Typ ein"/>
-                        
-
-                        <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
-                        <p:inputText id="fabrikationsnr" value="#{anlageNew.fabrikationsnr}" required="false" />
-                        
-
-                        <h:outputLabel value="Baujahr" for="baujahr" />
-                        <p:calendar id="baujahr" value="#{anlageNew.baujahr}" required="false" locale="de" pattern="yyyy"/>
-                        
-
-                        <h:outputLabel value="Bemerkung" for="bemerkung" />
-                        <p:inputText id="bemerkung" value="#{anlageNew.bemerkung}" required="false" />
-                        
-
-                        <h:outputLabel value="Interne Notiz" for="interneNotiz" />
-                        <p:inputText id="interneNotiz" value="#{anlageNew.interneNotiz}" required="false" />
-                        
-
-                        <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="yyyy/MM/dd" />
-                        
-
-                        <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                        <p:calendar id="naechsteWartung" value="#{anlageNew.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd" />
-                        
+                            <p:inputText id="interneNr" value="#{anlageEdit.interneNr}"  />
+                            
+                            <h:outputLabel value="Bemerkung" for="bemerkung" />
+                            <p:inputText id="bemerkung" value="#{anlageEdit.bemerkung}" required="false" />
+                            
+                            <h:outputLabel value="Hersteller" for="hersteller" />
+                             <h:selectOneMenu id="hersteller" value="#{anlageEdit.idHersteller}" required="true">
+                                <f:selectItems id="selectableHerstellerList" value="#{anlageNew.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                            </h:selectOneMenu>
+                            
                         </h:panelGrid>
                     </p:panel>
                     <p:commandButton action="#{anlageEdit.update}" update="display" value="Update" />

@@ -307,4 +307,20 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         query.setParameter("idAnlagen", idAnlagen);
         return (Kunden) ((Object[]) query.getResultList().get(0))[0];
     }
+
+    public void loadAnlagen(AnlageEdit backingBean) {
+        Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
+        query.setParameter("idAnlagen", backingBean.getIdAnlagen());
+        log.debug("Query to run: " + query.toString());
+        Anlagen anlagen = (Anlagen) query.getResultList().get(0);
+        log.debug("Anlage Id :"+ backingBean.getIdAnlagen());
+        backingBean.setInterneNr(anlagen.getInterneNr());
+        log.debug("Anlage Int Num :"+ anlagen.getInterneNr());
+        backingBean.setIdAnlagen(anlagen.getIdAnlagen());
+        backingBean.setIdHersteller(anlagen.getIdAnlagenHersteller());
+        log.debug("Hersteller id :"+anlagen.getIdAnlagenHersteller());
+        backingBean.setBemerkung(anlagen.getBemerkung());
+        log.debug("Anlage Bemerkung :"+ anlagen.getBemerkung());
+        
+    }
 }
