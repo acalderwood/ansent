@@ -58,6 +58,7 @@ public class KundenDAOImpl implements KundenDAO {
     public void updateKunden(KundenEdit backingBean) {
         Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
         query.setParameter("idKunden", backingBean.getIdKunden());
+        log.debug("Inside UpdateKunden method, starting to set up the attributes");
         Kunden kunden = (Kunden) query.getResultList().get(0);
         kunden.setAnsprechpartner(backingBean.getAnsprechpartner());
         kunden.setBemerkung(backingBean.getBemerkung());
@@ -75,6 +76,8 @@ public class KundenDAOImpl implements KundenDAO {
         kunden.setTimestamp(Calendar.getInstance().getTime());
         this.entityManager.merge(kunden);
         this.entityManager.persist(kunden);
+        log.debug("Kunden successfully updated");
+        //return ("index");
     }
 
     @Transactional(readOnly = true)

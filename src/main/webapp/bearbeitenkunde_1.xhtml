@@ -80,7 +80,7 @@
                             <h:outputLabel value="Steuernr. / USt-IdNr." for="steuerNr" />
                             <p:inputText id="steuerNr" value="#{kundenEdit.steuerNr}" required="false" />
                         
-                        
+                            <p:commandButton action="#{kundenEdit.update}" update="display" value="Update" />
                     </h:panelGrid>
             </p:panel>
 
