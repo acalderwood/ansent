@@ -27,7 +27,7 @@ public class KundenEdit extends KundenBean {
 
     public String update() {
         log.debug("Update Kunden is called");
-        kundenDAO.udpateKunden(this);
+        kundenDAO.updateKunden(this);
         return "index";
     }
     
