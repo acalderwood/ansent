@@ -19,9 +19,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class AnlageEdit extends AnlageBean {
 
-    @Inject
-    private AnlagenDAO anlagenDAO;
-
     public String update() {
         anlagenDAO.updateAnlagen(this);
         return "index";
