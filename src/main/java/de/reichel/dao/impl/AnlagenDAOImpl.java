@@ -156,10 +156,13 @@ public class AnlagenDAOImpl implements AnlagenDAO {
     }
 
     @Transactional(readOnly = true)
-    public List<Object[]> getAllAnlagen() {
-        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller order by anlagen.interneNr");
-        List<Object[]> result = query.getResultList();
-        return result;
+    public List<Anlagen> getAllAnlagen() {
+        log.debug("Inside get All Anlagen");
+        //Changing the query below to reflect all the Anlage
+        //Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller order by anlagen.interneNr");
+        Query query = entityManager.createQuery("from Anlagen anlagen order by anlagen.interneNr");
+        //List<Object[]> result = query.getResultList();
+        return query.getResultList();
     }
 
     @Transactional(readOnly = true)

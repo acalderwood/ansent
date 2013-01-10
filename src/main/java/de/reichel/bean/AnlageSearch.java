@@ -41,8 +41,8 @@ public class AnlageSearch extends AnlageBean {
     private Object[] anlage;
     private List<Object[]> anlagen;
 
-    public List<Object[]> getSelectableAnlagen() {
-        return anlagenDAO.getAnlagen(this);
+    public List<Anlagen> getSelectableAnlagen() {
+        return anlagenDAO.getAllAnlagen();
     }
 
     public String searchEdit() {
@@ -88,7 +88,7 @@ public class AnlageSearch extends AnlageBean {
         return anlage;
     }
 
-    public List<Object[]> getAllAnlagen() {
+    public List<Anlagen> getAllAnlagen() {
         return anlagenDAO.getAllAnlagen();
     }
 

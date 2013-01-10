@@ -6,6 +6,7 @@ package de.reichel.bean;
 
 import de.reichel.dao.AnlagenDAO;
 import de.reichel.dao.UvvDAO;
+import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.Betreiber;
 import de.reichel.domain.model.Kunden;
 import de.reichel.domain.model.Standorte;
@@ -95,7 +96,7 @@ public class UvvSearch implements Serializable {
         this.idUvv = idUvv;
     }
 
-    public List<Object[]> getAllAnlagen() {
+    public List<Anlagen> getAllAnlagen() {
         return anlagenDAO.getAllAnlagen();
     }
 

@@ -7,6 +7,7 @@ package de.reichel.dao;
 import de.reichel.bean.AnlageEdit;
 import de.reichel.bean.AnlageNew;
 import de.reichel.bean.AnlageSearch;
+import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.AnlagenArt;
 import de.reichel.domain.model.AnlagenHersteller;
 import de.reichel.domain.model.Betreiber;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public interface AnlagenDAO extends Serializable {
 
-    public List<Object[]> getAllAnlagen();
+    public List<Anlagen> getAllAnlagen();
 
     public Object[] getAnlagen(String interneNr);
 

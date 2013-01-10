@@ -13,13 +13,15 @@
                 <h:form>
                     <p:panel id="panel" header="Choose a Machine" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="Interne Nr." for="interneNr" />
+                            <h:outputLabel value="Interne Nr." for="selectableAnlageList" />
                             <h:selectOneMenu value="#{anlageEdit.interneNr}">
-                                <f:selectItems id="selectableAnlageList" value="#{anlageSearch.selectableAnlagen}" var="anlange" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                                <f:selectItems id="selectableAnlageList" value="#{anlageSearch.selectableAnlagen}" var="anlange" itemValue="#{anlange.idAnlagen}" itemLabel="#{anlange.interneNr}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
+                    
                     <p:commandButton actionListener="#{anlageEdit.load}" update="display" value="Choose" id="ajax"/>
+                    
                     <p:panel id="display" header="Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Interne Nr." for="interneNr" />
