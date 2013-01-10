@@ -120,7 +120,7 @@ public class AnlagenDAOImplTest {
         backingBean.setInterneNotiz("test");
         backingBean.setNaechsteUVV(new Date(1,1,43));
         backingBean.setNaechsteWartung(new Date(1,1,43));
-        backingBean.setTyp("FP 25");
+        backingBean.setTyp("FP 25 ");
         
         int sizeBefore = anlagenDAO.getAllAnlagen().size();
         anlagenDAO.addAnlagen(backingBean);
