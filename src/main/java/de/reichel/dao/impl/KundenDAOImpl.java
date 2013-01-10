@@ -87,26 +87,30 @@ public class KundenDAOImpl implements KundenDAO {
     public Kunden getKunden(Integer kundenId) {
         Query query = entityManager.createQuery("from Kunden k where k.idKunden = :idKunden");
         query.setParameter("idKunden", kundenId);
+        log.debug("getKunden for id " + kundenId);
         return (Kunden) query.getResultList().get(0);
     }
+
     @Transactional(readOnly = true)
     public void loadKunden(KundenEdit backingBean) {
-        log.debug("Inside LoadKunden");
-        Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
-        query.setParameter("idKunden", backingBean.getIdKunden());
-        log.debug("Query to run "+query.toString());
+        Query query = entityManager.createQuery("from Kunden kunden where kunden.firmenname = :firmenname");
+        query.setParameter("firmenname", backingBean.getFirmenname());
+        log.debug("Query to run " + query.toString());
         Kunden kunden = (Kunden) query.getResultList().get(0);
-        
-        log.debug("FirmenName :"+ kunden.getFirmenname());
-        backingBean.setFirmenname(kunden.getFirmenname());
-        backingBean.setAnsprechpartner(kunden.getAnsprechpartner());
-        backingBean.setStrasseNr(kunden.getStrasseNr());
-        backingBean.setFirmenname(kunden.getFirmenname());
-        backingBean.setFirmenname(kunden.getFirmenname());
-        backingBean.setFirmenname(kunden.getFirmenname());
-        backingBean.setFirmenname(kunden.getFirmenname());
-        backingBean.setFirmenname(kunden.getFirmenname());
-        kunden.setTimestamp(Calendar.getInstance().getTime());
+        kunden.setAnsprechpartner(backingBean.getAnsprechpartner());
+        kunden.setBemerkung(backingBean.getBemerkung());
+        kunden.setBuchungskreis(backingBean.getBuchungskreis());
+        kunden.setEmail(backingBean.getEmail());
+        kunden.setFax(backingBean.getFax());
+        kunden.setFirmenname(backingBean.getFirmenname());
+        kunden.setInterneNotiz(backingBean.getInterneNotiz());
+        kunden.setLand(backingBean.getLand());
+        kunden.setOrt(backingBean.getOrt());
+        kunden.setPlz(backingBean.getPlz());
+        kunden.setSteuernummer(backingBean.getSteuerNr());
+        kunden.setStrasseNr(backingBean.getStrasseNr());
+        kunden.setTelefon(backingBean.getTelefon());
+//        kunden.setTimestamp(Calendar.getInstance().getTime());
         log.debug("Kunden Loaded!");
     }
 }
