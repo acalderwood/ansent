@@ -1,87 +1,78 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
         <ui:composition template="templates/common-layout.xhtml">
             <ui:define name="content">
-        <h:form>
-            <h:panelGrid columns="1">
-                <h:outputLabel value="Interne Nr." for="interneNr" />
-                <h:inputText value="#{anlageEdit.interneNr}" />
-                <h:message for="interneNr" />
-
-                <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
-                <h:inputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" required="false" />
-                <h:message for="fabrikationsnr" />
-
-                <h:outputLabel value="Hersteller" for="selectableHersteller" />
-                <h:selectOneMenu id="selectableHersteller" value="#{anlageEdit.idHersteller}" required="true">
-                    <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
-                </h:selectOneMenu>
-                
-                                  <!--                    <h:outputLabel value="Standort" for="standort" />
-                                            <h:selectOneMenu id="standort" value="{anlageSearch.idStandort}" required="false">
-                                                <f:selectItems id="selectableStandortList" value="{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
-                                            </h:selectOneMenu>
-                                            <h:message for="standort" />                    
-                        
-                                             TODO: ajax
-                                            <h:outputLabel value="Kunden" for="kunden" />
-                                            <h:selectOneMenu id="kunden" value="{anlageSearch.idKunden}" required="false">
-                                                <f:selectItems id="selectableKundenList" value="{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
-                                            </h:selectOneMenu>
-                                            <h:message for="kunden" />    
-                        
-                                            <h:outputLabel value="Betreiber" for="betreiber" />
-                                            <h:selectOneMenu id="betreiber" value="{anlageSearch.idBetreiber}" required="false">
-                                                <f:selectItems id="selectableBetreiberList" value="{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
-                                            </h:selectOneMenu>
-                                            <h:message for="betreiber" />    
-                        -->
-                        
-                <h:message for="selectableHersteller" />    
-            </h:panelGrid>
-
-            <h:commandButton action="#{anlageEdit.update}" value="Speichern" />
-        </h:form>
-
-
-        <h:dataTable id="resultaten" value="#{anlageSearch.selectableAnlagen}" var="anlage" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" first="0" width="100%" dir="LTR" frame="hsides" rules="all">
-
-            <f:facet name="header">
-                <h:outputText value="Search results" />
-            </f:facet> 
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Interne ID" />
-                </f:facet> 
-                <h:outputText binding="#{anlageSearch.idSingleAnlagen}" value="#{anlage[0].interneNr}"></h:outputText>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Art" />
-                </f:facet> 
-                <h:outputText  value="#{anlage[1].art}"></h:outputText>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Holen" />
-                </f:facet> 
-
+                <!-- Search Anlage and Load it -->
                 <h:form>
-                    <h:commandButton action="#{anlageSearch.fetchEdit}" value="Holen"/>
-                </h:form>
+                    <p:panel id="panel" header="Choose a Machine" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Interne Nr." for="interneNr" />
+                            <h:selectOneMenu value="#{anlageEdit.interneNr}">
+                                <f:selectItems id="selectableAnlageList" value="#{anlageSearch.selectableAnlagen}" var="anlange" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton actionListener="#{anlageEdit.load}" update="display" value="Choose" id="ajax"/>
+                    <p:panel id="display" header="Information" style="margin-top:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Interne Nr." for="interneNr" />
+                        <p:inputText id="interneNr" value="#{anlageNew.interneNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Interne Nummer ein" />
+                        
 
-            </h:column>        
-        </h:dataTable>
-        <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
+                        <h:outputLabel value="Art" for="art" />
+                        <h:selectOneMenu id="art" value="#{anlageNew.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
+                            <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                        </h:selectOneMenu>
+                        
+
+                        <h:outputLabel value="Hersteller" for="hersteller" />
+                        <h:selectOneMenu id="hersteller" value="#{anlageNew.idHersteller}" required="true">
+                            <f:selectItems id="selectableHerstellerList" value="#{anlageNew.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                        </h:selectOneMenu>
+                        
+
+                        <h:outputLabel value="Typ" for="typ" />
+                        <p:inputText id="typ" value="#{anlageNew.typ}" required="true" requiredMessage="Bitte geben Sie eine gultige Typ ein"/>
+                        
+
+                        <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
+                        <p:inputText id="fabrikationsnr" value="#{anlageNew.fabrikationsnr}" required="false" />
+                        
+
+                        <h:outputLabel value="Baujahr" for="baujahr" />
+                        <p:calendar id="baujahr" value="#{anlageNew.baujahr}" required="false" locale="de" pattern="yyyy"/>
+                        
+
+                        <h:outputLabel value="Bemerkung" for="bemerkung" />
+                        <p:inputText id="bemerkung" value="#{anlageNew.bemerkung}" required="false" />
+                        
+
+                        <h:outputLabel value="Interne Notiz" for="interneNotiz" />
+                        <p:inputText id="interneNotiz" value="#{anlageNew.interneNotiz}" required="false" />
+                        
+
+                        <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
+                        <p:calendar value="#{anlageNew.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="yyyy/MM/dd" />
+                        
+
+                        <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
+                        <p:calendar id="naechsteWartung" value="#{anlageNew.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd" />
+                        
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton action="#{anlageEdit.update}" update="display" value="Update" />
+                </h:form>
+                            
+
+        
+       
             </ui:define>
         </ui:composition>
     </h:body>
