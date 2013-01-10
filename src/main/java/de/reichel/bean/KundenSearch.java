@@ -6,7 +6,6 @@ package de.reichel.bean;
 
 import de.reichel.dao.KundenDAO;
 import de.reichel.domain.model.Kunden;
-import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -14,6 +13,8 @@ import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -23,9 +24,8 @@ import org.springframework.stereotype.Controller;
 @ManagedBean(name = "kundenSearch")
 @RequestScoped
 @Controller
-public class KundenSearch {
-
-    private HtmlOutputText idSingleKunden;
+public class KundenSearch extends KundenBean {
+    private static final Log log = LogFactory.getLog(KundenSearch.class);
     @Inject
     private KundenDAO kundenDAO;
 
@@ -33,23 +33,43 @@ public class KundenSearch {
         return kundenDAO.getSelectableKunden();
     }
 
-    public String fetchEdit() {
+    public void processSelectedKundenForEdit() {
+        log.debug("processSelectedKundenForEdit");
         FacesContext context = FacesContext.getCurrentInstance();
         KundenEdit kundenEdit = (KundenEdit) context.getApplication().evaluateExpressionGet(context, "#{kundenEdit}", KundenEdit.class);
 
-        Kunden kunden = kundenDAO.getKunden((Integer)idSingleKunden.getValue());
+        log.debug("kundenEdit:" + kundenEdit);
+        
+        Kunden kunden = kundenDAO.getKunden((Integer) idKunden);
         kundenEdit.hydrate(kunden);
-        return "bearbeitenkunde";
     }
     
-    public String fetchView() {
+    public void processSelectedKundenForView() {
+        log.debug("processSelectedKundenForView");
         FacesContext context = FacesContext.getCurrentInstance();
         KundenView kundenView = (KundenView) context.getApplication().evaluateExpressionGet(context, "#{kundenView}", KundenView.class);
 
-        Kunden kunden = kundenDAO.getKunden((Integer)idSingleKunden.getValue());
+        Kunden kunden = kundenDAO.getKunden((Integer) idKunden);
         kundenView.hydrate(kunden);
-        return "ubersichtkunde";
-    }
+    }    
+    
+//    public String fetchEdit() {
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        KundenEdit kundenEdit = (KundenEdit) context.getApplication().evaluateExpressionGet(context, "#{kundenEdit}", KundenEdit.class);
+//
+//        Kunden kunden = kundenDAO.getKunden((Integer)idSingleKunden.getValue());
+//        kundenEdit.hydrate(kunden);
+//        return "bearbeitenkunde";
+//    }
+//    
+//    public String fetchView() {
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        KundenView kundenView = (KundenView) context.getApplication().evaluateExpressionGet(context, "#{kundenView}", KundenView.class);
+//
+//        Kunden kunden = kundenDAO.getKunden((Integer)idSingleKunden.getValue());
+//        kundenView.hydrate(kunden);
+//        return "ubersichtkunde";
+//    }
 //
 //    public HtmlOutputText getIdSingleKunden() {
 //        return idSingleKunden;
@@ -59,13 +79,4 @@ public class KundenSearch {
 //        System.out.println("Setting idSingleKunden=" + idSingleKunden.getValue());
 //        this.idSingleKunden = idSingleKunden;
 //    }
-    
-    public void processSelectedKundenForEdit(ValueChangeEvent event) {
-        System.out.println("processSelectedKundenForEdit");
-        FacesContext context = FacesContext.getCurrentInstance();
-        KundenEdit kundenEdit = (KundenEdit) context.getApplication().evaluateExpressionGet(context, "#{kundenEdit}", KundenEdit.class);
-
-        Kunden kunden = kundenDAO.getKunden((Integer)idSingleKunden.getValue());
-        kundenEdit.hydrate(kunden);
-    }
 }
