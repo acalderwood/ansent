@@ -7,7 +7,6 @@ package de.reichel.bean;
 import de.reichel.dao.KundenDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.apache.commons.logging.Log;
@@ -22,8 +21,6 @@ import org.apache.commons.logging.LogFactory;
 @Controller
 public class KundenEdit extends KundenBean {
     private static final Log log = LogFactory.getLog(KundenEdit.class);
-    @Inject
-    private KundenDAO kundenDAO;
 
     public String update() {
         log.debug("Update Kunden is called");
@@ -31,10 +28,10 @@ public class KundenEdit extends KundenBean {
         return "index";
     }
     
-    public void load(ActionEvent e) {
+    public String load() {
         
         log.debug("Load Kunden is called");
         kundenDAO.loadKunden(this);
-        //return "index";
+        return "index";
     }
 }
