@@ -17,53 +17,49 @@
                         <h:panelGrid columns="2">
 
                             <h:outputLabel value="Standortname" for="standortname" />
-                            <p:inputText id="standortname" value="#{kundenNew.firmenname}" required="true" requiredMessage="Bitte geben Sie eine gultige Kundennamen ein" />
+                            <p:inputText id="standortname" value="#{standorteNew.standortname}" required="true" requiredMessage="Bitte geben Sie einen gültigen Standortnamen ein!" />
                             
 
                             <h:outputLabel value="Strasse, Nr." for="strasseNr" />
-                            <p:inputText id="strasseNr" value="#{kundenNew.ansprechpartner}" required="false" />
+                            <p:inputText id="strasseNr" value="#{standorteNew.strasseNr}" required="true" requiredMessage="Bitte geben Sie eine gültige Strasse, Nr. ein!" />
                             
 
                             <h:outputLabel value="PLZ:" for="plz" />
-                            <p:inputText id="plz" value="#{kundenNew.plz}" required="true" requiredMessage="Bitte geben Sie eine gultige PLZ ein"/>
+                            <p:inputText id="plz" value="#{standorteNew.plz}" required="true" requiredMessage="Bitte geben Sie eine gultige PLZ ein"/>
                             
                             
                             <h:outputLabel value="Ort:" for="ort" />
-                            <p:inputText id="ort" value="#{kundenNew.ort}" required="true" requiredMessage="Bitte geben Sie eine gultige Ort ein"/>
+                            <p:inputText id="ort" value="#{standorteNew.ort}" required="true" requiredMessage="Bitte geben Sie eine gultige Ort ein"/>
                             
                             
                             <h:outputLabel value="Land:" for="land" />
-                            <p:inputText id="land" value="#{kundenNew.land}" required="false" />
+                            <p:inputText id="land" value="#{standorteNew.land}" required="false" />
                            
                             <h:outputLabel value="Telefon:" for="telefon" />
-                            <p:inputText id="telefon" value="#{kundenNew.telefon}" required="false" />
+                            <p:inputText id="telefon" value="#{standorteNew.telefon}" required="false" />
                            
                             <h:outputLabel value="Fax:" for="fax" />
-                            <p:inputText id="fax" value="#{kundenNew.fax}" required="false" />
+                            <p:inputText id="fax" value="#{standorteNew.fax}" required="false" />
                            
                            <h:outputLabel value="Besonderheiten:" for="besonderheiten" />
-                            <p:inputTextarea id="besonderheiten" value="#{kundenNew.bemerkung}" required="false" />                           
+                           <p:inputTextarea id="besonderheiten" value="#{standorteNew.besonderheiten}" required="false" />                           
                             
                             <h:outputLabel value="Bemerkung:" for="bemerkung" />
-                            <p:inputTextarea id="bemerkung" value="#{kundenNew.bemerkung}" required="false" />
+                            <p:inputTextarea id="bemerkung" value="#{standorteNew.bemerkung}" required="false" />
                            
-
                             <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
-                            <p:inputTextarea id="interneNotiz" value="#{kundenNew.interneNotiz}" required="false" />
-                           
-                    
+                            <p:inputTextarea id="interneNotiz" value="#{standorteNew.interneNotiz}" required="false" />
+                                               
                             <h:outputLabel value="Anfahrtsprausch Betrag" for="anfahrtsprausch" />
-                            <p:inputText id="anfahrtsprausch" value="#{kundenNew.buchungskreis}" required="false" />
+                            <p:inputText id="anfahrtsprausch" value="#{standorteNew.anfahrtspauschaleBetrag}" required="false" />
                            
-                            
-                    
                             <h:outputLabel value="Kilometerpausch. Betrag" for="kilometerpausch" />
-                            <p:inputText id="kilometerpausch" value="#{kundenNew.steuerNr}" required="false" />
+                            <p:inputText id="kilometerpausch" value="#{standorteNew.kilometerpauschaleBetrag}" required="false" />
                             
                             
                             
 
-                            <p:commandButton action="#{kundenNew.add}" value="HinzufÃ¼gen" update="panel" id="ajax"  />
+                            <p:commandButton action="#{standorteNew.add}" value="HinzufÃ¼gen" update="panel" id="ajax"  />
                 </h:panelGrid>
               </p:panel>
             </h:form>
