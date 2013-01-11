@@ -3,70 +3,76 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
         <ui:composition template="templates/common-layout.xhtml">        
             <ui:define name="content">
 
                 <h:form id="auswahlAnlagen">
-                    <p:panelGrid columns="1">
 
-                        <f:facet name="header">  
-                            Auswahl 
-                        </f:facet>  
+                    <p:panelGrid columns="2" styleClass="panelColumns">
+                        <p:column>
+                            <p:panel id="panel" header="UVV" style="margin-top:10px;"> 
+                                <p:panelGrid columns="1">
+                                    <h:outputLabel value="Interne Nr. Anlagen" for="anlagen" />
+                                    <h:selectOneMenu value="#{uvvSearch.idAnlagenForUvv}" id="anlagen">
+                                        <f:selectItems value="#{uvvSearch.allAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}"/>
+                                    </h:selectOneMenu>
+                                </p:panelGrid>
+                            </p:panel>
 
-                        <h:outputLabel value="Interne Nr. Anlagen" for="anlagen" />
-                        <h:selectOneMenu value="#{uvvSearch.idAnlagenForUvv}" id="anlagen">
-                            <f:selectItems value="#{uvvSearch.allAnlagen}" var="anlage" itemValue="#{anlage[0].idAnlagen}" itemLabel="#{anlage[0].interneNr}"/>
-                            <p:ajax listener="#{uvvSearch.processSelectedAnlagen}" update="betreiberort uvv"/>
-                        </h:selectOneMenu>
-                    </p:panelGrid>
-                    <p:panelGrid columns="2">
-                        <f:facet name="header">  
-                            Anlage:
-                        </f:facet>  
-                    </p:panelGrid>
-                    <p:panelGrid columns="2">                   
-                        <f:facet name="header">  
-                            Standort:
-                        </f:facet>  
-                        <h:outputLabel value="Ort" for="betreiberort" />
-                        <h:outputText id="betreiberort" value="#{uvvSearch.betreiber.ort}"/>
-                    </p:panelGrid>
-                    <p:panelGrid columns="2">
-                        <f:facet name="header">  
-                            Kunde:
-                        </f:facet>  
-                    </p:panelGrid>
-                    <p:panelGrid columns="2">
-                        <f:facet name="header">  
-                            Betreiber:
-                        </f:facet>  
-                    </p:panelGrid>  
- 
-                    <p:panelGrid columns="2">
+                            <p:commandButton actionListener="#{uvvSearch.load}" update="display uvv " value="Choose" id="ajax"/>
 
-                        <f:facet name="header">  
-                            Auswahl UVV:
-                        </f:facet>
+                            <p:panel id="display" header="Information" style="margin-top:10px;"> 
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">  
+                                        Anlage:
+                                    </f:facet>  
+                                </p:panelGrid>
+                                <p:panelGrid columns="2"> 
 
-                        <h:selectOneMenu value="#{uvvSearch.idUvv}" id="uvv">
-                            <f:selectItems value="#{uvvSearch.selectableUvv}" var="uvv" itemValue="#{uvv.idUvv}" itemLabel="#{uvv.pruefdatum}"/>
-                            <p:ajax listener="#{uvvSearch.processSelectedUvv}" update="ergebnis1 ergebnis0 nextUvv prufer" />
-                        </h:selectOneMenu>
-                        <!-- EMPTY CELL -->
+                                    <f:facet name="header">  
+                                        Standort:
+                                    </f:facet>  
+                                    <h:outputLabel value="Ort" for="betreiberort" />
+                                    <h:outputText id="betreiberort" value="#{uvvSearch.betreiber.ort}"/>
+                                </p:panelGrid>
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">  
+                                        Kunde:
+                                    </f:facet>  
+                                </p:panelGrid>
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">  
+                                        Betreiber:
+                                    </f:facet>  
+                                </p:panelGrid>  
+                            </p:panel>
+                        </p:column>
+                        <p:column>
+                            <p:panel id="uvv" header="Auswahl UVV" style="margin-top:10px;"> 
+                                <p:panelGrid columns="2">
 
-                        <h:outputLabel value="Ergebnis:" for="ergebnis" />
-                        <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '1'}" value="Erstprüfung IO" id="ergebnis1"/>
-                        <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '0'}" value="Nicht IO" id="ergebnis0"/>
-                        
-                        <h:outputLabel value="Nächste UVV:" for="nextUvv" />
-                        <h:outputText value="#{uvvSearch.uvv[0].nextUvv}" id="nextUvv"/>
+                                    <h:selectOneMenu value="#{uvvSearch.idUvv}" id="uvvSelection">
+                                        <f:selectItems value="#{uvvSearch.selectableUvv}" var="uvv" itemValue="#{uvv.idUvv}" itemLabel="#{uvv.pruefdatum}"/>
+                                        <p:ajax listener="#{uvvSearch.processSelectedUvv}" update="ergebnis1 ergebnis0 nextUvv prufer" />
+                                    </h:selectOneMenu>
+                                    <!-- EMPTY CELL -->
 
-                        <h:outputLabel value="Prüfer:" for="prufer" />
-                        <h:outputText value="#{uvvSearch.uvv[0].pruefer}" id="prufer"/>
+                                    <h:outputLabel value="Ergebnis:" for="ergebnis" />
+                                    <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '1'}" value="Erstprüfung IO" id="ergebnis1"/>
+                                    <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '0'}" value="Nicht IO" id="ergebnis0"/>
+
+                                    <h:outputLabel value="Nächste UVV:" for="nextUvv" />
+                                    <h:outputText value="#{uvvSearch.uvv[0].nextUvv}" id="nextUvv"/>
+
+                                    <h:outputLabel value="Prüfer:" for="prufer" />
+                                    <h:outputText value="#{uvvSearch.uvv[0].pruefer}" id="prufer"/>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:column>
                     </p:panelGrid>
                 </h:form>
 
