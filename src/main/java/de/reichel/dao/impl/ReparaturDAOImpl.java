@@ -145,9 +145,9 @@ public class ReparaturDAOImpl {
      * @param internalRemarks - Interne Bemerkungen
      */
     public void addRepairBasics(int idAnlagen, int idFirma) {
-        Query query = entityManager.createQuery("from AnlagenStandorte as where as.idAnlagen = :idAnlagen");
-        query.setParameter("idAnlagen", idAnlagen);
-        AnlagenStandorte anlagenStandorte = (AnlagenStandorte) query.getSingleResult();
+        Query anlagenStandorteQuery = entityManager.createQuery("from AnlagenStandorte as where as.idAnlagen = :idAnlagen");
+        anlagenStandorteQuery.setParameter("idAnlagen", idAnlagen);
+        AnlagenStandorte anlagenStandorte = (AnlagenStandorte) anlagenStandorteQuery.getSingleResult();
 
         Repair repair = new Repair();
 
@@ -155,6 +155,23 @@ public class ReparaturDAOImpl {
         repair.setIdBetreiber(anlagenStandorte.getIdBetreiber());
         repair.setIdKunden(anlagenStandorte.getIdKunden());
         repair.setIdStandorte(anlagenStandorte.getIdAnlagenStandorte());
+        
+        Query standorteQuery = entityManager.createQuery("from Standorte s where s.idStandorte = :idStandorte");
+        standorteQuery.setParameter("idStandorte", anlagenStandorte.getIdAnlagenStandorte());
+        Standorte standorte = (Standorte)standorteQuery.getSingleResult();
+        
+        repair.setFahrzeitPauschaleBetrag(standorte.getAnfahrtspauschaleBetrag());
+        if (standorte.getAnfahrtspauschaleBetrag() > 0) {
+            repair.setFahrzeitPauschale(1D);
+        }
+        
+        repair.setKilometerPauschaleBetrag(standorte.getKilometerpauschaleBetrag());
+        if (standorte.getKilometerpauschaleBetrag() > 0) {
+            repair.setKilometerPauschale(1D);
+        }
+        
+        anlagenStandorte.getIdAnlagenStandorte();
+
         entityManager.persist(repair);
     }
 
@@ -218,27 +235,25 @@ public class ReparaturDAOImpl {
         repair.setArbeitszeitMinuten(minsWorked);
         repair.setArbzeitHelferStunden(helperHoursWorked);
         repair.setArbzeitHelferMinuten(helperMinsWorked);
+        
+        repair.setFahrzeitPauschale(travelTimeMultiple);
+        repair.setFahrzeitPauschaleBetrag(travelRatePerHr);
+        repair.setKilometerPauschale(travelDistanceMultiple);
+        repair.setKilometerPauschaleBetrag(travelRatePerKm);
 
         //set either travel time or travel distance but not both - should already have been handled in the view
         if ((travelTimeHrs > 0 || travelTimeMins > 0 || travelTimeHelperHrs > 0 || travelTimeHelperMins > 0)) {
-            repair.setFahrzeitPauschale(travelTimeMultiple);
-            repair.setFahrzeitPauschaleBetrag(travelRatePerHr);
+
             repair.setFahrzeitStunden(travelTimeHrs);
             repair.setFahrzeitMinuten(travelTimeMins);
             repair.setFahrzeitHelferStunden(travelTimeHelperHrs);
             repair.setFahrzeitHelferMinuten(travelTimeHelperMins);
-            repair.setKilometerPauschale(0D);
-            repair.setKilometerPauschaleBetrag(0D);
             repair.setKilometer(0);
         } else {
-            repair.setFahrzeitPauschale(0D);
-            repair.setFahrzeitPauschaleBetrag(0D);
             repair.setFahrzeitStunden(0);
             repair.setFahrzeitMinuten(0);
             repair.setFahrzeitHelferStunden(0);
             repair.setFahrzeitHelferMinuten(0);
-            repair.setKilometerPauschale(travelDistanceMultiple);
-            repair.setKilometerPauschaleBetrag(travelRatePerKm);
             repair.setKilometer(travelDistanceKm);
         }
         repair.setAusloeseStunden(accommodationHrs);
