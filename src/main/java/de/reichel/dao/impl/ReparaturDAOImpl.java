@@ -52,13 +52,12 @@ public class ReparaturDAOImpl {
     }
 
     /**
-     * Gets the times and distance for a machine repair
+     * Gets the times and distance for a machine repair, used in generating the invoice
      *
      * @param idSaetze
-     * @return Saetze, or null if none exists. Note: need to check for null in
-     * backing bean
+     * @return Saetze
      */
-    public Saetze getSaetze(int idSaetze) throws NonUniqueResultException {
+    public Saetze getSaetze(int idSaetze) {
         Query query = entityManager.createQuery("from Saetze saetze where saetze.idSaetze = :idSaetze");
         query.setParameter("idSaetze", idSaetze);
         return (Saetze) query.getSingleResult();
