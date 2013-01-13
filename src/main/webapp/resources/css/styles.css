@@ -46,3 +46,8 @@ table.search td {
 .controls {
     font-size: 0.8em;
 }
+
+
+.panelColumns td {
+    vertical-align: top; 
+} 

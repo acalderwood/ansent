@@ -108,7 +108,7 @@ public class UvvSearch implements Serializable {
         this.anlage = anlage;
     }
 
-    public void processSelectedAnlagen() {
+    public void load() {
         int id = this.getIdAnlagenForUvv();
         System.out.println("id=" + id);
 
