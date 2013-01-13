@@ -1,0 +1,134 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <f:view>
+
+                    <h:form id="neuerStandort">
+                        <p:panel id="panel" header="Neue Reparatur" style="margin-bottom:10px;"> 
+                            <p:messages id="messages" />  
+                            <h:panelGrid columns="2">
+
+                                <!-- Select 1 of 4 states and map to values
+                                
+                                  erstellt              REPAIR.ERLEDIGT - 3
+                                  in Bearbeitung	REPAIR.ERLEDIGT - 0
+                                  bearbeitet            REPAIR.ERLEDIGT - 1
+                                  abgerechnet           REPAIR.ERLEDIGT - 2
+                                -->
+
+
+                                <h:outputLabel value="Anlage:" for="anlagen" />
+                                <!--Dropdown Machines (option to leave Unassigned - put "Unassigned" as an ANLAGEN record in the database and select as default)-->
+
+                                <h:outputLabel value="Ausführende Firma:" for="firm" />
+                                <!-- Dropdown Firms (3) -->
+
+                                <h:outputLabel value="Auszuführende Arbeiten:" for="workDescription" />
+                                <!-- Text box -->
+
+                                <h:outputLabel value="Interne bemerkungen:" for="internalRemarks" />
+                                <!-- Text box -->
+
+                                <h:outputLabel value="Satz:" for="satz" />
+                                <!-- Dropdown "Satz" name (rates) -->
+
+                                <h:outputLabel value="Techniker:" for="technician" />
+                                <!-- String input -->
+
+                                <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
+                                <!-- Date input -->
+
+                                <h:outputLabel value="Arbeitszeit: H" for="workHrs" />
+                                <!-- Integer input - next to below field? -->
+                                <h:outputLabel value="M" for="workMins" />
+                                <!-- Dropdown 0-60 step 5 -->
+
+                                <h:outputLabel value="Arbeitszeit Helfer: H" for="helperWorkHrs" />
+                                <!-- Integer input - next to below field? -->
+                                <!-- Dropdown 0-60 step 5 -->
+                                <h:outputLabel value="M" for="helperWorkMins" />
+
+                                <!--                          
+                                    -- Can select Anfahrt = travel time or Kilometer = travel distance
+                                    -- The other one should be hidden using a selector
+                                -->
+                                <!--
+                                    Option Travel Time (Anfahrt...) - can be hidden
+    
+                                    Anfahrtspauschale - pre-populated with value (done by DAO using table Standorte). (Todo: checking what pauschale means)
+                                    Anfahrtspauschalebetrag - pre-populated with value (done by DAO using table Standorte)
+                                    Travel time - hours, mins
+                                    Travel time helper - hours, mins
+                                -->
+
+                                <h:outputLabel value="Anfahrtspauschale:" for="fixedRateTimeFactor" />
+                                <!-- Dropdown 0.5-4.5 step 0.5 -->
+
+                                <h:outputLabel value="Anfahrtspauschalebetrag:" for="fixedRateTimeAmount" />
+                                <!-- Double input -->
+
+                                <h:outputLabel value="Fahrzeit: H" for="travelTimeHrs" />
+                                <!-- Integer input -->
+                                <!-- Dropdown 0-60 step 5 -->
+                                <h:outputLabel value="M" for="travelTimeMins" />
+
+                                <h:outputLabel value="Fahrzeit Helfer: H" for="helperTravelTimeHrs" />
+                                <!-- Integer input -->
+                                <!-- Dropdown 0-60 step 5 -->
+                                <h:outputLabel value="M" for="helperTravelTimeMins" />
+
+                                <!--                          
+                                    -- Can select Anfahrt = travel time or Kilometer = travel distance
+                                    -- The other one should be hidden using a selector
+                                -->
+                                <!--
+                                    Option Travel Distance (Kilometer...) - can be hidden
+    
+                                    Kilometerpauschale - pre-populated with value (done by DAO using table Standorte)
+                                    Kilometerpauschalebetrag - pre-populated with value (done by DAO using table Standorte)
+                                    Distance - km
+                                -->
+                                <h:outputLabel value="Kilometerpauschale:" for="fixedRateDistanceFactor" />
+                                <!-- Dropdown 0.5-4.5 step 0.5 -->
+
+                                <h:outputLabel value="Kilometerpauschalebetrag:" for="fixedRateDistanceAmount" />
+                                <!-- Double input -->                            
+
+                                <h:outputLabel value="Kilometer" for="kilometer" />
+                                <!-- Integer input -->                            
+
+
+                                <h:outputLabel value="Auslöse: H" for="accommodationHrs" />
+                                <!-- Integer input -->
+                                <!-- Dropdown 0-60 step 5 -->
+                                <h:outputLabel value="M" for="accommodationMins" />                            
+
+                                <h:outputLabel value="Überzeit H" for="overtimeHrs" />
+                                <!-- Integer input -->
+                                <!-- Dropdown 0-60 step 5 -->
+                                <h:outputLabel value="M" for="overtimeMins" />    
+
+                                <h:outputLabel value="Verschmutzungszuchlag H" for="dirtyTimeHrs" />
+                                <!-- Integer input -->
+                                <!-- Dropdown 0-60 step 5 -->
+                                <h:outputLabel value="M" for="dirtyTimeMins" />    
+
+
+                                <p:commandButton action="#{repairNew.add}" value="HinzufÃ¼gen" update="panel" id="ajax"  />
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
