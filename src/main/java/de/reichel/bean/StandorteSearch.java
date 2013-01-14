@@ -4,7 +4,7 @@
  */
 package de.reichel.bean;
 
-import de.reichel.dao.KundenDAO;
+
 import de.reichel.dao.StandorteDAO;
 import de.reichel.domain.model.Standorte;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Controller;
  * @author Alastair Calderwood
  */
 
-@ManagedBean(name = "kundenSearch")
+@ManagedBean(name = "standorteSearch")
 @RequestScoped
 @Controller
 public class StandorteSearch extends StandorteBean{

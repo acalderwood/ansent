@@ -73,9 +73,9 @@ public class BetreiberDAOImpl implements BetreiberDAO {
     }
 
     @Transactional(readOnly = true)
-    public List<Object[]> getAllBetreiber() {
+    public List<Betreiber> getAllBetreiber() {
         Query query = entityManager.createQuery("from Betreiber betreiber");
-        List<Object[]> result = query.getResultList();
+        List<Betreiber> result = query.getResultList();
         return result;
     }
 

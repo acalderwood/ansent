@@ -21,7 +21,7 @@ public interface BetreiberDAO {
 
     public void addBetreiber(BetreiberNew backingBean);
 
-    public List<Object[]> getAllBetreiber();
+    public List<Betreiber> getAllBetreiber();
 
     public Betreiber getBetreiber(Integer idBetreiber);
 }

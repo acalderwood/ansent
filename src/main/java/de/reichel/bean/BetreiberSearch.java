@@ -4,10 +4,31 @@
  */
 package de.reichel.bean;
 
+import de.reichel.dao.BetreiberDAO;
+import de.reichel.domain.model.Betreiber;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Controller;
+
 /**
  *
  * @author Alastair Calderwood
  */
-public class BetreiberSearch {
+@ManagedBean(name = "betreiberSearch")
+@RequestScoped
+@Controller
+public class BetreiberSearch extends BetreiberBean{
+    
+    private static final Log log = LogFactory.getLog(StandorteSearch.class);
+    @Inject
+    private BetreiberDAO betreiberDAO;
+    
+    public List<Betreiber> getAllBetreiber(){
+        return betreiberDAO.getAllBetreiber();
+    }
     
 }
