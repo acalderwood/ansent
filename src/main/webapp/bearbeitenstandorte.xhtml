@@ -13,7 +13,7 @@
                 <h:form>
                     <p:panel id="panel" header="Choose a Standort" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="Interne Nr." for="selectableStandorte" />
+                            <h:outputLabel value="Standortename" for="selectableStandorte" />
                             <h:selectOneMenu value="#{standorteEdit.idStandorte}">
                                 <f:selectItems id="selectableStandorte" value="#{standorteSearch.allStandorte}" var="standorte" itemValue="#{standorte.idStandorte}" itemLabel="#{standorte.standortname}" />
                             </h:selectOneMenu>
@@ -25,8 +25,44 @@
                     <p:panel id="display" header="Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">
                             
-                            <h:outputLabel value="Interne Nr." for="standorteName" />
+                            <h:outputLabel value="Standortename" for="standorteName" />
                             <p:inputText id="standorteName" value="#{standorteEdit.standortname}"  />
+                            
+                            <h:outputLabel value="Strasse, Nr." for="strasseNr" />
+                            <p:inputText id="strasseNr" value="#{standorteEdit.strasseNr}"  />
+                            
+
+                            <h:outputLabel value="PLZ:" for="plz" />
+                            <p:inputText id="plz" value="#{standorteEdit.plz}" />
+                            
+                            
+                            <h:outputLabel value="Ort:" for="ort" />
+                            <p:inputText id="ort" value="#{standorteEdit.ort}" />
+                            
+                            
+                            <h:outputLabel value="Land:" for="land" />
+                            <p:inputText id="land" value="#{standorteEdit.land}" required="false" />
+                           
+                            <h:outputLabel value="Telefon:" for="telefon" />
+                            <p:inputText id="telefon" value="#{standorteEdit.telefon}" required="false" />
+                           
+                            <h:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{standorteEdit.fax}" required="false" />
+                           
+                           <h:outputLabel value="Besonderheiten:" for="besonderheiten" />
+                           <p:inputTextarea id="besonderheiten" value="#{standorteEdit.besonderheiten}" required="false" />                           
+                            
+                            <h:outputLabel value="Bemerkung:" for="bemerkung" />
+                            <p:inputTextarea id="bemerkung" value="#{standorteEdit.bemerkung}" required="false" />
+                           
+                            <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
+                            <p:inputTextarea id="interneNotiz" value="#{standorteEdit.interneNotiz}" required="false" />
+                                               
+                            <h:outputLabel value="Anfahrtsprausch Betrag" for="anfahrtsprausch" />
+                            <p:inputText id="anfahrtsprausch" value="#{standorteEdit.anfahrtspauschaleBetrag}" required="false" />
+                           
+                            <h:outputLabel value="Kilometerpausch. Betrag" for="kilometerpausch" />
+                            <p:inputText id="kilometerpausch" value="#{standorteEdit.kilometerpauschaleBetrag}" required="false" />
                             
                             
                             
