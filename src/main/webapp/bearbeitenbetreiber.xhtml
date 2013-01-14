@@ -15,7 +15,7 @@
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Betreibername" for="selectableBetreiber" />
                             <h:selectOneMenu value="#{betreiberEdit.idBetreiber}">
-                                <f:selectItems id="selectableStandorte" value="#{betreiberSearch.allBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername}" />
+                                <f:selectItems id="selectableBetreiber" value="#{betreiberSearch.allBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
@@ -25,50 +25,42 @@
                     <p:panel id="display" header="Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">
                             
-                            <h:outputLabel value="Standortename" for="standorteName" />
-                            <p:inputText id="standorteName" value="#{standorteEdit.standortname}"  />
+                            <h:outputLabel value="Betreibername" for="betreibername" />
+                            <p:inputText id="betreibername" value="#{betreiberEdit.betreibername}"  />
+                            
+                            <h:outputLabel value="Ansprechpartner" for="ansprechpartner" />
+                            <p:inputText id="ansprechpartner" value="#{betreiberEdit.ansprechpartner}"  />
                             
                             <h:outputLabel value="Strasse, Nr." for="strasseNr" />
-                            <p:inputText id="strasseNr" value="#{standorteEdit.strasseNr}"  />
+                            <p:inputText id="strasseNr" value="#{betreiberEdit.strasseNr}"  />
                             
 
                             <h:outputLabel value="PLZ:" for="plz" />
-                            <p:inputText id="plz" value="#{standorteEdit.plz}" />
+                            <p:inputText id="plz" value="#{betreiberEdit.plz}" />
                             
                             
                             <h:outputLabel value="Ort:" for="ort" />
-                            <p:inputText id="ort" value="#{standorteEdit.ort}" />
+                            <p:inputText id="ort" value="#{betreiberEdit.ort}" />
                             
                             
                             <h:outputLabel value="Land:" for="land" />
-                            <p:inputText id="land" value="#{standorteEdit.land}" required="false" />
+                            <p:inputText id="land" value="#{betreiberEdit.land}" required="false" />
                            
                             <h:outputLabel value="Telefon:" for="telefon" />
-                            <p:inputText id="telefon" value="#{standorteEdit.telefon}" required="false" />
+                            <p:inputText id="telefon" value="#{betreiberEdit.telefon}" required="false" />
                            
                             <h:outputLabel value="Fax:" for="fax" />
-                            <p:inputText id="fax" value="#{standorteEdit.fax}" required="false" />
+                            <p:inputText id="fax" value="#{betreiberEdit.fax}" required="false" />
                            
-                           <h:outputLabel value="Besonderheiten:" for="besonderheiten" />
-                           <p:inputTextarea id="besonderheiten" value="#{standorteEdit.besonderheiten}" required="false" />                           
-                            
                             <h:outputLabel value="Bemerkung:" for="bemerkung" />
-                            <p:inputTextarea id="bemerkung" value="#{standorteEdit.bemerkung}" required="false" />
+                            <p:inputTextarea id="bemerkung" value="#{betreiberEdit.bemerkung}" required="false" />
                            
                             <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
-                            <p:inputTextarea id="interneNotiz" value="#{standorteEdit.interneNotiz}" required="false" />
-                                               
-                            <h:outputLabel value="Anfahrtsprausch Betrag" for="anfahrtsprausch" />
-                            <p:inputText id="anfahrtsprausch" value="#{standorteEdit.anfahrtspauschaleBetrag}" required="false" />
-                           
-                            <h:outputLabel value="Kilometerpausch. Betrag" for="kilometerpausch" />
-                            <p:inputText id="kilometerpausch" value="#{standorteEdit.kilometerpauschaleBetrag}" required="false" />
-                            
-                            
+                            <p:inputTextarea id="interneNotiz" value="#{betreiberEdit.interneNotiz}" required="false" />
                             
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton action="#{standorteEdit.update}" update="display" value="Update" />
+                    <p:commandButton action="#{betreiberEdit.update}" update="display" value="Update" />
                 </h:form>
                             
 

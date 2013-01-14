@@ -85,4 +85,23 @@ public class BetreiberDAOImpl implements BetreiberDAO {
         query.setParameter("idBetreiber", idBetreiber);
         return (Betreiber) query.getResultList().get(0);
     }
+
+    public void loadBetreiber(BetreiberEdit backingBean) {
+        Query query = entityManager.createQuery("from Betreiber betreiber where betreiber.idBetreiber = :idBetreiber");
+        query.setParameter("idBetreiber", backingBean.getIdBetreiber());
+        log.debug("Query to run " + query.toString());
+        Betreiber betreiber = (Betreiber) query.getResultList().get(0);
+        backingBean.setBetreibername(betreiber.getBetreibername());
+        log.debug("Betreiber name loaded: "+backingBean.getBetreibername());
+        backingBean.setAnsprechpartner(betreiber.getAnsprechpartner());
+        backingBean.setOrt(betreiber.getOrt());
+        backingBean.setPlz(betreiber.getPlz());
+        backingBean.setLand(betreiber.getLand());
+        backingBean.setStrasseNr(betreiber.getStrasseNr());
+        backingBean.setTelefon(betreiber.getTelefon());
+        backingBean.setFax(betreiber.getFax());
+        backingBean.setEmail(betreiber.getEmail());
+        backingBean.setBemerkung(betreiber.getBemerkung());
+        backingBean.setInterneNotiz(betreiber.getInterneNotiz());
+    }
 }
