@@ -19,10 +19,17 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class StandorteEdit extends StandorteBean {
 
-    private static final Log log = LogFactory.getLog(KundenEdit.class);
+    private static final Log log = LogFactory.getLog(StandorteEdit.class);
 
     public String update() {
         standorteDAO.updateStandorte(this);
+        return "index";
+    }
+    
+    public String load() {
+        
+        log.debug("Load Standorte is called");
+        standorteDAO.loadStandorte(this);
         return "index";
     }
 }

@@ -23,5 +23,7 @@ public interface StandorteDAO extends Serializable {
     public Standorte getStandorte(Integer kundenId);
 
     public void updateStandorte(StandorteEdit backingBean);
+
+    public void loadStandorte(StandorteEdit backingBean);
     
 }

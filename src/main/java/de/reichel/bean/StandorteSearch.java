@@ -4,10 +4,33 @@
  */
 package de.reichel.bean;
 
+import de.reichel.dao.KundenDAO;
+import de.reichel.dao.StandorteDAO;
+import de.reichel.domain.model.Standorte;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Controller;
+
 /**
  *
  * @author Alastair Calderwood
  */
-public class StandorteSearch {
+
+@ManagedBean(name = "kundenSearch")
+@RequestScoped
+@Controller
+public class StandorteSearch extends StandorteBean{
+    
+    private static final Log log = LogFactory.getLog(StandorteSearch.class);
+    @Inject
+    private StandorteDAO standorteDAO;
+    
+    public List<Standorte> getAllStandorte(){
+        return standorteDAO.getAllStandorte();
+    }
     
 }

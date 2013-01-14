@@ -94,4 +94,24 @@ public class StandorteDAOImpl implements StandorteDAO {
         query.setParameter("idStandorte", idStandorte);
         return (Standorte) query.getResultList().get(0);
     }
+
+    public void loadStandorte(StandorteEdit backingBean) {
+        Query query = entityManager.createQuery("from Standorte standorte where standorte.idStandorte = :idStandorte");
+        query.setParameter("idStandorte", backingBean.getIdStandorte());
+        log.debug("Query to run " + query.toString());
+        Standorte standorte = (Standorte) query.getResultList().get(0);
+        backingBean.setStandortname(standorte.getStandortname());
+        log.debug("Standorte Name: "+backingBean.getStandortname());
+        backingBean.setStrasseNr(standorte.getStrasseNr());
+        backingBean.setPlz(standorte.getPlz());
+        backingBean.setOrt(standorte.getOrt());
+        backingBean.setLand(standorte.getLand());
+        backingBean.setTelefon(standorte.getTelefon());
+        backingBean.setFax(standorte.getFax());
+        backingBean.setBesonderheiten(standorte.getBesonderheiten());
+        backingBean.setBemerkung(standorte.getBemerkung());
+        backingBean.setInterneNotiz(standorte.getInterneNotiz());
+        backingBean.setAnfahrtspauschaleBetrag(standorte.getAnfahrtspauschaleBetrag());
+        backingBean.setKilometerpauschaleBetrag(standorte.getKilometerpauschaleBetrag());
+    }
 }
