@@ -4,21 +4,19 @@
  */
 package de.reichel.dao.impl;
 
+import de.reichel.bean.RepairEdit;
+import de.reichel.bean.RepairNew;
+import de.reichel.dao.ReparaturDAO;
 import de.reichel.domain.model.AnlagenStandorte;
-import de.reichel.domain.model.Betreiber;
 import de.reichel.domain.model.Firmen;
-import de.reichel.domain.model.Kunden;
 import de.reichel.domain.model.Repair;
 import de.reichel.domain.model.RepairTeile;
 import de.reichel.domain.model.Saetze;
 import de.reichel.domain.model.Standorte;
 import de.reichel.domain.model.Teile;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.apache.commons.logging.Log;
@@ -28,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Alastair Calderwood
  */
-public class ReparaturDAOImpl {
+public class ReparaturDAOImpl implements ReparaturDAO {
 
     private static final Log log = LogFactory.getLog(ReparaturDAOImpl.class);
     @PersistenceContext
@@ -37,6 +35,7 @@ public class ReparaturDAOImpl {
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
 
     /**
      * Gets a list of all repairs
@@ -64,57 +63,6 @@ public class ReparaturDAOImpl {
     }
 
     /**
-     * Gets the location of a machine
-     *
-     * @param idStandorte
-     * @return Standorte, or null if none exists. Note: need to check for null
-     * in backing bean
-     */
-    public Standorte getStandorte(int idStandorte) {
-        Query query = entityManager.createQuery("from Standorte standorte where standorte.idStandorte = :idStandorte");
-        query.setParameter("idStandorte", idStandorte);
-        if (query.getResultList().size() > 0) {
-            return (Standorte) query.getResultList().get(0);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Gets the manager of a machine
-     *
-     * @param idBetreiber
-     * @return Betreiber (managing company), or null if none exists. Note: need
-     * to check for null in backing bean
-     */
-    public Betreiber getBetreiber(int idBetreiber) {
-        Query query = entityManager.createQuery("from Betreiber betreiber where betreiber.idBetreiber = :idBetreiber");
-        query.setParameter("idBetreiber", idBetreiber);
-        if (query.getResultList().size() > 0) {
-            return (Betreiber) query.getResultList().get(0);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Gets the customer of a machine
-     *
-     * @param idKunden
-     * @return Kunden (customer), or null if none exists. Note: need to check
-     * for null in backing bean
-     */
-    public Kunden getKunden(int idKunden) {
-        Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
-        query.setParameter("idKunden", idKunden);
-        if (query.getResultList().size() > 0) {
-            return (Kunden) query.getResultList().get(0);
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * Gets the owner of a machine
      *
      * @param idFirma
@@ -135,44 +83,6 @@ public class ReparaturDAOImpl {
     public List<Firmen> getAllFirmen() {
         Query query = entityManager.createQuery("from Firmen firmen order by firmen.firmenname");
         return query.getResultList();
-    }
-
-    /**
-     * Saves a new repair. Once added these details cannot be changed. See addOrUpdateRepairDetails to add other details
-     *
-     * @param idFirma
-     * @param workCarriedOut - Auszufuhrende Arbeiten - maps to REPAIR.FAX_TEXT
-     * @param internalRemarks - Interne Bemerkungen
-     */
-    public void addRepairBasics(int idAnlagen, int idFirma) {
-        Query anlagenStandorteQuery = entityManager.createQuery("from AnlagenStandorte as where as.idAnlagen = :idAnlagen");
-        anlagenStandorteQuery.setParameter("idAnlagen", idAnlagen);
-        AnlagenStandorte anlagenStandorte = (AnlagenStandorte) anlagenStandorteQuery.getSingleResult();
-
-        Repair repair = new Repair();
-
-        repair.setIdAnlagen(idAnlagen);
-        repair.setIdBetreiber(anlagenStandorte.getIdBetreiber());
-        repair.setIdKunden(anlagenStandorte.getIdKunden());
-        repair.setIdStandorte(anlagenStandorte.getIdAnlagenStandorte());
-        
-        Query standorteQuery = entityManager.createQuery("from Standorte s where s.idStandorte = :idStandorte");
-        standorteQuery.setParameter("idStandorte", anlagenStandorte.getIdAnlagenStandorte());
-        Standorte standorte = (Standorte)standorteQuery.getSingleResult();
-        
-        repair.setFahrzeitPauschaleBetrag(standorte.getAnfahrtspauschaleBetrag());
-        if (standorte.getAnfahrtspauschaleBetrag() > 0) {
-            repair.setFahrzeitPauschale(1D);
-        }
-        
-        repair.setKilometerPauschaleBetrag(standorte.getKilometerpauschaleBetrag());
-        if (standorte.getKilometerpauschaleBetrag() > 0) {
-            repair.setKilometerPauschale(1D);
-        }
-        
-        anlagenStandorte.getIdAnlagenStandorte();
-
-        entityManager.persist(repair);
     }
 
     /**
@@ -215,54 +125,85 @@ public class ReparaturDAOImpl {
      * @param dirtyHrs
      * @param dirtyMins
      */
-    public void addOrUpdateRepairDetails(int idRepair, short state, int idFirma, int idRates, String workDescription, String internalRemarks,  
-            int hoursOperation, Date repairDate, String technician, int hoursWorked, int minsWorked, int helperHoursWorked, int helperMinsWorked, 
-            double travelTimeMultiple, int travelTimeHrs, int travelTimeMins, int travelTimeHelperHrs, int travelTimeHelperMins, double travelRatePerHr, 
-            double travelDistanceMultiple, int travelDistanceKm, double travelRatePerKm, int accommodationHrs, int accommodationMins, 
-            int overtimeHrs, int overtimeMins, int dirtyHrs, int dirtyMins) {
+    
+    public void addRepair(RepairNew backingBean) {
+        Repair repair = new Repair();
+        repair.setIdAnlagen(backingBean.getIdAnlagen());
+        repair.setIdFirma(backingBean.getIdFirma());
+        repair.setErledigt(backingBean.getState());
+        repair.setIdSatz(backingBean.getIdRates());
+        repair.setFaxText(backingBean.getWorkDescription());
+        repair.setInterneBemerkung(backingBean.getInternalRemarks());
+        repair.setBetriebsstunden(backingBean.getHoursOperation());
+        repair.setReparaturDatum(backingBean.getRepairDate());
+        repair.setIdTechniker(backingBean.getTechnician());
+        repair.setArbeitszeitStunden(backingBean.getHoursWorked());
+        repair.setArbeitszeitMinuten(backingBean.getMinsWorked());
+        repair.setArbzeitHelferStunden(backingBean.getHelperHoursWorked());
+        repair.setArbzeitHelferMinuten(backingBean.getHelperMinsWorked());
+        repair.setFahrzeitStunden(backingBean.getTravelTimeHrs());
+        //set either travel time or travel distance but not both - should already have been handled in the view
+        if ((backingBean.getTravelTimeHrs() > 0 || backingBean.getTravelTimeMins() > 0 
+                || backingBean.getTravelTimeHelperHrs() > 0 || backingBean.getTravelTimeHelperMins() > 0)) {
+
+            repair.setFahrzeitMinuten(backingBean.getTravelTimeMins());
+            repair.setFahrzeitHelferStunden(backingBean.getTravelTimeHelperHrs());
+            repair.setFahrzeitHelferMinuten(backingBean.getTravelTimeHelperMins());
+            repair.setFahrzeitPauschaleBetrag(backingBean.getTravelRatePerHr());
+        } else {
+            repair.setKilometer(backingBean.getTravelDistanceKm());
+            repair.setKilometerPauschaleBetrag(backingBean.getTravelRatePerKm()); 
+        }
+        
+        repair.setAusloeseStunden(backingBean.getAccommodationHrs());
+        repair.setAusloeseMinuten(backingBean.getAccommodationMins());
+        repair.setUeberzeitStunden(backingBean.getOvertimeHrs());
+        repair.setUeberzeitMinuten(backingBean.getOvertimeMins());
+        repair.setZuschlagVmStunden(backingBean.getDirtyHrs());
+        repair.setZuschlagVmMinuten(backingBean.getDirtyMins());
+        addDetailsToRepair(backingBean.getIdAnlagen(), repair);
+        entityManager.persist(repair);
+    }    
+    
+    public void updateRepair(RepairEdit backingBean) {
         Query query = entityManager.createQuery("from Repair repair where repair.idRepair = :idRepair");
-        query.setParameter("idRepair", idRepair);
+        query.setParameter("idRepair", backingBean.getIdRepair());
 
         Repair repair = (Repair) query.getSingleResult();
-        repair.setIdFirma(idFirma);
-        repair.setIdSatz(idRates);
-        repair.setErledigt(state);
-        repair.setFaxText(workDescription);
-        repair.setInterneBemerkung(internalRemarks);
-        repair.setBetriebsstunden(hoursOperation);
-        repair.setReparaturDatum(repairDate);
-        repair.setArbeitszeitStunden(hoursWorked);
-        repair.setArbeitszeitMinuten(minsWorked);
-        repair.setArbzeitHelferStunden(helperHoursWorked);
-        repair.setArbzeitHelferMinuten(helperMinsWorked);
-        
-        repair.setFahrzeitPauschale(travelTimeMultiple);
-        repair.setFahrzeitPauschaleBetrag(travelRatePerHr);
-        repair.setKilometerPauschale(travelDistanceMultiple);
-        repair.setKilometerPauschaleBetrag(travelRatePerKm);
-
+        repair.setIdAnlagen(backingBean.getIdAnlagen());
+        repair.setIdFirma(backingBean.getIdFirma());
+        repair.setErledigt(backingBean.getState());
+        repair.setIdSatz(backingBean.getIdRates());
+        repair.setFaxText(backingBean.getWorkDescription());
+        repair.setInterneBemerkung(backingBean.getInternalRemarks());
+        repair.setBetriebsstunden(backingBean.getHoursOperation());
+        repair.setReparaturDatum(backingBean.getRepairDate());
+        repair.setIdTechniker(backingBean.getTechnician());
+        repair.setArbeitszeitStunden(backingBean.getHoursWorked());
+        repair.setArbeitszeitMinuten(backingBean.getMinsWorked());
+        repair.setArbzeitHelferStunden(backingBean.getHelperHoursWorked());
+        repair.setArbzeitHelferMinuten(backingBean.getHelperMinsWorked());
+        repair.setFahrzeitStunden(backingBean.getTravelTimeHrs());
         //set either travel time or travel distance but not both - should already have been handled in the view
-        if ((travelTimeHrs > 0 || travelTimeMins > 0 || travelTimeHelperHrs > 0 || travelTimeHelperMins > 0)) {
+        if ((backingBean.getTravelTimeHrs() > 0 || backingBean.getTravelTimeMins() > 0 
+                || backingBean.getTravelTimeHelperHrs() > 0 || backingBean.getTravelTimeHelperMins() > 0)) {
 
-            repair.setFahrzeitStunden(travelTimeHrs);
-            repair.setFahrzeitMinuten(travelTimeMins);
-            repair.setFahrzeitHelferStunden(travelTimeHelperHrs);
-            repair.setFahrzeitHelferMinuten(travelTimeHelperMins);
-            repair.setKilometer(0);
+            repair.setFahrzeitMinuten(backingBean.getTravelTimeMins());
+            repair.setFahrzeitHelferStunden(backingBean.getTravelTimeHelperHrs());
+            repair.setFahrzeitHelferMinuten(backingBean.getTravelTimeHelperMins());
+            repair.setFahrzeitPauschaleBetrag(backingBean.getTravelRatePerHr());
         } else {
-            repair.setFahrzeitStunden(0);
-            repair.setFahrzeitMinuten(0);
-            repair.setFahrzeitHelferStunden(0);
-            repair.setFahrzeitHelferMinuten(0);
-            repair.setKilometer(travelDistanceKm);
+            repair.setKilometer(backingBean.getTravelDistanceKm());
+            repair.setKilometerPauschaleBetrag(backingBean.getTravelRatePerKm()); 
         }
-        repair.setAusloeseStunden(accommodationHrs);
-        repair.setAusloeseMinuten(accommodationMins);
-        repair.setUeberzeitStunden(overtimeHrs);
-        repair.setUeberzeitMinuten(overtimeMins);
-        repair.setZuschlagVmStunden(dirtyHrs);
-        repair.setZuschlagVmMinuten(dirtyMins);
-
+        
+        repair.setAusloeseStunden(backingBean.getAccommodationHrs());
+        repair.setAusloeseMinuten(backingBean.getAccommodationMins());
+        repair.setUeberzeitStunden(backingBean.getOvertimeHrs());
+        repair.setUeberzeitMinuten(backingBean.getOvertimeMins());
+        repair.setZuschlagVmStunden(backingBean.getDirtyHrs());
+        repair.setZuschlagVmMinuten(backingBean.getDirtyMins());
+        addDetailsToRepair(backingBean.getIdAnlagen(), repair);
         entityManager.merge(repair);
     }
     
@@ -318,4 +259,68 @@ public class ReparaturDAOImpl {
         query.setParameter("idTeile", idMachinePart);
         return (Teile)query.getSingleResult();       
     }
+    
+    public void loadRepair(RepairEdit backingBean) {
+        Query query = entityManager.createQuery("from Repair repair where repair.idRepair = :idRepair");
+        query.setParameter("idRepair", backingBean.getIdRepair());
+        log.debug("Query to run " + query.toString());
+        Repair repair = (Repair) query.getSingleResult();
+        backingBean.setIdAnlagen(backingBean.getIdAnlagen());
+        backingBean.setIdFirma(backingBean.getIdFirma());
+        backingBean.setState(repair.getErledigt());
+        backingBean.setIdRates(repair.getIdSatz());
+        backingBean.setWorkDescription(repair.getFaxText());
+        backingBean.setInternalRemarks(repair.getInterneBemerkung());
+        backingBean.setHoursOperation(repair.getBetriebsstunden());
+        backingBean.setRepairDate(repair.getReparaturDatum());
+        backingBean.setTechnician(repair.getIdTechniker());
+        backingBean.setHoursWorked(repair.getArbeitszeitStunden());
+        backingBean.setMinsWorked(repair.getArbeitszeitMinuten());
+        backingBean.setHelperHoursWorked(repair.getArbzeitHelferStunden());
+        backingBean.setHelperMinsWorked(repair.getArbzeitHelferMinuten());
+        backingBean.setTravelTimeHrs(repair.getFahrzeitStunden());
+        backingBean.setTravelTimeMins(repair.getFahrzeitMinuten());
+        backingBean.setTravelTimeHelperHrs(repair.getFahrzeitHelferStunden());
+        backingBean.setTravelTimeHelperMins(repair.getFahrzeitHelferMinuten());
+        backingBean.setTravelRatePerHr(repair.getFahrzeitPauschaleBetrag());
+        backingBean.setTravelDistanceKm(repair.getKilometer());
+        backingBean.setTravelRatePerKm(repair.getKilometerPauschaleBetrag()); 
+        backingBean.setAccommodationHrs(repair.getAusloeseStunden());
+        backingBean.setAccommodationMins(repair.getAusloeseMinuten());
+        backingBean.setOvertimeHrs(repair.getUeberzeitStunden());
+        backingBean.setOvertimeMins(repair.getUeberzeitMinuten());
+        backingBean.setDirtyHrs(repair.getZuschlagVmStunden());
+        backingBean.setDirtyMins(repair.getZuschlagVmMinuten());
+        addDetailsToRepair(backingBean.getIdAnlagen(), repair);
+        
+    }
+    
+    /**
+     * Adds details for a new or updated repair but does not persist.
+     */
+    private void addDetailsToRepair(int idAnlagen, Repair repair) {
+        Query anlagenStandorteQuery = entityManager.createQuery("from AnlagenStandorte as where as.idAnlagen = :idAnlagen");
+        anlagenStandorteQuery.setParameter("idAnlagen", idAnlagen);
+        AnlagenStandorte anlagenStandorte = (AnlagenStandorte) anlagenStandorteQuery.getSingleResult();
+
+        repair.setIdAnlagen(idAnlagen);
+        repair.setIdBetreiber(anlagenStandorte.getIdBetreiber());
+        repair.setIdKunden(anlagenStandorte.getIdKunden());
+        repair.setIdStandorte(anlagenStandorte.getIdAnlagenStandorte());
+        
+        Query standorteQuery = entityManager.createQuery("from Standorte s where s.idStandorte = :idStandorte");
+        standorteQuery.setParameter("idStandorte", anlagenStandorte.getIdAnlagenStandorte());
+        Standorte standorte = (Standorte)standorteQuery.getSingleResult();
+        
+        repair.setFahrzeitPauschaleBetrag(standorte.getAnfahrtspauschaleBetrag());
+        if (standorte.getAnfahrtspauschaleBetrag() > 0) {
+            repair.setFahrzeitPauschale(1D);
+        }
+        
+        repair.setKilometerPauschaleBetrag(standorte.getKilometerpauschaleBetrag());
+        if (standorte.getKilometerpauschaleBetrag() > 0) {
+            repair.setKilometerPauschale(1D);
+        }
+    }
+
 }

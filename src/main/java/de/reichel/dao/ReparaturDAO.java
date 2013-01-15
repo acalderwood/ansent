@@ -4,10 +4,31 @@
  */
 package de.reichel.dao;
 
+import de.reichel.bean.RepairEdit;
+import de.reichel.bean.RepairNew;
+import de.reichel.domain.model.Firmen;
+import de.reichel.domain.model.Repair;
+import de.reichel.domain.model.Saetze;
+import java.util.List;
+
 /**
  *
  * @author Alastair Calderwood
  */
-public class ReparaturDAO {
-    
+public interface ReparaturDAO {
+
+    public void addRepair(RepairNew backingBean);
+
+    public void updateRepair(RepairEdit backingBean);
+
+    public void loadRepair(RepairEdit backingBean);
+
+    public List<Repair> getExistingRepairs(int idAnlagen);
+
+    public Saetze getSaetze(int idSaetze);
+
+    public Firmen getFirmen(int idFirma);
+
+    public List<Firmen> getAllFirmen();
+
 }

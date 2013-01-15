@@ -82,13 +82,13 @@ public class KundenDAOImpl implements KundenDAO {
 
     @Transactional(readOnly = true)
     public List<Kunden> getSelectableKunden() {
-        Query query = entityManager.createQuery("from Kunden k order by k.firmenname");
+        Query query = entityManager.createQuery("from Kunden kunden order by kunden.firmenname");
         return query.getResultList();
     }
 
     @Transactional(readOnly = true)
     public Kunden getKunden(Integer kundenId) {
-        Query query = entityManager.createQuery("from Kunden k where k.idKunden = :idKunden");
+        Query query = entityManager.createQuery("from Kunden kunden where kunden.idKunden = :idKunden");
         query.setParameter("idKunden", kundenId);
         log.debug("getKunden for id " + kundenId);
         return (Kunden) query.getResultList().get(0);

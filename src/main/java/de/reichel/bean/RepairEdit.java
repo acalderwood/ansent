@@ -6,30 +6,30 @@ package de.reichel.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import org.springframework.stereotype.Controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author Alastair Calderwood
  */
-@ManagedBean(name = "kundenEdit")
+@ManagedBean(name = "repairEdit")
 @RequestScoped
 @Controller
-public class KundenEdit extends KundenBean {
-    private static final Log log = LogFactory.getLog(KundenEdit.class);
+public class RepairEdit extends RepairBean {
+    private static final Log log = LogFactory.getLog(RepairEdit.class);
 
     public String update() {
-        log.debug("Update Kunden is called");
-        kundenDAO.updateKunden(this);
+        log.debug("Update Repair is called");
+        repairDAO.updateRepair(this);
         return "index";
     }
     
     public String load() {
         
-        log.debug("Load Kunden is called");
-        kundenDAO.loadKunden(this);
+        log.debug("Load Repair is called");
+        repairDAO.loadRepair(this);
         return "index";
     }
 }

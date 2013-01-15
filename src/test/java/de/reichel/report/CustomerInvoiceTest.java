@@ -15,6 +15,7 @@ public class CustomerInvoiceTest {
 
     @Test
     public void testGenerateReport() throws Exception {
-
+        CustomerInvoice ci = new CustomerInvoice();
+        
     }
 }

@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class StandorteDAOImpl implements StandorteDAO {
 
-    private static final Log log = LogFactory.getLog(AnlagenDAOImpl.class);
+    private static final Log log = LogFactory.getLog(StandorteDAOImpl.class);
     @PersistenceContext
     private EntityManager entityManager;
 
