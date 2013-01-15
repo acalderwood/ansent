@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+        <f:view>
+            
+            <h:form id="neuerEntsorger">
+                <p:panel id="panel" header="Neuer Entsorger" style="margin-bottom:10px;"> 
+                    <p:messages id="messages" />  
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="Entsorger:" for="entsorgername" />
+                            <p:inputText id="entsorgername" value="#{entsorgerNew.entsorgerName}"  />
+                            
+                            <h:outputLabel value="Ansprechpartner:" for="ansprechpartner" />
+                            <p:inputText id="ansprechpartner" value="#{entsorgerNew.ansprechPartner}"  />
+                            
+                            <h:outputLabel value="Strasse, Nr.:" for="strasse" />
+                            <p:inputText id="strasse" value="#{entsorgerNew.strasseNr}"  />
+                            
+                            <h:outputLabel value="PLZ:" for="plz" />
+                            <p:inputText id="plz" value="#{entsorgerNew.plz}" required="true" requiredMessage="Bitte geben Sie eine gultige PLZ ein"/>
+                                                        
+                            <h:outputLabel value="Ort:" for="ort" />
+                            <p:inputText id="ort" value="#{entsorgerNew.ort}" required="true" requiredMessage="Bitte geben Sie eine gultige Ort ein"/>
+                                                       
+                            <h:outputLabel value="Telefon:" for="telefon" />
+                            <p:inputText id="telefon" value="#{entsorgerNew.telefon}" required="false" />
+                           
+                            <h:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{entsorgerNew.fax}" required="false" />
+                            
+                            <h:outputLabel value="Email:" for="email" />
+                            <p:inputText id="email" value="#{entsorgerNew.email}" required="false" />
+                           
+                            <h:outputLabel value="Bemerkung:" for="bemerkung" />
+                            <p:inputTextarea id="bemerkung" value="#{entsorgerNew.bemerkung}" required="false" />
+                           
+                            <p:commandButton action="#{entsorgerNew.add}" value="HinzufÃ¼gen" update="panel" id="ajax"  />
+                </h:panelGrid>
+              </p:panel>
+            </h:form>
+        </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
