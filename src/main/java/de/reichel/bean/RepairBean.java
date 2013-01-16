@@ -21,6 +21,7 @@ public class RepairBean implements Serializable {
     protected ReparaturDAO repairDAO;
     public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
+    protected int idRepairTeile;
     protected int idRepair;
     protected int idAnlagen;
     protected int idFirma;
@@ -425,5 +426,19 @@ public class RepairBean implements Serializable {
      */
     public void setIdAnlagen(int idAnlagen) {
         this.idAnlagen = idAnlagen;
+    }
+
+    /**
+     * @return the idRepairTeile
+     */
+    public int getIdRepairTeile() {
+        return idRepairTeile;
+    }
+
+    /**
+     * @param idRepairTeile the idRepairTeile to set
+     */
+    public void setIdRepairTeile(int idRepairTeile) {
+        this.idRepairTeile = idRepairTeile;
     }
 }
