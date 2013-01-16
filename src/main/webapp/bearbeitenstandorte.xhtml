@@ -64,6 +64,10 @@
                             <h:outputLabel value="Kilometerpausch. Betrag" for="kilometerpausch" />
                             <p:inputText id="kilometerpausch" value="#{standorteEdit.kilometerpauschaleBetrag}" required="false" />
                             
+                            <h:outputLabel value="Entsorger" for="Entsorger" />
+                            <h:selectOneMenu id="entsorger" value="#{standorteEdit.idEntsorger}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
+                                <f:selectItems id="selectableEntsorger" value="#{standorteEdit.selectableEntsorger}" var="entsorger" itemValue="#{entsorger.idEntsorger}" itemLabel="#{entsorger.entsorgerName}" noSelectionValue="true" />
+                            </h:selectOneMenu>
                             
                             
                         </h:panelGrid>

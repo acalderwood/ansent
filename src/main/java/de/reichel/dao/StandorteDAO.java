@@ -6,6 +6,7 @@ package de.reichel.dao;
 
 import de.reichel.bean.StandorteEdit;
 import de.reichel.bean.StandorteNew;
+import de.reichel.domain.model.Entsorger;
 import de.reichel.domain.model.Standorte;
 import java.io.Serializable;
 import java.util.List;
@@ -25,5 +26,7 @@ public interface StandorteDAO extends Serializable {
     public void updateStandorte(StandorteEdit backingBean);
 
     public void loadStandorte(StandorteEdit backingBean);
+    
+    public List<Entsorger> getSelectableEntsorger();
     
 }

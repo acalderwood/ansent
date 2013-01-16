@@ -22,6 +22,7 @@ public class EntsorgerEdit extends EntsorgerBean {
     private static final Log log = LogFactory.getLog(EntsorgerEdit.class);
 
     public String update() {
+        log.debug("Update Entsorger is called");
         entsorgerDAO.updateEntsorger(this);
         return "index";
     }

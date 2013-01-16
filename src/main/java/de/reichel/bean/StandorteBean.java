@@ -5,8 +5,10 @@
 package de.reichel.bean;
 
 import de.reichel.dao.StandorteDAO;
+import de.reichel.domain.model.Entsorger;
 import de.reichel.domain.model.Standorte;
 import java.io.Serializable;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -290,5 +292,9 @@ public class StandorteBean implements Serializable {
      */
     public void setIdStandorte(Integer idStandorte) {
         this.idStandorte = idStandorte;
+    }
+    
+    public List<Entsorger> getSelectableEntsorger() {
+        return standorteDAO.getSelectableEntsorger();
     }
 }

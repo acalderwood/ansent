@@ -20,7 +20,7 @@ public interface EntsorgerDAO {
 
     public void addEntsorger(EntsorgerNew backingBean);
 
-    public List<Betreiber> getAllEntsorger();
+    public List<Entsorger> getAllEntsorger();
 
     public Entsorger getEntsorger(Integer idEntsorger);
 

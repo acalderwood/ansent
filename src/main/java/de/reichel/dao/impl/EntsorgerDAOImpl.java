@@ -16,12 +16,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Alastair Calderwood
  */
+@Repository
 public class EntsorgerDAOImpl implements EntsorgerDAO {
 
     private static final Log log = LogFactory.getLog(EntsorgerDAOImpl.class);
@@ -50,7 +52,7 @@ public class EntsorgerDAOImpl implements EntsorgerDAO {
         entsorger.setStrasseNr(backingBean.getStrasseNr());
         entsorger.setTelefon(backingBean.getTelefon());
         entsorger.setTimestamp(Calendar.getInstance().getTime());
-        entityManager.merge(backingBean);
+        entityManager.merge(entsorger);
     }
 
     @Transactional(readOnly = false)
@@ -73,9 +75,9 @@ public class EntsorgerDAOImpl implements EntsorgerDAO {
     }
 
     @Transactional(readOnly = true)
-    public List<Betreiber> getAllEntsorger() {
+    public List<Entsorger> getAllEntsorger() {
         Query query = entityManager.createQuery("from Entsorger entsorger order by entsorger.entsorgerName");
-        List<Betreiber> result = query.getResultList();
+        List<Entsorger> result = query.getResultList();
         return result;
     }
 
@@ -87,7 +89,8 @@ public class EntsorgerDAOImpl implements EntsorgerDAO {
     }
 
     public void loadEntsorger(EntsorgerEdit backingBean) {
-        Query query = entityManager.createQuery("from Entsorger betreiber where entsorger.idEntsorger = :idEntsorger");
+        log.debug("Inside loadEntsorger method");
+        Query query = entityManager.createQuery("from Entsorger entsorger where entsorger.idEntsorger = :idEntsorger");
         query.setParameter("idEntsorger", backingBean.getIdEntsorger());
         log.debug("Query to run " + query.toString());
         Entsorger entsorger = (Entsorger) query.getResultList().get(0);

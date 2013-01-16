@@ -7,6 +7,7 @@ package de.reichel.dao.impl;
 import de.reichel.bean.StandorteEdit;
 import de.reichel.bean.StandorteNew;
 import de.reichel.dao.StandorteDAO;
+import de.reichel.domain.model.Entsorger;
 import de.reichel.domain.model.Standorte;
 import java.util.Calendar;
 import java.util.List;
@@ -113,5 +114,11 @@ public class StandorteDAOImpl implements StandorteDAO {
         backingBean.setInterneNotiz(standorte.getInterneNotiz());
         backingBean.setAnfahrtspauschaleBetrag(standorte.getAnfahrtspauschaleBetrag());
         backingBean.setKilometerpauschaleBetrag(standorte.getKilometerpauschaleBetrag());
+        backingBean.setIdEntsorger(standorte.getIdEntsorger());
+    }
+
+    public List<Entsorger> getSelectableEntsorger() {
+        Query query = entityManager.createQuery("from Entsorger e order by e.entsorgerName");
+        return query.getResultList();
     }
 }
