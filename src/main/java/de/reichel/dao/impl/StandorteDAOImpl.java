@@ -83,7 +83,7 @@ public class StandorteDAOImpl implements StandorteDAO {
 
     @Transactional(readOnly = true)
     public List<Standorte> getAllStandorte() {
-        Query query = entityManager.createQuery("from Standorte standorte");
+        Query query = entityManager.createQuery("from Standorte standorte order by standorte.standortname");
         List<Standorte> result = query.getResultList();
         return result;
     }
