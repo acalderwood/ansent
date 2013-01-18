@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+
+                    <!-- TODO: Search Anlage and Load the repairs in selectableRepair -->
+
+
+                    <p:panel id="panel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="" for="selectableRepair" />
+                            <h:selectOneMenu value="#{repairEdit.idAnlagen}">
+                                <f:selectItems id="selectableRepair" value="#{repairSearch.selectableRepairs}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.timestamp}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <p:commandButton actionListener="#{repairEdit.load}" update="display" value="Choose" id="ajax"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

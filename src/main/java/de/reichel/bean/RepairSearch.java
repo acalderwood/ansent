@@ -6,6 +6,7 @@ package de.reichel.bean;
 
 import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.Firmen;
+import de.reichel.domain.model.Repair;
 import de.reichel.domain.model.Saetze;
 import de.reichel.domain.model.Techniker;
 import java.util.List;
@@ -21,6 +22,10 @@ import org.springframework.stereotype.Controller;
 @RequestScoped
 @Controller
 public class RepairSearch extends RepairBean {
+    
+    public List<Repair> getSelectableRepairs(int idAnlagen) {
+        return repairDAO.getExistingRepairs(idAnlagen);
+    }
     
     public List<Anlagen> getSelectableAnlagen() {
         return anlagenDAO.getAllAnlagen();
