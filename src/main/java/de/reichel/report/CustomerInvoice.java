@@ -10,7 +10,7 @@ package de.reichel.report;
  */
 public class CustomerInvoice {
 
-    private String repair_ID_REPAIR = "repair_ID_REPAIR 123";
+    private Integer repair_ID_REPAIR = 123;
     private String user_VORNAME = "vorname";
     private String user_NACHNAME = "nachname";
     private String repair_ERSTELLT = "nachname";
@@ -42,17 +42,19 @@ public class CustomerInvoice {
     private String techniker_FIRMA_TECHNIKER = "nachname";
     private String techniker_NAME_TECHNIKER = "nachname";
 
+    
+    
     /**
      * @return the repair_ID_REPAIR
      */
-    public String getRepair_ID_REPAIR() {
-        return repair_ID_REPAIR;
+    public Integer getRepair_ID_REPAIR() {
+        return 10;
     }
 
     /**
      * @param repair_ID_REPAIR the repair_ID_REPAIR to set
      */
-    public void setRepair_ID_REPAIR(String repair_ID_REPAIR) {
+    public void setRepair_ID_REPAIR(Integer repair_ID_REPAIR) {
         this.repair_ID_REPAIR = repair_ID_REPAIR;
     }
 

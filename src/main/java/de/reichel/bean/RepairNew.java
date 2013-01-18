@@ -4,10 +4,11 @@
  */
 package de.reichel.bean;
 
-import de.reichel.dao.ReparaturDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
+import javax.faces.event.AjaxBehaviorEvent;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -19,11 +20,15 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class RepairNew extends RepairBean {
 
-    @Inject
-    private ReparaturDAO repairDAO;
+    private static final Log log = LogFactory.getLog(RepairNew.class);
 
     public String add() {
+        log.debug("Adding new repair");
         repairDAO.addRepair(this);
         return "index";
+    }
+
+    public void timeKmListener(AjaxBehaviorEvent event) {
+        log.debug("timeKmListener called");
     }
 }

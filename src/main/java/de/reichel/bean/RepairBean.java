@@ -4,12 +4,15 @@
  */
 package de.reichel.bean;
 
+import de.reichel.dao.AnlagenDAO;
 import de.reichel.dao.ReparaturDAO;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -17,50 +20,65 @@ import javax.inject.Inject;
  */
 public class RepairBean implements Serializable {
 
+       private static final Log log = LogFactory.getLog(RepairBean.class);
+       
+    @Inject
+    protected AnlagenDAO anlagenDAO;    
     @Inject
     protected ReparaturDAO repairDAO;
     public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
-    protected int idRepairTeile;
-    protected int idRepair;
-    protected int idAnlagen;
-    protected int idFirma;
-    protected int idRates;
+    protected Integer idRepairTeile;
+    protected Integer idRepair;
+    protected Integer idAnlagen;
+    protected Integer idFirma;
+    protected Integer idStandorte;
+    protected Integer idKunden;
+    protected Integer idRates;
     protected short state;
     protected String workDescription;
     protected String internalRemarks;
-    protected int hoursOperation;
+    protected Integer hoursOperation;
     protected Date repairDate;
-    protected int idTechnician;
-    protected int hoursWorked;
-    protected int minsWorked;
-    protected int helperHoursWorked;
-    protected int helperMinsWorked;
-    protected int travelTimeHrs;
-    protected int travelTimeMins;
-    protected int travelTimeHelperHrs;
-    protected int travelTimeHelperMins;
+    protected Integer idTechnician;
+//    protected Integer hoursWorked;
+//    protected Integer minsWorked;
+    protected Date timeWorked;
+//    protected Integer helperHoursWorked;
+//    protected Integer helperMinsWorked;
+    protected Date helperTimeWorked;
+//    protected Integer travelTimeHrs;
+//    protected Integer travelTimeMins;
+    protected Date travelTime;
+//    protected Integer travelTimeHelperHrs;
+//    protected Integer travelTimeHelperMins;
+    protected Date travelTimeHelper;
     protected double travelRatePerHr;
-    protected int travelDistanceKm;
+    protected Integer travelDistanceKm;
     protected double travelRatePerKm;
-    protected int accommodationHrs;
-    protected int accommodationMins;
-    protected int overtimeHrs;
-    protected int overtimeMins;
-    protected int dirtyHrs;
-    protected int dirtyMins;
+//    protected Integer accommodationHrs;
+//    protected Integer accommodationMins;
+    protected Date accommodationTime;
+//    protected Integer overtimeHrs;
+//    protected Integer overtimeMins;
+    protected Date overtimeTime;
+//    protected Integer dirtyHrs;
+//    protected Integer dirtyMins;
+    protected Date dirtyTime;
+    protected boolean travelTypeTime = true;
+    protected boolean travelTypeKm = true;
 
     /**
      * @return the idRepair
      */
-    public int getIdRepair() {
+    public Integer getIdRepair() {
         return idRepair;
     }
 
     /**
      * @param idRepair the idRepair to set
      */
-    public void setIdRepair(int idRepair) {
+    public void setIdRepair(Integer idRepair) {
         this.idRepair = idRepair;
     }
 
@@ -81,28 +99,28 @@ public class RepairBean implements Serializable {
     /**
      * @return the idFirma
      */
-    public int getIdFirma() {
+    public Integer getIdFirma() {
         return idFirma;
     }
 
     /**
      * @param idFirma the idFirma to set
      */
-    public void setIdFirma(int idFirma) {
+    public void setIdFirma(Integer idFirma) {
         this.idFirma = idFirma;
     }
 
     /**
      * @return the idRates
      */
-    public int getIdRates() {
+    public Integer getIdRates() {
         return idRates;
     }
 
     /**
      * @param idRates the idRates to set
      */
-    public void setIdRates(int idRates) {
+    public void setIdRates(Integer idRates) {
         this.idRates = idRates;
     }
 
@@ -137,14 +155,14 @@ public class RepairBean implements Serializable {
     /**
      * @return the hoursOperation
      */
-    public int getHoursOperation() {
+    public Integer getHoursOperation() {
         return hoursOperation;
     }
 
     /**
      * @param hoursOperation the hoursOperation to set
      */
-    public void setHoursOperation(int hoursOperation) {
+    public void setHoursOperation(Integer hoursOperation) {
         this.hoursOperation = hoursOperation;
     }
 
@@ -165,128 +183,184 @@ public class RepairBean implements Serializable {
     /**
      * @return the technician
      */
-    public int getTechnician() {
+    public Integer getIdTechnician() {
         return idTechnician;
     }
 
     /**
      * @param technician the technician to set
      */
-    public void setTechnician(int idTechnician) {
+    public void setIdTechnician(Integer idTechnician) {
         this.idTechnician = idTechnician;
     }
 
-    /**
-     * @return the hoursWorked
-     */
-    public int getHoursWorked() {
-        return hoursWorked;
+    public Date getTimeWorked() {
+        return timeWorked;
     }
 
-    /**
-     * @param hoursWorked the hoursWorked to set
-     */
-    public void setHoursWorked(int hoursWorked) {
-        this.hoursWorked = hoursWorked;
+    public void setTimeWorked(Date date) {
+        this.timeWorked = date;
     }
 
-    /**
-     * @return the minsWorked
-     */
-    public int getMinsWorked() {
-        return minsWorked;
+    public Date getHelperTimeWorked() {
+        return helperTimeWorked;
     }
 
-    /**
-     * @param minsWorked the minsWorked to set
-     */
-    public void setMinsWorked(int minsWorked) {
-        this.minsWorked = minsWorked;
+    public void setHelperTimeWorked(Date date) {
+        this.helperTimeWorked = date;
+    }
+    
+    public Date getTravelTime() {
+        return travelTime;
     }
 
-    /**
-     * @return the helperHoursWorked
-     */
-    public int getHelperHoursWorked() {
-        return helperHoursWorked;
+    public void setTravelTime(Date date) {
+        this.travelTime = date;
+    }
+   
+     public Date getTravelTimeHelper() {
+        return travelTimeHelper;
     }
 
-    /**
-     * @param helperHoursWorked the helperHoursWorked to set
-     */
-    public void setHelperHoursWorked(int helperHoursWorked) {
-        this.helperHoursWorked = helperHoursWorked;
+    public void setTravelTimeHelper(Date date) {
+        this.travelTimeHelper = date;
+    }   
+    
+    public Date getAccommodationTime() {
+        return accommodationTime;
     }
 
-    /**
-     * @return the helperMinsWorked
-     */
-    public int getHelperMinsWorked() {
-        return helperMinsWorked;
+    public void setAccommodationTime(Date date) {
+        this.accommodationTime = date;
+    }     
+     
+    public Date getOvertimeTime() {
+        return overtimeTime;
     }
 
-    /**
-     * @param helperMinsWorked the helperMinsWorked to set
-     */
-    public void setHelperMinsWorked(int helperMinsWorked) {
-        this.helperMinsWorked = helperMinsWorked;
+    public void setOvertimeTime(Date date) {
+        this.overtimeTime = date;
+    }      
+    
+    public Date getDirtyTime() {
+        return dirtyTime;
     }
 
-    /**
-     * @return the travelTimeHrs
-     */
-    public int getTravelTimeHrs() {
-        return travelTimeHrs;
-    }
-
-    /**
-     * @param travelTimeHrs the travelTimeHrs to set
-     */
-    public void setTravelTimeHrs(int travelTimeHrs) {
-        this.travelTimeHrs = travelTimeHrs;
-    }
-
-    /**
-     * @return the travelTimeMins
-     */
-    public int getTravelTimeMins() {
-        return travelTimeMins;
-    }
-
-    /**
-     * @param travelTimeMins the travelTimeMins to set
-     */
-    public void setTravelTimeMins(int travelTimeMins) {
-        this.travelTimeMins = travelTimeMins;
-    }
-
-    /**
-     * @return the travelTimeHelperHrs
-     */
-    public int getTravelTimeHelperHrs() {
-        return travelTimeHelperHrs;
-    }
-
-    /**
-     * @param travelTimeHelperHrs the travelTimeHelperHrs to set
-     */
-    public void setTravelTimeHelperHrs(int travelTimeHelperHrs) {
-        this.travelTimeHelperHrs = travelTimeHelperHrs;
-    }
-
-    /**
-     * @return the travelTimeHelperMins
-     */
-    public int getTravelTimeHelperMins() {
-        return travelTimeHelperMins;
-    }
-
-    /**
-     * @param travelTimeHelperMins the travelTimeHelperMins to set
-     */
-    public void setTravelTimeHelperMins(int travelTimeHelperMins) {
-        this.travelTimeHelperMins = travelTimeHelperMins;
-    }
+    public void setDirtyTime(Date date) {
+        this.dirtyTime = date;
+    }      
+   
+//    /**
+//     * @return the hoursWorked
+//     */
+//    public Integer getHoursWorked() {
+//        return hoursWorked;
+//    }
+//
+//    /**
+//     * @param hoursWorked the hoursWorked to set
+//     */
+//    public void setHoursWorked(Integer hoursWorked) {
+//        this.hoursWorked = hoursWorked;
+//    }
+//
+//    /**
+//     * @return the minsWorked
+//     */
+//    public Integer getMinsWorked() {
+//        return minsWorked;
+//    }
+//
+//    /**
+//     * @param minsWorked the minsWorked to set
+//     */
+//    public void setMinsWorked(Integer minsWorked) {
+//        this.minsWorked = minsWorked;
+//    }
+//
+//    /**
+//     * @return the helperHoursWorked
+//     */
+//    public Integer getHelperHoursWorked() {
+//        return helperHoursWorked;
+//    }
+//
+//    /**
+//     * @param helperHoursWorked the helperHoursWorked to set
+//     */
+//    public void setHelperHoursWorked(Integer helperHoursWorked) {
+//        this.helperHoursWorked = helperHoursWorked;
+//    }
+//
+//    /**
+//     * @return the helperMinsWorked
+//     */
+//    public Integer getHelperMinsWorked() {
+//        return helperMinsWorked;
+//    }
+//
+//    /**
+//     * @param helperMinsWorked the helperMinsWorked to set
+//     */
+//    public void setHelperMinsWorked(Integer helperMinsWorked) {
+//        this.helperMinsWorked = helperMinsWorked;
+//    }
+//
+//    /**
+//     * @return the travelTimeHrs
+//     */
+//    public Integer getTravelTimeHrs() {
+//        return travelTimeHrs;
+//    }
+//
+//    /**
+//     * @param travelTimeHrs the travelTimeHrs to set
+//     */
+//    public void setTravelTimeHrs(Integer travelTimeHrs) {
+//        this.travelTimeHrs = travelTimeHrs;
+//    }
+//
+//    /**
+//     * @return the travelTimeMins
+//     */
+//    public Integer getTravelTimeMins() {
+//        return travelTimeMins;
+//    }
+//
+//    /**
+//     * @param travelTimeMins the travelTimeMins to set
+//     */
+//    public void setTravelTimeMins(Integer travelTimeMins) {
+//        this.travelTimeMins = travelTimeMins;
+//    }
+//
+//    /**
+//     * @return the travelTimeHelperHrs
+//     */
+//    public Integer getTravelTimeHelperHrs() {
+//        return travelTimeHelperHrs;
+//    }
+//
+//    /**
+//     * @param travelTimeHelperHrs the travelTimeHelperHrs to set
+//     */
+//    public void setTravelTimeHelperHrs(Integer travelTimeHelperHrs) {
+//        this.travelTimeHelperHrs = travelTimeHelperHrs;
+//    }
+//
+//    /**
+//     * @return the travelTimeHelperMins
+//     */
+//    public Integer getTravelTimeHelperMins() {
+//        return travelTimeHelperMins;
+//    }
+//
+//    /**
+//     * @param travelTimeHelperMins the travelTimeHelperMins to set
+//     */
+//    public void setTravelTimeHelperMins(Integer travelTimeHelperMins) {
+//        this.travelTimeHelperMins = travelTimeHelperMins;
+//    }
 
     /**
      * @return the travelRatePerHr
@@ -305,14 +379,14 @@ public class RepairBean implements Serializable {
     /**
      * @return the travelDistanceKm
      */
-    public int getTravelDistanceKm() {
+    public Integer getTravelDistanceKm() {
         return travelDistanceKm;
     }
 
     /**
      * @param travelDistanceKm the travelDistanceKm to set
      */
-    public void setTravelDistanceKm(int travelDistanceKm) {
+    public void setTravelDistanceKm(Integer travelDistanceKm) {
         this.travelDistanceKm = travelDistanceKm;
     }
 
@@ -329,116 +403,175 @@ public class RepairBean implements Serializable {
     public void setTravelRatePerKm(double travelRatePerKm) {
         this.travelRatePerKm = travelRatePerKm;
     }
-
-    /**
-     * @return the accommodationHrs
-     */
-    public int getAccommodationHrs() {
-        return accommodationHrs;
-    }
-
-    /**
-     * @param accommodationHrs the accommodationHrs to set
-     */
-    public void setAccommodationHrs(int accommodationHrs) {
-        this.accommodationHrs = accommodationHrs;
-    }
-
-    /**
-     * @return the accommodationMins
-     */
-    public int getAccommodationMins() {
-        return accommodationMins;
-    }
-
-    /**
-     * @param accommodationMins the accommodationMins to set
-     */
-    public void setAccommodationMins(int accommodationMins) {
-        this.accommodationMins = accommodationMins;
-    }
-
-    /**
-     * @return the overtimeHrs
-     */
-    public int getOvertimeHrs() {
-        return overtimeHrs;
-    }
-
-    /**
-     * @param overtimeHrs the overtimeHrs to set
-     */
-    public void setOvertimeHrs(int overtimeHrs) {
-        this.overtimeHrs = overtimeHrs;
-    }
-
-    /**
-     * @return the overtimeMins
-     */
-    public int getOvertimeMins() {
-        return overtimeMins;
-    }
-
-    /**
-     * @param overtimeMins the overtimeMins to set
-     */
-    public void setOvertimeMins(int overtimeMins) {
-        this.overtimeMins = overtimeMins;
-    }
-
-    /**
-     * @return the dirtyHrs
-     */
-    public int getDirtyHrs() {
-        return dirtyHrs;
-    }
-
-    /**
-     * @param dirtyHrs the dirtyHrs to set
-     */
-    public void setDirtyHrs(int dirtyHrs) {
-        this.dirtyHrs = dirtyHrs;
-    }
-
-    /**
-     * @return the dirtyMins
-     */
-    public int getDirtyMins() {
-        return dirtyMins;
-    }
-
-    /**
-     * @param dirtyMins the dirtyMins to set
-     */
-    public void setDirtyMins(int dirtyMins) {
-        this.dirtyMins = dirtyMins;
-    }
-
+//
+//    /**
+//     * @return the accommodationHrs
+//     */
+//    public Integer getAccommodationHrs() {
+//        return accommodationHrs;
+//    }
+//
+//    /**
+//     * @param accommodationHrs the accommodationHrs to set
+//     */
+//    public void setAccommodationHrs(Integer accommodationHrs) {
+//        this.accommodationHrs = accommodationHrs;
+//    }
+//
+//    /**
+//     * @return the accommodationMins
+//     */
+//    public Integer getAccommodationMins() {
+//        return accommodationMins;
+//    }
+//
+//    /**
+//     * @param accommodationMins the accommodationMins to set
+//     */
+//    public void setAccommodationMins(Integer accommodationMins) {
+//        this.accommodationMins = accommodationMins;
+//    }
+//
+//    /**
+//     * @return the overtimeHrs
+//     */
+//    public Integer getOvertimeHrs() {
+//        return overtimeHrs;
+//    }
+//
+//    /**
+//     * @param overtimeHrs the overtimeHrs to set
+//     */
+//    public void setOvertimeHrs(Integer overtimeHrs) {
+//        this.overtimeHrs = overtimeHrs;
+//    }
+//
+//    /**
+//     * @return the overtimeMins
+//     */
+//    public Integer getOvertimeMins() {
+//        return overtimeMins;
+//    }
+//
+//    /**
+//     * @param overtimeMins the overtimeMins to set
+//     */
+//    public void setOvertimeMins(Integer overtimeMins) {
+//        this.overtimeMins = overtimeMins;
+//    }
+//
+//    /**
+//     * @return the dirtyHrs
+//     */
+//    public Integer getDirtyHrs() {
+//        return dirtyHrs;
+//    }
+//
+//    /**
+//     * @param dirtyHrs the dirtyHrs to set
+//     */
+//    public void setDirtyHrs(Integer dirtyHrs) {
+//        this.dirtyHrs = dirtyHrs;
+//    }
+//
+//    /**
+//     * @return the dirtyMins
+//     */
+//    public Integer getDirtyMins() {
+//        return dirtyMins;
+//    }
+//
+//    /**
+//     * @param dirtyMins the dirtyMins to set
+//     */
+//    public void setDirtyMins(Integer dirtyMins) {
+//        this.dirtyMins = dirtyMins;
+//    }
+//
     /**
      * @return the idAnlagen
      */
-    public int getIdAnlagen() {
+    public Integer getIdAnlagen() {
         return idAnlagen;
     }
 
     /**
      * @param idAnlagen the idAnlagen to set
      */
-    public void setIdAnlagen(int idAnlagen) {
+    public void setIdAnlagen(Integer idAnlagen) {
         this.idAnlagen = idAnlagen;
     }
 
     /**
      * @return the idRepairTeile
      */
-    public int getIdRepairTeile() {
+    public Integer getIdRepairTeile() {
         return idRepairTeile;
     }
 
     /**
      * @param idRepairTeile the idRepairTeile to set
      */
-    public void setIdRepairTeile(int idRepairTeile) {
+    public void setIdRepairTeile(Integer idRepairTeile) {
         this.idRepairTeile = idRepairTeile;
+    }
+
+    /**
+     * @return the travelTypeTime
+     */
+    public boolean isTravelTypeTime() {
+        return travelTypeTime;
+    }
+
+    /**
+     * @param travelTypeTime the travelTypeTime to set
+     */
+    public void setTravelTypeTime(boolean travelTypeTime) {
+        this.travelTypeTime = travelTypeTime;
+        this.travelTypeKm = !travelTypeTime;
+    }
+
+    /**
+     * @return the travelTypeKm
+     */
+    public boolean isTravelTypeKm() {
+        return travelTypeKm;
+    }
+
+    /**
+     * @param travelTypeKm the travelTypeKm to set
+     */
+    public void setTravelTypeKm(boolean travelTypeKm) {
+        log.debug("repairBean.travelTypeKm");
+        this.travelTypeKm = travelTypeKm;
+        this.travelTypeTime = !travelTypeKm;
+    }
+
+    /**
+     * @return the idStandorte
+     */
+    public Integer getIdStandorte() {
+        return idStandorte;
+    }
+
+    /**
+     * @param idStandorte the idStandorte to set
+     */
+    public void setIdStandorte(Integer idStandorte) {
+        this.idStandorte = idStandorte;
+    }
+
+    /**
+     * @return the idKunden
+     */
+    public Integer getIdKunden() {
+        return idKunden;
+    }
+
+    /**
+     * @param idKunden the idKunden to set
+     */
+    public void setIdKunden(Integer idKunden) {
+        this.idKunden = idKunden;
     }
 }

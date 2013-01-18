@@ -9,6 +9,7 @@ import de.reichel.bean.RepairNew;
 import de.reichel.domain.model.Firmen;
 import de.reichel.domain.model.Repair;
 import de.reichel.domain.model.Saetze;
+import de.reichel.domain.model.Techniker;
 import java.util.List;
 
 /**
@@ -30,5 +31,9 @@ public interface ReparaturDAO {
     public Firmen getFirmen(int idFirma);
 
     public List<Firmen> getAllFirmen();
+
+    public List<Saetze> getAllSaetze();
+    
+    public List<Techniker> getAllTechniker();
 
 }
