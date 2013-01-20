@@ -52,6 +52,7 @@ public class KundenDAOImpl implements KundenDAO {
         kunden.setTelefon(backingBean.getTelefon());
         kunden.setTimestamp(Calendar.getInstance().getTime());
         entityManager.persist(kunden);
+        backingBean.setIdKunden(kunden.getIdKunden());
     }
 
     @Transactional(readOnly = false)
@@ -74,8 +75,7 @@ public class KundenDAOImpl implements KundenDAO {
         kunden.setStrasseNr(backingBean.getStrasseNr());
         kunden.setTelefon(backingBean.getTelefon());
         kunden.setTimestamp(Calendar.getInstance().getTime());
-        this.entityManager.merge(kunden);
-        this.entityManager.persist(kunden);
+        entityManager.merge(kunden);
         log.debug("Kunden successfully updated");
         //return ("index");
     }

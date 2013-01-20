@@ -6,6 +6,7 @@ package de.reichel.bean;
 
 import de.reichel.dao.AnlagenDAO;
 import de.reichel.dao.ReparaturDAO;
+import de.reichel.dao.TeileDAO;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,12 +21,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RepairBean implements Serializable {
 
-       private static final Log log = LogFactory.getLog(RepairBean.class);
-       
+    private static final Log log = LogFactory.getLog(RepairBean.class);
     @Inject
-    protected AnlagenDAO anlagenDAO;    
+    protected AnlagenDAO anlagenDAO;
     @Inject
     protected ReparaturDAO repairDAO;
+    @Inject
+    protected TeileDAO teileDAO;
     public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
     protected Integer idRepairTeile;
@@ -209,7 +211,7 @@ public class RepairBean implements Serializable {
     public void setHelperTimeWorked(Date date) {
         this.helperTimeWorked = date;
     }
-    
+
     public Date getTravelTime() {
         return travelTime;
     }
@@ -217,39 +219,39 @@ public class RepairBean implements Serializable {
     public void setTravelTime(Date date) {
         this.travelTime = date;
     }
-   
-     public Date getTravelTimeHelper() {
+
+    public Date getTravelTimeHelper() {
         return travelTimeHelper;
     }
 
     public void setTravelTimeHelper(Date date) {
         this.travelTimeHelper = date;
-    }   
-    
+    }
+
     public Date getAccommodationTime() {
         return accommodationTime;
     }
 
     public void setAccommodationTime(Date date) {
         this.accommodationTime = date;
-    }     
-     
+    }
+
     public Date getOvertimeTime() {
         return overtimeTime;
     }
 
     public void setOvertimeTime(Date date) {
         this.overtimeTime = date;
-    }      
-    
+    }
+
     public Date getDirtyTime() {
         return dirtyTime;
     }
 
     public void setDirtyTime(Date date) {
         this.dirtyTime = date;
-    }      
-   
+    }
+
 //    /**
 //     * @return the hoursWorked
 //     */
@@ -361,7 +363,6 @@ public class RepairBean implements Serializable {
 //    public void setTravelTimeHelperMins(Integer travelTimeHelperMins) {
 //        this.travelTimeHelperMins = travelTimeHelperMins;
 //    }
-
     /**
      * @return the travelRatePerHr
      */
@@ -488,6 +489,7 @@ public class RepairBean implements Serializable {
 //        this.dirtyMins = dirtyMins;
 //    }
 //
+
     /**
      * @return the idAnlagen
      */

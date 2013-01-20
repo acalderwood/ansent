@@ -3,7 +3,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
     <h:head>
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
@@ -14,7 +15,7 @@
                     <h:form id="repairForm">
                         <p:panel id="panel" header="Neue Reparatur" style="margin-bottom:10px;"> 
                             <p:messages id="messages" />  
-                            <h:panelGrid columns="2">
+                            <t:panelGrid columns="2">
 
                                 <h:outputText value="Options: " />  
                                 <p:selectOneRadio id="options" value="#{repairNew.state}">  
@@ -35,10 +36,10 @@
                                 </p:selectOneMenu>
 
                                 <h:outputLabel value="Auszuführende Arbeiten:" for="workDescription" />
-                                <p:inputTextarea rows="10" cols="50" id="workDescription" value="#{repairNew.workDescription}" required="false" />
+                                <p:inputTextarea rows="4" cols="50" id="workDescription" value="#{repairNew.workDescription}" required="false" />
 
                                 <h:outputLabel value="Interne bemerkungen:" for="internalRemarks" />
-                                <p:inputTextarea rows="10" cols="50" id="internalRemarks" value="#{repairNew.internalRemarks}" required="false" />
+                                <p:inputTextarea rows="4" cols="50" id="internalRemarks" value="#{repairNew.internalRemarks}" required="false" />
 
                                 <h:outputLabel value="Satz:" for="selectableSaetzeList" />
                                 <p:selectOneMenu value="#{repairNew.idRates}">
@@ -59,21 +60,6 @@
                                 <h:outputLabel value="Arbeitszeit Helfer:" for="helperWorkTimeDatePicker" />
                                 <p:calendar id="helperWorkTimeDatePicker" value="#{repairNew.helperTimeWorked}" pattern="HH:mm" timeOnly="true" />
 
-                                <h:outputLabel value="Anfahrtspauschalebetrag:" for="travelRatePerHr" />
-                                <h:inputText id="travelRatePerHr" value="#{repairNew.travelRatePerHr}" required="false" />
-
-                                <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
-                                <p:calendar id="travelTimeDatePicker" value="#{repairNew.travelTime}" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
-                                <p:calendar id="travelTimeHelperDatePicker" value="#{repairNew.travelTimeHelper}" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Kilometerpauschalebetrag:" for="travelRatePerKm" />
-                                <h:inputText id="travelRatePerKm" value="#{repairNew.travelRatePerKm}" required="false" />
-
-                                <h:outputLabel value="Kilometer" for="kilometer" />
-                                <h:inputText id="kilometer" value="#{repairNew.travelDistanceKm}" required="false" />   
-
                                 <h:outputLabel value="Auslöse:" for="accommodationTimePicker" />
                                 <p:calendar id="accommodationTimePicker"  value="#{repairNew.accommodationTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
@@ -83,17 +69,89 @@
                                 <h:outputLabel value="Verschmutzungszuchlag:" for="dirtyTimePicker" />
                                 <p:calendar id="dirtyTimePicker"  value="#{repairNew.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
-                                <!-- Add new parts (ErsatzTeile) - This can be a form with hide/show button, on each submit a part is added -->
-                                <!-- Ersatazteil = Description -->
-                                <!-- Anzahl = Number -->
-                                <!-- Einheit = Unit -->
-                                <!-- Preis = Price -->
-                                <!-- Rabatt = Rebate -->
-                                <!-- EK = ? -->
-                                <!-- Subunternehmer = Subcontractor -->
+                                <h:outputLabel value="Anfahrtspauschale: €" for="travelRatePerHr" />
+                                <h:inputText id="travelRatePerHr" value="#{repairNew.travelRatePerHr}" required="false" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
 
-                                <p:commandButton action="#{repairNew.add}" value="Hinzufügen" update="messages"/>
-                            </h:panelGrid>
+                                <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
+                                <p:calendar id="travelTimeDatePicker" value="#{repairNew.travelTime}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                                <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
+                                <p:calendar id="travelTimeHelperDatePicker" value="#{repairNew.travelTimeHelper}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                                <h:outputLabel value="Kilometer" for="kilometer" />
+                                <h:inputText id="kilometer" value="#{repairNew.travelDistanceKm}" required="false" onclick="setValue('repairForm:accordion:travelRatePerHr', '0.0'); setValue('repairForm:accordion:travelTimeDatePicker_input', ''); setValue('repairForm:accordion:travelTimeHelperDatePicker_input', '')"/>   
+
+                                <t:panelGroup colspan="2"> 
+                                    <p:fieldset legend="ErsatzTeile Hinzufügen" toggleable="true" toggleSpeed="500">   
+                                        <p:dataTable id="partTable" var="t" value="#{teileNew.currentTeile}">  
+                                            <f:facet name="header">  
+                                                Teile 
+                                            </f:facet>                                               
+
+                                            <p:column sortBy="#{t.teileName}" headerText="Name">  
+                                                <h:outputText value="#{t.teileName}" />  
+                                            </p:column> 
+
+                                            <p:column sortBy="#{t.anzahl}" headerText="Anzahl">  
+                                                <h:outputText value="#{t.anzahl}" />  
+                                            </p:column>                                                  
+
+                                            <p:column sortBy="#{t.teileEinheit}" headerText="Einheit">  
+                                                <h:outputText value="#{t.teileEinheit}" />  
+                                            </p:column>  
+
+                                            <p:column sortBy="#{t.teileEk}" headerText="EK">  
+                                                <h:outputText value="#{t.teileEk}" />  
+                                            </p:column>  
+
+                                            <p:column sortBy="#{t.teilePreis}" headerText="Preis">  
+                                                <h:outputText value="#{t.teilePreis}" />  
+                                            </p:column>  
+
+                                            <p:column sortBy="#{t.teileRabatt}" headerText="Rabatt">  
+                                                <h:outputText value="#{t.teileRabatt}" />  
+                                            </p:column>  
+
+                                            <p:column headerText="Löschen">
+                                                <p:commandLink actionListener="#{teileNew.removeAction}" update="partTable" value="Löschen">
+                                                    <f:attribute name="partToRemove" value="#{t}" />
+                                                </p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>  
+
+                                        <h:panelGrid columns="2" cellpadding="10">
+
+                                            <h:outputLabel value="Name" for="selectableTeileList" />
+                                            <p:selectOneMenu value="#{teileNew.teileName}">
+                                                <f:selectItems id="selectableTeileList" value="#{teileSearch.selectableTeile}" var="teile" itemValue="#{teile.bezeichnung}" itemLabel="#{teile.bezeichnung}" />
+                                            </p:selectOneMenu>   
+
+                                            <h:outputLabel value="Anzahl" for="teileAnzahl" />
+                                            <p:inputText id="teileAnzahl" value="#{teileNew.anzahl}" />
+
+                                            <h:outputLabel value="Einheit" for="teileEinheit" />
+                                            <p:inputText id="teileEinheit" value="#{teileNew.teileEinheit}" />
+
+                                            <h:outputLabel value="EK" for="teileEk" />
+                                            <p:inputText id="teileEk" value="#{teileNew.teileEk}" />
+
+                                            <h:outputLabel value="Preis" for="teilePreis" />
+                                            <p:inputText id="teilePreis" value="#{teileNew.teilePreis}" />
+
+                                            <h:outputLabel value="Rabatt" for="teileRabatt" />
+                                            <p:inputText id="teileRabatt" value="#{teileNew.teileRabatt}" />
+
+                                            <!-- -->
+                                            <!-- Subunternehmer = Subcontractor -->
+                                            <p:commandButton actionListener="#{teileNew.addAction}" update="partTable" value="Teil Hinzufügen"/>
+                                        </h:panelGrid>
+                                    </p:fieldset>
+                                </t:panelGroup>
+
+                                <p:commandButton action="#{repairNew.add}" actionListener="#{repairNew.addParts}" value="Repair Hinzufügen" update="messages">
+                                    <f:attribute name="parts" value="#{teileNew.currentTeile}" />
+                                </p:commandButton>
+                            </t:panelGrid>
                         </p:panel>
                     </h:form>
                 </f:view>

@@ -72,6 +72,7 @@ public class EntsorgerDAOImpl implements EntsorgerDAO {
         entsorger.setTelefon(backingBean.getTelefon());
         entsorger.setTimestamp(Calendar.getInstance().getTime());
         entityManager.persist(entsorger);
+        backingBean.setIdEntsorger(entsorger.getIdEntsorger());
     }
 
     @Transactional(readOnly = true)

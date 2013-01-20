@@ -237,6 +237,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         log.debug("Retrieved Standorte");
 
         entityManager.persist(repair);
+        backingBean.setIdRepair(repair.getIdRepair());
         log.debug("Added basics");
 
 

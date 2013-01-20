@@ -138,6 +138,7 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         log.debug("Typ is set");
 
         this.entityManager.persist(anlagen);
+        backingBean.setIdAnlagen(anlagen.getIdAnlagen());
 
         log.debug("Persisted Anlagen with ID " + anlagen.getIdAnlagen());
 

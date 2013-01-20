@@ -4,6 +4,7 @@
  */
 package de.reichel.dao.impl;
 
+import de.reichel.bean.TeileBean;
 import de.reichel.bean.TeileEdit;
 import de.reichel.bean.TeileNew;
 import de.reichel.dao.TeileDAO;
@@ -26,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class TeileDAOImpl implements TeileDAO {
 
-    private static final Log log = LogFactory.getLog(StandorteDAOImpl.class);
+    private static final Log log = LogFactory.getLog(TeileDAOImpl.class);
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -65,8 +66,9 @@ public class TeileDAOImpl implements TeileDAO {
         repairTeile.setTeileRabatt(backingBean.getTeileRabatt());
         repairTeile.setTimestamp(Calendar.getInstance().getTime());
         entityManager.persist(repairTeile);
+        backingBean.setIdRepairTeile(repairTeile.getIdRepairTeile());
     }
-    
+
     @Transactional(readOnly = false)
     public void removeRepairTeile(TeileEdit backingBean) {
         RepairTeile repairTeile = getRepairTeile(backingBean.getIdRepairTeile());
@@ -100,6 +102,4 @@ public class TeileDAOImpl implements TeileDAO {
         query.setParameter("idRepairTeile", idRepairTeile);
         return (RepairTeile) query.getSingleResult();
     }
-    
-    
 }

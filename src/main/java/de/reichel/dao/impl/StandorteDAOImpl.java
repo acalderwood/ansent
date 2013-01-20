@@ -80,6 +80,7 @@ public class StandorteDAOImpl implements StandorteDAO {
         standorte.setTelefon(backingBean.getTelefon());
         standorte.setTimestamp(Calendar.getInstance().getTime());
         entityManager.persist(standorte);
+        backingBean.setIdStandorte(standorte.getIdStandorte());
     }
 
     @Transactional(readOnly = true)

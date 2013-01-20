@@ -70,6 +70,7 @@ public class BetreiberDAOImpl implements BetreiberDAO {
         betreiber.setInterneNotiz(backingBean.getInterneNotiz());
         betreiber.setTimestamp(Calendar.getInstance().getTime());
         entityManager.persist(betreiber);
+        backingBean.setIdBetreiber(betreiber.getIdBetreiber());
     }
 
     @Transactional(readOnly = true)
