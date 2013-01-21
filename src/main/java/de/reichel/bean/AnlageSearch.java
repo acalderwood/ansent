@@ -41,10 +41,46 @@ public class AnlageSearch extends AnlageBean {
     private Object[] anlage;
     private List<Object[]> anlagen;
 
+    public void setIdSingleAnlagen(HtmlOutputText idSingleAnlagen) {
+        System.out.println("Setting idSingleAnlagen=" + idSingleAnlagen.getValue());
+        this.idSingleAnlagen = idSingleAnlagen;
+    }
+
+    public void validateBaujahr(FacesContext context, UIComponent validate, Object value) throws ValidatorException {
+        if (value != null && !((String) value).equals("")) {
+            try {
+                Integer.parseInt((String) value);
+            } catch (NumberFormatException e) {
+                FacesMessage msg = new FacesMessage("Baujahr muß ein Jahr sein");
+                throw new ValidatorException(msg);
+            }
+        }
+    }    
+    
     public List<Anlagen> getSelectableAnlagen() {
         return anlagenDAO.getAllAnlagen();
     }
 
+    public List<AnlagenArt> getSelectableArt() {
+        return anlagenDAO.getSelectableArt();
+    }
+
+    public List<AnlagenHersteller> getSelectableHersteller() {
+        return anlagenDAO.getSelectableHersteller();
+    }
+
+    public List<Standorte> getSelectableStandort() {
+        return anlagenDAO.getSelectableStandort();
+    }
+
+    public List<Kunden> getSelectableKunden() {
+        return anlagenDAO.getSelectableKunden();
+    }
+
+    public List<Betreiber> getSelectableBetreiber() {
+        return anlagenDAO.getSelectableBetreiber();
+    }    
+    
     public String searchEdit() {
         if (anlagenDAO.getNumberAnlagen(this) == 1L) {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -88,32 +124,12 @@ public class AnlageSearch extends AnlageBean {
         return anlage;
     }
 
-    public List<Anlagen> getAllAnlagen() {
-        return anlagenDAO.getAllAnlagen();
-    }
-
     public void setAnlage(Object[] anlage) {
         this.anlage = anlage;
     }
 
     public HtmlOutputText getIdSingleAnlagen() {
         return idSingleAnlagen;
-    }
-
-    public void setIdSingleAnlagen(HtmlOutputText idSingleAnlagen) {
-        System.out.println("Setting idSingleAnlagen=" + idSingleAnlagen.getValue());
-        this.idSingleAnlagen = idSingleAnlagen;
-    }
-
-    public void validateBaujahr(FacesContext context, UIComponent validate, Object value) throws ValidatorException {
-        if (value != null && !((String) value).equals("")) {
-            try {
-                Integer.parseInt((String) value);
-            } catch (NumberFormatException e) {
-                FacesMessage msg = new FacesMessage("Baujahr muß ein Jahr sein");
-                throw new ValidatorException(msg);
-            }
-        }
     }
 
     public List<Integer> getSelectedArt() {

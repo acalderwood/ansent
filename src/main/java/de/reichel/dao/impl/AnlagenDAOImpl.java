@@ -57,6 +57,7 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         log.debug("Getting Fabrikation Number");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
         log.debug("Getting Hersteller ID");
+        
         this.entityManager.merge(anlagen);
 //        this.entityManager.persist(anlagen);
         //@TODO: finish fields
@@ -306,6 +307,7 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         return (Kunden) ((Object[]) query.getResultList().get(0))[0];
     }
 
+    @Transactional(readOnly = true)
     public void loadAnlagen(AnlageEdit backingBean) {
         Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", backingBean.getIdAnlagen());
@@ -328,5 +330,8 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         backingBean.setNaechsteUVV(anlagen.getNUvv());
         backingBean.setNaechsteWartung(anlagen.getNWart());
         
+        backingBean.setIdKunden(getKunden(backingBean.getIdAnlagen()).getIdKunden());
+        backingBean.setIdBetreiber(getBetreiber(backingBean.getIdAnlagen()).getIdBetreiber());
+        backingBean.setIdStandort(getStandort(backingBean.getIdAnlagen()).getIdStandorte());
     }
 }

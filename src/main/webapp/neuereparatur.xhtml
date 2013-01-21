@@ -38,10 +38,10 @@
                                 <h:outputLabel value="Auszuführende Arbeiten:" for="workDescription" />
                                 <p:inputTextarea rows="4" cols="50" id="workDescription" value="#{repairNew.workDescription}" required="false" />
 
-                                <h:outputLabel value="Interne bemerkungen:" for="internalRemarks" />
+                                <h:outputLabel value="Interne Bemerkungen:" for="internalRemarks" />
                                 <p:inputTextarea rows="4" cols="50" id="internalRemarks" value="#{repairNew.internalRemarks}" required="false" />
 
-                                <h:outputLabel value="Satz:" for="selectableSaetzeList" />
+                                <h:outputLabel value="Stundensatz:" for="selectableSaetzeList" />
                                 <p:selectOneMenu value="#{repairNew.idRates}">
                                     <f:selectItems id="selectableSaetzeList" value="#{repairSearch.selectableSaetze}" var="satz" itemValue="#{satz.idSatz}" itemLabel="#{satz.satzBezeichnung}" />
                                 </p:selectOneMenu>

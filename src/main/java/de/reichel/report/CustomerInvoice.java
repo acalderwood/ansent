@@ -41,8 +41,13 @@ public class CustomerInvoice {
     private String repair_REPARATUR_DATUM = "nachname";
     private String techniker_FIRMA_TECHNIKER = "nachname";
     private String techniker_NAME_TECHNIKER = "nachname";
-
-    
+    private String rechnungen_RECHNUNGSNUMMERINTERN;
+    private String rechnungen_RECHNUNGSDATUM;
+    private String rechnungen_LIEFERDATUM;
+    private String rechnungen_REPAIR_ID;
+    private String rechnungen_ANGEBOTSNUMMER;
+    private String rechnungen_BESTELLNUMMER;
+    private String rechnungen_INVOICE_TEXT = "";
     
     /**
      * @return the repair_ID_REPAIR
@@ -476,5 +481,103 @@ public class CustomerInvoice {
      */
     public void setTechniker_NAME_TECHNIKER(String techniker_NAME_TECHNIKER) {
         this.techniker_NAME_TECHNIKER = techniker_NAME_TECHNIKER;
+    }
+
+    /**
+     * @return the rechnungen_RECHNUNGSNUMMERINTERN
+     */
+    public String getRechnungen_RECHNUNGSNUMMERINTERN() {
+        return rechnungen_RECHNUNGSNUMMERINTERN;
+    }
+
+    /**
+     * @param rechnungen_RECHNUNGSNUMMERINTERN the rechnungen_RECHNUNGSNUMMERINTERN to set
+     */
+    public void setRechnungen_RECHNUNGSNUMMERINTERN(String rechnungen_RECHNUNGSNUMMERINTERN) {
+        this.rechnungen_RECHNUNGSNUMMERINTERN = rechnungen_RECHNUNGSNUMMERINTERN;
+    }
+
+    /**
+     * @return the rechnungen_RECHNUNGSDATUM
+     */
+    public String getRechnungen_RECHNUNGSDATUM() {
+        return rechnungen_RECHNUNGSDATUM;
+    }
+
+    /**
+     * @param rechnungen_RECHNUNGSDATUM the rechnungen_RECHNUNGSDATUM to set
+     */
+    public void setRechnungen_RECHNUNGSDATUM(String rechnungen_RECHNUNGSDATUM) {
+        this.rechnungen_RECHNUNGSDATUM = rechnungen_RECHNUNGSDATUM;
+    }
+
+    /**
+     * @return the rechnungen_LIEFERDATUM
+     */
+    public String getRechnungen_LIEFERDATUM() {
+        return rechnungen_LIEFERDATUM;
+    }
+
+    /**
+     * @param rechnungen_LIEFERDATUM the rechnungen_LIEFERDATUM to set
+     */
+    public void setRechnungen_LIEFERDATUM(String rechnungen_LIEFERDATUM) {
+        this.rechnungen_LIEFERDATUM = rechnungen_LIEFERDATUM;
+    }
+
+    /**
+     * @return the rechnungen_REPAIR_ID
+     */
+    public String getRechnungen_REPAIR_ID() {
+        return rechnungen_REPAIR_ID;
+    }
+
+    /**
+     * @param rechnungen_REPAIR_ID the rechnungen_REPAIR_ID to set
+     */
+    public void setRechnungen_REPAIR_ID(String rechnungen_REPAIR_ID) {
+        this.rechnungen_REPAIR_ID = rechnungen_REPAIR_ID;
+    }
+
+    /**
+     * @return the rechnungen_ANGEBOTSNUMMER
+     */
+    public String getRechnungen_ANGEBOTSNUMMER() {
+        return rechnungen_ANGEBOTSNUMMER;
+    }
+
+    /**
+     * @param rechnungen_ANGEBOTSNUMMER the rechnungen_ANGEBOTSNUMMER to set
+     */
+    public void setRechnungen_ANGEBOTSNUMMER(String rechnungen_ANGEBOTSNUMMER) {
+        this.rechnungen_ANGEBOTSNUMMER = rechnungen_ANGEBOTSNUMMER;
+    }
+
+    /**
+     * @return the rechnungen_BESTELLNUMMER
+     */
+    public String getRechnungen_BESTELLNUMMER() {
+        return rechnungen_BESTELLNUMMER;
+    }
+
+    /**
+     * @param rechnungen_BESTELLNUMMER the rechnungen_BESTELLNUMMER to set
+     */
+    public void setRechnungen_BESTELLNUMMER(String rechnungen_BESTELLNUMMER) {
+        this.rechnungen_BESTELLNUMMER = rechnungen_BESTELLNUMMER;
+    }
+
+    /**
+     * @return the rechnungen_INVOICE_TEXT
+     */
+    public String getRechnungen_INVOICE_TEXT() {
+        return rechnungen_INVOICE_TEXT;
+    }
+
+    /**
+     * @param rechnungen_INVOICE_TEXT the rechnungen_INVOICE_TEXT to set
+     */
+    public void setRechnungen_INVOICE_TEXT(String rechnungen_INVOICE_TEXT) {
+        this.rechnungen_INVOICE_TEXT = rechnungen_INVOICE_TEXT;
     }
 }

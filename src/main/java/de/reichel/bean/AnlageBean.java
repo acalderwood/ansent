@@ -219,26 +219,6 @@ public class AnlageBean implements Serializable {
     public void setArt(String art) {
         this.art = art;
     }
-    
-    public List<AnlagenArt> getSelectableArt() {
-        return anlagenDAO.getSelectableArt();
-    }
-
-    public List<AnlagenHersteller> getSelectableHersteller() {
-        return anlagenDAO.getSelectableHersteller();
-    }
-
-    public List<Standorte> getSelectableStandort() {
-        return anlagenDAO.getSelectableStandort();
-    }
-
-    public List<Kunden> getSelectableKunden() {
-        return anlagenDAO.getSelectableKunden();
-    }
-
-    public List<Betreiber> getSelectableBetreiber() {
-        return anlagenDAO.getSelectableBetreiber();
-    }
 
     public Standorte getStandorte() {
         return standorte;

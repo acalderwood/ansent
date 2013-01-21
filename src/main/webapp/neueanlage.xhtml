@@ -23,13 +23,27 @@
                         <h:selectOneMenu id="art" value="#{anlageNew.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
                             <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
                         </h:selectOneMenu>
-                        
 
                         <h:outputLabel value="Hersteller" for="hersteller" />
                         <h:selectOneMenu id="hersteller" value="#{anlageNew.idHersteller}" required="true">
-                            <f:selectItems id="selectableHerstellerList" value="#{anlageNew.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                            <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
                         </h:selectOneMenu>
                         
+                        <h:outputLabel value="Standort" for="standort" />
+                        <h:selectOneMenu id="standort" value="#{anlageNew.idStandort}" required="false">
+                            <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
+                        </h:selectOneMenu>                 
+
+                        <h:outputLabel value="Kunden" for="kunden" />
+                        <h:selectOneMenu id="kunden" value="#{anlageNew.idKunden}" required="false">
+                            <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="Betreiber" for="betreiber" />
+                        <h:selectOneMenu id="betreiber" value="#{anlageNew.idBetreiber}" required="false">
+                            <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
+                        </h:selectOneMenu>
+
 
                         <h:outputLabel value="Typ" for="typ" />
                         <p:inputText id="typ" value="#{anlageNew.typ}" required="true" requiredMessage="Bitte geben Sie eine gultige Typ ein"/>
