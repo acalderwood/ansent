@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+
+                    <p:panel id="panel" header="Edit Reparatur" style="margin-bottom:10px;"> 
+                            <p:messages id="messages" />  
+                            <h:panelGrid columns="2">
+
+                                <h:outputText value="Options: " />  
+                                <p:selectOneRadio id="options" value="#{repairEdit.state}">  
+                                    <f:selectItem itemLabel="erstellt" itemValue="3" />  
+                                    <f:selectItem itemLabel="in Bearbeitung" itemValue="0" />  
+                                    <f:selectItem itemLabel="bearbeitet" itemValue="1" /> 
+                                    <f:selectItem itemLabel="abgerechnet" itemValue="2" /> 
+                                </p:selectOneRadio> 
+
+                                <h:outputLabel value="Anlage:" for="selectableAnlageList" />
+                                <p:selectOneMenu value="#{repairEdit.idAnlagen}">
+                                    <f:selectItems id="selectableAnlageList" value="#{repairSearch.selectableAnlagen}" var="anlange" itemValue="#{anlange.idAnlagen}" itemLabel="#{anlange.interneNr}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Ausführende Firma:" for="selectableFirmaList" />
+                                <p:selectOneMenu value="#{repairEdit.idFirma}">
+                                    <f:selectItems id="selectableFirmaList" value="#{repairSearch.selectableFirmen}" var="firma" itemValue="#{firma.idFirma}" itemLabel="#{firma.firmenname}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Auszuführende Arbeiten:" for="workDescription" />
+                                <p:inputTextarea rows="4" cols="50" id="workDescription" value="#{repairEdit.workDescription}" required="false" />
+
+                                <h:outputLabel value="Interne bemerkungen:" for="internalRemarks" />
+                                <p:inputTextarea rows="4" cols="50" id="internalRemarks" value="#{repairEdit.internalRemarks}" required="false" />
+
+                                <h:outputLabel value="Satz:" for="selectableSaetzeList" />
+                                <p:selectOneMenu value="#{repairEdit.idRates}">
+                                    <f:selectItems id="selectableSaetzeList" value="#{repairSearch.selectableSaetze}" var="satz" itemValue="#{satz.idSatz}" itemLabel="#{satz.satzBezeichnung}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Techniker:" for="selectableTechnikerList" />
+                                <p:selectOneMenu value="#{repairEdit.idTechnician}">
+                                    <f:selectItems id="selectableTechnikerList" value="#{repairSearch.selectableTechniker}" var="tech" itemValue="#{tech.idTechniker}" itemLabel="#{tech.nameTechniker}" />
+                                </p:selectOneMenu>                                
+
+                                <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
+                                <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="false" locale="de" pattern="yyyy/MM/dd" />
+
+                                <h:outputLabel value="Arbeitszeit:" for="workTimeDatePicker" />
+                                <p:calendar id="workTimeDatePicker"  value="#{repairEdit.timeWorked}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                                <h:outputLabel value="Arbeitszeit Helfer:" for="helperWorkTimeDatePicker" />
+                                <p:calendar id="helperWorkTimeDatePicker" value="#{repairEdit.helperTimeWorked}" pattern="HH:mm" timeOnly="true" />
+
+                                <h:outputLabel value="Auslöse:" for="accommodationTimePicker" />
+                                <p:calendar id="accommodationTimePicker"  value="#{repairEdit.accommodationTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                                <h:outputLabel value="Überzeit:" for="overtimeTimePicker" />
+                                <p:calendar id="overtimeTimePicker"  value="#{repairEdit.overtimeTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                                <h:outputLabel value="Verschmutzungszuchlag:" for="dirtyTimePicker" />
+                                <p:calendar id="dirtyTimePicker"  value="#{repairEdit.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                                <h:outputLabel value="Anfahrtspauschale: €" for="travelRatePerHr" />
+                                <h:inputText id="travelRatePerHr" value="#{repairEdit.travelRatePerHr}" required="false" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                                <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
+                                <p:calendar id="travelTimeDatePicker" value="#{repairEdit.travelTime}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                                <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
+                                <p:calendar id="travelTimeHelperDatePicker" value="#{repairEdit.travelTimeHelper}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                                <h:outputLabel value="Kilometer" for="kilometer" />
+                                <h:inputText id="kilometer" value="#{repairEdit.travelDistanceKm}" required="false" onclick="setValue('repairForm:accordion:travelRatePerHr', '0.0'); setValue('repairForm:accordion:travelTimeDatePicker_input', ''); setValue('repairForm:accordion:travelTimeHelperDatePicker_input', '')"/>   
+
+                                
+
+                                <p:commandButton action="#{repairEdit.load}" actionListener="#{repairEdit.addParts}" value="Repair Hinzufügen" update="messages">
+                                    <f:attribute name="parts" value="#{teileNew.currentTeile}" />
+                                </p:commandButton>
+                            </h:panelGrid>
+                        </p:panel>
+
+                    
+                    
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

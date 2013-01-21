@@ -32,7 +32,7 @@ public class RepairEdit extends RepairBean {
         
         log.debug("Load Repair is called");
         repairDAO.loadRepair(this);
-        return "index";
+        return "bearbeitenreparatur_ret";
     }
     
     public List<Repair> getSelectableRepairsByID() {
