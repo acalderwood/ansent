@@ -4,6 +4,8 @@
  */
 package de.reichel.bean;
 
+import de.reichel.domain.model.Repair;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.apache.commons.logging.Log;
@@ -31,5 +33,9 @@ public class RepairEdit extends RepairBean {
         log.debug("Load Repair is called");
         repairDAO.loadRepair(this);
         return "index";
+    }
+    
+    public List<Repair> getSelectableRepairsByID() {
+        return repairDAO.getExistingRepairsByID(this);
     }
 }

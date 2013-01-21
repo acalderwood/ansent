@@ -6,6 +6,7 @@ package de.reichel.dao.impl;
 
 import de.reichel.bean.RepairEdit;
 import de.reichel.bean.RepairNew;
+import de.reichel.bean.RepairSearch;
 import de.reichel.dao.ReparaturDAO;
 import de.reichel.domain.model.AnlagenStandorte;
 import de.reichel.domain.model.Firmen;
@@ -408,5 +409,25 @@ public class ReparaturDAOImpl implements ReparaturDAO {
             date.setTime((hrs.intValue() * 3600 + mins.intValue() * 60) * 1000);
         }
         return date;
+    }
+
+    public List<Repair> getExistingRepairsByID(RepairEdit backingBean) {
+        log.debug("Inside Search by ID method");
+        log.debug("Anlage ID for repairs "+backingBean.getIdAnlagen());
+        
+        if (backingBean.getIdAnlagen()==null){
+            log.debug("Anlage ID is null");
+            Query query = entityManager.createQuery("from Repair repair order by repair.idRepair desc");
+            return query.getResultList();
+        }
+        else{
+            log.debug("Anlage ID is not null");
+            Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen order by repair.idRepair desc");
+            query.setParameter("idAnlagen", backingBean.getIdAnlagen());
+            return query.getResultList();
+        }
+        
+        
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 }

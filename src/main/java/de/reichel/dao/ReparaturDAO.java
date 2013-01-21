@@ -6,6 +6,7 @@ package de.reichel.dao;
 
 import de.reichel.bean.RepairEdit;
 import de.reichel.bean.RepairNew;
+import de.reichel.bean.RepairSearch;
 import de.reichel.domain.model.Firmen;
 import de.reichel.domain.model.Repair;
 import de.reichel.domain.model.Saetze;
@@ -35,5 +36,7 @@ public interface ReparaturDAO {
     public List<Saetze> getAllSaetze();
     
     public List<Techniker> getAllTechniker();
+
+    public List<Repair> getExistingRepairsByID(RepairEdit backingBean);
 
 }
