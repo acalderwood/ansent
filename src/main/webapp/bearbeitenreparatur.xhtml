@@ -13,17 +13,26 @@
 
                     <!-- TODO: Search Anlage and Load the repairs in selectableRepair -->
 
-
-                    <p:panel id="panel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
+                    <p:panel id="AnlagePanel" header="Search by Anlage" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="" for="selectableRepair" />
+                            <h:outputLabel value="" for="selectableAnlage" />
                             <h:selectOneMenu value="#{repairEdit.idAnlagen}">
-                                <f:selectItems id="selectableRepair" value="#{repairSearch.selectableRepairs}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.timestamp}" />
+                                <f:selectItems id="selectableAnlage" value="#{repairSearch.selectableAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
+                    <p:commandButton actionListener="#{repairEdit.load}" update="repairPanel" value="Choose" id="ajax"/>
                     
+                    <p:panel id="repairPanel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="" for="selectableRepair" />
+                            <h:selectOneMenu value="#{repairEdit.idRepair}">
+                                <f:selectItems id="selectableRepair" value="#{repairSearch.selectableRepairsByID()}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.timestamp}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
                     <p:commandButton actionListener="#{repairEdit.load}" update="display" value="Choose" id="ajax"/>
+                    
                 </h:form>
             </ui:define>
         </ui:composition>
