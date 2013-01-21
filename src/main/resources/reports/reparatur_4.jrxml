@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reparatur" pageWidth="595" pageHeight="842" columnWidth="505" leftMargin="48" rightMargin="42" topMargin="56" bottomMargin="56" uuid="474487c2-06a9-4c5a-9afe-e6372378934f">
+	<property name="ireport.zoom" value="2.200000000000014"/>
+	<property name="ireport.x" value="50"/>
+	<property name="ireport.y" value="651"/>
+	<field name="repair_ID_REPAIR" class="java.lang.Integer"/>
+	<field name="user_VORNAME" class="java.lang.String"/>
+	<field name="user_NACHNAME" class="java.lang.String"/>
+	<field name="repair_ERSTELLT" class="java.lang.String"/>
+	<field name="repair_GESENDET_DATUM" class="java.lang.String"/>
+	<field name="anlagen_INTERNE_NR" class="java.lang.String"/>
+	<field name="standorte_ID_STANDORTE" class="java.lang.String"/>
+	<field name="standorte_STANDORTNAME" class="java.lang.String"/>
+	<field name="standorte_STRASSE_NR" class="java.lang.String"/>
+	<field name="standorte_PLZ" class="java.lang.String"/>
+	<field name="standorte_ORT" class="java.lang.String"/>
+	<field name="anlagen_art_ART" class="java.lang.String"/>
+	<field name="anlagen_hersteller_HERSTELLER" class="java.lang.String"/>
+	<field name="anlagen_TYP" class="java.lang.String"/>
+	<field name="anlagen_FABRIKATIONSNUMMER" class="java.lang.String"/>
+	<field name="anlagen_BAUJAHR" class="java.lang.String"/>
+	<field name="betreiber_ID_BETREIBER" class="java.lang.String"/>
+	<field name="betreiber_BETREIBERNAME" class="java.lang.String"/>
+	<field name="betreiber_STRASSE_NR" class="java.lang.String"/>
+	<field name="betreiber_PLZ" class="java.lang.String"/>
+	<field name="betreiber_ORT" class="java.lang.String"/>
+	<field name="kunden_ID_KUNDEN" class="java.lang.String"/>
+	<field name="kunden_FIRMENNAME" class="java.lang.String"/>
+	<field name="kunden_STRASSE_NR" class="java.lang.String"/>
+	<field name="kunden_PLZ" class="java.lang.String"/>
+	<field name="kunden_ORT" class="java.lang.String"/>
+	<field name="repair_FAX_TEXT" class="java.lang.String"/>
+	<field name="repair_INTERNE_BEMERKUNG" class="java.lang.String"/>
+	<field name="repair_REPARATUR_DATUM" class="java.lang.String"/>
+	<field name="techniker_FIRMA_TECHNIKER" class="java.lang.String"/>
+	<field name="techniker_NAME_TECHNIKER" class="java.lang.String"/>
+	<field name="rechnungen_RECHNUNGSNUMMERINTERN" class="java.lang.String"/>
+	<field name="rechnungen_LIEFERDATUM" class="java.lang.String"/>
+	<field name="rechnungen_REPAIR_ID" class="java.lang.String"/>
+	<field name="rechnungen_ANGEBOTSNUMMER" class="java.lang.String"/>
+	<field name="rechnungen_BESTELLNUMMER" class="java.lang.String"/>
+	<field name="rechnungen_INVOICE_TEXT" class="java.lang.String"/>
+	<field name="rechnungen_RECHNUNGSDATUM" class="java.lang.String"/>
+	<group name="repair_ID_REPAIR">
+		<groupExpression><![CDATA[$F{repair_ID_REPAIR}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="171" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="873da2f8-1de5-45be-bf55-feba03f4523c" mode="Opaque" x="423" y="8" width="72" height="29" forecolor="#003366" backcolor="#003366"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c75349b3-59f4-44d2-9cb9-f1093e51ccdb" x="423" y="0" width="75" height="56" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Times New Roman" size="36"/>
+				</textElement>
+				<text><![CDATA[ENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9ff557ce-31dd-4e81-a008-8c0e90042b9d" x="-1" y="57" width="152" height="21"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[ANSENT GmbH & Co Technik KG
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86deb996-058e-4af2-84e6-5fec2ab5a57b" x="349" y="57" width="146" height="110"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isUnderline="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Tel.:	08250 / 31 50 292
+Fax.:	08250 / 31 50 294
+
+
+
+Ust-Id-Nr. DE219227663
+HRA 78607, Amtsgericht München
+Persönlich haftende Geselschafterin:
+Ansent Verwaltungs-GmbH
+HRB 138476, Amtsgerich München
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c75349b3-59f4-44d2-9cb9-f1093e51ccdb" x="351" y="0" width="84" height="56" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Times New Roman" size="36"/>
+				</textElement>
+				<text><![CDATA[ANS
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a4a33596-c6ef-4aad-9e91-d9a75108d62d" x="422" y="35" width="83" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T E C H N I K]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="424ad3f7-3b14-434c-b869-e4550f76f7f5" x="353" y="78" width="152" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[service@ansent-tec.de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84842b3b-8785-4490-ac00-c55014ed8052" x="353" y="93" width="152" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[Geschäftsführer: Klaus-Dieter Reichel
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d1d758a-c5ed-44d9-8e2e-41128a9698e8" x="3" y="69" width="148" height="25"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[Sachsenspiegelstr.26
+80995 München]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c43e4e34-c6b8-449e-ad71-bb1bb3447421" x="3" y="152" width="251" height="11"/>
+				<textElement>
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<text><![CDATA[ANSENT GmbH & Co. Technik KG – Sachsenspiegelstr. 26-80995 München]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a1a9aad5-3296-4eae-b3f7-27055d33e87b" x="239" y="-211" width="136" height="62"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Reparatur-Id:
+Lieferanten-Nr.:
+Bestell-Nr.:
+Wartungszeitraum:
+]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="406" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="203b878b-0134-4ba1-ab49-e1fe76cf67c1" mode="Opaque" x="-1" y="130" width="64" height="15" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Anlage:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="64" y="151" width="441" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{standorte_STANDORTNAME} + ", " + $F{standorte_STRASSE_NR} + ", " + $F{standorte_PLZ} + " " + $F{standorte_ORT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="64" y="129" width="441" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anlagen_art_ART} + ", " + $F{anlagen_hersteller_HERSTELLER} + ", " + $F{anlagen_INTERNE_NR} + ", " + $F{anlagen_TYP} + ", " + $F{anlagen_FABRIKATIONSNUMMER} + ", " + $F{anlagen_BAUJAHR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="203b878b-0134-4ba1-ab49-e1fe76cf67c1" mode="Opaque" x="4" y="189" width="148" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durchgeführte Arbeiten:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="64" y="208" width="239" height="52"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{repair_FAX_TEXT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="203b878b-0134-4ba1-ab49-e1fe76cf67c1" mode="Opaque" x="240" y="188" width="137" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Techniker:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="78cb5914-06e7-4352-a5cc-ea466c6b3e3f" x="354" y="188" width="151" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{techniker_NAME_TECHNIKER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="203b878b-0134-4ba1-ab49-e1fe76cf67c1" mode="Opaque" x="-1" y="153" width="64" height="14" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Standort:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d00d957a-612e-4260-b3ec-0c56731eab8d" x="3" y="260" width="502" height="146"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rechnungen_INVOICE_TEXT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8cc73a60-ddd7-44d5-9c4d-31b16dd8739a" x="1" y="34" width="350" height="36"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kunden_PLZ} + " " + $F{kunden_ORT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="1" y="4" width="350" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kunden_FIRMENNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cb7861a5-bd29-4f89-a65d-107a7eef0c28" x="1" y="85" width="112" height="37"/>
+				<textElement>
+					<font fontName="Times New Roman" size="24"/>
+				</textElement>
+				<text><![CDATA[Rechnung]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b8f46f3f-7da1-437c-8978-1f89125f1d30" x="1" y="19" width="350" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kunden_STRASSE_NR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
