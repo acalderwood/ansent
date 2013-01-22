@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <!-- Search Anlage and Load it -->
+                <h:form>
+                    <p:panel id="panel" header="Choose Anlage" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Interne Nr." for="selectableAnlageList" />
+                            <h:selectOneMenu value="#{anlageEdit.idAnlagen}">
+                                <f:selectItems id="selectableAnlageList" value="#{anlageSearch.selectableAnlagen}" var="anlange" itemValue="#{anlange.idAnlagen}" itemLabel="#{anlange.interneNr}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:commandButton actionListener="#{anlageEdit.load}" update="display" value="Choose" id="ajax"/>
+
+                    <p:panel id="display" header="Anlage Information" style="margin-top:10px;"> 
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="Interne Nr." for="interneNr" />
+                            <p:inputText id="interneNr" value="#{anlageEdit.interneNr}"  />
+
+                            <h:outputLabel value="Art" for="art" />
+                            <p:selectOneMenu id="art" value="#{anlageEdit.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
+                                <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Hersteller" for="hersteller" />
+                            <h:selectOneMenu id="hersteller" value="#{anlageEdit.idHersteller}" required="true">
+                                <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Standort" for="standort" />
+                            <h:selectOneMenu id="standort" value="#{anlageEdit.idStandort}" required="false">
+                                <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
+                            </h:selectOneMenu>                 
+
+                            <h:outputLabel value="Kunden" for="kunden" />
+                            <h:selectOneMenu id="kunden" value="#{anlageEdit.idKunden}" required="false">
+                                <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Betreiber" for="betreiber" />
+                            <h:selectOneMenu id="betreiber" value="#{anlageEdit.idBetreiber}" required="false">
+                                <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
+                            </h:selectOneMenu>                            
+
+                            <h:outputLabel value="Typ" for="typ" />
+                            <p:inputText id="typ" value="#{anlageEdit.typ}" />
+
+                            <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
+                            <p:inputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" required="false" />
+
+
+                            <h:outputLabel value="Baujahr" for="baujahr" />
+                            <p:calendar id="baujahr" value="#{anlageEdit.baujahr}" required="false" locale="de" pattern="yyyy"/>
+
+
+                            <h:outputLabel value="Bemerkung" for="bemerkung" />
+                            <p:inputText id="bemerkung" value="#{anlageEdit.bemerkung}" required="false" />
+
+
+                            <h:outputLabel value="Interne Notiz" for="interneNotiz" />
+                            <p:inputText id="interneNotiz" value="#{anlageEdit.interneNotiz}" required="false" />
+
+
+                            <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
+                            <p:calendar value="#{anlageEdit.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="yyyy/MM/dd" />
+
+
+                            <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
+                            <p:calendar id="naechsteWartung" value="#{anlageEdit.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd" />
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </h:form>
+
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
