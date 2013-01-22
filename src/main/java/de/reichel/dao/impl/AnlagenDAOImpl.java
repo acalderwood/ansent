@@ -287,24 +287,39 @@ public class AnlagenDAOImpl implements AnlagenDAO {
     }
 
     @Transactional(readOnly = true)
-    public Standorte getStandort(int idAnlagen) {
+    public int getIdStandort(int idAnlagen) {
         Query query = entityManager.createQuery("from Standorte standorte, AnlagenStandorte anlagenStandorte where standorte.idStandorte = anlagenStandorte.idStandorte and anlagenStandorte.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", idAnlagen);
-        return (Standorte) ((Object[]) query.getResultList().get(0))[0];
+        List<Object[]> standorte = query.getResultList();
+        if (standorte.isEmpty()) {
+            return 203108;
+        } else {
+            return ((Standorte) standorte.get(0)[0]).getIdStandorte();
+        }
     }
 
     @Transactional(readOnly = true)
-    public Betreiber getBetreiber(int idAnlagen) {
+    public int getIdBetreiber(int idAnlagen) {
         Query query = entityManager.createQuery("from Betreiber betreiber, AnlagenStandorte anlagenStandorte where betreiber.idBetreiber = anlagenStandorte.idBetreiber and anlagenStandorte.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", idAnlagen);
-        return (Betreiber) ((Object[]) query.getResultList().get(0))[0];
+        List<Object[]> betreiber = query.getResultList();
+        if (betreiber.isEmpty()) {
+            return 203;
+        } else {
+            return ((Betreiber) betreiber.get(0)[0]).getIdBetreiber();
+        }
     }
 
     @Transactional(readOnly = true)
-    public Kunden getKunden(int idAnlagen) {
+    public int getIdKunden(int idAnlagen) {
         Query query = entityManager.createQuery("from Kunden kunden, AnlagenStandorte anlagenStandorte where kunden.idKunden = anlagenStandorte.idKunden and anlagenStandorte.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", idAnlagen);
-        return (Kunden) ((Object[]) query.getResultList().get(0))[0];
+        List<Object[]> kunden = query.getResultList();
+        if (kunden.isEmpty()) {
+            return -1;
+        } else {
+            return ((Kunden) kunden.get(0)[0]).getIdKunden();
+        }
     }
 
     @Transactional(readOnly = true)
@@ -329,9 +344,9 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         backingBean.setInterneNotiz(anlagen.getInterneNotiz());
         backingBean.setNaechsteUVV(anlagen.getNUvv());
         backingBean.setNaechsteWartung(anlagen.getNWart());
-        
-        backingBean.setIdKunden(getKunden(backingBean.getIdAnlagen()).getIdKunden());
-        backingBean.setIdBetreiber(getBetreiber(backingBean.getIdAnlagen()).getIdBetreiber());
-        backingBean.setIdStandort(getStandort(backingBean.getIdAnlagen()).getIdStandorte());
+
+        backingBean.setIdKunden(getIdKunden(backingBean.getIdAnlagen()));
+        backingBean.setIdBetreiber(getIdBetreiber(backingBean.getIdAnlagen()));
+        backingBean.setIdStandort(getIdStandort(backingBean.getIdAnlagen()));
     }
 }

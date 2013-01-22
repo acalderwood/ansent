@@ -113,9 +113,9 @@ public class UvvSearch implements Serializable {
         System.out.println("id=" + id);
 
         this.anlage = anlagenDAO.getAnlagen(id);
-        this.setStandorte(anlagenDAO.getStandort(id));
-        this.setBetreiber(anlagenDAO.getBetreiber(id));
-        this.setKunden(anlagenDAO.getKunden(id));
+//        this.setIdStandorte(anlagenDAO.getIdStandort(id));
+//        this.setIdBetreiber(anlagenDAO.getIdBetreiber(id));
+//        this.setIdKunden(anlagenDAO.getIdKunden(id));
     }
 
     /**

@@ -10,6 +10,9 @@
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{kundenNew.init}"/>
+        </f:metadata>        
         <ui:composition template="templates/common-layout.xhtml">
             <ui:define name="content">
         <!-- Search Kunde and Load it -->

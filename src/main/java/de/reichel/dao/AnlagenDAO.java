@@ -46,11 +46,11 @@ public interface AnlagenDAO extends Serializable {
 
     public Object[] getAnlagen(int idAnlagen);
 
-    public Standorte getStandort(int idAnlagen);
+    public int getIdStandort(int idAnlagen);
 
-    public Betreiber getBetreiber(int idAnlagen);
+    public int getIdBetreiber(int idAnlagen);
 
-    public Kunden getKunden(int idAnlagen);
+    public int getIdKunden(int idAnlagen);
     
     public void loadAnlagen(AnlageEdit aThis);
 }
