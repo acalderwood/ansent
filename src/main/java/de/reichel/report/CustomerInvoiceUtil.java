@@ -12,10 +12,10 @@ import java.util.List;
  */
 public class CustomerInvoiceUtil {
     
-    public static String createInvoiceDetail(List<InvoiceItem> invoiceItems) {
+    public static String getQuantities(List<InvoiceItem> invoiceItems) {
         String rows = "";
         for (InvoiceItem item: invoiceItems) {
-            String row = item.getQuantity() + "\t";
+            String row = item.getQuantity() + "\n";
             rows += row;
         }
         return rows;

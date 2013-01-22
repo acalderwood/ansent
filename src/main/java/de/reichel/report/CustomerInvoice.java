@@ -47,7 +47,13 @@ public class CustomerInvoice {
     private String rechnungen_REPAIR_ID;
     private String rechnungen_ANGEBOTSNUMMER;
     private String rechnungen_BESTELLNUMMER;
-    private String rechnungen_INVOICE_TEXT = "";
+    private String rechnungen_INVOICEDUE = "20.12.2012";
+    private String rechnungen_INVOICEQTY = "1\n1\n1";
+    private String rechnungen_ME = "Std.\nx\nx";
+    private String rechnungen_DESCRIPTION = "äòæÆöû\nPart2\nStuff";
+    private String rechnungen_UNITPRICE = "€12,55\n€12,55\n€12332.00";
+    private String rechnungen_TOTAL = "€12,55\n€12,55\n€122332.00";
+    
     
     /**
      * @return the repair_ID_REPAIR
@@ -568,16 +574,86 @@ public class CustomerInvoice {
     }
 
     /**
-     * @return the rechnungen_INVOICE_TEXT
+     * @return the rechnungen_INVOICEDUE
      */
-    public String getRechnungen_INVOICE_TEXT() {
-        return rechnungen_INVOICE_TEXT;
+    public String getRechnungen_INVOICEDUE() {
+        return rechnungen_INVOICEDUE;
     }
 
     /**
-     * @param rechnungen_INVOICE_TEXT the rechnungen_INVOICE_TEXT to set
+     * @param rechnungen_INVOICEDUE the rechnungen_INVOICEDUE to set
      */
-    public void setRechnungen_INVOICE_TEXT(String rechnungen_INVOICE_TEXT) {
-        this.rechnungen_INVOICE_TEXT = rechnungen_INVOICE_TEXT;
+    public void setRechnungen_INVOICEDUE(String rechnungen_INVOICEDUE) {
+        this.rechnungen_INVOICEDUE = rechnungen_INVOICEDUE;
+    }
+
+    /**
+     * @return the rechnungen_INVOICEQTY
+     */
+    public String getRechnungen_INVOICEQTY() {
+        return rechnungen_INVOICEQTY;
+    }
+
+    /**
+     * @param rechnungen_INVOICEQTY the rechnungen_INVOICEQTY to set
+     */
+    public void setRechnungen_INVOICEQTY(String rechnungen_INVOICEQTY) {
+        this.rechnungen_INVOICEQTY = rechnungen_INVOICEQTY;
+    }
+
+    /**
+     * @return the rechnungen_ME
+     */
+    public String getRechnungen_ME() {
+        return rechnungen_ME;
+    }
+
+    /**
+     * @param rechnungen_ME the rechnungen_ME to set
+     */
+    public void setRechnungen_ME(String rechnungen_ME) {
+        this.rechnungen_ME = rechnungen_ME;
+    }
+
+    /**
+     * @return the rechnungen_DESCRIPTION
+     */
+    public String getRechnungen_DESCRIPTION() {
+        return rechnungen_DESCRIPTION;
+    }
+
+    /**
+     * @param rechnungen_DESCRIPTION the rechnungen_DESCRIPTION to set
+     */
+    public void setRechnungen_DESCRIPTION(String rechnungen_DESCRIPTION) {
+        this.rechnungen_DESCRIPTION = rechnungen_DESCRIPTION;
+    }
+
+    /**
+     * @return the rechnungen_UNITPRICE
+     */
+    public String getRechnungen_UNITPRICE() {
+        return rechnungen_UNITPRICE;
+    }
+
+    /**
+     * @param rechnungen_UNITPRICE the rechnungen_UNITPRICE to set
+     */
+    public void setRechnungen_UNITPRICE(String rechnungen_UNITPRICE) {
+        this.rechnungen_UNITPRICE = rechnungen_UNITPRICE;
+    }
+
+    /**
+     * @return the rechnungen_TOTAL
+     */
+    public String getRechnungen_TOTAL() {
+        return rechnungen_TOTAL;
+    }
+
+    /**
+     * @param rechnungen_TOTAL the rechnungen_TOTAL to set
+     */
+    public void setRechnungen_TOTAL(String rechnungen_TOTAL) {
+        this.rechnungen_TOTAL = rechnungen_TOTAL;
     }
 }

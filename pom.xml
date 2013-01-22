@@ -13,24 +13,6 @@
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
-            <!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appfuse-maven-plugin</artifactId>
-                <version>${appfuse.version}</version>
-                <configuration>
-                    <genericCore>${amp.genericCore}</genericCore>
-                    <fullSource>${amp.fullSource}</fullSource>
-                </configuration>
-                 Dependency needed by appfuse:gen-model to connect to database. 
-                 See http://issues.appfuse.org/browse/APF-868 to learn more.    
-                <dependencies>
-                    <dependency>
-                        <groupId>${jdbc.groupId}</groupId>
-                        <artifactId>${jdbc.artifactId}</artifactId>
-                        <version>${jdbc.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
@@ -70,84 +52,9 @@
                 <configuration>
                     <source>1.5</source>
                     <target>1.5</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <!--                        <plugin> 
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <components>
-                        <component>
-                            <name>hbm2java</name>
-                            <outputDirectory>target/generated-sources/hibernate3-maven-plugin</outputDirectory>
-                            <implementation>jdbcconfiguration</implementation>
-                        </component>
-                    </components>
-                    <componentProperties>
-                        <revengfile>/src/main/resources/reveng/reveng.xml</revengfile>
-                        <propertyfile>/src/main/resources/META-INF/hibernate.properties</propertyfile>
-                        <jdk5>true</jdk5>
-                        <ejb3>true</ejb3>
-                    </componentProperties>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.22</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>cglib</groupId>
-                        <artifactId>cglib-nodep</artifactId>
-                        <version>2.1_3</version>
-                    </dependency>
-                </dependencies> 
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>hbm2java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
-                                                
-                        
-            <!--                        <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <components>
-                        <component>
-                            <name>hbm2ddl</name>
-                            <implementation>jpaconfiguration</implementation>
-                        </component>
-                    </components>
-                    <componentProperties>
-                        <drop>true</drop>
-                        <jdk5>true</jdk5>
-                        <propertyfile>target/classes/jdbc.properties</propertyfile>
-                        <skip>${maven.test.skip}</skip>
-                    </componentProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>hbm2ddl</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>${jdbc.groupId}</groupId>
-                        <artifactId>${jdbc.artifactId}</artifactId>
-                        <version>${jdbc.version}</version>
-                    </dependency>                
-                </dependencies>
-            </plugin>-->
-            
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.0.2</version>
@@ -157,26 +64,14 @@
                     </dependentWarExcludes>
                 </configuration>
             </plugin>
-            <!--            <plugin>
-                <groupId>org.appfuse</groupId>
-                <artifactId>maven-warpath-plugin</artifactId>
-                <version>2.0.2</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>add-classes</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <warpathExcludes>
-                        applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,
-                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,**/persistence.xml,
-                        sql-map-config.xml
-                    </warpathExcludes>
-                </configuration>
-            </plugin>-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>            
         </plugins>
         <resources>
             <resource>
@@ -219,6 +114,10 @@
 
     <repositories>
         <repository>
+            <id>fdvsolution.public</id>
+            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+        </repository>           
+        <repository>
             <id>central</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
@@ -231,50 +130,9 @@
             <id>java.net</id>
             <url>http://download.java.net/maven/1/</url>
             <layout>default</layout>
-        </repository>
+        </repository>     
     </repositories>
-
-    <!--    <pluginRepositories>
-        <pluginRepository>
-            <id>appfuse</id>
-            <url>http://static.appfuse.org/repository</url>
-        </pluginRepository>
-    </pluginRepositories>-->
-
     <dependencies>
-        <!--        <dependency>
-            <groupId>org.appfuse</groupId>
-            <artifactId>appfuse-${web.framework}</artifactId>
-            <version>${appfuse.version}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>org.appfuse</groupId>
-            <artifactId>appfuse-${web.framework}</artifactId>
-            <version>${appfuse.version}</version>
-            <type>warpath</type>
-             This exclusion and the dependency following this one allow DAO framework switching. 
-             You only need these if you want to use JPA or iBATIS. See APF-565 for more information. 
-             It does no harm to leave it in for Hibernate, but it's not needed. 
-            <exclusions>
-                <exclusion>
-                    <groupId>org.appfuse</groupId>
-                    <artifactId>appfuse-hibernate</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.appfuse</groupId>
-            <artifactId>appfuse-${dao.framework}</artifactId>
-            <version>${appfuse.version}</version>
-        </dependency>-->
-        <!-- Uncomment the following if you want to run in Tomcat 5.x -->
-        <!-- http://raibledesigns.com/rd/entry/upgrading_to_tomcat_6 -->
-        <!--<dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>1.2</version>
-        </dependency>-->
         <dependency>
             <groupId>${jdbc.groupId}</groupId>
             <artifactId>${jdbc.artifactId}</artifactId>
@@ -473,11 +331,11 @@
             <version>4.4</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>el-impl</artifactId>
-            <version>2.2</version>
-        </dependency>        -->
+        <dependency>
+            <groupId>ar.com.fdvs</groupId>
+            <artifactId>DynamicJasper-core-fonts</artifactId>
+            <version>1.0</version>
+        </dependency>        
     </dependencies>
 
     <reporting>
@@ -542,7 +400,6 @@
                             <wait>${cargo.wait}</wait>
                             <container>
                                 <containerId>${cargo.container}</containerId>
-                                <!--home>${cargo.container.home}</home-->
                                 <zipUrlInstaller>
                                     <url>${cargo.container.url}</url>
                                     <installDir>${installDir}</installDir>
@@ -573,52 +430,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!--                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.1</version>
-                        <configuration>
-                            <tasks>
-                                <taskdef resource="webtest_base_relaxed.taskdef">
-                                    <classpath refid="maven.test.classpath"/>
-                                </taskdef>
-                                <mkdir dir="target/webtest-data"/>
-                                 Delete old results file if it exists 
-                                <delete file="target/webtest-data/web-tests-result.xml"/>
-                                 This is so the default will be used if no test case is specified 
-                                <property name="test" value="run-all-tests"/>
-                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
-                                <ant antfile="src/test/resources/web-tests.xml" target="${test}">
-                                    <property name="user.language" value="${user.language}"/>
-                                    <property name="webapp.name" value="${project.build.finalName}"/>
-                                    <property name="host" value="${cargo.host}"/>
-                                    <property name="port" value="${cargo.port}"/>
-                                </ant>
-                            </tasks>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.canoo.webtest</groupId>
-                                <artifactId>webtest</artifactId>
-                                <version>${webtest.version}</version>
-                                 groovy-all doesn't have a pom in central repo 
-                                 exclude groovy to prevent trying to fetch pom 
-                                <exclusions>
-                                    <exclusion>
-                                        <groupId>groovy</groupId>
-                                        <artifactId>groovy-all</artifactId>
-                                    </exclusion>
-                                </exclusions>
-                            </dependency>
-                        </dependencies>
-                    </plugin>-->
                 </plugins>
             </build>
         </profile>
@@ -687,5 +498,6 @@
         <jdbc.username>root</jdbc.username>
         <jdbc.password>root</jdbc.password>
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

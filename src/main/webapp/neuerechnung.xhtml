@@ -1,5 +1,147 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <h:form>
 
+                    <!-- TODO: Search Anlage and Load the repairs in selectableRepair -->
+
+                    <p:panel id="AnlagePanel" header="Search by Anlage" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Anlage" for="selectableAnlage" />
+                            <h:selectOneMenu value="#{repairEdit.idAnlagen}">
+                                <f:selectItems id="selectableAnlage" value="#{repairSearch.selectableAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton actionListener="#{repairEdit.load}" update="repairPanel" value="Choose Anlage" id="ajax"/>
+
+                    <p:panel id="repairPanel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Reparatur" for="selectableRepair" />
+                            <h:selectOneMenu value="#{repairEdit.idRepair}">
+                                <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.timestamp}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton action="#{repairEdit.load}" update="display" value="Choose Reparatur" />
+
+                    <!-- Show table of invoices for repair with option to print -->
+                    <!-- Option add new invoice for repair -->
+                    <p:panel id="display" header="Rechnung eingeben" style="margin-bottom:10px;" > 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Arbeitszeit:" for="workTimeDatePicker" />
+                            <p:calendar id="workTimeDatePicker"  value="#{repairNew.timeWorked}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                            <h:outputLabel value="Arbeitszeit Helfer:" for="helperWorkTimeDatePicker" />
+                            <p:calendar id="helperWorkTimeDatePicker" value="#{repairNew.helperTimeWorked}" pattern="HH:mm" timeOnly="true" />
+
+                            <h:outputLabel value="Auslöse:" for="accommodationTimePicker" />
+                            <p:calendar id="accommodationTimePicker"  value="#{repairNew.accommodationTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                            <h:outputLabel value="Überzeit:" for="overtimeTimePicker" />
+                            <p:calendar id="overtimeTimePicker"  value="#{repairNew.overtimeTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                            <h:outputLabel value="Verschmutzungszuchlag:" for="dirtyTimePicker" />
+                            <p:calendar id="dirtyTimePicker"  value="#{repairNew.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+
+                            <h:outputLabel value="Anfahrtspauschale: €" for="travelRatePerHr" />
+                            <h:inputText id="travelRatePerHr" value="#{repairNew.travelRatePerHr}" required="false" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                            <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
+                            <p:calendar id="travelTimeDatePicker" value="#{repairNew.travelTime}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                            <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
+                            <p:calendar id="travelTimeHelperDatePicker" value="#{repairNew.travelTimeHelper}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+
+                            <h:outputLabel value="Kilometer" for="kilometer" />
+                            <h:inputText id="kilometer" value="#{repairNew.travelDistanceKm}" required="false" onclick="setValue('repairForm:accordion:travelRatePerHr', '0.0'); setValue('repairForm:accordion:travelTimeDatePicker_input', ''); setValue('repairForm:accordion:travelTimeHelperDatePicker_input', '')"/>   
+
+                            <t:panelGroup colspan="2"> 
+                                <p:fieldset legend="ErsatzTeile Hinzufügen" toggleable="true" toggleSpeed="500">   
+                                    <p:dataTable id="partTable" var="t" value="#{teileNew.currentTeile}">  
+                                        <f:facet name="header">  
+                                            Teile 
+                                        </f:facet>                                               
+
+                                        <p:column sortBy="#{t.teileName}" headerText="Name">  
+                                            <h:outputText value="#{t.teileName}" />  
+                                        </p:column> 
+
+                                        <p:column sortBy="#{t.anzahl}" headerText="Anzahl">  
+                                            <h:outputText value="#{t.anzahl}" />  
+                                        </p:column>                                                  
+
+                                        <p:column sortBy="#{t.teileEinheit}" headerText="Einheit">  
+                                            <h:outputText value="#{t.teileEinheit}" />  
+                                        </p:column>  
+
+                                        <p:column sortBy="#{t.teileEk}" headerText="EK">  
+                                            <h:outputText value="#{t.teileEk}" />  
+                                        </p:column>  
+
+                                        <p:column sortBy="#{t.teilePreis}" headerText="Preis">  
+                                            <h:outputText value="#{t.teilePreis}" />  
+                                        </p:column>  
+
+                                        <p:column sortBy="#{t.teileRabatt}" headerText="Rabatt">  
+                                            <h:outputText value="#{t.teileRabatt}" />  
+                                        </p:column>  
+
+                                        <p:column headerText="Löschen">
+                                            <p:commandLink actionListener="#{teileNew.removeAction}" update="partTable" value="Löschen">
+                                                <f:attribute name="partToRemove" value="#{t}" />
+                                            </p:commandLink>
+                                        </p:column>
+                                    </p:dataTable>  
+
+                                    <h:panelGrid columns="2" cellpadding="10">
+
+                                        <h:outputLabel value="Name" for="selectableTeileList" />
+                                        <p:selectOneMenu value="#{teileNew.teileName}">
+                                            <f:selectItems id="selectableTeileList" value="#{teileSearch.selectableTeile}" var="teile" itemValue="#{teile.bezeichnung}" itemLabel="#{teile.bezeichnung}" />
+                                        </p:selectOneMenu>   
+
+                                        <h:outputLabel value="Anzahl" for="teileAnzahl" />
+                                        <p:inputText id="teileAnzahl" value="#{teileNew.anzahl}" />
+
+                                        <h:outputLabel value="Einheit" for="teileEinheit" />
+                                        <p:inputText id="teileEinheit" value="#{teileNew.teileEinheit}" />
+
+                                        <h:outputLabel value="EK" for="teileEk" />
+                                        <p:inputText id="teileEk" value="#{teileNew.teileEk}" />
+
+                                        <h:outputLabel value="Preis" for="teilePreis" />
+                                        <p:inputText id="teilePreis" value="#{teileNew.teilePreis}" />
+
+                                        <h:outputLabel value="Rabatt" for="teileRabatt" />
+                                        <p:inputText id="teileRabatt" value="#{teileNew.teileRabatt}" />
+
+                                        <!-- -->
+                                        <!-- Subunternehmer = Subcontractor -->
+                                        <p:commandButton actionListener="#{teileNew.addAction}" update="partTable" value="Teil Hinzufügen"/>
+                                    </h:panelGrid>
+                                </p:fieldset>
+                            </t:panelGroup>
+                        </h:panelGrid>
+                    </p:panel>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+<!--
 fields from neuereparatur
 Rechnungsnummer - enter in invoice
 Lieferanten-Nr - associated with Kunde
 Bestell-Nr. - enter in invoice
+-->

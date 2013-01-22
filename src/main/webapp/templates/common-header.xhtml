@@ -45,35 +45,45 @@
             <p:menubar>  
                 <p:menuitem value="Übersicht" url="suchubersichtanlage.jsf" />
 
-                <p:submenu label="Neuanlage" >  
-                    <p:menuitem value="Reparaturauftrag" url="neuereparatur.jsf" />
-                    <p:menuitem value="Anlage" url="neueanlage.jsf" />  
-                    <p:menuitem value="Kunde" url="neuerkunde.jsf" />  
-                    <p:menuitem value="Betreiber" url="neuebetreiber.jsf" />  
-                    <p:menuitem value="Standort" url="neuestandorte.jsf" />  
-                    <p:menuitem value="Entsorger" url="neuerentsorger.jsf" />
-                </p:submenu>  
+                <p:submenu label="Anlage" >                  
+                    <p:menuitem value="Neue Anlage" url="neueanlage.jsf" /> 
+                    <p:menuitem value="Bearbeiten Anlage" url="bearbeitenanlage.jsf" />
+                    <p:menuitem value="Suchen Anlage" url="#" />  
+                </p:submenu>
 
-                <p:submenu label="Bearbeiten" >  
-                    <p:menuitem value="Reparaturauftrag" url="bearbeitenreparatur.jsf" />
-                    <p:menuitem value="Anlage" url="bearbeitenanlage.jsf" />  
-                    <p:menuitem value="Kunde" url="bearbeitenkunde.jsf" />  
-                    <p:menuitem value="Betreiber" url="bearbeitenbetreiber.jsf" />  
-                    <p:menuitem value="Standort" url="bearbeitenstandorte.jsf" />  
-                    <p:menuitem value="Entsorger" url="bearbeitenentsorger.jsf" />
-                </p:submenu>     
+                <p:submenu label="Kunde" >                  
+                    <p:menuitem value="Neuer Kunde" url="neuerkunde.jsf" /> 
+                    <p:menuitem value="Bearbeiten Kunde" url="bearbeitenkunde.jsf" />
+                </p:submenu>
 
-                <p:menuitem value="UVV" url="neueuvv.jsf" />
+                <p:submenu label="Betreiber" >                  
+                    <p:menuitem value="Neuer Betreiber" url="neuebetreiber.jsf" /> 
+                    <p:menuitem value="Bearbeiten Betreiber" url="bearbeitenbetreiber.jsf" />
+                </p:submenu>
 
-                
+                <p:submenu label="Standort" >                  
+                    <p:menuitem value="Neue Standort" url="neuestandorte.jsf" /> 
+                    <p:menuitem value="Bearbeiten Standort" url="bearbeitenstandorte.jsf" />
+                </p:submenu>
 
-                <p:submenu label="Suche" >  
-                    <p:menuitem value="Anlage" url="#" />  
-                    <p:menuitem value="Kunde" url="ubersichtkunde.jsf" />  
-                    <p:menuitem value="Betreiber" url="#" />  
-                    <p:menuitem value="Standort" url="ubersichtstandorte.jsf" />  
-                    <p:menuitem value="Alles" url="#" />
-                </p:submenu>  
+                <p:submenu label="Entsorger" >                  
+                    <p:menuitem value="Neuer Entsorger" url="neuerentsorger.jsf" /> 
+                    <p:menuitem value="Bearbeiten Entsorger" url="bearbeitenentsorger.jsf" />
+                </p:submenu>                
+
+                <p:submenu label="UVV" >   
+                    <p:menuitem value="Neue UVV" url="neueuvv.jsf" />
+                    <p:menuitem value="Bearbeiten UVV" url="bearbeitenuvv.jsf" />
+                </p:submenu>
+
+                <p:submenu label="Reparaturauftrag" >
+                    <p:menuitem value="Neuer Reparaturauftrag" url="neuereparatur.jsf" />
+                    <p:menuitem value="Bearbeiten Reparaturauftrag" url="bearbeitenreparatur.jsf" />
+                </p:submenu>
+
+                <p:submenu label="Rechnungen" >
+                    <p:menuitem value="Neue Rechnung" url="neuerechnung.jsf" />
+                </p:submenu>
 
                 <p:menuitem value="Logout" url="#" />
 
