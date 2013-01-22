@@ -26,7 +26,7 @@
                         <h:panelGrid columns="2">
 
                             <h:outputLabel value="Interne Nr." for="interneNr" />
-                            <p:inputText id="interneNr" value="#{anlageEdit.interneNr}"  />
+                            <h:outputText id="interneNr" value="#{anlageEdit.interneNr}" />
 
                             <h:outputLabel value="Art" for="art" />
                             <p:selectOneMenu id="art" value="#{anlageEdit.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
@@ -54,30 +54,30 @@
                             </h:selectOneMenu>                            
 
                             <h:outputLabel value="Typ" for="typ" />
-                            <p:inputText id="typ" value="#{anlageEdit.typ}" />
+                            <h:outputText id="typ" value="#{anlageEdit.typ}" />
 
                             <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
-                            <p:inputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" required="false" />
+                            <h:outputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" />
 
 
                             <h:outputLabel value="Baujahr" for="baujahr" />
-                            <p:calendar id="baujahr" value="#{anlageEdit.baujahr}" required="false" locale="de" pattern="yyyy"/>
+                            <h:outputText id="baujahr" value="#{anlageEdit.baujahr}" />
 
 
                             <h:outputLabel value="Bemerkung" for="bemerkung" />
-                            <p:inputText id="bemerkung" value="#{anlageEdit.bemerkung}" required="false" />
+                            <h:outputText id="bemerkung" value="#{anlageEdit.bemerkung}"  />
 
 
                             <h:outputLabel value="Interne Notiz" for="interneNotiz" />
-                            <p:inputText id="interneNotiz" value="#{anlageEdit.interneNotiz}" required="false" />
+                            <h:outputText id="interneNotiz" value="#{anlageEdit.interneNotiz}"  />
 
 
                             <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
-                            <p:calendar value="#{anlageEdit.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="yyyy/MM/dd" />
+                            <h:outputText value="#{anlageEdit.naechsteUVV}" id="naechsteUVV"   />
 
 
                             <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
-                            <p:calendar id="naechsteWartung" value="#{anlageEdit.naechsteWartung}" required="false" locale="de" pattern="yyyy/MM/dd" />
+                            <h:outputText id="naechsteWartung" value="#{anlageEdit.naechsteWartung}" />
 
 
                         </h:panelGrid>
