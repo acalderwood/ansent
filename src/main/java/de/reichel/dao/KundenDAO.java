@@ -25,4 +25,6 @@ public interface KundenDAO extends Serializable {
     public void updateKunden(KundenEdit backingBean);
 
     public void loadKunden(KundenEdit backingBean);
+
+    public void newKundenInit(KundenNew backingBean);
 }

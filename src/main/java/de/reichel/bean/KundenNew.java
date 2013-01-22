@@ -29,4 +29,10 @@ public class KundenNew extends KundenBean {
         kundenDAO.addKunden(this);
         return "index";
     }
+    
+    public String init(){
+        log.debug("init() has been called");
+        kundenDAO.newKundenInit(this);
+        return null;
+    }
 }

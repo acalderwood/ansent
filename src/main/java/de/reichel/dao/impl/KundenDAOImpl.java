@@ -116,4 +116,24 @@ public class KundenDAOImpl implements KundenDAO {
         kunden.setTimestamp(Calendar.getInstance().getTime());
         log.debug("Kunden Loaded!");
     }
+
+    public void newKundenInit(KundenNew backingBean) {
+        log.debug("Initializing new Kunden Bean");
+        backingBean.setEmail(null);
+        backingBean.setFirmenname(null);
+        backingBean.setInterneNotiz(null);
+        backingBean.setAnsprechpartner(null);
+        backingBean.setStrasseNr(null);
+        backingBean.setBemerkung(null);
+        backingBean.setBuchungskreis(null);
+        backingBean.setFax(null);
+        backingBean.setOrt(null);
+        backingBean.setTelefon(null);
+        backingBean.setSteuerNr(null);
+        backingBean.setPlz(null);
+        backingBean.setLand(null);
+        backingBean.setIdKunden(null);
+        log.debug("New Kunden Bean is now empty!");
+        //throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
