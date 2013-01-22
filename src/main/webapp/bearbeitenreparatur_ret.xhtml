@@ -52,38 +52,8 @@
                                 <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
                                 <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="false" locale="de" pattern="yyyy/MM/dd" />
 
-                                <h:outputLabel value="Arbeitszeit:" for="workTimeDatePicker" />
-                                <p:calendar id="workTimeDatePicker"  value="#{repairEdit.timeWorked}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Arbeitszeit Helfer:" for="helperWorkTimeDatePicker" />
-                                <p:calendar id="helperWorkTimeDatePicker" value="#{repairEdit.helperTimeWorked}" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Auslöse:" for="accommodationTimePicker" />
-                                <p:calendar id="accommodationTimePicker"  value="#{repairEdit.accommodationTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Überzeit:" for="overtimeTimePicker" />
-                                <p:calendar id="overtimeTimePicker"  value="#{repairEdit.overtimeTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Verschmutzungszuchlag:" for="dirtyTimePicker" />
-                                <p:calendar id="dirtyTimePicker"  value="#{repairEdit.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
-
-                                <h:outputLabel value="Anfahrtspauschale: €" for="travelRatePerHr" />
-                                <h:inputText id="travelRatePerHr" value="#{repairEdit.travelRatePerHr}" required="false" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
-
-                                <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
-                                <p:calendar id="travelTimeDatePicker" value="#{repairEdit.travelTime}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
-
-                                <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
-                                <p:calendar id="travelTimeHelperDatePicker" value="#{repairEdit.travelTimeHelper}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
-
-                                <h:outputLabel value="Kilometer" for="kilometer" />
-                                <h:inputText id="kilometer" value="#{repairEdit.travelDistanceKm}" required="false" onclick="setValue('repairForm:accordion:travelRatePerHr', '0.0'); setValue('repairForm:accordion:travelTimeDatePicker_input', ''); setValue('repairForm:accordion:travelTimeHelperDatePicker_input', '')"/>   
-
-                                
-
-                                <p:commandButton action="#{repairEdit.load}" actionListener="#{repairEdit.addParts}" value="Repair Hinzufügen" update="messages">
-                                    <f:attribute name="parts" value="#{teileNew.currentTeile}" />
-                                </p:commandButton>
+                                <p:commandButton action="#{repairEdit.update}" value="Repair Hinzufügen" />
+                                   
                             </h:panelGrid>
                         </p:panel>
 
