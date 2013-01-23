@@ -16,13 +16,22 @@ import de.reichel.domain.model.Saetze;
 import de.reichel.domain.model.Standorte;
 import de.reichel.domain.model.Techniker;
 import de.reichel.domain.model.Teile;
+import de.reichel.report.CustomerInvoice;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
@@ -288,80 +297,89 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         log.debug(i + " parts removed");
         
         for (TeileBean partBean: backingBean.getParts()) {
-            RepairTeile repairTeile = new RepairTeile();
-            repairTeile.setAnzahl(partBean.getAnzahl());
-            log.debug(partBean.getAnzahl());
-            repairTeile.setIdRepair(backingBean.getIdRepair());
-            log.debug(backingBean.getIdRepair());
-            repairTeile.setIdSub(partBean.getIdSub());
-            log.debug(partBean.getIdSub());
-            repairTeile.setIdTeile(partBean.getIdTeile());
-            log.debug(partBean.getIdTeile());
-            repairTeile.setTeileEk(partBean.getTeileEk());
-            log.debug(partBean.getTeileEk());
-            repairTeile.setTeileEinheit(partBean.getTeileEinheit());
-            log.debug(partBean.getTeileEinheit());
-            repairTeile.setTeilePreis(partBean.getTeilePreis());
-            log.debug(partBean.getTeilePreis());
-            repairTeile.setTeileRabatt(partBean.getTeileRabatt());
-            log.debug(partBean.getTeileRabatt());
-            
-            repairTeile.setTeileName(getPartDescription(partBean.getIdTeile()));
-            repairTeile.setTimestamp(Calendar.getInstance().getTime());
-         
-            entityManager.persist(repairTeile);
-            log.debug("Part added");
-            
-            
-            //generate invoice here
-            generateInvoice(backingBean);
+
+                RepairTeile repairTeile = new RepairTeile();
+                repairTeile.setAnzahl(partBean.getAnzahl());
+                log.debug(partBean.getAnzahl());
+                repairTeile.setIdRepair(backingBean.getIdRepair());
+                log.debug(backingBean.getIdRepair());
+                repairTeile.setIdSub(partBean.getIdSub());
+                log.debug(partBean.getIdSub());
+                repairTeile.setIdTeile(partBean.getIdTeile());
+                log.debug(partBean.getIdTeile());
+                repairTeile.setTeileEk(partBean.getTeileEk());
+                log.debug(partBean.getTeileEk());
+                repairTeile.setTeileEinheit(partBean.getTeileEinheit());
+                log.debug(partBean.getTeileEinheit());
+                repairTeile.setTeilePreis(partBean.getTeilePreis());
+                log.debug(partBean.getTeilePreis());
+                repairTeile.setTeileRabatt(partBean.getTeileRabatt());
+                log.debug(partBean.getTeileRabatt());
+//                String partDesc = getPartDescription(partBean.getIdTeile());
+//                if (partDesc != null) {
+//                    repairTeile.setTeileName(partDesc);
+//                } else {
+                repairTeile.setTeileName(partBean.getTeileName());
+//                }
+                repairTeile.setTimestamp(Calendar.getInstance().getTime());
+             
+                entityManager.persist(repairTeile);
+                log.debug("Part added");
         }
+                
+                
+                //generate invoice here
+            try {
+                generateInvoice(backingBean);
+            } catch (JRException ex) {
+                Logger.getLogger(ReparaturDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     
     }
     
-    public void generateInvoice(RepairEdit backingBean) {
+     @Transactional(readOnly = true)   
+    public void generateInvoice(RepairEdit backingBean) throws JRException {
         
+        CustomerInvoice invoice = new CustomerInvoice();
+        
+        Query query = entityManager.createQuery("from Standorte standorte where standorte.idStandorte = :idStandorte");
+        query.setParameter("idStandorte", backingBean.getIdStandorte());
+        log.debug("idStandort for invoice: " + backingBean.getIdStandorte());
+        Standorte standorte = (Standorte)query.getSingleResult();
+        log.debug("Got Standorte for invoice");
+        
+        invoice.setStandorte_STANDORTNAME(standorte.getStandortname());
+        invoice.setStandorte_STRASSE_NR(standorte.getStrasseNr());
+        invoice.setStandorte_ORT(standorte.getOrt());
+        invoice.setStandorte_PLZ(standorte.getPlz());
+        
+        
+        List<CustomerInvoice> invoices = new ArrayList<CustomerInvoice>();
+        invoices.add(invoice);
+        
+        try {
+        Map parameters = new HashMap();
+        parameters.put("SUBREPORT_DIR", "C:\\Users\\Alastair Calderwood\\Documents\\NetBeansProjects\\reichel\\src\\main\\resources\\reports");
+        
+        log.debug("Generating invoice: PLZ: " + invoices.get(0).getStandorte_PLZ());
+        JasperFillManager.fillReportToFile("C:\\Users\\Alastair Calderwood\\Documents\\NetBeansProjects\\reichel\\src\\main\\resources\\reports\\reparatur_4.jasper",
+                "invoice.jrprint", parameters, new JRBeanCollectionDataSource(invoices));
+        JasperExportManager.exportReportToPdfFile("invoice.jrprint");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @Transactional(readOnly = true)
     public String getPartDescription(int idTeile) {
             Query descriptionQuery = entityManager.createQuery("from Teile teile where teile.id = :id");
             descriptionQuery.setParameter("id", idTeile);
-            Teile teile = (Teile) descriptionQuery.getSingleResult();
-            log.debug("Got part from DB. Description: " + teile.getBezeichnung());
-            return teile.getBezeichnung();
-    }
-
-    /**
-     * Adds a machine part to an existing repair
-     *
-     * @param idRepair
-     * @param idMachinePart
-     * @param number
-     * @param unit
-     * @param price
-     * @param rebatePercent
-     * @param ek
-     * @param idSubContractor
-     */
-    @Transactional(readOnly = false)
-    public void addMachinePartToRepair(int idRepair, int idMachinePart, int number, String unit, double price, double rebatePercent, double ek, int idSubContractor) {
-        RepairTeile repairTeile = new RepairTeile();
-        repairTeile.setAnzahl(price);
-        repairTeile.setIdRepair(idRepair);
-        repairTeile.setIdSub(idSubContractor);
-        repairTeile.setIdTeile(idMachinePart);
-        repairTeile.setTeileEk(ek);
-        repairTeile.setTeileEinheit(unit);
-
-        Query query = entityManager.createQuery("from Teile teile where teile.idTeile = :idTeile");
-        query.setParameter("idTeile", idMachinePart);
-        Teile teile = (Teile) query.getSingleResult();
-        repairTeile.setTeileName(teile.getAngebotstext());
-        repairTeile.setTeilePreis(price);
-        repairTeile.setTeileRabatt(price);
-        repairTeile.setTimestamp(Calendar.getInstance().getTime());
-
-        entityManager.persist(repairTeile);
+            List<Teile> teilen = descriptionQuery.getResultList();
+            if (teilen.isEmpty()) {
+                return null;
+            } else {
+                return teilen.get(0).getBezeichnung();
+            }
     }
 
     /**
@@ -438,7 +456,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
             teileBean.setIdTeile(repairTeil.getIdTeile());
             log.debug("Created part");
             backingBean.getParts().add(teileBean);
-            log.debug("Added part");
+            log.debug("Added part, idTeile = " + teileBean.getIdTeile());
         }
         log.debug("No. Parts added: " + backingBean.getParts().size());
     }

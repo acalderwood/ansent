@@ -9,8 +9,7 @@ import java.util.Map;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
-import net.sf.jasperreports.engine.util.JRProperties;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -19,7 +18,7 @@ import org.junit.Test;
  */
 public class CustomerInvoiceTest {
 
-    @Test
+    @Test @Ignore
     public void testGenerateReport() throws Exception {
         Map parameters = new HashMap();
         parameters.put("SUBREPORT_DIR", "C:\\Users\\Alastair Calderwood\\Documents\\NetBeansProjects\\reichel\\src\\main\\resources\\reports");

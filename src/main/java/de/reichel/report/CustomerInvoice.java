@@ -4,57 +4,62 @@
  */
 package de.reichel.report;
 
+import de.reichel.dao.impl.StandorteDAOImpl;
+import java.io.Serializable;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  *
  * @author Alastair Calderwood
  */
-public class CustomerInvoice {
+public class CustomerInvoice implements Serializable {
 
-    private Integer repair_ID_REPAIR = 123;
-    private String user_VORNAME = "vorname";
-    private String user_NACHNAME = "nachname";
-    private String repair_ERSTELLT = "nachname";
-    private String repair_GESENDET_DATUM = "nachname";
-    private String anlagen_INTERNE_NR = "nachname";
-    private String standorte_ID_STANDORTE = "nachname";
-    private String standorte_STANDORTNAME = "nachname";
-    private String standorte_STRASSE_NR = "nachname";
-    private String standorte_PLZ = "nachname";
-    private String standorte_ORT = "nachname";
-    private String anlagen_art_ART = "nachname";
-    private String anlagen_hersteller_HERSTELLER = "nachname";
-    private String anlagen_TYP = "nachname";
-    private String anlagen_FABRIKATIONSNUMMER = "nachname";
-    private String anlagen_BAUJAHR = "nachname";
-    private String betreiber_ID_BETREIBER = "nachname";
-    private String betreiber_BETREIBERNAME = "nachname";
-    private String betreiber_STRASSE_NR = "nachname";
-    private String betreiber_PLZ = "nachname";
-    private String betreiber_ORT = "nachname";
-    private String kunden_ID_KUNDEN = "nachname";
-    private String kunden_FIRMENNAME = "nachname";
-    private String kunden_STRASSE_NR = "nachname";
-    private String kunden_PLZ = "nachname";
-    private String kunden_ORT = "nachname";
-    private String repair_FAX_TEXT = "nachname";
-    private String repair_INTERNE_BEMERKUNG = "nachname";
-    private String repair_REPARATUR_DATUM = "nachname";
-    private String techniker_FIRMA_TECHNIKER = "nachname";
-    private String techniker_NAME_TECHNIKER = "nachname";
-    private String rechnungen_RECHNUNGSNUMMERINTERN;
-    private String rechnungen_RECHNUNGSDATUM;
-    private String rechnungen_LIEFERDATUM;
-    private String rechnungen_REPAIR_ID;
-    private String rechnungen_ANGEBOTSNUMMER;
-    private String rechnungen_BESTELLNUMMER;
-    private String rechnungen_INVOICEDUE = "20.12.2012";
-    private String rechnungen_INVOICEQTY = "1\n1\n1";
-    private String rechnungen_ME = "Std.\nx\nx";
-    private String rechnungen_DESCRIPTION = "äòæÆöû\nPart2\nStuff";
-    private String rechnungen_UNITPRICE = "€12,55\n€12,55\n€12332.00";
-    private String rechnungen_TOTAL = "€12,55\n€12,55\n€122332.00";
+    private Integer repair_ID_REPAIR = null;
+    private String user_VORNAME = null;
+    private String user_NACHNAME = null;
+    private String repair_ERSTELLT = null;
+    private String repair_GESENDET_DATUM = null;
+    private String anlagen_INTERNE_NR = null;
+    private String standorte_ID_STANDORTE = null;
+    private String standorte_STANDORTNAME = null;
+    private String standorte_STRASSE_NR = null;
+    private String standorte_PLZ = null;
+    private String standorte_ORT = null;
+    private String anlagen_art_ART = null;
+    private String anlagen_hersteller_HERSTELLER = null;
+    private String anlagen_TYP = null;
+    private String anlagen_FABRIKATIONSNUMMER = null;
+    private String anlagen_BAUJAHR = null;
+    private String betreiber_ID_BETREIBER = null;
+    private String betreiber_BETREIBERNAME = null;
+    private String betreiber_STRASSE_NR = null;
+    private String betreiber_PLZ = null;
+    private String betreiber_ORT = null;
+    private String kunden_ID_KUNDEN = null;
+    private String kunden_FIRMENNAME = null;
+    private String kunden_STRASSE_NR = null;
+    private String kunden_PLZ = null;
+    private String kunden_ORT = null;
+    private String repair_FAX_TEXT = null;
+    private String repair_INTERNE_BEMERKUNG = null;
+    private String repair_REPARATUR_DATUM = null;
+    private String techniker_FIRMA_TECHNIKER = null;
+    private String techniker_NAME_TECHNIKER = null;
+    private String rechnungen_RECHNUNGSNUMMERINTERN = null;
+    private String rechnungen_RECHNUNGSDATUM = null;
+    private String rechnungen_LIEFERDATUM = null;
+    private String rechnungen_REPAIR_ID = null;
+    private String rechnungen_ANGEBOTSNUMMER = null;
+    private String rechnungen_BESTELLNUMMER = null;
+    private String rechnungen_INVOICEDUE = null;
+    private String rechnungen_INVOICEQTY = null;
+    private String rechnungen_ME = null;
+    private String rechnungen_DESCRIPTION = null;
+    private String rechnungen_UNITPRICE = null;
+    private String rechnungen_TOTAL = null;
     
-    
+    private static final Log log = LogFactory.getLog(CustomerInvoice.class);
     /**
      * @return the repair_ID_REPAIR
      */
@@ -157,6 +162,7 @@ public class CustomerInvoice {
      * @return the standorte_STANDORTNAME
      */
     public String getStandorte_STANDORTNAME() {
+        log.debug("getStandorte_STANDORTNAME():" + standorte_STANDORTNAME);
         return standorte_STANDORTNAME;
     }
 

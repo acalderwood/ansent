@@ -11,14 +11,13 @@ import java.util.List;
  *
  * @author Alastair Calderwood
  */
-public class CustomerInvoiceBeanCollection {
-
-    public static List<CustomerInvoice> getBeanCollection() {
-        CustomerInvoice invoice = new CustomerInvoice();
-//        invoice
-        invoice.setStandorte_STANDORTNAME("ort");
+public class Main {
+    
+    public static void main(String[] args) {
+        CustomerInvoice ci = new CustomerInvoice();
+        ci.setAnlagen_BAUJAHR("2012");
         List<CustomerInvoice> invoices = new ArrayList<CustomerInvoice>();
-        invoices.add(invoice);
-        return invoices;
+        invoices.add(ci);
+        System.out.println(invoices.get(0).getAnlagen_BAUJAHR());
     }
 }
