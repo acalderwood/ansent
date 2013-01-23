@@ -4,10 +4,12 @@
  */
 package de.reichel.bean;
 
+import java.util.List;
+
 /**
  *
  * @author Alastair Calderwood
  */
 public class TeileEdit extends TeileBean {
-    
+
 }

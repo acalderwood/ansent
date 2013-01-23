@@ -10,7 +10,9 @@ import de.reichel.dao.TeileDAO;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +38,7 @@ public class RepairBean implements Serializable {
     protected Integer idFirma;
     protected Integer idStandorte;
     protected Integer idKunden;
+    private Integer idBetreiber;
     protected Integer idRates;
     protected short state;
     protected String workDescription;
@@ -69,6 +72,8 @@ public class RepairBean implements Serializable {
     protected Date dirtyTime;
     protected boolean travelTypeTime = true;
     protected boolean travelTypeKm = true;
+    
+    protected List<TeileBean> parts = new ArrayList<TeileBean>();
 
     /**
      * @return the idRepair
@@ -575,5 +580,33 @@ public class RepairBean implements Serializable {
      */
     public void setIdKunden(Integer idKunden) {
         this.idKunden = idKunden;
+    }
+
+    /**
+     * @return the parts
+     */
+    public List<TeileBean> getParts() {
+        return parts;
+    }
+
+    /**
+     * @param parts the parts to set
+     */
+    public void setParts(List<TeileBean> parts) {
+        this.parts = parts;
+    }
+
+    /**
+     * @return the idBetreiber
+     */
+    public Integer getIdBetreiber() {
+        return idBetreiber;
+    }
+
+    /**
+     * @param idBetreiber the idBetreiber to set
+     */
+    public void setIdBetreiber(Integer idBetreiber) {
+        this.idBetreiber = idBetreiber;
     }
 }

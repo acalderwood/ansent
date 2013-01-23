@@ -22,92 +22,92 @@
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton actionListener="#{repairEdit.load}" update="repairPanel" value="Choose Anlage" id="ajax"/>
+                    <p:commandButton actionListener="#{repairEdit.loadRepairs}" update="repairPanel" value="Choose Anlage" id="ajax"/>
 
                     <p:panel id="repairPanel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Reparatur" for="selectableRepair" />
                             <h:selectOneMenu value="#{repairEdit.idRepair}">
-                                <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.timestamp}" />
+                                <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.reparaturDatum}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton action="#{repairEdit.load}" update="display" value="Choose Reparatur" />
+                    <p:commandButton actionListener="#{repairEdit.loadRepair}" update="display" value="Choose Reparatur" id ="ajax2"/>
 
                     <!-- Show table of invoices for repair with option to print -->
                     <!-- Option add new invoice for repair -->
-                    <p:panel id="display" header="Rechnung eingeben" style="margin-bottom:10px;" > 
-                        <h:panelGrid columns="2">
+                    <p:panel id="display" header="Neue Reparatur" style="margin-bottom:10px;"> 
+                        <t:panelGrid columns="2">
                             <h:outputLabel value="Arbeitszeit:" for="workTimeDatePicker" />
-                            <p:calendar id="workTimeDatePicker"  value="#{repairNew.timeWorked}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+                            <p:calendar id="workTimeDatePicker"  value="#{repairEdit.timeWorked}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Arbeitszeit Helfer:" for="helperWorkTimeDatePicker" />
-                            <p:calendar id="helperWorkTimeDatePicker" value="#{repairNew.helperTimeWorked}" pattern="HH:mm" timeOnly="true" />
+                            <p:calendar id="helperWorkTimeDatePicker" value="#{repairEdit.helperTimeWorked}" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Auslöse:" for="accommodationTimePicker" />
-                            <p:calendar id="accommodationTimePicker"  value="#{repairNew.accommodationTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+                            <p:calendar id="accommodationTimePicker"  value="#{repairEdit.accommodationTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Überzeit:" for="overtimeTimePicker" />
-                            <p:calendar id="overtimeTimePicker"  value="#{repairNew.overtimeTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+                            <p:calendar id="overtimeTimePicker"  value="#{repairEdit.overtimeTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Verschmutzungszuchlag:" for="dirtyTimePicker" />
-                            <p:calendar id="dirtyTimePicker"  value="#{repairNew.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
+                            <p:calendar id="dirtyTimePicker"  value="#{repairEdit.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Anfahrtspauschale: €" for="travelRatePerHr" />
-                            <h:inputText id="travelRatePerHr" value="#{repairNew.travelRatePerHr}" required="false" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+                            <h:inputText id="travelRatePerHr" value="#{repairEdit.travelRatePerHr}" required="false" />
 
                             <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
-                            <p:calendar id="travelTimeDatePicker" value="#{repairNew.travelTime}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+                            <p:calendar id="travelTimeDatePicker" value="#{repairEdit.travelTime}" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
-                            <p:calendar id="travelTimeHelperDatePicker" value="#{repairNew.travelTimeHelper}" pattern="HH:mm" timeOnly="true" onclick="setValue('repairForm:accordion:travelRatePerKm', '0.0'); setValue('repairForm:accordion:kilometer', '0.0')"/>
+                            <p:calendar id="travelTimeHelperDatePicker" value="#{repairEdit.travelTimeHelper}" pattern="HH:mm" timeOnly="true" />
 
                             <h:outputLabel value="Kilometer" for="kilometer" />
-                            <h:inputText id="kilometer" value="#{repairNew.travelDistanceKm}" required="false" onclick="setValue('repairForm:accordion:travelRatePerHr', '0.0'); setValue('repairForm:accordion:travelTimeDatePicker_input', ''); setValue('repairForm:accordion:travelTimeHelperDatePicker_input', '')"/>   
+                            <h:inputText id="kilometer" value="#{repairEdit.travelDistanceKm}" required="false" />   
 
                             <t:panelGroup colspan="2"> 
                                 <p:fieldset legend="ErsatzTeile Hinzufügen" toggleable="true" toggleSpeed="500">   
-                                    <p:dataTable id="partTable" var="t" value="#{teileNew.currentTeile}">  
+                                    <p:dataTable id="partTable" var="part" value="#{repairEdit.parts}">  
                                         <f:facet name="header">  
                                             Teile 
                                         </f:facet>                                               
 
-                                        <p:column sortBy="#{t.teileName}" headerText="Name">  
-                                            <h:outputText value="#{t.teileName}" />  
+                                        <p:column sortBy="#{part.teileName}" headerText="Name">  
+                                            <h:outputText value="#{part.teileName}" />  
                                         </p:column> 
 
-                                        <p:column sortBy="#{t.anzahl}" headerText="Anzahl">  
-                                            <h:outputText value="#{t.anzahl}" />  
+                                        <p:column sortBy="#{part.anzahl}" headerText="Anzahl">  
+                                            <h:outputText value="#{part.anzahl}" />  
                                         </p:column>                                                  
 
-                                        <p:column sortBy="#{t.teileEinheit}" headerText="Einheit">  
-                                            <h:outputText value="#{t.teileEinheit}" />  
+                                        <p:column sortBy="#{part.teileEinheit}" headerText="Einheit">  
+                                            <h:outputText value="#{part.teileEinheit}" />  
                                         </p:column>  
 
-                                        <p:column sortBy="#{t.teileEk}" headerText="EK">  
-                                            <h:outputText value="#{t.teileEk}" />  
+                                        <p:column sortBy="#{part.teileEk}" headerText="EK">  
+                                            <h:outputText value="#{part.teileEk}" />  
                                         </p:column>  
 
-                                        <p:column sortBy="#{t.teilePreis}" headerText="Preis">  
-                                            <h:outputText value="#{t.teilePreis}" />  
+                                        <p:column sortBy="#{part.teilePreis}" headerText="Preis">  
+                                            <h:outputText value="#{part.teilePreis}" />  
                                         </p:column>  
 
-                                        <p:column sortBy="#{t.teileRabatt}" headerText="Rabatt">  
-                                            <h:outputText value="#{t.teileRabatt}" />  
+                                        <p:column sortBy="#{part.teileRabatt}" headerText="Rabatt">  
+                                            <h:outputText value="#{part.teileRabatt}" />  
                                         </p:column>  
 
                                         <p:column headerText="Löschen">
-                                            <p:commandLink actionListener="#{teileNew.removeAction}" update="partTable" value="Löschen">
-                                                <f:attribute name="partToRemove" value="#{t}" />
+                                            <p:commandLink actionListener="#{repairEdit.removePart}" update="partTable" value="Löschen">
+                                                <f:attribute name="partToRemove" value="#{part}" />
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>  
 
-                                    <h:panelGrid columns="2" cellpadding="10">
+                                    <t:panelGrid columns="2" cellpadding="10">
 
                                         <h:outputLabel value="Name" for="selectableTeileList" />
-                                        <p:selectOneMenu value="#{teileNew.teileName}">
-                                            <f:selectItems id="selectableTeileList" value="#{teileSearch.selectableTeile}" var="teile" itemValue="#{teile.bezeichnung}" itemLabel="#{teile.bezeichnung}" />
+                                        <p:selectOneMenu value="#{teileNew.idTeile}">
+                                            <f:selectItems id="selectableTeileList" value="#{teileSearch.selectableTeile}" var="teile" itemValue="#{teile.id}" itemLabel="#{teile.bezeichnung}" />
                                         </p:selectOneMenu>   
 
                                         <h:outputLabel value="Anzahl" for="teileAnzahl" />
@@ -127,13 +127,17 @@
 
                                         <!-- -->
                                         <!-- Subunternehmer = Subcontractor -->
-                                        <p:commandButton actionListener="#{teileNew.addAction}" update="partTable" value="Teil Hinzufügen"/>
-                                    </h:panelGrid>
+                                        <p:commandLink actionListener="#{repairEdit.addPart}" update="partTable" value="Teil Hinzufügen">
+                                            <f:attribute name="partToAdd" value="#{teileNew}" />
+                                        </p:commandLink>
+                                    </t:panelGrid>
                                 </p:fieldset>
                             </t:panelGroup>
-                        </h:panelGrid>
-                    </p:panel>
 
+                            <p:commandButton action="#{repairEdit.update}" value="Rechnung Machen" />
+                            
+                        </t:panelGrid>
+                    </p:panel>
                 </h:form>
             </ui:define>
         </ui:composition>

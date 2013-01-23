@@ -27,11 +27,11 @@
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Reparatur" for="selectableRepair" />
                             <h:selectOneMenu value="#{repairEdit.idRepair}">
-                                <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.timestamp}" />
+                                <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.reparaturDatum}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton action="#{repairEdit.load}" value="Choose Reperatur" />
+                    <p:commandButton action="#{repairEdit.load}" value="Choose Reparatur" />
                     
                                         
                 </h:form>

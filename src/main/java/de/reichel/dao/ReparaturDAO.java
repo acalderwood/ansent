@@ -39,4 +39,5 @@ public interface ReparaturDAO {
 
     public List<Repair> getExistingRepairsByID(RepairEdit backingBean);
 
+    public String getPartDescription(int idTeile);
 }

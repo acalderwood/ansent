@@ -52,13 +52,9 @@
                                 </p:selectOneMenu>                                
 
                                 <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
-                                <p:calendar id="dateRepaired" value="#{repairNew.repairDate}" required="false" locale="de" pattern="yyyy/MM/dd" />
+                                <p:calendar id="dateRepaired" value="#{repairNew.repairDate}" required="true" locale="de" pattern="yyyy/MM/dd" />
 
-
-
-                                <p:commandButton action="#{repairNew.add}" actionListener="#{repairNew.addParts}" value="Repair Hinzufügen" update="messages">
-                                    <f:attribute name="parts" value="#{teileNew.currentTeile}" />
-                                </p:commandButton>
+                                <p:commandButton action="#{repairNew.add}" value="Repair Hinzufügen" update="messages" />
                             </t:panelGrid>
                         </p:panel>
                     </h:form>
