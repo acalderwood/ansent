@@ -58,6 +58,9 @@ public class CustomerInvoice implements Serializable {
     private String rechnungen_DESCRIPTION = null;
     private String rechnungen_UNITPRICE = null;
     private String rechnungen_TOTAL = null;
+    private String rechnungen_AMT = null;
+    private String rechnungen_TAX = null;
+    private String rechnungen_SUM = null;
     
     private static final Log log = LogFactory.getLog(CustomerInvoice.class);
     /**
@@ -661,5 +664,47 @@ public class CustomerInvoice implements Serializable {
      */
     public void setRechnungen_TOTAL(String rechnungen_TOTAL) {
         this.rechnungen_TOTAL = rechnungen_TOTAL;
+    }
+
+    /**
+     * @return the rechnungen_AMT
+     */
+    public String getRechnungen_AMT() {
+        return rechnungen_AMT;
+    }
+
+    /**
+     * @param rechnungen_AMT the rechnungen_AMT to set
+     */
+    public void setRechnungen_AMT(String rechnungen_AMT) {
+        this.rechnungen_AMT = rechnungen_AMT;
+    }
+
+    /**
+     * @return the rechnungen_TAX
+     */
+    public String getRechnungen_TAX() {
+        return rechnungen_TAX;
+    }
+
+    /**
+     * @param rechnungen_TAX the rechnungen_TAX to set
+     */
+    public void setRechnungen_TAX(String rechnungen_TAX) {
+        this.rechnungen_TAX = rechnungen_TAX;
+    }
+
+    /**
+     * @return the rechnungen_SUM
+     */
+    public String getRechnungen_SUM() {
+        return rechnungen_SUM;
+    }
+
+    /**
+     * @param rechnungen_SUM the rechnungen_SUM to set
+     */
+    public void setRechnungen_SUM(String rechnungen_SUM) {
+        this.rechnungen_SUM = rechnungen_SUM;
     }
 }

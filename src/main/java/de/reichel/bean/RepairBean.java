@@ -58,7 +58,7 @@ public class RepairBean implements Serializable {
 //    protected Integer travelTimeHelperHrs;
 //    protected Integer travelTimeHelperMins;
     protected Date travelTimeHelper;
-    protected double travelRatePerHr;
+    protected double fixedTravelCost;
     protected Integer travelDistanceKm;
     protected double travelRatePerKm;
 //    protected Integer accommodationHrs;
@@ -369,17 +369,17 @@ public class RepairBean implements Serializable {
 //        this.travelTimeHelperMins = travelTimeHelperMins;
 //    }
     /**
-     * @return the travelRatePerHr
+     * @return the fixedTravelCost
      */
-    public double getTravelRatePerHr() {
-        return travelRatePerHr;
+    public double getFixedTravelCost() {
+        return fixedTravelCost;
     }
 
     /**
-     * @param travelRatePerHr the travelRatePerHr to set
+     * @param fixedTravelCost the fixedTravelCost to set
      */
-    public void setTravelRatePerHr(double travelRatePerHr) {
-        this.travelRatePerHr = travelRatePerHr;
+    public void setFixedTravelCost(double fixedTravelCost) {
+        this.fixedTravelCost = fixedTravelCost;
     }
 
     /**

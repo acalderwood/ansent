@@ -53,8 +53,8 @@
                             <h:outputLabel value="Verschmutzungszuchlag:" for="dirtyTimePicker" />
                             <p:calendar id="dirtyTimePicker"  value="#{repairEdit.dirtyTime}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
 
-                            <h:outputLabel value="Anfahrtspauschale: €" for="travelRatePerHr" />
-                            <h:inputText id="travelRatePerHr" value="#{repairEdit.travelRatePerHr}" required="false" />
+                            <h:outputLabel value="Anfahrtspauschale: €" for="fixedTravelCost" />
+                            <h:inputText id="fixedTravelCost" value="#{repairEdit.fixedTravelCost}" required="false" />
 
                             <h:outputLabel value="Fahrzeit:" for="travelTimeDatePicker" />
                             <p:calendar id="travelTimeDatePicker" value="#{repairEdit.travelTime}" pattern="HH:mm" timeOnly="true" />

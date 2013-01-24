@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reparatur" pageWidth="595" pageHeight="842" columnWidth="505" leftMargin="48" rightMargin="42" topMargin="56" bottomMargin="56" uuid="474487c2-06a9-4c5a-9afe-e6372378934f">
-	<property name="ireport.zoom" value="1.6528925619834838"/>
+	<property name="ireport.zoom" value="1.366026910730152"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="513"/>
+	<property name="ireport.y" value="505"/>
 	<property name="ireport.encoding" value="Cp1252"/>
 	<field name="repair_ID_REPAIR" class="java.lang.Integer"/>
 	<field name="user_VORNAME" class="java.lang.String"/>
@@ -47,6 +47,9 @@
 	<field name="rechnungen_DESCRIPTION" class="java.lang.String"/>
 	<field name="rechnungen_UNITPRICE" class="java.lang.String"/>
 	<field name="rechnungen_TOTAL" class="java.lang.String"/>
+	<field name="rechnungen_SUM" class="java.lang.String"/>
+	<field name="rechnungen_TAX" class="java.lang.String"/>
+	<field name="rechnungen_AMT" class="java.lang.String"/>
 	<group name="repair_ID_REPAIR">
 		<groupExpression><![CDATA[$F{repair_ID_REPAIR}]]></groupExpression>
 	</group>
@@ -123,7 +126,7 @@ Wartungszeitraum:
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="532" splitType="Stretch">
+		<band height="575" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="203b878b-0134-4ba1-ab49-e1fe76cf67c1" mode="Opaque" x="-1" y="215" width="64" height="15" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
@@ -302,20 +305,20 @@ Auftraggeber:
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="1" y="495" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
+				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="1" y="511" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="300ffd37-53b6-4c4b-8362-f525b7d56174" x="0" y="510" width="63" height="20"/>
+				<reportElement uuid="300ffd37-53b6-4c4b-8362-f525b7d56174" x="0" y="549" width="63" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fälligkeit:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="a8c5813c-cbf3-4262-b996-bc0eab72dd2b" x="64" y="510" width="218" height="20"/>
+				<reportElement uuid="a8c5813c-cbf3-4262-b996-bc0eab72dd2b" x="64" y="549" width="218" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -329,7 +332,7 @@ Auftraggeber:
 				<textFieldExpression><![CDATA[$F{rechnungen_ME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="d00d957a-612e-4260-b3ec-0c56731eab8d" x="472" y="346" width="33" height="121"/>
+				<reportElement uuid="d00d957a-612e-4260-b3ec-0c56731eab8d" x="435" y="346" width="70" height="121"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -343,12 +346,56 @@ Auftraggeber:
 				<textFieldExpression><![CDATA[$F{rechnungen_DESCRIPTION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="d00d957a-612e-4260-b3ec-0c56731eab8d" x="354" y="345" width="118" height="121"/>
+				<reportElement uuid="d00d957a-612e-4260-b3ec-0c56731eab8d" x="354" y="345" width="81" height="121"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_UNITPRICE}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="34b4d984-6203-4d42-8bdd-375130ca5227" x="320" y="467" width="100" height="44"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Summe
+19% Mwst.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c37faeba-2dd9-4cfc-b93e-42fbc4484e4b" x="435" y="467" width="71" height="45"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rechnungen_SUM} + "\n" + $F{rechnungen_TAX}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="34b4d984-6203-4d42-8bdd-375130ca5227" x="320" y="512" width="100" height="44"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Rechnungsbetrag]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c37faeba-2dd9-4cfc-b93e-42fbc4484e4b" x="436" y="511" width="69" height="45"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rechnungen_AMT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8a330883-c198-4497-be01-ce144af8814d" x="422" y="466" width="14" height="44"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[€
+€]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a330883-c198-4497-be01-ce144af8814d" x="422" y="512" width="14" height="44"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[€]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>

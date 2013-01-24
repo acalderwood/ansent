@@ -45,4 +45,21 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
+	
+<!--
+	<security-constraint>
+	  <web-resource-collection>
+		<web-resource-name>reichel</web-resource-name>
+		<url-pattern>/*</url-pattern>
+	  </web-resource-collection>
+	  <auth-constraint>
+		<role-name>manager-gui</role-name>
+	  </auth-constraint>
+	</security-constraint>
+
+	<login-config>
+	  <auth-method>BASIC</auth-method>
+	  <realm-name>reichel</realm-name>
+	</login-config>
+-->	
 </web-app>

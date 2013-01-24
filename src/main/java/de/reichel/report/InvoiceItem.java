@@ -10,8 +10,8 @@ package de.reichel.report;
  */
 public class InvoiceItem {
     
-    private int quantity;
-    private boolean me;
+    private double quantity;
+    private String me;
     private String description;
     private double unitPrice;
     private double totalPrice;
@@ -19,28 +19,28 @@ public class InvoiceItem {
     /**
      * @return the quantity
      */
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
     /**
      * @return the me
      */
-    public boolean isMe() {
+    public String getMe() {
         return me;
     }
 
     /**
      * @param me the me to set
      */
-    public void setMe(boolean me) {
+    public void setMe(String me) {
         this.me = me;
     }
 

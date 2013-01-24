@@ -43,7 +43,6 @@
     <logger name="org.apache.commons.validator.ValidatorResources">
         <level value="ERROR"/>
     </logger>
-
     <!-- Suppress invalid warning messages from JSF -->
     <logger name="org.apache.myfaces.shared_impl.renderkit.html">
         <level value="ERROR"/>
@@ -58,7 +57,7 @@
     </logger>
 
     <root>
-        <level value="WARN"/>
+        <level value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 

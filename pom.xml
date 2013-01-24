@@ -73,43 +73,6 @@
         </configuration>
       </plugin>            
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>ApplicationResources_de.properties</exclude>
-                    <exclude>ApplicationResources_fr.properties</exclude>
-                    <exclude>ApplicationResources_ko.properties</exclude>
-                    <exclude>ApplicationResources_nl.properties</exclude>
-                    <exclude>ApplicationResources_no.properties</exclude>
-                    <exclude>ApplicationResources_pt*.properties</exclude>
-                    <exclude>ApplicationResources_tr.properties</exclude>
-                    <exclude>ApplicationResources_zh*.properties</exclude>
-                    <exclude>applicationContext-resources.xml</exclude>
-                </excludes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>applicationContext-resources.xml</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-            <testResource>
-                <directory>src/main/webapp</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </testResource>
-        </testResources>
     </build>
 
     <repositories>
