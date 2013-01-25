@@ -74,7 +74,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
      */
     @Transactional(readOnly = true)
     public List<Repair> getExistingRepairs(int idAnlagen) {
-        Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen order by repair.reparaturDatum");
+        Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen and repair.reparaturDatum != null order by repair.reparaturDatum");
         query.setParameter("idAnlagen", idAnlagen);
         return query.getResultList();
     }
@@ -100,8 +100,8 @@ public class ReparaturDAOImpl implements ReparaturDAO {
      */
     @Transactional(readOnly = true)
     public Saetze getSaetze(int idSaetze) {
-        Query query = entityManager.createQuery("from Saetze saetze where saetze.idSaetze = :idSaetze");
-        query.setParameter("idSaetze", idSaetze);
+        Query query = entityManager.createQuery("from Saetze saetze where saetze.idSatz = :idSatz");
+        query.setParameter("idSatz", idSaetze);
         return (Saetze) query.getSingleResult();
     }
 
@@ -339,19 +339,10 @@ public class ReparaturDAOImpl implements ReparaturDAO {
             entityManager.persist(repairTeile);
             log.debug("Part added");
         }
-
-
-        //generate invoice here
-        try {
-            generateInvoice(backingBean);
-        } catch (JRException ex) {
-            Logger.getLogger(ReparaturDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     @Transactional(readOnly = true)
-    public void generateInvoice(RepairEdit backingBean) throws JRException {
+    public byte[] generateInvoice(RepairEdit backingBean) {
 
         CustomerInvoice invoice = new CustomerInvoice();
 
@@ -412,7 +403,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         invoice.setStandorte_STRASSE_NR(standorte.getStrasseNr());
         invoice.setStandorte_ORT(standorte.getOrt());
         invoice.setStandorte_PLZ(standorte.getPlz());
-        invoice.setRepair_ID_REPAIR(backingBean.getIdRepair());
+        invoice.setRechnungen_REPAIR_ID(backingBean.getIdRepair().toString());
         invoice.setStandorte_STANDORTNAME(standorte.getStandortname());
         invoice.setStandorte_STRASSE_NR(standorte.getStrasseNr());
         invoice.setStandorte_PLZ(standorte.getPlz());
@@ -422,9 +413,16 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         invoice.setAnlagen_INTERNE_NR(anlagen.getInterneNr());
         invoice.setAnlagen_TYP(anlagen.getTyp());
         invoice.setAnlagen_FABRIKATIONSNUMMER(anlagen.getFabrikationsnummer());
-        invoice.setAnlagen_BAUJAHR(yearFormat.format(anlagen.getBaujahr()));
+        
+        if(anlagen.getBaujahr() != null) {        
+            invoice.setAnlagen_BAUJAHR(yearFormat.format(anlagen.getBaujahr()));
+        } else {
+            invoice.setAnlagen_BAUJAHR("");
+        }
+        
+        
         invoice.setRepair_FAX_TEXT(backingBean.getWorkDescription());
-        invoice.setTechniker_NAME_TECHNIKER(techniker.getNameTechniker());
+        invoice.setTechniker_NAME_TECHNIKER("Techniker: " + techniker.getNameTechniker());
 
         invoice.setKunden_PLZ(kunden.getPlz());
         invoice.setKunden_ORT(kunden.getOrt());
@@ -610,7 +608,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
 
         double TAX_RATE = 0.19;
         double tax = sumBeforeTax * TAX_RATE;
-        double sumAfterTax = sumBeforeTax * tax;
+        double sumAfterTax = sumBeforeTax + tax;
 
         String sumBeforeTaxStr = Utils.doubleToCurrency(sumBeforeTax);
         String taxStr = Utils.doubleToCurrency(tax);
@@ -633,18 +631,10 @@ public class ReparaturDAOImpl implements ReparaturDAO {
             log.debug("Generating invoice: PLZ: " + invoices.get(0).getStandorte_PLZ());
             InputStream is = this.getClass().getClassLoader().getResourceAsStream("reports/reparatur_4.jasper");
             byte[] bytes = JasperRunManager.runReportToPdf(is, new HashMap(), new JRBeanCollectionDataSource(invoices));
-
-            log.debug("JasperPrint object created");
-            File pdf = File.createTempFile("output.", ".pdf");
-            log.debug("Temp file created at: " + pdf.getAbsolutePath());
-
-            OutputStream os = new FileOutputStream(pdf);
-            os.write(bytes);
-            log.debug("Exported to PDF");
-
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
+            return bytes;
+        } catch (Throwable t) {
+            t.printStackTrace();
+            throw new RuntimeException(t.getMessage());
         }
     }
 
@@ -770,11 +760,11 @@ public class ReparaturDAOImpl implements ReparaturDAO {
 
         if (backingBean.getIdAnlagen() == null) {
             log.debug("Anlage ID is null");
-            Query query = entityManager.createQuery("from Repair repair order by repair.idRepair desc");
+            Query query = entityManager.createQuery("from Repair repair where repair.reparaturDatum != null order by repair.idRepair desc");
             return query.getResultList();
         } else {
             log.debug("Anlage ID is not null");
-            Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen order by repair.idRepair desc");
+            Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen and repair.reparaturDatum != null order by repair.idRepair desc");
             query.setParameter("idAnlagen", backingBean.getIdAnlagen());
             return query.getResultList();
         }
