@@ -2,6 +2,11 @@ body {
     background: #eee;
     font-family: Verdana, serif;
     font-size:12px;
+    background-image:url(../resources/images/Ansent_Logo.jpg);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+
 }
 
 table.search {
