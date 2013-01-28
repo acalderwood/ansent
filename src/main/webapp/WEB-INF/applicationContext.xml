@@ -44,6 +44,17 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="de.reichel.util.ViewScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
     <aop:config proxy-target-class="true"/>
     
 </beans>

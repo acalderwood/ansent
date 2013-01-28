@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import javax.inject.Inject;
 
 /**
@@ -20,8 +21,6 @@ public class EntsorgerBean implements Serializable {
 
     @Inject
     protected EntsorgerDAO entsorgerDAO;
-    public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
     protected Integer idEntsorger;
     protected String entsorgerName;
     protected String strasseNr;

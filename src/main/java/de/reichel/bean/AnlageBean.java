@@ -26,8 +26,6 @@ public class AnlageBean implements Serializable {
 
     @Inject
     protected AnlagenDAO anlagenDAO;
-    public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
     private Integer idAnlagen;
     protected Integer idArt;
     private String art;

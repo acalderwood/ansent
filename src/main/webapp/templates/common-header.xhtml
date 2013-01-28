@@ -3,6 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui" 
       >
     <body>
@@ -41,7 +42,7 @@
                     document.getElementById(element).value = newValue;
                 }
             </script>            
-
+                <h:form>
             <p:menubar>  
                 <p:menuitem value="Übersicht" url="suchubersichtanlage.jsf" />
 
@@ -72,23 +73,25 @@
                 </p:submenu>                
 
                 <p:submenu label="UVV" >   
-                    <p:menuitem value="Neue UVV" url="neueuvv.jsf" />
-                    <p:menuitem value="Bearbeiten UVV" url="bearbeitenuvv.jsf" />
+                    <p:menuitem value="Neue UVV" url="#" />
+                    <p:menuitem value="Bearbeiten UVV" url="#" />
                 </p:submenu>
 
                 <p:submenu label="Reparaturauftrag" >
                     <p:menuitem value="Neuer Reparaturauftrag" url="neuereparatur.jsf" />
                     <p:menuitem value="Bearbeiten Reparaturauftrag" url="bearbeitenreparatur.jsf" />
+                    <p:menuitem value="Aufträge Anschauen" url="auftraege" />
                 </p:submenu>
 
                 <p:submenu label="Rechnungen" >
                     <p:menuitem value="Neue Rechnung" url="neuerechnung.jsf" />
+                    <p:menuitem value="Rechnungen Anschauen" url="rechnungen" />
                 </p:submenu>
 
-                <p:menuitem value="Logout" url="#" />
+                    <p:menuitem value="Logout" action="${userManager.logout}" />
 
             </p:menubar>
-
+                </h:form>
         </ui:composition>
     </body>
 </html>

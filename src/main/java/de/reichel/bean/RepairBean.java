@@ -7,6 +7,8 @@ package de.reichel.bean;
 import de.reichel.dao.AnlagenDAO;
 import de.reichel.dao.ReparaturDAO;
 import de.reichel.dao.TeileDAO;
+import de.reichel.util.Utils;
+import java.io.File;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,8 +32,6 @@ public class RepairBean implements Serializable {
     protected ReparaturDAO repairDAO;
     @Inject
     protected TeileDAO teileDAO;
-    public static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    public static DateFormat yearFormat = new SimpleDateFormat("yyyy");
     protected Integer idRepairTeile;
     protected Integer idRepair;
     protected Integer idAnlagen;
@@ -72,8 +72,9 @@ public class RepairBean implements Serializable {
     protected Date dirtyTime;
     protected boolean travelTypeTime = true;
     protected boolean travelTypeKm = true;
-    
     protected List<TeileBean> parts = new ArrayList<TeileBean>();
+    protected List<String> invoiceFileNames = new ArrayList<String>();
+    private String newTechnicianName;
 
     /**
      * @return the idRepair
@@ -608,5 +609,36 @@ public class RepairBean implements Serializable {
      */
     public void setIdBetreiber(Integer idBetreiber) {
         this.idBetreiber = idBetreiber;
+    }
+
+    public List<String> getInvoiceFileNames() {
+        File invoiceDir = new File(Utils.getInvoiceDirPath());
+        File[] invoiceFileList = invoiceDir.listFiles();
+        List<String> fileNames = new ArrayList<String>();
+        for (int i = 0; i < invoiceFileList.length; i++) {
+            if (invoiceFileList[i].isFile()) {
+                String fileName = invoiceFileList[i].getName();
+                fileNames.add(fileName);
+            }
+        }
+        return invoiceFileNames;
+    }
+
+    public void setInvoiceFileNames(List<String> invoiceFileNames) {
+        this.invoiceFileNames = invoiceFileNames;
+    }
+
+    /**
+     * @return the newTechnicianName
+     */
+    public String getNewTechnicianName() {
+        return newTechnicianName;
+    }
+
+    /**
+     * @param newTechnicianName the newTechnicianName to set
+     */
+    public void setNewTechnicianName(String newTechnicianName) {
+        this.newTechnicianName = newTechnicianName;
     }
 }

@@ -8,6 +8,8 @@ import de.reichel.domain.model.Teile;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -15,7 +17,8 @@ import org.springframework.stereotype.Controller;
  * @author Alastair Calderwood
  */
 @ManagedBean(name = "teileSearch")
-@RequestScoped
+@ViewScoped
+@Scope("view")
 @Controller
 public class TeileSearch extends TeileBean {
     

@@ -11,7 +11,8 @@ import de.reichel.domain.model.Saetze;
 import de.reichel.domain.model.Techniker;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -19,7 +20,8 @@ import org.springframework.stereotype.Controller;
  * @author Alastair Calderwood
  */
 @ManagedBean(name = "repairSearch")
-@RequestScoped
+@ViewScoped
+@Scope("view")
 @Controller
 public class RepairSearch extends RepairBean {
     

@@ -160,6 +160,7 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         //Changing the query below to reflect all the Anlage
         //Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller order by anlagen.interneNr");
         Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.interneNr is not null order by anlagen.interneNr");
+        query.setHint("org.hibernate.cacheable", true);
         //List<Object[]> result = query.getResultList();
         return query.getResultList();
     }

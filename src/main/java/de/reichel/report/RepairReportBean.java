@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Alastair Calderwood
  */
-public class CustomerInvoice implements Serializable {
+public class RepairReportBean implements Serializable {
 
     private Integer repair_ID_REPAIR = null;
     private String user_VORNAME = null;
@@ -62,7 +62,7 @@ public class CustomerInvoice implements Serializable {
     private String rechnungen_TAX = null;
     private String rechnungen_SUM = null;
     
-    private static final Log log = LogFactory.getLog(CustomerInvoice.class);
+    private static final Log log = LogFactory.getLog(RepairReportBean.class);
     /**
      * @return the repair_ID_REPAIR
      */

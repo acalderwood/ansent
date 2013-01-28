@@ -7,6 +7,7 @@ package de.reichel.dao;
 import de.reichel.bean.BetreiberEdit;
 import de.reichel.bean.BetreiberNew;
 import de.reichel.domain.model.Betreiber;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Alastair Calderwood
  */
-public interface BetreiberDAO {
+public interface BetreiberDAO extends Serializable  {
 
     public void updateBetreiber(BetreiberEdit backingBean);
 

@@ -15,6 +15,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,7 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -30,7 +32,8 @@ import org.springframework.stereotype.Controller;
  * @author alastair
  */
 @ManagedBean(name = "anlageSearch")
-@RequestScoped
+@ViewScoped
+@Scope("view")
 @Controller
 public class AnlageSearch extends AnlageBean {
 

@@ -50,7 +50,7 @@
                                 </p:selectOneMenu>                                
 
                                 <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
-                                <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="false" locale="de" pattern="yyyy/MM/dd" />
+                                <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="false" locale="de" pattern="dd.MM.yyyy" />
 
                                 <p:commandButton action="#{repairEdit.update}" value="Repair Hinzufügen" />
                                    

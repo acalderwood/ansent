@@ -9,12 +9,14 @@ import de.reichel.domain.model.Kunden;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -22,7 +24,8 @@ import org.springframework.stereotype.Controller;
  * @author Alastair Calderwood
  */
 @ManagedBean(name = "kundenSearch")
-@RequestScoped
+@ViewScoped
+@Scope("view")
 @Controller
 public class KundenSearch extends KundenBean {
     private static final Log log = LogFactory.getLog(KundenSearch.class);

@@ -49,12 +49,15 @@
                                 <h:outputLabel value="Techniker:" for="selectableTechnikerList" />
                                 <p:selectOneMenu value="#{repairNew.idTechnician}">
                                     <f:selectItems id="selectableTechnikerList" value="#{repairSearch.selectableTechniker}" var="tech" itemValue="#{tech.idTechniker}" itemLabel="#{tech.nameTechniker}" />
-                                </p:selectOneMenu>                                
+                                </p:selectOneMenu>   
+
+                                <h:outputLabel value="Techniker (Neuer):" for="technikerName" />
+                                <p:inputText id="technikerName" value="${repairNew.newTechnicianName}" />
 
                                 <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
-                                <p:calendar id="dateRepaired" value="#{repairNew.repairDate}" required="true" locale="de" pattern="yyyy/MM/dd" />
+                                <p:calendar id="dateRepaired" value="#{repairNew.repairDate}" required="true" locale="de" pattern="dd.MM.yyyy" />
 
-                                <p:commandButton action="#{repairNew.add}" value="Repair Hinzufügen" update="messages" />
+                                <p:commandButton action="#{repairNew.generateAuftrag}" value="Auftrag machen" update="messages" />
                             </t:panelGrid>
                         </p:panel>
                     </h:form>

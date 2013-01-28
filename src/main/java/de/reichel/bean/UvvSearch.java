@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -27,7 +29,8 @@ import org.springframework.stereotype.Controller;
  * @author alastair
  */
 @ManagedBean(name = "uvvSearch")
-@RequestScoped
+@ViewScoped
+@Scope("view")
 @Controller
 public class UvvSearch implements Serializable {
 

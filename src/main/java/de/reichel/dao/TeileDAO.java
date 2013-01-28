@@ -9,13 +9,14 @@ import de.reichel.bean.TeileEdit;
 import de.reichel.bean.TeileNew;
 import de.reichel.domain.model.RepairTeile;
 import de.reichel.domain.model.Teile;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Alastair Calderwood
  */
-public interface TeileDAO {
+public interface TeileDAO extends Serializable {
     
     public void updateRepairTeile(TeileEdit backingBean);
 

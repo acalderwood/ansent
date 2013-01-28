@@ -6,18 +6,18 @@ package de.reichel.dao;
 
 import de.reichel.bean.RepairEdit;
 import de.reichel.bean.RepairNew;
-import de.reichel.bean.RepairSearch;
 import de.reichel.domain.model.Firmen;
 import de.reichel.domain.model.Repair;
 import de.reichel.domain.model.Saetze;
 import de.reichel.domain.model.Techniker;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Alastair Calderwood
  */
-public interface ReparaturDAO {
+public interface ReparaturDAO extends Serializable {
 
     public void addRepair(RepairNew backingBean);
 
@@ -42,4 +42,6 @@ public interface ReparaturDAO {
     public String getPartDescription(int idTeile);
     
     public byte[] generateInvoice(RepairEdit backingBean);
+    
+    public byte[] generateAuftrag(RepairNew backingBean);
 }
