@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reparatur" pageWidth="595" pageHeight="842" columnWidth="505" leftMargin="48" rightMargin="42" topMargin="56" bottomMargin="56" uuid="474487c2-06a9-4c5a-9afe-e6372378934f">
-	<property name="ireport.zoom" value="1.1289478601075642"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="246"/>
+	<property name="ireport.zoom" value="2.2000000000000193"/>
+	<property name="ireport.x" value="57"/>
+	<property name="ireport.y" value="454"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<field name="repair_ID_REPAIR" class="java.lang.Integer"/>
 	<field name="user_VORNAME" class="java.lang.String"/>
@@ -50,6 +50,15 @@
 	<field name="rechnungen_SUM" class="java.lang.String"/>
 	<field name="rechnungen_TAX" class="java.lang.String"/>
 	<field name="rechnungen_AMT" class="java.lang.String"/>
+	<field name="line_EXTRA_KEY_1" class="java.lang.String"/>
+	<field name="line_EXTRA_KEY_2" class="java.lang.String"/>
+	<field name="line_EXTRA_VALUE_1" class="java.lang.String"/>
+	<field name="line_EXTRA_VALUE_2" class="java.lang.String"/>
+	<field name="line_EXTRA_KEY_3" class="java.lang.String"/>
+	<field name="line_EXTRA_KEY_4" class="java.lang.String"/>
+	<field name="line_EXTRA_VALUE_3" class="java.lang.String"/>
+	<field name="line_EXTRA_VALUE_4" class="java.lang.String"/>
+	<field name="rechnungen_AUFTRAGGEBER" class="java.lang.String"/>
 	<group name="repair_ID_REPAIR">
 		<groupExpression><![CDATA[$F{repair_ID_REPAIR}]]></groupExpression>
 	</group>
@@ -128,17 +137,17 @@ Wartungszeitraum:
 	<detail>
 		<band height="583" splitType="Stretch">
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="69" y="208" width="441" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="69" y="208" width="435" height="16"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 					<paragraph leftIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{standorte_STANDORTNAME} + ", " + $F{standorte_STRASSE_NR} + ", " + $F{standorte_PLZ} + " " + $F{standorte_ORT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="64" y="186" width="441" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="69" y="186" width="435" height="16"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph leftIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{anlagen_art_ART} + ", " + $F{anlagen_hersteller_HERSTELLER} + ", " + $F{anlagen_INTERNE_NR} + ", " + $F{anlagen_TYP} + ", " + $F{anlagen_FABRIKATIONSNUMMER} + ", " + $F{anlagen_BAUJAHR}]]></textFieldExpression>
@@ -151,16 +160,16 @@ Wartungszeitraum:
 				<text><![CDATA[Durchgeführte Arbeiten:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="64" y="255" width="239" height="41"/>
+				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="69" y="255" width="239" height="41"/>
 				<textElement verticalAlignment="Top">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{repair_FAX_TEXT}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="78cb5914-06e7-4352-a5cc-ea466c6b3e3f" x="303" y="234" width="202" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{techniker_NAME_TECHNIKER}]]></textFieldExpression>
 			</textField>
@@ -174,14 +183,14 @@ Wartungszeitraum:
 			<textField>
 				<reportElement uuid="8cc73a60-ddd7-44d5-9c4d-31b16dd8739a" x="1" y="33" width="350" height="24"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{kunden_PLZ} + " " + $F{kunden_ORT}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="1" y="3" width="350" height="16"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{kunden_FIRMENNAME}]]></textFieldExpression>
 			</textField>
@@ -195,7 +204,7 @@ Wartungszeitraum:
 			<textField>
 				<reportElement uuid="b8f46f3f-7da1-437c-8978-1f89125f1d30" x="1" y="18" width="350" height="16"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{kunden_STRASSE_NR}]]></textFieldExpression>
 			</textField>
@@ -206,42 +215,42 @@ Wartungszeitraum:
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="98" width="131" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="98" width="131" height="12"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_REPAIR_ID}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="126" y="113" width="144" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="126" y="113" width="144" height="14"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_RECHNUNGSDATUM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="112" width="131" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="112" width="131" height="14"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_ANGEBOTSNUMMER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="126" y="98" width="144" height="16"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_RECHNUNGSNUMMERINTERN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="127" width="131" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="127" width="131" height="14"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_BESTELLNUMMER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="a1a9aad5-3296-4eae-b3f7-27055d33e87b" x="270" y="98" width="104" height="62"/>
+				<reportElement uuid="a1a9aad5-3296-4eae-b3f7-27055d33e87b" x="270" y="98" width="104" height="57"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -252,7 +261,7 @@ Wartungszeitraum:
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="a1a9aad5-3296-4eae-b3f7-27055d33e87b" x="2" y="98" width="124" height="62"/>
+				<reportElement uuid="a1a9aad5-3296-4eae-b3f7-27055d33e87b" x="2" y="98" width="124" height="57"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -263,14 +272,14 @@ Auftraggeber:
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="126" y="128" width="144" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="126" y="126" width="144" height="15"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rechnungen_LIEFERDATUM}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{repair_REPARATURDATUM}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="0" y="179" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
+				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="0" y="183" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
@@ -345,7 +354,7 @@ Auftraggeber:
 				<textFieldExpression><![CDATA[$F{rechnungen_SUM} + "\n" + $F{rechnungen_TAX}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="34b4d984-6203-4d42-8bdd-375130ca5227" x="320" y="485" width="100" height="23"/>
+				<reportElement uuid="34b4d984-6203-4d42-8bdd-375130ca5227" x="320" y="485" width="103" height="23"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -438,6 +447,60 @@ USt-Id-Nr. DE219227663			HRB 138476, Amtsgericht München		IBAN: DE 2074 06 1101
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
+			<textField>
+				<reportElement uuid="d0a6f96d-3bd7-4853-94a8-4523d5d01866" x="3" y="155" width="123" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_KEY_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d0a6f96d-3bd7-4853-94a8-4523d5d01866" x="3" y="169" width="123" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_KEY_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d0a6f96d-3bd7-4853-94a8-4523d5d01866" x="270" y="155" width="105" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_KEY_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d0a6f96d-3bd7-4853-94a8-4523d5d01866" x="270" y="169" width="105" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_KEY_4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7fb86ff-06c7-4d5d-abd7-7de7c6a37a20" x="126" y="155" width="134" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_VALUE_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7fb86ff-06c7-4d5d-abd7-7de7c6a37a20" x="126" y="169" width="134" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_VALUE_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="126" y="138" width="144" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rechnungen_AUFTRAGGEBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="374" y="140" width="131" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rechnungen_WARTUNGSZEITRAUM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d0a6f96d-3bd7-4853-94a8-4523d5d01866" x="374" y="155" width="124" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_VALUE_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d0a6f96d-3bd7-4853-94a8-4523d5d01866" x="374" y="169" width="124" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{line_EXTRA_VALUE_4}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

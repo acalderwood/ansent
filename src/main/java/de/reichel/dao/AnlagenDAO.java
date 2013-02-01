@@ -53,4 +53,6 @@ public interface AnlagenDAO extends Serializable {
     public int getIdKunden(int idAnlagen);
     
     public void loadAnlagen(AnlageEdit aThis);
+    
+    public void searchAnlagen(AnlageSearch anlageSearch);
 }

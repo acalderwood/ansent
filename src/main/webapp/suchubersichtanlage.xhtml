@@ -1,44 +1,170 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
     <h:head>
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
         <ui:composition template="templates/common-layout.xhtml">
             <ui:define name="content">
-            <f:view>
-                <h4>Übersicht</h4>
                 <h:form id="searchForm">
-                    <h:panelGrid columns="1">
+                    <p:panel id="anlageSearchPanel" header="Suchen Anlage" style="margin-bottom:10px;">                     
+                        <t:panelGrid columns="2">
+                            <h:outputLabel value="Interne Nr." for="searchAnlagenInterneNr" />
+                            <h:inputText id="searchAnlagenInterneNr" value="#{anlageSearch.searchAnlagenInterneNr}" required="false" />
 
-                        <h:outputLabel value="Interne Nr." for="interneNr" />
-                        <h:inputText id="interneNr" value="#{anlageSearch.interneNr}" required="false" />
-                        <h:message for="interneNr" />
+                            <h:outputLabel value="Anlagen Art" for="searchAnlagenArt" />
+                            <h:inputText id="searchAnlagenArt" value="#{anlageSearch.searchAnlagenArt}" required="false" />
 
-                        <h:outputLabel value="Art" for="selectableArt" />
-                        <h:selectManyListbox id="selectableArt" value="#{anlageSearch.selectedArt}" required="false" size="10">
-                            <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
-                        </h:selectManyListbox>
-                        <h:message for="selectableArt" />
+                            <h:outputLabel value="Anlagen Hersteller" for="searchAnlagenHersteller" />
+                            <h:inputText id="searchAnlagenHersteller" value="#{anlageSearch.searchAnlagenHersteller}" required="false" />                            
 
-                        <h:outputLabel value="Hersteller" for="selectableHersteller" />
-                        <h:selectManyListbox id="selectableHersteller" value="#{anlageSearch.selectedHersteller}" required="false" size="10">
-                            <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
-                        </h:selectManyListbox>
-                        <h:message for="selectableHersteller" />                        
-                        
-                        <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
-                        <h:inputText id="fabrikationsnr" value="#{anlageSearch.fabrikationsnr}" required="false" />
-                        <h:message for="fabrikationsnr" />
-                        
-                        <h:commandButton action="#{anlageSearch.searchView}" value="Next" />
-                    </h:panelGrid>
+                            <h:outputLabel value="Anlagen Typ" for="art" />
+                            <h:inputText id="searchAnlagenTyp" value="#{anlageSearch.searchAnlagenTyp}" required="false" />
+
+                            <h:outputLabel value="Anlagen Fabrikations Nr" for="searchAnlagenFabrikationsNr" />
+                            <h:inputText id="searchAnlagenFabrikationsNr" value="#{anlageSearch.searchAnlagenFabrikationsNr}" required="false" />
+
+                            <h:outputLabel value="Anlagen Baujahr" for="searchAnlagenBaujahr" />
+                            <h:inputText id="searchAnlagenBaujahr" value="#{anlageSearch.searchAnlagenBaujahr}" required="false" />
+
+                            <h:outputLabel value="Anlagen Bemerkung" for="searchAnlagenBemerkung" />
+                            <h:inputText id="searchAnlagenBemerkung" value="#{anlageSearch.searchAnlagenBemerkung}" required="false" />
+
+                            <h:outputLabel value="Kunde Firmenname" for="searchKundenFirmenName" />
+                            <h:inputText id="searchKundenFirmenName" value="#{anlageSearch.searchKundenFirmenName}" required="false" />
+
+                            <h:outputLabel value="Kunde Ansprechpartner" for="searchKundenAnsprechPartner" />
+                            <h:inputText id="searchKundenAnsprechPartner" value="#{anlageSearch.searchKundenAnsprechPartner}" required="false" />
+
+                            <h:outputLabel value="Kunde Strasse, Nr" for="searchKundenStrasseNr" />
+                            <h:inputText id="searchKundenStrasseNr" value="#{anlageSearch.searchKundenStrasseNr}" required="false" />
+
+                            <h:outputLabel value="Kunde Plz" for="searchKundenPlz" />
+                            <h:inputText id="searchKundenPlz" value="#{anlageSearch.searchKundenPlz}" required="false" />
+
+                            <h:outputLabel value="Kunde Ort" for="searchKundenOrt" />
+                            <h:inputText id="searchKundenOrt" value="#{anlageSearch.searchKundenOrt}" required="false" />
+
+                            <h:outputLabel value="Kunde Bemerkung" for="searchKundenBemerkung" />
+                            <h:inputText id="searchKundenBemerkung" value="#{anlageSearch.searchKundenBemerkung}" required="false" />
+
+                            <h:outputLabel value="Standortname" for="searchStandortName" />
+                            <h:inputText id="searchStandortName" value="#{anlageSearch.searchStandortName}" required="false" />
+
+                            <h:outputLabel value="Standort AnsprechPartner" for="searchStandortAnsprechPartner" />
+                            <h:inputText id="searchStandortAnsprechPartner" value="#{anlageSearch.searchStandortAnsprechPartner}" required="false" />
+
+                            <h:outputLabel value="Standort Strasse, Nr" for="searchStandortStrasseNr" />
+                            <h:inputText id="searchStandortStrasseNr" value="#{anlageSearch.searchStandortStrasseNr}" required="false" />
+
+                            <h:outputLabel value="Standort Plz" for="searchStandortPlz" />
+                            <h:inputText id="searchStandortPlz" value="#{anlageSearch.searchStandortPlz}" required="false" />
+
+                            <h:outputLabel value="Standort Ort" for="searchStandortOrt" />
+                            <h:inputText id="searchStandortOrt" value="#{anlageSearch.searchStandortOrt}" required="false" />
+
+                            <h:outputLabel value="Standort Bemerkung" for="searchStandortBemerkung" />
+                            <h:inputText id="searchStandortBemerkung" value="#{anlageSearch.searchStandortBemerkung}" required="false" />
+
+                            <h:outputLabel value="Betreibername" for="searchBetreiberName" />
+                            <h:inputText id="searchBetreiberName" value="#{anlageSearch.searchBetreiberName}" required="false" />
+
+                            <h:outputLabel value="Betreiber Ansprechpartner" for="searchBetreiberAnsprechpartner" />
+                            <h:inputText id="searchBetreiberAnsprechpartner" value="#{anlageSearch.searchBetreiberAnsprechPartner}" required="false" />
+
+                            <h:outputLabel value="Betreiber Strasse, Nr" for="searchBetreiberStrasseNr" />
+                            <h:inputText id="searchBetreiberStrasseNr" value="#{anlageSearch.searchBetreiberStrasseNr}" required="false" />
+
+                            <h:outputLabel value="Betreiber Plz" for="searchBetreiberPlz" />
+                            <h:inputText id="searchBetreiberPlz" value="#{anlageSearch.searchBetreiberPlz}" required="false" />
+
+                            <h:outputLabel value="Betreiber Ort" for="searchBetreiberOrt" />
+                            <h:inputText id="searchBetreiberOrt" value="#{anlageSearch.searchBetreiberOrt}" required="false" />
+
+                            <h:outputLabel value="Betreiber Bemerkung" for="searchBetreiberBemerkung" />
+                            <h:inputText id="searchBetreiberBemerkung" value="#{anlageSearch.searchBetreiberBemerkung}" required="false" />
+
+                        </t:panelGrid>
+                    </p:panel>
+                    <p:commandButton actionListener="#{anlageSearch.searchAnlagen}" update="resultPanel" value="Suchen" id="ajax2"/>
+
+                    <p:panel id="resultPanel" header="Suchergebnis" style="margin-bottom:10px;"> 
+                        <t:panelGrid columns="2">
+                            <h:outputLabel value="Interne Nr." for="selectableAnlage" />
+                            <h:selectOneMenu value="#{anlageEdit.idAnlagen}">
+                                <f:selectItems id="selectableAnlage" value="#{anlageSearch.anlagenResultList}" var="anlagen" itemValue="#{anlagen.idAnlagen}" itemLabel="#{anlagen.interneNr}" />
+                            </h:selectOneMenu>
+                        </t:panelGrid>
+                    </p:panel>
+
+                    <p:commandButton actionListener="#{anlageEdit.load}" update="display" value="Choose" id="ajax"/>
+
+                    <p:panel id="display" header="Information" style="margin-top:10px;"> 
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="Interne Nr." for="interneNr" />
+                            <p:inputText id="interneNr" value="#{anlageEdit.interneNr}"  />
+
+                            <h:outputLabel value="Art" for="art" />
+                            <h:selectOneMenu id="art" value="#{anlageEdit.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
+                                <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Hersteller" for="hersteller" />
+                            <h:selectOneMenu id="hersteller" value="#{anlageEdit.idHersteller}" required="true">
+                                <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Standort" for="standort" />
+                            <h:selectOneMenu id="standort" value="#{anlageEdit.idStandort}" required="false">
+                                <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.idStandorte} - #{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
+                            </h:selectOneMenu>                 
+
+                            <h:outputLabel value="Kunden" for="kunden" />
+                            <h:selectOneMenu id="kunden" value="#{anlageEdit.idKunden}" required="false">
+                                <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.idKunden} - #{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Betreiber" for="betreiber" />
+                            <h:selectOneMenu id="betreiber" value="#{anlageEdit.idBetreiber}" required="false">
+                                <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.idBetreiber} - #{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
+                            </h:selectOneMenu>                            
+
+                            <h:outputLabel value="Typ" for="typ" />
+                            <p:inputText id="typ" value="#{anlageEdit.typ}" />
+
+                            <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
+                            <p:inputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" required="false" />
+
+
+                            <h:outputLabel value="Baujahr" for="baujahr" />
+                            <p:calendar id="baujahr" value="#{anlageEdit.baujahr}" required="false" locale="de" pattern="yyyy"/>
+
+
+                            <h:outputLabel value="Bemerkung" for="bemerkung" />
+                            <p:inputText id="bemerkung" value="#{anlageEdit.bemerkung}" required="false" />
+
+
+                            <h:outputLabel value="Interne Notiz" for="interneNotiz" />
+                            <p:inputText id="interneNotiz" value="#{anlageEdit.interneNotiz}" required="false" />
+
+
+                            <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
+                            <p:calendar value="#{anlageEdit.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="dd.MM.yyyy" />
+
+
+                            <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
+                            <p:calendar id="naechsteWartung" value="#{anlageEdit.naechsteWartung}" required="false" locale="de" pattern="dd.MM.yyyy" />
+
+
+                        </h:panelGrid>
+                    </p:panel>
                 </h:form>
-
-            </f:view>
-          </ui:define>
+            </ui:define>
         </ui:composition>
     </h:body>
 </html>

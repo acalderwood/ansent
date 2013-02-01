@@ -350,4 +350,52 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         backingBean.setIdBetreiber(getIdBetreiber(backingBean.getIdAnlagen()));
         backingBean.setIdStandort(getIdStandort(backingBean.getIdAnlagen()));
     }
+    
+    @Transactional(readOnly = true)
+    public void searchAnlagen(AnlageSearch anlageSearch) {
+
+        String searchQuery = "from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller, AnlagenStandorte anlagenStandorte, Kunden kunden, Standorte standorte, Betreiber betreiber where anlagen.interneNr like '%" + anlageSearch.getSearchAnlagenInterneNr() 
+                + "%' and anlagen.fabrikationsnummer like '%" + anlageSearch.getSearchAnlagenFabrikationsNr() 
+                + "%' and anlagen.typ like '%" + anlageSearch.getSearchAnlagenTyp()
+                + "%' and anlagen.bemerkung like '%" + anlageSearch.getSearchAnlagenBemerkung()
+                + "%' and anlagen.baujahr like '%" + anlageSearch.getSearchAnlagenBaujahr()
+                + "%' and anlagenArt.art like '%" + anlageSearch.getSearchAnlagenArt()
+                + "%' and anlagenHersteller.hersteller like '%" + anlageSearch.getSearchAnlagenHersteller()         
+                + "%' and kunden.firmenname like '%" + anlageSearch.getSearchKundenFirmenName()
+                + "%' and kunden.ansprechpartner like '%" + anlageSearch.getSearchKundenAnsprechPartner()
+                + "%' and kunden.strasseNr like '%" + anlageSearch.getSearchKundenStrasseNr()
+                + "%' and kunden.plz like '%" + anlageSearch.getSearchKundenPlz()
+                + "%' and kunden.ort like '%" + anlageSearch.getSearchKundenOrt()
+                + "%' and kunden.bemerkung like '%" + anlageSearch.getSearchKundenBemerkung()
+                + "%' and standorte.ansprechpartner like '%" + anlageSearch.getSearchStandortAnsprechPartner()
+                + "%' and standorte.strasseNr like '%" + anlageSearch.getSearchStandortStrasseNr()
+                + "%' and standorte.standortname like '%" + anlageSearch.getSearchStandortName()
+                + "%' and standorte.plz like '%" + anlageSearch.getSearchStandortPlz()
+                + "%' and standorte.ort like '%" + anlageSearch.getSearchStandortOrt()
+                + "%' and standorte.bemerkung like '%" + anlageSearch.getSearchStandortBemerkung()
+                + "%' and betreiber.ansprechpartner like '%" + anlageSearch.getSearchBetreiberAnsprechPartner()
+                + "%' and betreiber.strasseNr like '%" + anlageSearch.getSearchBetreiberStrasseNr()
+                + "%' and betreiber.betreibername like '%" + anlageSearch.getSearchBetreiberName()
+                + "%' and betreiber.plz like '%" + anlageSearch.getSearchBetreiberPlz()
+                + "%' and betreiber.ort like '%" + anlageSearch.getSearchBetreiberOrt()
+                + "%' and betreiber.bemerkung like '%" + anlageSearch.getSearchBetreiberBemerkung() + "%'"
+                + " and anlagenStandorte.idAnlagen = anlagen.idAnlagen"
+                + " and betreiber.idBetreiber = anlagenStandorte.idBetreiber"
+                + " and standorte.idStandorte = anlagenStandorte.idStandorte"
+                + " and kunden.idKunden = anlagenStandorte.idKunden"
+                + " and anlagenArt.idAnlagenArt = anlagen.idAnlagenArt"
+                + " and anlagenHersteller.idAnlagenHersteller = anlagen.idAnlagenHersteller";
+        
+        log.debug("query = " + searchQuery);
+        
+        Query query = entityManager.createQuery(searchQuery);
+        
+        List<Object[]> results = query.getResultList();
+        List<Anlagen> anlagenList = new ArrayList<Anlagen>();
+        for (Object[] result: results) {
+            Anlagen anlagen = (Anlagen)result[0];
+            anlagenList.add(anlagen);
+        }
+        anlageSearch.setAnlagenResultList(anlagenList);
+    } 
 }

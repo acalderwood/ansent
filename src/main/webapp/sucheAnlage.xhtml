@@ -28,10 +28,6 @@
                             <h:outputLabel value="Interne Nr." for="interneNr" />
                             <h:outputText id="interneNr" value="#{anlageEdit.interneNr}" />
 
-                            <h:outputLabel value="Art" for="art" />
-                            <p:selectOneMenu id="art" value="#{anlageEdit.idArt}" required="true" requiredMessage="Bitte geben Sie eine gultige Anlageart ein">
-                                <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
-                            </p:selectOneMenu>
 
                             <h:outputLabel value="Hersteller" for="hersteller" />
                             <h:selectOneMenu id="hersteller" value="#{anlageEdit.idHersteller}" required="true">
@@ -82,7 +78,7 @@
 
                         </h:panelGrid>
                     </p:panel>
-                    
+
                 </h:form>
 
 

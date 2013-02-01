@@ -74,7 +74,21 @@ public class RepairBean implements Serializable {
     protected boolean travelTypeKm = true;
     protected List<TeileBean> parts = new ArrayList<TeileBean>();
     protected List<String> invoiceFileNames = new ArrayList<String>();
-    private String newTechnicianName;
+    protected String newTechnicianName;
+    
+    private String rechnungsnummer;
+    private String auftraggeber;
+    private String lieferantenNr;
+    private String bestellNr;
+    private String wartungzeitraum;
+    private String extraKey1;
+    private String extraValue1;
+    private String extraKey2;
+    private String extraValue2;
+    private String extraKey3;
+    private String extraValue3;
+    private String extraKey4;
+    private String extraValue4;
 
     /**
      * @return the idRepair
@@ -640,5 +654,187 @@ public class RepairBean implements Serializable {
      */
     public void setNewTechnicianName(String newTechnicianName) {
         this.newTechnicianName = newTechnicianName;
+    }
+
+    /**
+     * @return the rechnungsnummer
+     */
+    public String getRechnungsnummer() {
+        return rechnungsnummer;
+    }
+
+    /**
+     * @param rechnungsnummer the rechnungsnummer to set
+     */
+    public void setRechnungsnummer(String rechnungsnummer) {
+        this.rechnungsnummer = rechnungsnummer;
+    }
+
+    /**
+     * @return the auftraggeber
+     */
+    public String getAuftraggeber() {
+        return auftraggeber;
+    }
+
+    /**
+     * @param auftraggeber the auftraggeber to set
+     */
+    public void setAuftraggeber(String auftraggeber) {
+        this.auftraggeber = auftraggeber;
+    }
+
+    /**
+     * @return the lieferantenNr
+     */
+    public String getLieferantenNr() {
+        return lieferantenNr;
+    }
+
+    /**
+     * @param lieferantenNr the lieferantenNr to set
+     */
+    public void setLieferantenNr(String lieferantenNr) {
+        this.lieferantenNr = lieferantenNr;
+    }
+
+    /**
+     * @return the bestellNr
+     */
+    public String getBestellNr() {
+        return bestellNr;
+    }
+
+    /**
+     * @param bestellNr the bestellNr to set
+     */
+    public void setBestellNr(String bestellNr) {
+        this.bestellNr = bestellNr;
+    }
+
+    /**
+     * @return the wartungzeitraum
+     */
+    public String getWartungzeitraum() {
+        return wartungzeitraum;
+    }
+
+    /**
+     * @param wartungzeitraum the wartungzeitraum to set
+     */
+    public void setWartungzeitraum(String wartungzeitraum) {
+        this.wartungzeitraum = wartungzeitraum;
+    }
+
+    /**
+     * @return the extraKey1
+     */
+    public String getExtraKey1() {
+        return extraKey1;
+    }
+
+    /**
+     * @param extraKey1 the extraKey1 to set
+     */
+    public void setExtraKey1(String extraKey1) {
+        this.extraKey1 = extraKey1;
+    }
+
+    /**
+     * @return the extraValue1
+     */
+    public String getExtraValue1() {
+        return extraValue1;
+    }
+
+    /**
+     * @param extraValue1 the extraValue1 to set
+     */
+    public void setExtraValue1(String extraValue1) {
+        this.extraValue1 = extraValue1;
+    }
+
+    /**
+     * @return the extraKey2
+     */
+    public String getExtraKey2() {
+        return extraKey2;
+    }
+
+    /**
+     * @param extraKey2 the extraKey2 to set
+     */
+    public void setExtraKey2(String extraKey2) {
+        this.extraKey2 = extraKey2;
+    }
+
+    /**
+     * @return the extraValue2
+     */
+    public String getExtraValue2() {
+        return extraValue2;
+    }
+
+    /**
+     * @param extraValue2 the extraValue2 to set
+     */
+    public void setExtraValue2(String extraValue2) {
+        this.extraValue2 = extraValue2;
+    }
+
+    /**
+     * @return the extraKey3
+     */
+    public String getExtraKey3() {
+        return extraKey3;
+    }
+
+    /**
+     * @param extraKey3 the extraKey3 to set
+     */
+    public void setExtraKey3(String extraKey3) {
+        this.extraKey3 = extraKey3;
+    }
+
+    /**
+     * @return the extraValue3
+     */
+    public String getExtraValue3() {
+        return extraValue3;
+    }
+
+    /**
+     * @param extraValue3 the extraValue3 to set
+     */
+    public void setExtraValue3(String extraValue3) {
+        this.extraValue3 = extraValue3;
+    }
+
+    /**
+     * @return the extraKey4
+     */
+    public String getExtraKey4() {
+        return extraKey4;
+    }
+
+    /**
+     * @param extraKey4 the extraKey4 to set
+     */
+    public void setExtraKey4(String extraKey4) {
+        this.extraKey4 = extraKey4;
+    }
+
+    /**
+     * @return the extraValue4
+     */
+    public String getExtraValue4() {
+        return extraValue4;
+    }
+
+    /**
+     * @param extraValue4 the extraValue4 to set
+     */
+    public void setExtraValue4(String extraValue4) {
+        this.extraValue4 = extraValue4;
     }
 }
