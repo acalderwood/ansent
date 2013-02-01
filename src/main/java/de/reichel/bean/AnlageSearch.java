@@ -151,5 +151,11 @@ public class AnlageSearch extends AnlageBean {
     public void setSelectedHersteller(List<Integer> selectedHersteller) {
         this.selectedHersteller = selectedHersteller;
     }
+    
+    public String load(){
+         log.debug("Load AnlageSearch is called");
+         anlagenDAO.loadAnlagen(this);
+         return "index";
+    }
 
 }

@@ -350,4 +350,17 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         backingBean.setIdBetreiber(getIdBetreiber(backingBean.getIdAnlagen()));
         backingBean.setIdStandort(getIdStandort(backingBean.getIdAnlagen()));
     }
+
+    public void loadAnlagen(AnlageSearch backingBean) {
+        log.debug("Inside load Anlagen for Standort");
+        log.debug("Standort id: "+backingBean.getIdStandort());
+        
+        Query query = entityManager.createQuery("from AnlagenStandorte anlagenStandorte where anlagenStandorte.idStandorte = :idStandort");
+        log.debug("Query: "+query.toString());
+        query.setParameter("idStandort", backingBean.getIdStandort());
+        
+        log.debug("Standort id: "+backingBean.getIdStandort());
+        
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

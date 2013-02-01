@@ -27,7 +27,7 @@
 
                             <h:outputLabel value="Anlage" for="AnlageList" />
                             <h:selectOneMenu value="#{anlageSearch.idAnlagen}">
-                                <f:selectItems id="AnlageList" value="#{anlageSearch.selectableAnlageByStandortId}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                                <f:selectItems id="AnlageList" value="#{anlageSearch}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
                             </h:selectOneMenu>
                             
                         </h:panelGrid>
