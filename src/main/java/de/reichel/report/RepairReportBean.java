@@ -16,53 +16,53 @@ import org.apache.commons.logging.LogFactory;
 public class RepairReportBean implements Serializable {
 
     private Integer repair_ID_REPAIR = null;
-    private String user_VORNAME = null;
-    private String user_NACHNAME = null;
-    private String repair_ERSTELLT = null;
-    private String repair_GESENDET_DATUM = null;
-    private String anlagen_INTERNE_NR = null;
-    private String standorte_ID_STANDORTE = null;
-    private String standorte_STANDORTNAME = null;
-    private String standorte_STRASSE_NR = null;
-    private String standorte_PLZ = null;
-    private String standorte_ORT = null;
-    private String anlagen_art_ART = null;
-    private String anlagen_hersteller_HERSTELLER = null;
-    private String anlagen_TYP = null;
-    private String anlagen_FABRIKATIONSNUMMER = null;
-    private String anlagen_BAUJAHR = null;
-    private String betreiber_ID_BETREIBER = null;
-    private String betreiber_BETREIBERNAME = null;
-    private String betreiber_STRASSE_NR = null;
-    private String betreiber_PLZ = null;
-    private String betreiber_ORT = null;
-    private String kunden_ID_KUNDEN = null;
-    private String kunden_FIRMENNAME = null;
-    private String kunden_STRASSE_NR = null;
-    private String kunden_PLZ = null;
-    private String kunden_ORT = null;
-    private String repair_FAX_TEXT = null;
-    private String repair_INTERNE_BEMERKUNG = null;
-    private String repair_REPARATUR_DATUM = null;
-    private String techniker_FIRMA_TECHNIKER = null;
-    private String techniker_NAME_TECHNIKER = null;
-    private String rechnungen_RECHNUNGSNUMMERINTERN = null;
-    private String rechnungen_RECHNUNGSDATUM = null;
-    private String rechnungen_LIEFERDATUM = null;
-    private String rechnungen_REPAIR_ID = null;
-    private String rechnungen_ANGEBOTSNUMMER = null;
-    private String rechnungen_BESTELLNUMMER = null;
-    private String rechnungen_INVOICEDUE = null;
-    private String rechnungen_INVOICEQTY = null;
-    private String rechnungen_ME = null;
-    private String rechnungen_DESCRIPTION = null;
-    private String rechnungen_UNITPRICE = null;
-    private String rechnungen_TOTAL = null;
-    private String rechnungen_AMT = null;
-    private String rechnungen_TAX = null;
-    private String rechnungen_SUM = null;
-    
+    private String user_VORNAME = "";
+    private String user_NACHNAME = "";
+    private String repair_ERSTELLT = "";
+    private String repair_GESENDET_DATUM = "";
+    private String anlagen_INTERNE_NR = "";
+    private String standorte_ID_STANDORTE = "";
+    private String standorte_STANDORTNAME = "";
+    private String standorte_STRASSE_NR = "";
+    private String standorte_PLZ = "";
+    private String standorte_ORT = "";
+    private String anlagen_art_ART = "";
+    private String anlagen_hersteller_HERSTELLER = "";
+    private String anlagen_TYP = "";
+    private String anlagen_FABRIKATIONSNUMMER = "";
+    private String anlagen_BAUJAHR = "";
+    private String betreiber_ID_BETREIBER = "";
+    private String betreiber_BETREIBERNAME = "";
+    private String betreiber_STRASSE_NR = "";
+    private String betreiber_PLZ = "";
+    private String betreiber_ORT = "";
+    private String kunden_ID_KUNDEN = "";
+    private String kunden_FIRMENNAME = "";
+    private String kunden_STRASSE_NR = "";
+    private String kunden_PLZ = "";
+    private String kunden_ORT = "";
+    private String repair_FAX_TEXT = "";
+    private String repair_INTERNE_BEMERKUNG = "";
+    private String repair_REPARATUR_DATUM = "";
+    private String techniker_FIRMA_TECHNIKER = "";
+    private String techniker_NAME_TECHNIKER = "";
+    private String rechnungen_RECHNUNGSNUMMERINTERN = "";
+    private String rechnungen_RECHNUNGSDATUM = "";
+    private String rechnungen_LIEFERDATUM = "";
+    private String rechnungen_REPAIR_ID = "";
+    private String rechnungen_ANGEBOTSNUMMER = "";
+    private String rechnungen_BESTELLNUMMER = "";
+    private String rechnungen_INVOICEDUE = "";
+    private String rechnungen_INVOICEQTY = "";
+    private String rechnungen_ME = "";
+    private String rechnungen_DESCRIPTION = "";
+    private String rechnungen_UNITPRICE = "";
+    private String rechnungen_TOTAL = "";
+    private String rechnungen_AMT = "";
+    private String rechnungen_TAX = "";
+    private String rechnungen_SUM = "";
     private static final Log log = LogFactory.getLog(RepairReportBean.class);
+
     /**
      * @return the repair_ID_REPAIR
      */
@@ -74,7 +74,9 @@ public class RepairReportBean implements Serializable {
      * @param repair_ID_REPAIR the repair_ID_REPAIR to set
      */
     public void setRepair_ID_REPAIR(Integer repair_ID_REPAIR) {
-        this.repair_ID_REPAIR = repair_ID_REPAIR;
+        if (repair_ID_REPAIR != null) {
+            this.repair_ID_REPAIR = repair_ID_REPAIR;
+        }
     }
 
     /**
@@ -165,7 +167,6 @@ public class RepairReportBean implements Serializable {
      * @return the standorte_STANDORTNAME
      */
     public String getStandorte_STANDORTNAME() {
-        log.debug("getStandorte_STANDORTNAME():" + standorte_STANDORTNAME);
         return standorte_STANDORTNAME;
     }
 
@@ -228,8 +229,12 @@ public class RepairReportBean implements Serializable {
     /**
      * @param anlagen_art_ART the anlagen_art_ART to set
      */
-    public void setAnlagen_art_ART(String anlagen_art_ART) {
-        this.anlagen_art_ART = anlagen_art_ART;
+    public void setAnlagen_art_ART(String _anlagen_art_ART) {
+        if (_anlagen_art_ART != null && !_anlagen_art_ART.equals("unbekannt")) {
+            this.anlagen_art_ART = _anlagen_art_ART;
+        } else {
+            this.anlagen_art_ART = "Art: unbekannt";
+        }
     }
 
     /**
@@ -240,10 +245,15 @@ public class RepairReportBean implements Serializable {
     }
 
     /**
-     * @param anlagen_hersteller_HERSTELLER the anlagen_hersteller_HERSTELLER to set
+     * @param anlagen_hersteller_HERSTELLER the anlagen_hersteller_HERSTELLER to
+     * set
      */
-    public void setAnlagen_hersteller_HERSTELLER(String anlagen_hersteller_HERSTELLER) {
-        this.anlagen_hersteller_HERSTELLER = anlagen_hersteller_HERSTELLER;
+    public void setAnlagen_hersteller_HERSTELLER(String _anlagen_hersteller_HERSTELLER) {
+        if (_anlagen_hersteller_HERSTELLER != null && !_anlagen_hersteller_HERSTELLER.equals("unbekannt")) {
+            this.anlagen_hersteller_HERSTELLER = _anlagen_hersteller_HERSTELLER;
+        } else {
+            this.anlagen_hersteller_HERSTELLER = "Hersteller: unbekannt";
+        }
     }
 
     /**
@@ -256,8 +266,12 @@ public class RepairReportBean implements Serializable {
     /**
      * @param anlagen_TYP the anlagen_TYP to set
      */
-    public void setAnlagen_TYP(String anlagen_TYP) {
-        this.anlagen_TYP = anlagen_TYP;
+    public void setAnlagen_TYP(String _anlagen_TYP) {
+        if (_anlagen_TYP != null && !_anlagen_TYP.equals("unbekannt")) {
+            this.anlagen_TYP = _anlagen_TYP;
+        } else {
+            this.anlagen_TYP = "Typ: unbekannt";
+        }
     }
 
     /**
@@ -270,8 +284,12 @@ public class RepairReportBean implements Serializable {
     /**
      * @param anlagen_FABRIKATIONSNUMMER the anlagen_FABRIKATIONSNUMMER to set
      */
-    public void setAnlagen_FABRIKATIONSNUMMER(String anlagen_FABRIKATIONSNUMMER) {
-        this.anlagen_FABRIKATIONSNUMMER = anlagen_FABRIKATIONSNUMMER;
+    public void setAnlagen_FABRIKATIONSNUMMER(String _anlagen_FABRIKATIONSNUMMER) {
+        if (_anlagen_FABRIKATIONSNUMMER != null && !_anlagen_FABRIKATIONSNUMMER.equals("unbekannt")) {
+            this.anlagen_FABRIKATIONSNUMMER = _anlagen_FABRIKATIONSNUMMER;
+        } else {
+            this.anlagen_FABRIKATIONSNUMMER = "Fabrikationsnr: unbekannt";
+        }
     }
 
     /**
@@ -284,8 +302,12 @@ public class RepairReportBean implements Serializable {
     /**
      * @param anlagen_BAUJAHR the anlagen_BAUJAHR to set
      */
-    public void setAnlagen_BAUJAHR(String anlagen_BAUJAHR) {
-        this.anlagen_BAUJAHR = anlagen_BAUJAHR;
+    public void setAnlagen_BAUJAHR(String _anlagen_BAUJAHR) {
+        if (anlagen_BAUJAHR != null && !_anlagen_BAUJAHR.contains("0000")) {
+            this.anlagen_BAUJAHR = _anlagen_BAUJAHR;
+        } else {
+            this.anlagen_BAUJAHR = "Baujahr: unbekannt";
+        }
     }
 
     /**
@@ -506,7 +528,8 @@ public class RepairReportBean implements Serializable {
     }
 
     /**
-     * @param rechnungen_RECHNUNGSNUMMERINTERN the rechnungen_RECHNUNGSNUMMERINTERN to set
+     * @param rechnungen_RECHNUNGSNUMMERINTERN the
+     * rechnungen_RECHNUNGSNUMMERINTERN to set
      */
     public void setRechnungen_RECHNUNGSNUMMERINTERN(String rechnungen_RECHNUNGSNUMMERINTERN) {
         this.rechnungen_RECHNUNGSNUMMERINTERN = rechnungen_RECHNUNGSNUMMERINTERN;

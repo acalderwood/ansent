@@ -20,7 +20,7 @@ import javax.persistence.Version;
 @Table(name="ANLAGEN"
     ,catalog="ansent"
 )
-public class Anlagen  implements java.io.Serializable {
+public class Anlagen implements java.io.Serializable {
 
 
      private Integer idAnlagen;

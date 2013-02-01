@@ -143,5 +143,10 @@ public class AnlagenDAOImplTest {
         Assert.assertTrue(arten.size() > 0);
     }
     
-
+    @Test @Ignore
+    public void testSearchAnlagen() {
+        AnlageSearch anlagen = new AnlageSearch();
+        anlagen.setSearchAnlagenArt("container");
+        anlagenDAO.searchAnlagen(anlagen);
+    }
 }

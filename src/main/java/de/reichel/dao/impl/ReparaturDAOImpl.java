@@ -388,7 +388,11 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         AnlagenHersteller anlagenHersteller = (AnlagenHersteller) queryAnlagenHersteller.getSingleResult();
         log.debug("Got AnlagenHersteller for invoice");
         
-        auftrag.setRepair_REPARATUR_DATUM(Utils.dateFormat.format(backingBean.getRepairDate()));
+        auftrag.setAnlagen_FABRIKATIONSNUMMER(anlagen.getFabrikationsnummer());
+        auftrag.setAnlagen_INTERNE_NR(anlagen.getInterneNr());
+        auftrag.setAnlagen_BAUJAHR(Utils.yearFormat.format(anlagen.getBaujahr()));
+        auftrag.setRepair_FAX_TEXT(backingBean.getWorkDescription());
+        auftrag.setRechnungen_LIEFERDATUM(Utils.dateFormat.format(backingBean.getRepairDate()));
         auftrag.setRepair_ID_REPAIR(backingBean.getIdRepair());
         auftrag.setStandorte_STANDORTNAME(standorte.getStandortname());
         auftrag.setStandorte_STRASSE_NR(standorte.getStrasseNr());

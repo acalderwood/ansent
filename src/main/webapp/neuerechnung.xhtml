@@ -62,9 +62,48 @@
                             <h:outputLabel value="Fahrzeit Helfer:" for="travelTimeHelperDatePicker" />
                             <p:calendar id="travelTimeHelperDatePicker" value="#{repairEdit.travelTimeHelper}" pattern="HH:mm" timeOnly="true" />
 
-                            <h:outputLabel value="Kilometer" for="kilometer" />
+                            <h:outputLabel value="Kilometer:" for="kilometer" />
                             <h:inputText id="kilometer" value="#{repairEdit.travelDistanceKm}" required="false" />   
 
+                            <h:outputLabel value="Rechnungsnummer:" for="rechnungsnummer" />
+                            <h:inputText id="rechnungsnummer" value="#{repairEdit.rechnungsnummer}" required="false" />  
+                            
+                            <h:outputLabel value="Auftraggeber:" for="auftraggeber" />
+                            <h:inputText id="auftraggeber" value="#{repairEdit.auftraggeber}" required="false" />  
+                            
+                            <h:outputLabel value="Lieferanten-Nr.:" for="lieferantenNr" />
+                            <h:inputText id="lieferantenNr" value="#{repairEdit.lieferantenNr}" required="false" />  
+                            
+                            <h:outputLabel value="Bestell-Nr.:" for="bestellNr" />
+                            <h:inputText id="bestellNr" value="#{repairEdit.bestellNr}" required="false" />  
+                            
+                            <h:outputLabel value="Wartungszeitraum" for="wartungszeitraum" />
+                            <h:inputText id="wartungzeitraum" value="#{repairEdit.wartungzeitraum}" required="false" />  
+                            
+                            <h:outputLabel value="Extra1..:" for="extraKey1" />
+                            <h:inputText id="extraKey1" value="#{repairEdit.extraKey1}" required="false" />  
+                            
+                            <h:outputLabel value="..Extra1:" for="extraValue1" />
+                            <h:inputText id="extraValue1" value="#{repairEdit.extraValue1}" required="false" />     
+                            
+                            <h:outputLabel value="Extra2..:" for="extraKey2" />
+                            <h:inputText id="extraKey2" value="#{repairEdit.extraKey2}" required="false" />     
+                            
+                            <h:outputLabel value="..Extra2:" for="extraValue2" />
+                            <h:inputText id="extraValue2" value="#{repairEdit.extraValue2}" required="false" />     
+                            
+                            <h:outputLabel value="Extra3..:" for="extraKey3" />
+                            <h:inputText id="extraKey3" value="#{repairEdit.extraKey3}" required="false" />     
+                            
+                            <h:outputLabel value="..Extra3:" for="extraValue3" />
+                            <h:inputText id="extraValue3" value="#{repairEdit.extraValue3}" required="false" />     
+                            
+                            <h:outputLabel value="Extra4..:" for="extraKey4" />
+                            <h:inputText id="extraKey4" value="#{repairEdit.extraKey4}" required="false" />     
+                            
+                            <h:outputLabel value="..Extra4" for="extraValue4" />
+                            <h:inputText id="extraValue4" value="#{repairEdit.extraValue4}" required="false" />                                 
+                            
                             <t:panelGroup colspan="2"> 
                                 <p:fieldset legend="ErsatzTeile Hinzufügen" toggleable="true" toggleSpeed="500">   
                                     <p:dataTable id="partTable" var="part" value="#{repairEdit.parts}">  
