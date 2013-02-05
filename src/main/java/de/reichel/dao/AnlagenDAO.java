@@ -57,4 +57,6 @@ public interface AnlagenDAO extends Serializable {
     public void searchAnlagen(AnlageSearch anlageSearch);
 
     public void loadAnlagen(AnlageSearch aThis);
+
+    public List<Anlagen> getAnlagebyStandort(AnlageSearch aThis);
 }

@@ -552,4 +552,8 @@ public class AnlageSearch extends AnlageBean {
     public void setAnlagenResultList(List<Anlagen> anlagenResultList) {
         this.anlagenResultList = anlagenResultList;
     }
+    public List<Anlagen> getAnlagebyStandort() {
+        return anlagenDAO.getAnlagebyStandort(this);
+    }
+    
 }
