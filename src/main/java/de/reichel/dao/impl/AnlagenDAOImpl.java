@@ -408,16 +408,44 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         }
         anlageSearch.setAnlagenResultList(anlagenList);
     } 
-
+	
     public void loadAnlagen(AnlageSearch backingBean) {
         log.debug("Inside load Anlagen for Standort");
         //log.debug("Standort id: "+backingBean.getIdStandort());
-        
         Query query = entityManager.createQuery("from AnlagenStandorte anlagenStandorte where anlagenStandorte.idStandorte = :idStandort");
         log.debug("Query: "+query.toString());
         query.setParameter("idStandort", backingBean.getIdStandort());
-        
         log.debug("Standort id: "+backingBean.getIdStandort());
+        }	
+    
+    public List<Anlagen> getAnlagebyStandort(AnlageSearch backingBean) {
+        log.debug("Inside GET Anlagen for Standort");
+        List<Anlagen> anlagenList = new ArrayList<Anlagen>();
+        if (backingBean.getIdStandort()==null){
+            log.debug("Empty ID");
+            Query query = entityManager.createQuery("from Anlagen anlagen");
+           anlagenList = query.getResultList();
+        }
+        else{
+            log.debug("Non Empty ID");
+            anlagenList.clear();
+            //Query query = entityManager.createQuery("SELECT anlagen.idAnlagen, anlagen.interneNr FROM Anlagen anlagen,AnlagenStandorte anlagenStandorte where anlagenStandorte.idAnlagen=anlagenStandorte.idAnlagen and anlagenStandorte.idStandorte = :idStandort");
+            Query query = entityManager.createQuery("from Anlagen anlagen,AnlagenStandorte anlagenStandorte where anlagenStandorte.idAnlagen=anlagenStandorte.idAnlagen and anlagenStandorte.idStandort = :idStandort");
+            // Query query = entityManager.createQuery();
+            query.setParameter("idStandort", backingBean.getIdStandort());
+            log.debug("Query Executed for id: "+backingBean.getIdStandort());
+            List<Object[]> results = query.getResultList();
+            //anlagenList = new ArrayList<Anlagen>();
+            for (Object[] result: results) {
+                Anlagen anlagen = (Anlagen)result[0];
+                anlagenList.add(anlagen);
+            }
+        }
+        
+        
+        
+        
+        return anlagenList;
         
         //throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -13,24 +13,28 @@ import de.reichel.domain.model.AnlagenHersteller;
 import de.reichel.domain.model.Betreiber;
 import de.reichel.domain.model.Kunden;
 import de.reichel.domain.model.Standorte;
-import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author alastair
  */
-public interface AnlagenDAO extends Serializable {
+public interface AnlagenDAO {
+
+    public void setEntityManager(EntityManager entityManager);
+
+    public void updateAnlagen(AnlageEdit backingBean);
+
+    public long getNumberAnlagen(AnlageSearch anlageSearch);
+
+    public void addAnlagen(AnlageNew backingBean);
 
     public List<Anlagen> getAllAnlagen();
 
     public Object[] getAnlagen(String interneNr);
 
-    public List<Object[]> getAnlagen(AnlageSearch anlageSearch);
-    
-    public long getNumberAnlagen(AnlageSearch anlageSearch);
-
-    public void addAnlagen(AnlageNew backingBean);
+    public List<Object[]> getAnlagen(AnlageSearch backingBean);
 
     public List<AnlagenArt> getSelectableArt();
 
@@ -42,8 +46,6 @@ public interface AnlagenDAO extends Serializable {
 
     public List<Kunden> getSelectableKunden();
 
-    public void updateAnlagen(AnlageEdit anlageEdit);
-
     public Object[] getAnlagen(int idAnlagen);
 
     public int getIdStandort(int idAnlagen);
@@ -51,12 +53,12 @@ public interface AnlagenDAO extends Serializable {
     public int getIdBetreiber(int idAnlagen);
 
     public int getIdKunden(int idAnlagen);
-    
-    public void loadAnlagen(AnlageEdit aThis);
-    
+
+    public void loadAnlagen(AnlageEdit backingBean);
+
     public void searchAnlagen(AnlageSearch anlageSearch);
 
-    public void loadAnlagen(AnlageSearch aThis);
+    public void loadAnlagen(AnlageSearch backingBean);
 
-    public List<Anlagen> getAnlagebyStandort(AnlageSearch aThis);
+    public List<Anlagen> getAnlagebyStandort(AnlageSearch backingBean);	
 }
