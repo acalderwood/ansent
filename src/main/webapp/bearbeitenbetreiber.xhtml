@@ -11,7 +11,7 @@
             <ui:define name="content">
                 <!-- Search Anlage and Load it -->
                 <h:form>
-                    <p:panel id="panel" header="Choose a Betreiber" style="margin-bottom:10px;"> 
+                    <p:panel id="panel" header="Betreiber Wählen" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Betreibername" for="selectableBetreiber" />
                             <h:selectOneMenu value="#{betreiberEdit.idBetreiber}">
@@ -20,7 +20,7 @@
                         </h:panelGrid>
                     </p:panel>
                     
-                    <p:commandButton actionListener="#{betreiberEdit.load}" update="display" value="Choose" id="ajax"/>
+                    <p:commandButton actionListener="#{betreiberEdit.load}" update="display" value="Wählen" id="ajax"/>
                     
                     <p:panel id="display" header="Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">

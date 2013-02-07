@@ -7,7 +7,11 @@ package de.reichel.dao.impl;
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import de.reichel.bean.AnlageNew;
 import de.reichel.bean.AnlageSearch;
+import de.reichel.bean.BetreiberNew;
+import de.reichel.bean.KundenNew;
 import de.reichel.dao.AnlagenDAO;
+import de.reichel.dao.BetreiberDAO;
+import de.reichel.dao.KundenDAO;
 import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.AnlagenArt;
 import java.util.ArrayList;
@@ -36,6 +40,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class AnlagenDAOImplTest {
 
     private AnlagenDAO anlagenDAO;
+    private BetreiberDAO betreiberDAO;
+    private KundenDAO kundenDAO;
 
     static {
         try {
@@ -63,6 +69,8 @@ public class AnlagenDAOImplTest {
     @Before
     public void setUp() {
         anlagenDAO = context.getBean(AnlagenDAOImpl.class);
+        betreiberDAO = context.getBean(BetreiberDAOImpl.class);
+        kundenDAO = context.getBean(KundenDAOImpl.class);
     }
 
     @Test @Ignore
@@ -108,7 +116,7 @@ public class AnlagenDAOImplTest {
         Assert.assertEquals(AnlagenArt.class, (anlagenDAO.getAnlagen(interneNr))[1].getClass());
     }
     
-    @Test @Ignore
+    @Test
     public void testAddAnlagen() {
         AnlageNew backingBean = new AnlageNew();
         backingBean.setInterneNr("test" + Calendar.getInstance().getTimeInMillis());
@@ -128,6 +136,51 @@ public class AnlagenDAOImplTest {
         Assert.assertEquals(sizeBefore + 1, sizeAfter);
     }
 
+    @Test
+    public void testAddBetreiber() {
+        BetreiberNew backingBean = new BetreiberNew();
+        backingBean.setAnsprechpartner("test" + Calendar.getInstance().getTimeInMillis());
+        backingBean.setBemerkung("hohoho");
+        backingBean.setBetreibername("10000000");
+        backingBean.setEmail("a@a.com");
+        backingBean.setIdKunden(1);
+        backingBean.setInterneNotiz("test");
+        backingBean.setLand("AAAA");
+        backingBean.setOrt("AAAA");
+        backingBean.setPlz("AAAA");
+        backingBean.setStrasseNr("123 AAA");
+        backingBean.setTelefon("098098098");
+        
+        int sizeBefore = betreiberDAO.getAllBetreiber().size();
+        betreiberDAO.addBetreiber(backingBean);
+        int sizeAfter = betreiberDAO.getAllBetreiber().size();
+        Assert.assertEquals(sizeBefore + 1, sizeAfter);
+    } 
+    
+    @Test
+    public void testAddKunden() {
+        KundenNew backingBean = new KundenNew();
+        backingBean.setAnsprechpartner("AAAAAA");
+        backingBean.setBemerkung("AAAAAA");
+        backingBean.setBuchungskreis("AAAAAA");
+        backingBean.setEmail("AAAAAA");
+        backingBean.setFax("AAAAAA");
+        backingBean.setFirmenname("AAAAAA");
+        backingBean.setInterneNotiz("AAAAAA");
+        backingBean.setLand("AAAAAA");
+        backingBean.setOrt("AAAAAA");
+        backingBean.setPlz("AAAAAA");
+        backingBean.setSteuerNr("AAAAAA");
+        backingBean.setStrasseNr("AAAAAA");
+        backingBean.setTelefon("AAAAAA");
+
+        
+        int sizeBefore = kundenDAO.getSelectableKunden().size();
+        kundenDAO.addKunden(backingBean);
+        int sizeAfter = kundenDAO.getSelectableKunden().size();
+        Assert.assertEquals(sizeBefore + 1, sizeAfter);
+    }     
+    
     @Test @Ignore
     public void testGetTypes() {
         String interneNr = "389-X-PPK";

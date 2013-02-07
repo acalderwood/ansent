@@ -36,6 +36,8 @@ import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Alastair Calderwood
  */
 @Repository
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "prototype")
 public class ReparaturDAOImpl implements ReparaturDAO {
 
     private static final Log log = LogFactory.getLog(ReparaturDAOImpl.class);
@@ -63,7 +66,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
      */
     @Transactional(readOnly = true)
     public List<Repair> getExistingRepairs(int idAnlagen) {
-        Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen and repair.reparaturDatum != null order by repair.reparaturDatum");
+        Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen and repair.reparaturDatum is not null order by repair.reparaturDatum");
         query.setHint("org.hibernate.cacheable", true);
         query.setParameter("idAnlagen", idAnlagen);
         return query.getResultList();
@@ -390,7 +393,11 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         
         auftrag.setAnlagen_FABRIKATIONSNUMMER(anlagen.getFabrikationsnummer());
         auftrag.setAnlagen_INTERNE_NR(anlagen.getInterneNr());
-        auftrag.setAnlagen_BAUJAHR(Utils.yearFormat.format(anlagen.getBaujahr()));
+        if (anlagen.getBaujahr() != null) {
+            auftrag.setAnlagen_BAUJAHR(Utils.yearFormat.format(anlagen.getBaujahr()));
+        } else {
+            auftrag.setAnlagen_BAUJAHR("Baujahr unbekannt");
+        }
         auftrag.setRepair_FAX_TEXT(backingBean.getWorkDescription());
         auftrag.setRechnungen_LIEFERDATUM(Utils.dateFormat.format(backingBean.getRepairDate()));
         auftrag.setRepair_ID_REPAIR(backingBean.getIdRepair());
@@ -492,6 +499,12 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         invoice.setAnlagen_INTERNE_NR(anlagen.getInterneNr());
         invoice.setAnlagen_TYP(anlagen.getTyp());
         invoice.setAnlagen_FABRIKATIONSNUMMER(anlagen.getFabrikationsnummer());
+        invoice.setRepair_REPARATUR_DATUM(Utils.dateFormat.format(backingBean.getRepairDate()));
+        invoice.setRechnungen_WARTUNGSZEITRAUM(backingBean.getWartungzeitraum());
+        invoice.setRechnungen_BESTELLNUMMER(backingBean.getBestellNr());
+        invoice.setRechnungen_RECHNUNGSNUMMERINTERN(backingBean.getRechnungsnummer());
+        invoice.setRechnungen_AUFTRAGGEBER(backingBean.getAuftraggeber());
+        invoice.setRechnungen_ANGEBOTSNUMMER(backingBean.getLieferantenNr());
         
         if(anlagen.getBaujahr() != null) {        
             invoice.setAnlagen_BAUJAHR(Utils.yearFormat.format(anlagen.getBaujahr()));
@@ -514,11 +527,16 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         invoice.setRechnungen_LIEFERDATUM("");
         invoice.setRechnungen_INVOICEDUE(Utils.dateFormat.format(due.getTime()));
 
-        //parts
-        //pauschale
-        //kilometer
-        //time
-
+        invoice.setLine_EXTRA_KEY_1(backingBean.getExtraKey1());
+        invoice.setLine_EXTRA_KEY_2(backingBean.getExtraKey2());
+        invoice.setLine_EXTRA_KEY_3(backingBean.getExtraKey3());
+        invoice.setLine_EXTRA_KEY_4(backingBean.getExtraKey4());
+        
+        invoice.setLine_EXTRA_VALUE_1(backingBean.getExtraValue1());
+        invoice.setLine_EXTRA_VALUE_2(backingBean.getExtraValue2());
+        invoice.setLine_EXTRA_VALUE_3(backingBean.getExtraValue3());
+        invoice.setLine_EXTRA_VALUE_4(backingBean.getExtraValue4());
+        
         List<InvoiceItem> invoiceItems = new ArrayList<InvoiceItem>();
 
         for (TeileBean part : backingBean.getParts()) {
@@ -838,12 +856,13 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         log.debug("Anlage ID for repairs " + backingBean.getIdAnlagen());
 
         if (backingBean.getIdAnlagen() == null) {
-            log.debug("Anlage ID is null");
-            Query query = entityManager.createQuery("from Repair repair where repair.reparaturDatum != null order by repair.idRepair desc");
-            return query.getResultList();
+//            log.debug("Anlage ID is null");
+//            Query query = entityManager.createQuery("from Repair repair where repair.reparaturDatum is not null order by repair.idRepair desc");
+//            return query.getResultList();
+            return new ArrayList<Repair>();
         } else {
             log.debug("Anlage ID is not null");
-            Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen and repair.reparaturDatum != null order by repair.idRepair desc");
+            Query query = entityManager.createQuery("from Repair repair where repair.idAnlagen = :idAnlagen and repair.reparaturDatum is not null order by repair.idRepair desc");
             query.setParameter("idAnlagen", backingBean.getIdAnlagen());
             return query.getResultList();
         }

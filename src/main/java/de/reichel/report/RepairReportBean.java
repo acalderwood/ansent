@@ -44,6 +44,8 @@ public class RepairReportBean implements Serializable {
     private String repair_FAX_TEXT = "";
     private String repair_INTERNE_BEMERKUNG = "";
     private String repair_REPARATUR_DATUM = "";
+    private String rechnungen_WARTUNGSZEITRAUM = "";
+    private String rechnungen_AUFTRAGGEBER = "";
     private String techniker_FIRMA_TECHNIKER = "";
     private String techniker_NAME_TECHNIKER = "";
     private String rechnungen_RECHNUNGSNUMMERINTERN = "";
@@ -61,13 +63,21 @@ public class RepairReportBean implements Serializable {
     private String rechnungen_AMT = "";
     private String rechnungen_TAX = "";
     private String rechnungen_SUM = "";
+    private String line_EXTRA_KEY_1 = "";
+    private String line_EXTRA_KEY_2 = "";
+    private String line_EXTRA_KEY_3 = "";
+    private String line_EXTRA_KEY_4 = "";
+    private String line_EXTRA_VALUE_1 = "";
+    private String line_EXTRA_VALUE_2 = "";
+    private String line_EXTRA_VALUE_3 = "";
+    private String line_EXTRA_VALUE_4 = "";
     private static final Log log = LogFactory.getLog(RepairReportBean.class);
 
     /**
      * @return the repair_ID_REPAIR
      */
     public Integer getRepair_ID_REPAIR() {
-        return 10;
+        return repair_ID_REPAIR;
     }
 
     /**
@@ -729,5 +739,145 @@ public class RepairReportBean implements Serializable {
      */
     public void setRechnungen_SUM(String rechnungen_SUM) {
         this.rechnungen_SUM = rechnungen_SUM;
+    }
+
+    /**
+     * @return the line_EXTRA_KEY_1
+     */
+    public String getLine_EXTRA_KEY_1() {
+        return line_EXTRA_KEY_1;
+    }
+
+    /**
+     * @param line_EXTRA_KEY_1 the line_EXTRA_KEY_1 to set
+     */
+    public void setLine_EXTRA_KEY_1(String line_EXTRA_KEY_1) {
+        this.line_EXTRA_KEY_1 = line_EXTRA_KEY_1;
+    }
+
+    /**
+     * @return the line_EXTRA_KEY_2
+     */
+    public String getLine_EXTRA_KEY_2() {
+        return line_EXTRA_KEY_2;
+    }
+
+    /**
+     * @param line_EXTRA_KEY_2 the line_EXTRA_KEY_2 to set
+     */
+    public void setLine_EXTRA_KEY_2(String line_EXTRA_KEY_2) {
+        this.line_EXTRA_KEY_2 = line_EXTRA_KEY_2;
+    }
+
+    /**
+     * @return the line_EXTRA_KEY_3
+     */
+    public String getLine_EXTRA_KEY_3() {
+        return line_EXTRA_KEY_3;
+    }
+
+    /**
+     * @param line_EXTRA_KEY_3 the line_EXTRA_KEY_3 to set
+     */
+    public void setLine_EXTRA_KEY_3(String line_EXTRA_KEY_3) {
+        this.line_EXTRA_KEY_3 = line_EXTRA_KEY_3;
+    }
+
+    /**
+     * @return the line_EXTRA_KEY_4
+     */
+    public String getLine_EXTRA_KEY_4() {
+        return line_EXTRA_KEY_4;
+    }
+
+    /**
+     * @param line_EXTRA_KEY_4 the line_EXTRA_KEY_4 to set
+     */
+    public void setLine_EXTRA_KEY_4(String line_EXTRA_KEY_4) {
+        this.line_EXTRA_KEY_4 = line_EXTRA_KEY_4;
+    }
+
+    /**
+     * @return the line_EXTRA_VALUE_1
+     */
+    public String getLine_EXTRA_VALUE_1() {
+        return line_EXTRA_VALUE_1;
+    }
+
+    /**
+     * @param line_EXTRA_VALUE_1 the line_EXTRA_VALUE_1 to set
+     */
+    public void setLine_EXTRA_VALUE_1(String line_EXTRA_VALUE_1) {
+        this.line_EXTRA_VALUE_1 = line_EXTRA_VALUE_1;
+    }
+
+    /**
+     * @return the line_EXTRA_VALUE_2
+     */
+    public String getLine_EXTRA_VALUE_2() {
+        return line_EXTRA_VALUE_2;
+    }
+
+    /**
+     * @param line_EXTRA_VALUE_2 the line_EXTRA_VALUE_2 to set
+     */
+    public void setLine_EXTRA_VALUE_2(String line_EXTRA_VALUE_2) {
+        this.line_EXTRA_VALUE_2 = line_EXTRA_VALUE_2;
+    }
+
+    /**
+     * @return the line_EXTRA_VALUE_3
+     */
+    public String getLine_EXTRA_VALUE_3() {
+        return line_EXTRA_VALUE_3;
+    }
+
+    /**
+     * @param line_EXTRA_VALUE_3 the line_EXTRA_VALUE_3 to set
+     */
+    public void setLine_EXTRA_VALUE_3(String line_EXTRA_VALUE_3) {
+        this.line_EXTRA_VALUE_3 = line_EXTRA_VALUE_3;
+    }
+
+    /**
+     * @return the line_EXTRA_VALUE_4
+     */
+    public String getLine_EXTRA_VALUE_4() {
+        return line_EXTRA_VALUE_4;
+    }
+
+    /**
+     * @param line_EXTRA_VALUE_4 the line_EXTRA_VALUE_4 to set
+     */
+    public void setLine_EXTRA_VALUE_4(String line_EXTRA_VALUE_4) {
+        this.line_EXTRA_VALUE_4 = line_EXTRA_VALUE_4;
+    }
+
+    /**
+     * @return the rechnungen_WARTUNGSZEITRAUM
+     */
+    public String getRechnungen_WARTUNGSZEITRAUM() {
+        return rechnungen_WARTUNGSZEITRAUM;
+    }
+
+    /**
+     * @param rechnungen_WARTUNGSZEITRAUM the rechnungen_WARTUNGSZEITRAUM to set
+     */
+    public void setRechnungen_WARTUNGSZEITRAUM(String rechnungen_WARTUNGSZEITRAUM) {
+        this.rechnungen_WARTUNGSZEITRAUM = rechnungen_WARTUNGSZEITRAUM;
+    }
+
+    /**
+     * @return the rechnungen_AUFTRAGGEBER
+     */
+    public String getRechnungen_AUFTRAGGEBER() {
+        return rechnungen_AUFTRAGGEBER;
+    }
+
+    /**
+     * @param rechnungen_AUFTRAGGEBER the rechnungen_AUFTRAGGEBER to set
+     */
+    public void setRechnungen_AUFTRAGGEBER(String rechnungen_AUFTRAGGEBER) {
+        this.rechnungen_AUFTRAGGEBER = rechnungen_AUFTRAGGEBER;
     }
 }

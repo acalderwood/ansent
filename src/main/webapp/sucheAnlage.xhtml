@@ -11,7 +11,7 @@
             <ui:define name="content">
                 <!-- Search Anlage and Load it -->
                 <h:form>
-                    <p:panel id="panel" header="Choose Anlage" style="margin-bottom:10px;"> 
+                    <p:panel id="panel" header="Anlage Wählen" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Interne Nr." for="selectableAnlageList" />
                             <h:selectOneMenu value="#{anlageEdit.idAnlagen}">
@@ -20,7 +20,7 @@
                         </h:panelGrid>
                     </p:panel>
 
-                    <p:commandButton actionListener="#{anlageEdit.load}" update="display" value="Choose" id="ajax"/>
+                    <p:commandButton actionListener="#{anlageEdit.load}" update="display" value="Wählen" id="ajax"/>
 
                     <p:panel id="display" header="Anlage Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">

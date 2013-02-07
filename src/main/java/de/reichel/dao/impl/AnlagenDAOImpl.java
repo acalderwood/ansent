@@ -25,6 +25,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author alastair
  */
 @Repository
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "prototype")
 public class AnlagenDAOImpl implements AnlagenDAO {
 
     private static final Log log = LogFactory.getLog(AnlagenDAOImpl.class);
@@ -159,10 +162,17 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         log.debug("Inside get All Anlagen");
         //Changing the query below to reflect all the Anlage
         //Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenArt anlagenArt, AnlagenHersteller anlagenHersteller where anlagen.idAnlagenArt = anlagenArt.idAnlagenArt and anlagen.idAnlagenHersteller = anlagenHersteller.idAnlagenHersteller order by anlagen.interneNr");
-        Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.interneNr is not null order by anlagen.interneNr");
+        Query query = entityManager.createQuery("select anlagen.idAnlagen, anlagen.interneNr from Anlagen anlagen where anlagen.interneNr is not null order by anlagen.interneNr");
         query.setHint("org.hibernate.cacheable", true);
-        //List<Object[]> result = query.getResultList();
-        return query.getResultList();
+        List<Object[]> queryResult = query.getResultList();
+        List<Anlagen> operationResult = new ArrayList<Anlagen>();
+        for (Object[] obj: queryResult) {
+            Anlagen anlagen = new Anlagen();
+            anlagen.setIdAnlagen((Integer)obj[0]);
+            anlagen.setInterneNr((String)obj[1]);
+            operationResult.add(anlagen);
+        }
+        return operationResult;
     }
 
     @Transactional(readOnly = true)

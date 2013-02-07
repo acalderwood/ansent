@@ -8,11 +8,14 @@ import de.reichel.domain.model.Repair;
 import de.reichel.util.Utils;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.event.ActionEvent;
 import org.springframework.context.annotation.Scope;
 import org.apache.commons.logging.Log;
@@ -56,10 +59,12 @@ public class RepairEdit extends RepairBean {
         return "index";
     }
 
-    public String load() {
+    public String loadRepairRedirect() {
         log.debug("Load Repair is called");
         repairDAO.loadRepair(this);
-        return "bearbeitenreparatur_ret";
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        flash.put("repairEdit", this);
+        return "bearbeitenreparatur_ret?faces-redirect=true";
     }
 
     public String loadRepair() {
@@ -70,7 +75,7 @@ public class RepairEdit extends RepairBean {
     }
 
     public String loadRepairs() {
-        log.debug("Load Repairs for Rechnung is called");
+        log.debug("Load Repairs for Rechnung - method required for actionListener");
         return null;
     }
 

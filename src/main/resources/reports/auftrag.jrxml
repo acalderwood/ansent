@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reparatur" pageWidth="595" pageHeight="842" columnWidth="505" leftMargin="48" rightMargin="42" topMargin="56" bottomMargin="56" uuid="474487c2-06a9-4c5a-9afe-e6372378934f">
 	<property name="ireport.zoom" value="1.1289478601075642"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="248"/>
+	<property name="ireport.y" value="241"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<field name="repair_ID_REPAIR" class="java.lang.Integer"/>
 	<field name="user_VORNAME" class="java.lang.String"/>
@@ -272,8 +272,22 @@ USt-Id-Nr. DE219227663			HRB 138476, Amtsgericht München		IBAN: DE 2074 06 1101
 				</textElement>
 				<text><![CDATA[Auszuführende Arbeiten:]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="3308b64e-503d-440d-9ba0-d881c8ff904f" x="190" y="29" width="305" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{repair_ID_REPAIR}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement uuid="ebd14ace-c714-4486-8932-5e90ac9609c4" x="0" y="253" width="498" height="286"/>
+				<reportElement uuid="bc514d34-eb9d-437c-9309-441863115b6b" x="190" y="56" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Claudia Sabat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ebd14ace-c714-4486-8932-5e90ac9609c4" x="2" y="248" width="502" height="286"/>
 				<textElement>
 					<font fontName="Arial" size="11" isItalic="false"/>
 				</textElement>
@@ -293,8 +307,8 @@ _________ Std. Fahrzeit				Ersatzteile   _________________________
 _________ km 						___________________________________
 _________ Anfahrtspauschale				___________________________________
 _________ Verschm. Zuschlag 20%			___________________________________
-							____________________________________
-Datum:
+
+Datum: ________________________
 
 
 ______________________________			__________________________
@@ -317,20 +331,6 @@ Erfasst durch:
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rechnungen_LIEFERDATUM}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="3308b64e-503d-440d-9ba0-d881c8ff904f" x="190" y="29" width="305" height="14"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{repair_ID_REPAIR}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="bc514d34-eb9d-437c-9309-441863115b6b" x="190" y="56" width="100" height="20"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<text><![CDATA[Claudia Sabat]]></text>
-			</staticText>
 		</band>
 	</detail>
 	<columnFooter>

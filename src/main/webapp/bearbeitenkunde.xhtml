@@ -17,7 +17,7 @@
             <ui:define name="content">
         <!-- Search Kunde and Load it -->
         <h:form id="form">
-            <p:panel id="panel" header="Choose a Customer" style="margin-bottom:10px;"> 
+            <p:panel id="panel" header="Kunde Wählen" style="margin-bottom:10px;"> 
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Firmenname:" for="selectableKundenList" />
                     <h:selectOneMenu value="#{kundenEdit.idKunden}">
@@ -26,7 +26,7 @@
     
                 </h:panelGrid>
             </p:panel>
-            <p:commandButton actionListener="#{kundenEdit.load}" update="display" value="Choose" id="ajax"/>
+            <p:commandButton actionListener="#{kundenEdit.load}" update="display" value="Wählen" id="ajax"/>
         
            <!-- Edit the customer -->
             <p:panel id="display" header="Information" style="margin-top:10px;"> 

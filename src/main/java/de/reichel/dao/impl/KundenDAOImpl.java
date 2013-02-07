@@ -7,7 +7,6 @@ package de.reichel.dao.impl;
 import de.reichel.bean.KundenEdit;
 import de.reichel.bean.KundenNew;
 import de.reichel.dao.KundenDAO;
-import de.reichel.domain.model.Anlagen;
 import de.reichel.domain.model.Kunden;
 import java.util.Calendar;
 import java.util.List;
@@ -16,6 +15,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,9 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Alastair Calderwood
  */
 @Repository
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "prototype")
 public class KundenDAOImpl implements KundenDAO {
 
     private static final Log log = LogFactory.getLog(KundenDAOImpl.class);
+    
     @PersistenceContext
     private EntityManager entityManager;
 

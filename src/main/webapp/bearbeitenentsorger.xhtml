@@ -11,7 +11,7 @@
             <ui:define name="content">
                 <!-- Search Anlage and Load it -->
                 <h:form>
-                    <p:panel id="panel" header="Choose a Entsorger" style="margin-bottom:10px;"> 
+                    <p:panel id="panel" header="Entsorger Wählen" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Entsorger Name" for="selectableEntsorger" />
                             <h:selectOneMenu value="#{entsorgerEdit.idEntsorger}">
@@ -20,7 +20,7 @@
                         </h:panelGrid>
                     </p:panel>
                     
-                    <p:commandButton actionListener="#{entsorgerEdit.load}" update="display" value="Choose" id="ajax"/>
+                    <p:commandButton actionListener="#{entsorgerEdit.load}" update="display" value="Wählen" id="ajax"/>
                     
                     <p:panel id="display" header="Information" style="margin-top:10px;"> 
                         <h:panelGrid columns="2">

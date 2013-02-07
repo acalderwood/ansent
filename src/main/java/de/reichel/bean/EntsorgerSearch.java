@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 @ViewScoped
 @Scope("view")
 @Controller
-public class EntsorgerSearch {
+public class EntsorgerSearch extends EntsorgerBean {
       
     private static final Log log = LogFactory.getLog(EntsorgerSearch.class);
     @Inject
