@@ -28,24 +28,28 @@
                             <h:outputLabel value="Interne Nr." for="interneNr" />
                             <h:outputText id="interneNr" value="#{anlageEdit.interneNr}" />
 
+                            <h:outputLabel value="Art" for="art" />
+                            <h:selectOneMenu id="art" value="#{anlageEdit.idArt}" disabled="true">
+                                <f:selectItems id="selectableArtList" value="#{anlageSearch.selectableArt}" var="art" itemValue="#{art.idAnlagenArt}" itemLabel="#{art.art}" />
+                            </h:selectOneMenu>
 
-                            <h:outputLabel value="Hersteller" for="hersteller" />
-                            <h:selectOneMenu id="hersteller" value="#{anlageEdit.idHersteller}" required="true">
+                            <h:outputLabel value="Hersteller" for="hersteller" disabled="true"/>
+                            <h:selectOneMenu id="hersteller" value="#{anlageEdit.idHersteller}" disabled="true">
                                 <f:selectItems id="selectableHerstellerList" value="#{anlageSearch.selectableHersteller}" var="hersteller" itemValue="#{hersteller.idAnlagenHersteller}" itemLabel="#{hersteller.hersteller}" />
                             </h:selectOneMenu>
 
                             <h:outputLabel value="Standort" for="standort" />
-                            <h:selectOneMenu id="standort" value="#{anlageEdit.idStandort}" required="false">
+                            <h:selectOneMenu id="standort" value="#{anlageEdit.idStandort}" disabled="true">
                                 <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
                             </h:selectOneMenu>                 
 
                             <h:outputLabel value="Kunden" for="kunden" />
-                            <h:selectOneMenu id="kunden" value="#{anlageEdit.idKunden}" required="false">
+                            <h:selectOneMenu id="kunden" value="#{anlageEdit.idKunden}" disabled="true">
                                 <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
                             </h:selectOneMenu>
 
                             <h:outputLabel value="Betreiber" for="betreiber" />
-                            <h:selectOneMenu id="betreiber" value="#{anlageEdit.idBetreiber}" required="false">
+                            <h:selectOneMenu id="betreiber" value="#{anlageEdit.idBetreiber}" disabled="true">
                                 <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
                             </h:selectOneMenu>                            
 

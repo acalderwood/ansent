@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+
+                    <!-- TODO: Search Anlage and Load the repairs in selectableRepair -->
+
+                    <p:panel id="AnlagePanel" header="Anlage suchen" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Anlage" for="selectableAnlage" />
+                            <h:selectOneMenu value="#{repairEdit.idAnlagen}">
+                                <f:selectItems id="selectableAnlage" value="#{repairSearch.selectableAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                                <p:ajax update="historyPanel" event="change" listener="#{repairEdit.loadRepairs}" />                                 
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel id="historyPanel" header="Geschichte Anlage" style="margin-bottom:10px;"> 
+
+                        <p:dataTable id="repairTable" var="repair" value="#{repairEdit.selectableRepairsByID}" style="margin-bottom:10px;">  
+                            <f:facet name="header">  
+                                Reparaturen 
+                            </f:facet>                                               
+
+                            <p:column headerText="Datum">  
+                                <h:outputText value="#{repair.reparaturDatum}" />  
+                            </p:column> 
+
+                            <p:column headerText="Rep.-ID">  
+                                <h:outputText value="#{repair.idRepair}" />  
+                            </p:column>                             
+
+                            <p:column headerText="Bezeichnung">  
+                                <h:outputText value="#{repair.faxText}" />  
+                            </p:column>
+
+                            <p:column headerText="">
+                                <p:commandButton ajax="false" id="rechnung" action="#{repairEdit.loadRepairRedirectRechnung}" value="Rechnung">
+                                    <f:setPropertyActionListener target="#{repairEdit.idRepair}" value="#{repair.idRepair}"/>
+                                </p:commandButton>
+
+                            </p:column>
+
+                            <p:column headerText="">
+                                <p:commandButton ajax="false" id="auftrag" action="#{repairEdit.loadRepairRedirectAuftrag}" value="Auftrag">
+                                    <f:setPropertyActionListener target="#{repairEdit.idRepair}" value="#{repair.idRepair}"/>
+                                </p:commandButton>  
+                            </p:column>   
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

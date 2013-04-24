@@ -10,33 +10,10 @@
     <h:body>
         <ui:composition template="templates/common-layout.xhtml">
             <ui:define name="content">
-                <h:form>
-
-                    <!-- TODO: Search Anlage and Load the repairs in selectableRepair -->
-
-                    <p:panel id="AnlagePanel" header="Search by Anlage" style="margin-bottom:10px;"> 
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value="Anlage" for="selectableAnlage" />
-                            <h:selectOneMenu value="#{repairEdit.idAnlagen}">
-                                <f:selectItems id="selectableAnlage" value="#{repairSearch.selectableAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
-                            </h:selectOneMenu>
-                        </h:panelGrid>
-                    </p:panel>
-                    <p:commandButton actionListener="#{repairEdit.loadRepairs}" update="repairPanel" value="Anlage Wahlen" id="ajax"/>
-
-                    <p:panel id="repairPanel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value="Reparatur" for="selectableRepair" />
-                            <h:selectOneMenu value="#{repairEdit.idRepair}">
-                                <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.idRepair}" />
-                            </h:selectOneMenu>
-                        </h:panelGrid>
-                    </p:panel>
-                    <p:commandButton actionListener="#{repairEdit.loadRepair}" update="display" value="Reparatur Wahlen" id ="ajax2"/>
-
+                <h:form id="rechnungForm">
                     <!-- Show table of invoices for repair with option to print -->
                     <!-- Option add new invoice for repair -->
-                    <p:panel id="display" header="Neue Reparatur" style="margin-bottom:10px;"> 
+                    <p:panel id="display" header="Rechnung" style="margin-bottom:10px;"> 
                         <t:panelGrid columns="2">
                             <h:outputLabel value="Arbeitszeit:" for="workTimeDatePicker" />
                             <p:calendar id="workTimeDatePicker"  value="#{repairEdit.timeWorked}" required="false" locale="de" pattern="HH:mm" timeOnly="true" />
@@ -171,13 +148,21 @@
                                         </p:commandLink>
                                     </t:panelGrid>
                                 
-                                    <t:commandButton action="#{repairEdit.generateInvoice}" value="Rechnung Machen" />
+                                    
                             </t:panelGroup>
                             
                         </t:panelGrid>
+                        <p:commandButton action="#{repairEdit.generateInvoice}" value="Rechnung Machen" />
                     </p:panel>
+                    
                 </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
 </html>
+<!--
+fields from neuereparatur
+Rechnungsnummer - enter in invoice
+Lieferanten-Nr - associated with Kunde
+Bestell-Nr. - enter in invoice
+-->

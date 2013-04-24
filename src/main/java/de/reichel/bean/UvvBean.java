@@ -13,11 +13,10 @@ import de.reichel.domain.model.Standorte;
 import de.reichel.domain.model.Uvv;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,13 +27,13 @@ import org.springframework.stereotype.Controller;
  *
  * @author alastair
  */
-@ManagedBean(name = "uvvSearch")
+@ManagedBean(name = "uvvBean")
 @ViewScoped
 @Scope("view")
 @Controller
-public class UvvSearch implements Serializable {
+public class UvvBean implements Serializable {
 
-    private static final Log log = LogFactory.getLog(UvvSearch.class);
+    private static final Log log = LogFactory.getLog(UvvBean.class);
     @Inject
     private UvvDAO uvvDAO;  
     @Inject
@@ -43,15 +42,28 @@ public class UvvSearch implements Serializable {
     private Standorte standorte;
     private Kunden kunden;
     private Betreiber betreiber;
-    private Integer idAnlagenForUvv;
+    private Integer idAnlagen;
     private Integer idUvv;
     private Object[] uvv;
     private List<Object[]> uvvPunkte;
     private List<Object[]> uvvMangel;
+    private String pruefer;
+    private Date pruefDatum;
+    private Date naechsteUvv;
+    private boolean erstPruefung;
+    private boolean nachPruefung;
+    private boolean plakette;
+    private boolean maengel;
+    private String erledigtDurch;
+    private String erledigtAm;
+    private String bemerkung;
+    
+    
+    
 
     public List<Uvv> getSelectableUvv() {
-        if (this.idAnlagenForUvv != null) {
-            return uvvDAO.getSelectableUvv(this.idAnlagenForUvv);
+        if (this.idAnlagen != null) {
+            return uvvDAO.getSelectableUvv(this.idAnlagen);
         } else {
             return new ArrayList<Uvv>();
         }
@@ -70,20 +82,17 @@ public class UvvSearch implements Serializable {
     /**
      * @return the idAnlagen
      */
-    public Integer getIdAnlagenForUvv() {
-        return idAnlagenForUvv;
+    public Integer getIdAnlagen() {
+        return idAnlagen;
     }
 
     /**
      * @param idAnlagen the idAnlagen to set
      */
-    public void setIdAnlagenForUvv(Integer idAnlagenForUvv) {
-        System.out.println("setting idAnlagenForUvv to:" + idAnlagenForUvv);
-        this.idAnlagenForUvv = idAnlagenForUvv;
+    public void setIdAnlagen(Integer idAnlagen) {
+        System.out.println("setting idAnlagen for Uvv to:" + idAnlagen);
+        this.idAnlagen = idAnlagen;
     }
-//    public void setAnlageSearch(AnlageSearch anlageSearch) {
-//        this.anlageSearch = anlageSearch;
-//    }
 
     /**
      * @return the idUvv
@@ -112,7 +121,7 @@ public class UvvSearch implements Serializable {
     }
 
     public void load() {
-        int id = this.getIdAnlagenForUvv();
+        int id = this.getIdAnlagen();
         System.out.println("id=" + id);
 
         this.anlage = anlagenDAO.getAnlagen(id);
@@ -189,5 +198,47 @@ public class UvvSearch implements Serializable {
      */
     public void setUvvMangel(List<Object[]> uvvMangel) {
         this.uvvMangel = uvvMangel;
+    }
+
+    /**
+     * @return the pruefer
+     */
+    public String getPruefer() {
+        return pruefer;
+    }
+
+    /**
+     * @param pruefer the pruefer to set
+     */
+    public void setPruefer(String pruefer) {
+        this.pruefer = pruefer;
+    }
+
+    /**
+     * @return the pruefDatum
+     */
+    public Date getPruefDatum() {
+        return pruefDatum;
+    }
+
+    /**
+     * @param pruefDatum the pruefDatum to set
+     */
+    public void setPruefDatum(Date pruefDatum) {
+        this.pruefDatum = pruefDatum;
+    }
+
+    /**
+     * @return the naechsteUvv
+     */
+    public Date getNaechsteUvv() {
+        return naechsteUvv;
+    }
+
+    /**
+     * @param naechsteUvv the naechsteUvv to set
+     */
+    public void setNaechsteUvv(Date naechsteUvv) {
+        this.naechsteUvv = naechsteUvv;
     }
 }

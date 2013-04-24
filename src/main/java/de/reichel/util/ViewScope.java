@@ -10,6 +10,7 @@ import org.springframework.beans.factory.config.Scope;
 public class ViewScope implements Scope {
 
 	public Object get(String name, ObjectFactory objectFactory) {
+            if (FacesContext.getCurrentInstance() != null) {
 		Map<String,Object> viewMap = FacesContext.getCurrentInstance().getViewRoot().getViewMap();
 
 		if(viewMap.containsKey(name)) {
@@ -20,6 +21,9 @@ public class ViewScope implements Scope {
 
 			return object;
 		}
+            } else {
+                return null;
+            }
 	}
 
 	public Object remove(String name) {

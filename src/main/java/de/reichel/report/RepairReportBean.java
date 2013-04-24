@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RepairReportBean implements Serializable {
 
-    private Integer repair_ID_REPAIR = null;
+    private String repair_ID_REPAIR = null;
     private String user_VORNAME = "";
     private String user_NACHNAME = "";
     private String repair_ERSTELLT = "";
@@ -26,6 +26,9 @@ public class RepairReportBean implements Serializable {
     private String standorte_STRASSE_NR = "";
     private String standorte_PLZ = "";
     private String standorte_ORT = "";
+    private String standorte_TEL = "";
+    private String standorte_FAX = "";
+    private String standorte_ANSPRECHPARTNER = "";
     private String anlagen_art_ART = "";
     private String anlagen_hersteller_HERSTELLER = "";
     private String anlagen_TYP = "";
@@ -76,14 +79,14 @@ public class RepairReportBean implements Serializable {
     /**
      * @return the repair_ID_REPAIR
      */
-    public Integer getRepair_ID_REPAIR() {
+    public String getRepair_ID_REPAIR() {
         return repair_ID_REPAIR;
     }
 
     /**
      * @param repair_ID_REPAIR the repair_ID_REPAIR to set
      */
-    public void setRepair_ID_REPAIR(Integer repair_ID_REPAIR) {
+    public void setRepair_ID_REPAIR(String repair_ID_REPAIR) {
         if (repair_ID_REPAIR != null) {
             this.repair_ID_REPAIR = repair_ID_REPAIR;
         }
@@ -879,5 +882,47 @@ public class RepairReportBean implements Serializable {
      */
     public void setRechnungen_AUFTRAGGEBER(String rechnungen_AUFTRAGGEBER) {
         this.rechnungen_AUFTRAGGEBER = rechnungen_AUFTRAGGEBER;
+    }
+
+    /**
+     * @return the standorte_TEL
+     */
+    public String getStandorte_TEL() {
+        return standorte_TEL;
+    }
+
+    /**
+     * @param standorte_TEL the standorte_TEL to set
+     */
+    public void setStandorte_TEL(String standorte_TEL) {
+        this.standorte_TEL = standorte_TEL;
+    }
+
+    /**
+     * @return the standorte_FAX
+     */
+    public String getStandorte_FAX() {
+        return standorte_FAX;
+    }
+
+    /**
+     * @param standorte_FAX the standorte_FAX to set
+     */
+    public void setStandorte_FAX(String standorte_FAX) {
+        this.standorte_FAX = standorte_FAX;
+    }
+
+    /**
+     * @return the standorte_ANSPRECHPARTNER
+     */
+    public String getStandorte_ANSPRECHPARTNER() {
+        return standorte_ANSPRECHPARTNER;
+    }
+
+    /**
+     * @param standorte_ANSPRECHPARTNER the standorte_ANSPRECHPARTNER to set
+     */
+    public void setStandorte_ANSPRECHPARTNER(String standorte_ANSPRECHPARTNER) {
+        this.standorte_ANSPRECHPARTNER = standorte_ANSPRECHPARTNER;
     }
 }

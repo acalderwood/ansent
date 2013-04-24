@@ -52,6 +52,7 @@ public class Utils {
 
     public static String getInvoiceDirPath() {
         if (isUnix() || isMac() || isSolaris()) {
+//            return "/share/MD0_DATA/Public/MTB-Eneutec/Claudia/ENEUTEC-MTB/Rechnungen/2013-Rechnungen";
             return "/var/ansent/rechnungen";
         }
         if (isWindows()) {
@@ -62,7 +63,8 @@ public class Utils {
     
     public static String getAuftragDirPath() {
         if (isUnix() || isMac() || isSolaris()) {
-            return "/var/ansent/auftraege";
+return "/var/ansent/auftraege";
+            //            return "/share/MD0_DATA/Public/MTB-Eneutec/Claudia/ENEUTEC-MTB/Auftragsbestätigungen/2013-Aufträge";
         }
         if (isWindows()) {
             return "C:\\temp\\auftraege";

@@ -116,7 +116,7 @@ public class AnlagenDAOImplTest {
         Assert.assertEquals(AnlagenArt.class, (anlagenDAO.getAnlagen(interneNr))[1].getClass());
     }
     
-    @Test
+    @Test @Ignore
     public void testAddAnlagen() {
         AnlageNew backingBean = new AnlageNew();
         backingBean.setInterneNr("test" + Calendar.getInstance().getTimeInMillis());
@@ -136,7 +136,7 @@ public class AnlagenDAOImplTest {
         Assert.assertEquals(sizeBefore + 1, sizeAfter);
     }
 
-    @Test
+    @Test @Ignore
     public void testAddBetreiber() {
         BetreiberNew backingBean = new BetreiberNew();
         backingBean.setAnsprechpartner("test" + Calendar.getInstance().getTimeInMillis());
@@ -157,7 +157,7 @@ public class AnlagenDAOImplTest {
         Assert.assertEquals(sizeBefore + 1, sizeAfter);
     } 
     
-    @Test
+    @Test @Ignore
     public void testAddKunden() {
         KundenNew backingBean = new KundenNew();
         backingBean.setAnsprechpartner("AAAAAA");

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app metadata-complete="true" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <display-name>reichel</display-name>
     <session-config>
         <session-timeout>60000</session-timeout>
@@ -12,7 +12,11 @@
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>Production</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.defaultResourceMaxAge</param-name>
+        <param-value>60480000000</param-value>
     </context-param>
     <context-param>
         <param-name>org.apache.myfaces.USE_ENCRYPTION</param-name>
@@ -20,7 +24,7 @@
     </context-param>
         <context-param>
             <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-            <param-value>client</param-value>
+            <param-value>server</param-value>
         </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -28,6 +32,27 @@
             /WEB-INF/applicationContext.xml
         </param-value>
     </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.NUMBER_OF_VIEWS_IN_SESSION</param-name>
+        <param-value>1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+        <param-value>false</param-value>
+    </context-param>
+       <context-param>
+        <param-name>org.apache.myfaces.COMPRESS_STATE_IN_SESSION=false</param-name>
+        <param-value>false</param-value>
+    </context-param>
+       <context-param>
+        <param-name>org.apache.myfaces.CACHE_OLD_VIEWS_IN_SESSION_MODE</param-name>
+        <param-value>false</param-value>
+    </context-param>  
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>     
+
     <resource-ref>
         <res-ref-name>jdbc/ReichelDS</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>

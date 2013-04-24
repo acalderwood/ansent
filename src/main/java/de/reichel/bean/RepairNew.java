@@ -30,7 +30,7 @@ public class RepairNew extends RepairBean {
 
     private static final Log log = LogFactory.getLog(RepairNew.class);
     private List<TeileNew> parts = null;
-
+    private Integer additionalNo = null;
 
     public String add() {
         log.debug("Adding new repair");
@@ -38,24 +38,24 @@ public class RepairNew extends RepairBean {
         return "index";
     }
     
-    public String generateAuftrag() {
-        log.debug("Adding new repair");
-        repairDAO.addRepair(this);
-        try {
-            byte[] invoiceBytes = repairDAO.generateAuftrag(this);
-            log.debug("JasperPrint object created");
-            File pdf = new File(Utils.getAuftragDirPath() + File.separator + "reparatur-auftrag-" + Utils.fileDateFormat.format(this.getRepairDate()) + "-" + this.getIdRepair() + ".pdf");
-            log.debug("Jasper file created at: " + pdf.getAbsolutePath());
-            OutputStream os = new FileOutputStream(pdf);
-            os.write(invoiceBytes);
-            os.flush();
-            os.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "index";
-    }    
+//    public String generateAuftrag() {
+//        log.debug("Adding new repair");
+////        repairDAO.addRepair(this);
+//        try {
+//            byte[] invoiceBytes = repairDAO.generateAuftrag(this);
+//            log.debug("JasperPrint object created");
+//            File pdf = new File(Utils.getAuftragDirPath() + File.separator + "reparatur-auftrag-" + Utils.fileDateFormat.format(this.getRepairDate()) + "-" + this.getIdRepair() + ".pdf");
+//            log.debug("Jasper file created at: " + pdf.getAbsolutePath());
+//            OutputStream os = new FileOutputStream(pdf);
+//            os.write(invoiceBytes);
+//            os.flush();
+//            os.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return "index";
+//    }    
 
     public void addParts(ActionEvent event) {
         parts = (List<TeileNew>) event.getComponent().getAttributes().get("parts");
@@ -63,5 +63,19 @@ public class RepairNew extends RepairBean {
 
     public void timeKmListener(AjaxBehaviorEvent event) {
         log.debug("timeKmListener called");
+    }
+    
+    public void setAdditionalNo(Integer additionalNo) {
+        this.additionalNo = additionalNo;
+    }
+    
+    public Integer getAdditionalNo() {
+        return additionalNo;
+    }
+    
+    public void incrementAdditionalNo() {
+        if (additionalNo != null) {
+            additionalNo = additionalNo++;
+        }
     }
 }

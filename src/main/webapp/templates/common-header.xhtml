@@ -44,13 +44,15 @@
             </script>            
                 <h:form>
             <p:menubar>  
-                <p:menuitem value="Übersicht" url="suchubersichtanlage.jsf" />
+                
 
                 <p:submenu label="Anlage" >                  
                     <p:menuitem value="Neue Anlage" url="neueanlage.jsf" /> 
                     <p:menuitem value="Bearbeiten Anlage" url="bearbeitenanlage.jsf" />
-                    <p:menuitem value="Suchen Anlage" url="sucheAnlage.jsf" />
-                    <p:menuitem value="Suchen Standorten Anlage" url="sucheStandortAnlage.jsf" />
+                    <p:menuitem value="Suchen Anlage (kurz)" url="sucheAnlage.jsf" />
+                    <p:menuitem value="Suchen Anlage (ausgebr.)" url="suchubersichtanlage.jsf" />
+                    <p:menuitem value="Geschichte Anlage" url="geschichteanlagen.jsf" />
+<!--                    <p:menuitem value="Suchen Standorten Anlage" url="sucheStandortAnlage.jsf" />-->
                 </p:submenu>
 
                 <p:submenu label="Kunde" >                  
@@ -74,8 +76,8 @@
                 </p:submenu>                
 
                 <p:submenu label="UVV" >   
-                    <p:menuitem value="Neue UVV" url="#" />
-                    <p:menuitem value="Bearbeiten UVV" url="#" />
+                    <p:menuitem value="Neue UVV" url="neueuvv.jsf" />
+                    <p:menuitem value="Bearbeiten UVV" url="bearbeitenuvv.jsf" />
                 </p:submenu>
 
                 <p:submenu label="Reparaturauftrag" >

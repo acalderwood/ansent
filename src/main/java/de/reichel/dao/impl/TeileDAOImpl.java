@@ -11,6 +11,7 @@ import de.reichel.dao.TeileDAO;
 import de.reichel.domain.model.RepairTeile;
 import de.reichel.domain.model.Teile;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -80,8 +81,10 @@ public class TeileDAOImpl implements TeileDAO {
 
     @Transactional(readOnly = true)
     public List<Teile> getAllTeile() {
+        long startTime = new Date().getTime();
         Query query = entityManager.createQuery("from Teile teile order by teile.bezeichnung");
         List<Teile> result = query.getResultList();
+        log.debug("TIME: " + (new Date().getTime() - startTime));
         return result;
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reparatur" pageWidth="595" pageHeight="842" columnWidth="505" leftMargin="48" rightMargin="42" topMargin="20" bottomMargin="20" uuid="474487c2-06a9-4c5a-9afe-e6372378934f">
-	<property name="ireport.zoom" value="1.2418426461183354"/>
+	<property name="ireport.zoom" value="0.7009877989627908"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
@@ -62,66 +62,14 @@
 	<title>
 		<band height="131" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="59" y="23" width="261" height="24" forecolor="#808080"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[MTB Reichel Entsorgungstechnik KG]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="2" y="44" width="285" height="0" forecolor="#333333" backcolor="#333333"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</rectangle>
-			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="2" y="44" width="291" height="2" forecolor="#0000CC" backcolor="#0000FF"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement uuid="fc72a16c-f76a-442a-a313-7b15a9bafafb" x="59" y="46" width="261" height="20" forecolor="#0000FF"/>
+				<reportElement uuid="a1a9aad5-3296-4eae-b3f7-27055d33e87b" x="239" y="-211" width="136" height="62"/>
 				<textElement>
-					<font size="10"/>
+					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Planung  -  Anlagenverkauf  -  Vermietung  -  Service]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="fc72a16c-f76a-442a-a313-7b15a9bafafb" x="2" y="111" width="318" height="10" forecolor="#0000FF"/>
-				<textElement>
-					<font size="6"/>
-				</textElement>
-				<text><![CDATA[MTB Reichel Entsorgungstechnik KG – Birkenweg 1 - D-86567 Hilgertshausen ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="57" width="96" height="10" forecolor="#0000FF"/>
-				<textElement>
-					<font fontName="Arial" size="7" isBold="false"/>
-				</textElement>
-				<text><![CDATA[B i r k e n w e g 1
-]]></text>
-			</staticText>
-			<image>
-				<reportElement uuid="87e03a63-25d1-4772-96a4-8824896e0559" x="359" y="4" width="144" height="42"/>
-				<imageExpression><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance(new java.io.File("C:\\Users\\Alastair Calderwood\\Documents\\NetBeansProjects\\reichel\\src\\main\\resources\\reports\\mtb_highres.svg"))]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="66" width="97" height="13" forecolor="#0000FF"/>
-				<textElement>
-					<font fontName="Arial" size="7" isBold="false"/>
-				</textElement>
-				<text><![CDATA[D – 86567 Hilgertshausen]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="84" width="97" height="44" forecolor="#0000FF"/>
-				<textElement>
-					<font fontName="Arial" size="7" isBold="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Tel.:	08250 31 50 292
-Fax.:	08250 31 50 294
-Mobil: 	0175 / 722 35 84
-e-mail:	mtb@eneutec.de
+				<text><![CDATA[Reparatur-Id:
+Lieferanten-Nr.:
+Bestell-Nr.:
+Wartungszeitraum:
 ]]></text>
 			</staticText>
 		</band>
@@ -133,7 +81,7 @@ e-mail:	mtb@eneutec.de
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="671" splitType="Stretch">
+		<band height="633" splitType="Stretch">
 			<textField>
 				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="69" width="404" height="30"/>
 				<textElement verticalAlignment="Middle">
@@ -168,7 +116,7 @@ e-mail:	mtb@eneutec.de
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Kunde: ]]></text>
+				<text><![CDATA[Kunde:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="70" width="67" height="16"/>
@@ -250,7 +198,7 @@ e-mail:	mtb@eneutec.de
 				<text><![CDATA[__________________]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="169" y="208" width="335" height="54"/>
+				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="169" y="206" width="335" height="54"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="11"/>
 				</textElement>
@@ -366,34 +314,6 @@ Unterschrift und Stempel des Kunden			Name in Druckschrift des Kunden]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{techniker_NAME_TECHNIKER}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement uuid="023eb0cb-c6bc-48fc-a03b-98c2a6f5f509" x="3" y="608" width="205" height="52" forecolor="#0000FF"/>
-				<textElement>
-					<font fontName="Arial"/>
-				</textElement>
-				<text><![CDATA[HRA 1167 Amtsgericht Passau
-Persönlich haftender Gesellschafter:
-Klaus-Dieter Reichel
-USt.-Id.: DE 241001220
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="023eb0cb-c6bc-48fc-a03b-98c2a6f5f509" x="308" y="608" width="197" height="52" forecolor="#0000FF"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial"/>
-				</textElement>
-				<text><![CDATA[Raiffeisenbank Am Goldenen Steig
-Kto.Nr.: 10 18 11 371  BLZ: 740 611 01
-IBAN:  DE 4474 0611 0101 0181 1371
-BIC:  GENODEF1RGS
-]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="3" y="605" width="502" height="2" forecolor="#0000CC" backcolor="#0000FF"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</rectangle>
 		</band>
 	</detail>
 	<columnFooter>

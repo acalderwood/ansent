@@ -33,10 +33,10 @@ public class AnlageEdit extends AnlageBean {
         return "index";
     }
     
-    public String load() {
+    public void load() {
         
         log.debug("Load Anlagen is called");
         anlagenDAO.loadAnlagen(this);
-        return "index";
+//        return "index";
     }
 }

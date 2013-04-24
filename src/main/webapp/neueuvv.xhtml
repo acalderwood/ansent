@@ -3,80 +3,89 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
     <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
     <h:body>
-        <ui:composition template="templates/common-layout.xhtml">        
+        <ui:composition template="templates/common-layout.xhtml">
             <ui:define name="content">
+                <!-- Search Anlage and Load it -->
+                <h:form>
+                    <p:panel id="panel" header="Bearbeiten Anlage" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Interne Nr." for="selectableAnlageList" />
+                            <h:selectOneMenu value="#{uvvBean.idAnlagen}">
+                                <f:selectItems id="selectableAnlageList" value="#{anlageSearch.selectableAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
 
-                <h:form id="auswahlAnlagen">
+                    <p:commandButton actionListener="#{uvvBean.load}" update="display" value="Wählen" id="ajax"/>
 
-                    <p:panelGrid columns="2" styleClass="panelColumns">
-                        <p:column>
-                            <p:panel id="panel" header="UVV" style="margin-top:10px;"> 
-                                <p:panelGrid columns="1">
-                                    <h:outputLabel value="Interne Nr. Anlagen" for="anlagen" />
-                                    <h:selectOneMenu value="#{uvvSearch.idAnlagenForUvv}" id="anlagen">
-                                        <f:selectItems value="#{uvvSearch.allAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}"/>
-                                    </h:selectOneMenu>
-                                </p:panelGrid>
-                            </p:panel>
+                    <p:panel id="display" header="Information" style="margin-top:10px;"> 
+                        <h:panelGrid columns="2">
 
-                            <p:commandButton actionListener="#{uvvSearch.load}" update="display uvv " value="Wählen" id="ajax"/>
+                            <h:outputLabel value="Prüfer" for="interneNr" />
+                            <p:inputText id="pruefer" value="#{uvvBean.pruefer}"  />
 
-                            <p:panel id="display" header="Information" style="margin-top:10px;"> 
-                                <p:panelGrid columns="2">
-                                    <f:facet name="header">  
-                                        Anlage:
-                                    </f:facet>  
-                                </p:panelGrid>
-                                <p:panelGrid columns="2"> 
+                            <h:outputLabel value="Prüfdatum" for="pruefDatumDatePicker" />
+                            <p:calendar id="pruefDatumDatePicker"  value="#{uvvBean.pruefDatum}" required="false" locale="de" />
 
-                                    <f:facet name="header">  
-                                        Standort:
-                                    </f:facet>  
-                                    <h:outputLabel value="Ort" for="betreiberort" />
-                                    <h:outputText id="betreiberort" value="#{uvvSearch.betreiber.ort}"/>
-                                </p:panelGrid>
-                                <p:panelGrid columns="2">
-                                    <f:facet name="header">  
-                                        Kunde:
-                                    </f:facet>  
-                                </p:panelGrid>
-                                <p:panelGrid columns="2">
-                                    <f:facet name="header">  
-                                        Betreiber:
-                                    </f:facet>  
-                                </p:panelGrid>  
-                            </p:panel>
-                        </p:column>
-                        <p:column>
-                            <p:panel id="uvv" header="Auswahl UVV" style="margin-top:10px;"> 
-                                <p:panelGrid columns="2">
+                            <h:outputLabel value="Nächte UVV" for="naechsteUvvdatepicker" />
+                            <p:calendar id="naechsteUvvdatepicker"  value="#{uvvBean.naechsteUvv}" required="false" locale="de" />
 
-                                    <h:selectOneMenu value="#{uvvSearch.idUvv}" id="uvvSelection">
-                                        <f:selectItems value="#{uvvSearch.selectableUvv}" var="uvv" itemValue="#{uvv.idUvv}" itemLabel="#{uvv.pruefdatum}"/>
-                                        <p:ajax listener="#{uvvSearch.processSelectedUvv}" update="ergebnis1 ergebnis0 nextUvv prufer" />
-                                    </h:selectOneMenu>
-                                    <!-- EMPTY CELL -->
 
-                                    <h:outputLabel value="Ergebnis:" for="ergebnis" />
-                                    <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '1'}" value="Erstprüfung IO" id="ergebnis1"/>
-                                    <h:outputText rendered="#{uvvSearch.uvv[0].erstpruefungIo == '0'}" value="Nicht IO" id="ergebnis0"/>
+                            <h:outputLabel value="Standort" for="standort" />
+                            <h:selectOneMenu id="standort" value="#{anlageEdit.idStandort}" required="false">
+                                <f:selectItems id="selectableStandortList" value="#{anlageSearch.selectableStandort}" var="standort" itemValue="#{standort.idStandorte}" itemLabel="#{standort.idStandorte} - #{standort.standortname} - #{standort.strasseNr} - #{standort.plz} - #{standort.ort}" />
+                            </h:selectOneMenu>                 
 
-                                    <h:outputLabel value="Nächste UVV:" for="nextUvv" />
-                                    <h:outputText value="#{uvvSearch.uvv[0].nextUvv}" id="nextUvv"/>
+                            <h:outputLabel value="Kunden" for="kunden" />
+                            <h:selectOneMenu id="kunden" value="#{anlageEdit.idKunden}" required="false">
+                                <f:selectItems id="selectableKundenList" value="#{anlageSearch.selectableKunden}" var="kunden" itemValue="#{kunden.idKunden}" itemLabel="#{kunden.idKunden} - #{kunden.firmenname} - #{kunden.strasseNr} - #{kunden.plz} - #{kunden.ort}" />
+                            </h:selectOneMenu>
 
-                                    <h:outputLabel value="Prüfer:" for="prufer" />
-                                    <h:outputText value="#{uvvSearch.uvv[0].pruefer}" id="prufer"/>
-                                </p:panelGrid>
-                            </p:panel>
-                        </p:column>
-                    </p:panelGrid>
+                            <h:outputLabel value="Betreiber" for="betreiber" />
+                            <h:selectOneMenu id="betreiber" value="#{anlageEdit.idBetreiber}" required="false">
+                                <f:selectItems id="selectableBetreiberList" value="#{anlageSearch.selectableBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.idBetreiber} - #{betreiber.betreibername} - #{betreiber.strasseNr} - #{betreiber.plz} - #{betreiber.ort}" />
+                            </h:selectOneMenu>                            
+
+                            <h:outputLabel value="Typ" for="typ" />
+                            <p:inputText id="typ" value="#{anlageEdit.typ}" />
+
+                            <h:outputLabel value="Fabrikationsnr." for="fabrikationsnr" />
+                            <p:inputText id="fabrikationsnr" value="#{anlageEdit.fabrikationsnr}" required="false" />
+
+
+                            <h:outputLabel value="Baujahr" for="baujahr" />
+                            <p:calendar id="baujahr" value="#{anlageEdit.baujahr}" required="false" locale="de" pattern="yyyy"/>
+
+
+                            <h:outputLabel value="Bemerkung" for="bemerkung" />
+                            <p:inputText id="bemerkung" value="#{anlageEdit.bemerkung}" required="false" />
+
+
+                            <h:outputLabel value="Interne Notiz" for="interneNotiz" />
+                            <p:inputText id="interneNotiz" value="#{anlageEdit.interneNotiz}" required="false" />
+
+
+                            <h:outputLabel value="Nächste UVV" for="naechsteUVV" />
+                            <p:calendar value="#{anlageEdit.naechsteUVV}" id="naechsteUVV"  required="false" locale="de" pattern="dd.MM.yyyy" />
+
+
+                            <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
+                            <p:calendar id="naechsteWartung" value="#{anlageEdit.naechsteWartung}" required="false" locale="de" pattern="dd.MM.yyyy" />
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton action="#{anlageEdit.update}" update="display" value="Update" />
                 </h:form>
 
-            </ui:define>    
+
+
+
+            </ui:define>
         </ui:composition>
     </h:body>
 </html>

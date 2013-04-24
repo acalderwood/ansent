@@ -8,10 +8,10 @@ import de.reichel.domain.model.Repair;
 import de.reichel.util.Utils;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -34,9 +34,53 @@ public class RepairEdit extends RepairBean {
 
     private static final Log log = LogFactory.getLog(RepairEdit.class);
 
+    @PostConstruct
+    public void refreshData() {
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        RepairEdit repairEdit = (RepairEdit) flash.get("repairEdit");
+        if (repairEdit != null) {
+            log.debug("FLASH=" + repairEdit.getWorkDescription());
+            this.setAccommodationTime(repairEdit.getAccommodationTime());
+            this.setAuftraggeber(repairEdit.getAuftraggeber());
+            this.setBestellNr(repairEdit.getBestellNr());
+            this.setDirtyTime(repairEdit.getDirtyTime());
+            this.setFixedTravelCost(repairEdit.getFixedTravelCost());
+            this.setHelperTimeWorked(repairEdit.getHelperTimeWorked());
+            this.setHoursOperation(repairEdit.getHoursOperation());
+            this.setIdAnlagen(repairEdit.getIdAnlagen());
+            this.setIdBetreiber(repairEdit.getIdBetreiber());
+            this.setIdFirma(repairEdit.getIdFirma());
+            this.setIdKunden(repairEdit.getIdKunden());
+            this.setIdRates(repairEdit.getIdRates());
+            this.setIdRepair(repairEdit.getIdRepair());
+            this.setIdRepairTeile(repairEdit.getIdRepairTeile());
+            this.setIdStandorte(repairEdit.getIdStandorte());
+            this.setIdTechnician(repairEdit.getIdTechnician());
+            this.setInternalRemarks(repairEdit.getInternalRemarks());
+            this.setLieferantenNr(repairEdit.getLieferantenNr());
+            this.setNewTechnicianName(repairEdit.getNewTechnicianName());
+            this.setOvertimeTime(repairEdit.getOvertimeTime());
+            this.setParts(repairEdit.getParts());
+            this.setRechnungsnummer(repairEdit.getRechnungsnummer());
+            this.setRepairDate(repairEdit.getRepairDate());
+            this.setState(repairEdit.getState());
+            this.setTimeWorked(repairEdit.getTimeWorked());
+            this.setTravelDistanceKm(repairEdit.getTravelDistanceKm());
+            this.setTravelRatePerKm(repairEdit.getTravelRatePerKm());
+            this.setTravelTime(repairEdit.getTravelTime());
+            this.setTravelTimeHelper(repairEdit.getTravelTimeHelper());
+            this.setWartungzeitraum(repairEdit.getWartungzeitraum());
+            this.setWorkDescription(repairEdit.getWorkDescription());
+        }
+    }
+
     public String update() {
         log.debug("Update Repair is called");
-        repairDAO.updateRepair(this);
+        try {
+            repairDAO.updateRepair(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "index";
     }
 
@@ -58,6 +102,29 @@ public class RepairEdit extends RepairBean {
 
         return "index";
     }
+    
+    public String generateAuftrag() {
+        log.debug("Adding new repair");
+        if (this.getIdRepair() == null) {
+            repairDAO.addRepair(this);        
+        } else {
+            repairDAO.updateRepair(this);
+        }
+        try {
+            byte[] invoiceBytes = repairDAO.generateAuftrag(this);
+            log.debug("JasperPrint object created");
+            File pdf = new File(Utils.getAuftragDirPath() + File.separator + "reparatur-auftrag-" + Utils.fileDateFormat.format(this.getRepairDate()) + "-" + this.getIdRepair() + ".pdf");
+            log.debug("Jasper file created at: " + pdf.getAbsolutePath());
+            OutputStream os = new FileOutputStream(pdf);
+            os.write(invoiceBytes);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "index";
+    }
 
     public String loadRepairRedirect() {
         log.debug("Load Repair is called");
@@ -65,6 +132,22 @@ public class RepairEdit extends RepairBean {
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
         flash.put("repairEdit", this);
         return "bearbeitenreparatur_ret?faces-redirect=true";
+    }
+
+    public String loadRepairRedirectRechnung() {
+        log.debug("Load Repair is called");
+        repairDAO.loadRepair(this);
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        flash.put("repairEdit", this);
+        return "neuerechnung_geschichte?faces-redirect=true";
+    }
+
+    public String loadRepairRedirectAuftrag() {
+        log.debug("Load Repair is called");
+        repairDAO.loadRepair(this);
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        flash.put("repairEdit", this);
+        return "neuerauftrag_geschichte?faces-redirect=true";
     }
 
     public String loadRepair() {

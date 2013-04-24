@@ -2,7 +2,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
     <h:head>
         <h:outputStylesheet library="css" name="styles.css"  />
     </h:head>
@@ -10,10 +11,9 @@
         <ui:composition template="templates/common-layout.xhtml">
             <ui:define name="content">
                 <h:form>
-
-                    <p:panel id="panel" header="Edit Reparatur" style="margin-bottom:10px;"> 
+                    <p:panel id="panel" header="Auftrag" style="margin-bottom:10px;"> 
                         <p:messages id="messages" />  
-                        <h:panelGrid columns="2">
+                        <t:panelGrid columns="2">
 
                             <h:outputText value="Options: " />  
                             <p:selectOneRadio id="options" value="#{repairEdit.state}">  
@@ -36,10 +36,10 @@
                             <h:outputLabel value="Auszuführende Arbeiten:" for="workDescription" />
                             <p:inputTextarea rows="4" cols="50" id="workDescription" value="#{repairEdit.workDescription}" required="false" />
 
-                            <h:outputLabel value="Interne bemerkungen:" for="internalRemarks" />
+                            <h:outputLabel value="Interne Bemerkungen:" for="internalRemarks" />
                             <p:inputTextarea rows="4" cols="50" id="internalRemarks" value="#{repairEdit.internalRemarks}" required="false" />
 
-                            <h:outputLabel value="Satz:" for="selectableSaetzeList" />
+                            <h:outputLabel value="Stundensatz:" for="selectableSaetzeList" />
                             <p:selectOneMenu value="#{repairEdit.idRates}">
                                 <f:selectItems id="selectableSaetzeList" value="#{repairSearch.selectableSaetze}" var="satz" itemValue="#{satz.idSatz}" itemLabel="#{satz.satzBezeichnung}" />
                             </p:selectOneMenu>
@@ -47,14 +47,21 @@
                             <h:outputLabel value="Techniker:" for="selectableTechnikerList" />
                             <p:selectOneMenu value="#{repairEdit.idTechnician}">
                                 <f:selectItems id="selectableTechnikerList" value="#{repairSearch.selectableTechniker}" var="tech" itemValue="#{tech.idTechniker}" itemLabel="#{tech.nameTechniker}" />
-                            </p:selectOneMenu>                                
+                            </p:selectOneMenu>   
+
+                            <h:outputLabel value="Techniker (Neuer):" for="technikerName" />
+                            <p:inputText id="technikerName" value="${repairEdit.newTechnicianName}" />
 
                             <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
-                            <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="false" locale="de" pattern="dd.MM.yyyy" />
-                        </h:panelGrid>
+                            <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="true" locale="de" pattern="dd.MM.yyyy" />
+
+                        </t:panelGrid>
+
+                        <p:commandButton id="auftragMachen" action="#{repairEdit.generateAuftrag}" value="Auftrag machen"/>
                     </p:panel>
-                    <p:commandButton action="#{repairEdit.update}" value="Repair Hinzufügen" />
-                </h:form>
+
+
+                </h:form>   
             </ui:define>
         </ui:composition>
     </h:body>
