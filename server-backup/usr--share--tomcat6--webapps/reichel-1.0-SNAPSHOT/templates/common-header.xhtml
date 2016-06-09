@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      >
+    <body>
+        <ui:composition>
+
+            <script type="text/javascript">
+                PrimeFaces.locales['de'] = {
+                    closeText: 'Schließen',
+                    prevText: 'Zurück',
+                    nextText: 'Weiter',
+                    monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                    monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                    dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                    dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+                    dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+                    weekHeader: 'Woche',
+                    FirstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'Nur Zeit',
+                    timeText: 'Zeit',
+                    hourText: 'Stunde',
+                    minuteText: 'Minute',
+                    secondText: 'Sekunde',
+                    currentText: 'Heute',
+                    ampm: false,
+                    month: 'Monat',
+                    week: 'Woche',
+                    day: 'Tag',
+                    allDayText: 'Ganzer Tag'
+                };
+            </script>
+            <script type="text/javascript">
+                function setValue(element, newValue){
+                    document.getElementById(element).value = newValue;
+                }
+            </script>            
+                <h:form>
+            <p:menubar>  
+                
+
+                <p:submenu label="Anlage" >                  
+                    <p:menuitem value="Neue Anlage" url="neueanlage.jsf" /> 
+                    <p:menuitem value="Bearbeiten Anlage" url="bearbeitenanlage.jsf" />
+                    <p:menuitem value="Suchen Anlage (kurz)" url="sucheAnlage.jsf" />
+                    <p:menuitem value="Suchen Anlage (ausgebr.)" url="suchubersichtanlage.jsf" />
+                    <p:menuitem value="Geschichte Anlage" url="geschichteanlagen.jsf" />
+<!--                    <p:menuitem value="Suchen Standorten Anlage" url="sucheStandortAnlage.jsf" />-->
+                </p:submenu>
+
+                <p:submenu label="Kunde" >                  
+                    <p:menuitem value="Neuer Kunde" url="neuerkunde.jsf" /> 
+                    <p:menuitem value="Bearbeiten Kunde" url="bearbeitenkunde.jsf" />
+                </p:submenu>
+
+                <p:submenu label="Betreiber" >                  
+                    <p:menuitem value="Neuer Betreiber" url="neuebetreiber.jsf" /> 
+                    <p:menuitem value="Bearbeiten Betreiber" url="bearbeitenbetreiber.jsf" />
+                </p:submenu>
+
+                <p:submenu label="Standort" >                  
+                    <p:menuitem value="Neue Standort" url="neuestandorte.jsf" /> 
+                    <p:menuitem value="Bearbeiten Standort" url="bearbeitenstandorte.jsf" />
+                </p:submenu>
+
+                <p:submenu label="Entsorger" >                  
+                    <p:menuitem value="Neuer Entsorger" url="neuerentsorger.jsf" /> 
+                    <p:menuitem value="Bearbeiten Entsorger" url="bearbeitenentsorger.jsf" />
+                </p:submenu>                
+
+                <p:submenu label="UVV" >   
+                    <p:menuitem value="Neue UVV" url="neueuvv.jsf" />
+                    <p:menuitem value="Bearbeiten UVV" url="bearbeitenuvv.jsf" />
+                </p:submenu>
+
+                <p:submenu label="Reparaturauftrag" >
+                    <p:menuitem value="Neuer Reparaturauftrag" url="neuereparatur.jsf" />
+                    <p:menuitem value="Bearbeiten Reparaturauftrag" url="bearbeitenreparatur.jsf" />
+                    <p:menuitem value="Aufträge Anschauen" url="auftraege" />
+                </p:submenu>
+
+                <p:submenu label="Rechnungen" >
+                    <p:menuitem value="Neue Rechnung" url="neuerechnung.jsf" />
+                    <p:menuitem value="Rechnungen Anschauen" url="rechnungen" />
+                </p:submenu>
+
+                    <p:menuitem value="Logout" action="${userManager.logout}" />
+
+            </p:menubar>
+                </h:form>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.Saetze" 
+    table="SAETZE"
+>
+
+    <id
+        name="idSatz"
+        type="java.lang.Integer"
+        column="ID_SATZ"
+    >
+        <generator class="increment" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="idKunden"
+        type="java.lang.Integer"
+        column="ID_KUNDEN"
+        length="10"
+    />
+    <property
+        name="gueltigBis"
+        type="java.sql.Timestamp"
+        column="GUELTIG_BIS"
+        length="19"
+    />
+    <property
+        name="satzBezeichnung"
+        type="java.lang.String"
+        column="SATZ_BEZEICHNUNG"
+        length="50"
+    />
+    <property
+        name="arbeitszeit"
+        type="java.lang.Double"
+        column="ARBEITSZEIT"
+        length="22"
+    />
+    <property
+        name="fahrzeit"
+        type="java.lang.Double"
+        column="FAHRZEIT"
+        length="22"
+    />
+    <property
+        name="fahrzeitHelfer"
+        type="java.lang.Double"
+        column="FAHRZEIT_HELFER"
+        length="22"
+    />
+    <property
+        name="arbzeitHelfer"
+        type="java.lang.Double"
+        column="ARBZEIT_HELFER"
+        length="22"
+    />
+    <property
+        name="ausloese"
+        type="java.lang.Double"
+        column="AUSLOESE"
+        length="22"
+    />
+    <property
+        name="ueberzeit"
+        type="java.lang.Double"
+        column="UEBERZEIT"
+        length="22"
+    />
+    <property
+        name="kilometer"
+        type="java.lang.Double"
+        column="KILOMETER"
+        length="22"
+    />
+    <property
+        name="zuschlagVerschmutzung"
+        type="java.lang.Double"
+        column="ZUSCHLAG_VERSCHMUTZUNG"
+        length="22"
+    />
+    <property
+        name="ersatzteileRabatt"
+        type="java.lang.Double"
+        column="ERSATZTEILE_RABATT"
+        length="22"
+    />
+    <property
+        name="wartungsP"
+        type="short"
+        column="WARTUNGS_P"
+        not-null="true"
+        length="5"
+    />
+    <property
+        name="wartungsPb"
+        type="double"
+        column="WARTUNGS_PB"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="uvvP"
+        type="short"
+        column="UVV_P"
+        not-null="true"
+        length="5"
+    />
+    <property
+        name="uvvPb"
+        type="double"
+        column="UVV_PB"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="gesperrt"
+        type="int"
+        column="GESPERRT"
+        not-null="true"
+        length="10"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

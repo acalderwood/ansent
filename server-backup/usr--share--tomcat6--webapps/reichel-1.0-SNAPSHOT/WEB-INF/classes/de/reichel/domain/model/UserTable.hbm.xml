@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.UserTable" 
+    table="USER_TABLE"
+>
+
+    <id
+        name="idUser"
+        type="java.lang.Integer"
+        column="ID_USER"
+    >
+        <generator class="increment" />
+    </id>
+
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="user"
+        type="java.lang.String"
+        column="USER"
+        length="16"
+    />
+    <property
+        name="password"
+        type="java.lang.String"
+        column="PASSWORD"
+        length="16"
+    />
+    <property
+        name="vorname"
+        type="java.lang.String"
+        column="VORNAME"
+        length="200"
+    />
+    <property
+        name="nachname"
+        type="java.lang.String"
+        column="NACHNAME"
+        length="200"
+    />
+    <property
+        name="idKunden"
+        type="java.lang.Integer"
+        column="ID_KUNDEN"
+        length="10"
+    />
+    <property
+        name="userlevel"
+        type="java.lang.Long"
+        column="USERLEVEL"
+        length="19"
+    />
+    <property
+        name="sid"
+        type="java.lang.String"
+        column="SID"
+        length="32"
+    />
+    <property
+        name="lastlogin"
+        type="java.sql.Timestamp"
+        column="LASTLOGIN"
+        length="19"
+    />
+    <property
+        name="sms"
+        type="java.lang.String"
+        column="SMS"
+        length="32"
+    />
+    <property
+        name="fax"
+        type="java.lang.String"
+        column="FAX"
+        length="32"
+    />
+    <property
+        name="telefon"
+        type="java.lang.String"
+        column="TELEFON"
+        length="32"
+    />
+    <property
+        name="email"
+        type="java.lang.String"
+        column="EMAIL"
+        length="32"
+    />
+    <property
+        name="idBetreiber"
+        type="java.lang.Integer"
+        column="ID_BETREIBER"
+        length="10"
+    />
+    <property
+        name="bemerkung1"
+        type="java.lang.String"
+        column="BEMERKUNG_1"
+        length="200"
+    />
+    <property
+        name="bemerkung2"
+        type="java.lang.String"
+        column="BEMERKUNG_2"
+        length="200"
+    />
+    <property
+        name="bemerkung3"
+        type="java.lang.String"
+        column="BEMERKUNG_3"
+        length="200"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

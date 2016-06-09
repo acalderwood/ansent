@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+        <!-- Search Kunde and Load it -->
+        <h:form id="form">
+            <p:panel id="panel" header="Choose a Customer" style="margin-bottom:10px;"> 
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Firmenname:" for="selectableKundenList" />
+                    <h:selectOneMenu value="#{kundenEdit.idKunden}">
+                        <f:selectItems id="selectableKundenList" value="#{kundenSearch.selectableKunden}" var="kunde" itemValue="#{kunde.idKunden}" itemLabel="#{kunde.firmenname}" />
+                    </h:selectOneMenu>
+    
+                </h:panelGrid>
+            </p:panel>
+            <p:commandButton actionListener="#{kundenEdit.load}" update="display" value="Choose" id="ajax"/>
+        
+           <!-- Edit the customer -->
+            <p:panel id="display" header="Information" style="margin-top:10px;"> 
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Firmenname:" for="firmenname" />
+                            <p:inputText id="firmenname" value="#{kundenEdit.firmenname}"   />
+                            
+
+                            <h:outputLabel value="Ansprechpartner:" for="ansprechpartner" />
+                            <p:inputText id="ansprechpartner" value="#{kundenEdit.ansprechpartner}" required="false" />
+                            
+
+                            <h:outputLabel value="Strasse, Nr,:" for="strasseNr" />
+                            <p:inputText id="strasseNr" value="#{kundenEdit.strasseNr}" />
+                            
+
+                            <h:outputLabel value="PLZ:" for="plz" />
+                            <p:inputText id="plz" value="#{kundenEdit.plz}" />
+                            
+                            
+                            <h:outputLabel value="Ort:" for="ort" />
+                            <p:inputText id="ort" value="#{kundenEdit.ort}" />
+                            
+                            
+                            <h:outputLabel value="Land:" for="land" />
+                            <p:inputText id="land" value="#{kundenEdit.land}" required="false" />
+                           
+                            
+                            <h:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{kundenEdit.fax}" required="false" />
+                           
+
+                            <h:outputLabel value="Telefon:" for="telefon" />
+                            <p:inputText id="telefon" value="#{kundenEdit.telefon}" required="false" />
+                           
+
+                            <h:outputLabel value="E-Mail:" for="email" />
+                            <p:inputText id="email" value="#{kundenEdit.email}" required="false" />
+                           
+                            
+                            <h:outputLabel value="Bemerkung:" for="bemerkung" />
+                            <p:inputTextarea id="bemerkung" value="#{kundenEdit.bemerkung}" required="false" />
+                           
+
+                            <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
+                            <p:inputTextarea id="interneNotiz" value="#{kundenEdit.interneNotiz}" required="false" />
+                           
+                    
+                            <h:outputLabel value="Buchungskreis:" for="buchungskreis" />
+                            <p:inputText id="buchungskreis" value="#{kundenEdit.buchungskreis}" required="false" />
+                           
+                            
+                    
+                            <h:outputLabel value="Steuernr. / USt-IdNr." for="steuerNr" />
+                            <p:inputText id="steuerNr" value="#{kundenEdit.steuerNr}" required="false" />
+                        
+                            <p:commandButton action="#{kundenEdit.update}" update="display" value="Update" />
+                    </h:panelGrid>
+            </p:panel>
+
+        </h:form>    
+        </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <!-- Search Anlage and Load it -->
+                <h:form>
+                    <p:panel id="panel" header="Standort Wählen" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Standorte" for="allStandorteList" />
+                            <h:selectOneMenu value="#{anlageSearch.idStandort}">
+                                <f:selectItems id="allStandorteList" value="#{standorteSearch.allStandorte}" var="standorte" itemValue="#{standorte.idStandorte}" itemLabel="#{standorte.standortname}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:commandButton actionListener="#{anlageSearch.load}" update="display" value="Wählen" id="ajax"/>
+
+                    <p:panel id="display" header="Anlage in this Standort" style="margin-top:10px;"> 
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="Anlage" for="AnlageList" />
+                            <h:selectOneMenu value="#{anlageSearch.idAnlagen}">
+                                <f:selectItems id="AnlageList" value="#{anlageSearch.anlagebyStandort}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                            </h:selectOneMenu>
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </h:form>
+
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class 
+        name="de.reichel.domain.model.UvvArt" 
+        table="UVV_ART"
+    >
+
+        <id
+            name="idUvvArt"
+            type="java.lang.Integer"
+            column="ID_UVV_ART"
+        >
+            <generator class="increment" />
+        </id>
+        <property 
+            name="timestamp" 
+            column="TIMESTAMP" 
+            type="java.sql.Timestamp"
+            length="19"
+        />
+        <property 
+            name="idAnlagenArt" 
+            column="ID_ANLAGEN_ART" 
+            type="int"
+            length="10"
+        />
+        <property 
+            name="kurztext" 
+            column="KURZTEXT" 
+            type="java.lang.String"
+            length="50"
+        />
+        <property 
+            name="langtext" 
+            column="LANGTEXT" 
+            type="java.lang.String"
+            length="255"
+        />
+        <property 
+            name="bez1" 
+            column="BEZ1" 
+            type="java.lang.String"
+            length="100"
+        />
+        <property 
+            name="bez2" 
+            column="BEZ2" 
+            type="java.lang.String"
+            length="255"
+        />
+        <property 
+            name="bez3" 
+            column="BEZ3" 
+            type="java.lang.String"
+            length="100"
+        />
+        <property 
+            name="bez4" 
+            column="BEZ4" 
+            type="java.lang.String"
+            length="100"
+        />
+
+
+        <!-- Associations -->
+        <!-- derived association(s) for compound key -->
+        <!-- end of derived association(s) -->
+  
+
+    </class>
+</hibernate-mapping>

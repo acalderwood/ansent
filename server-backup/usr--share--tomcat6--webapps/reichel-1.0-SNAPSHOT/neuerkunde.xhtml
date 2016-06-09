@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{kundenNew.init}"/>
+        </f:metadata>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+        <f:view>
+            
+            <h:form id="neuerKunde">
+                <p:panel id="panel" header="Neuer Kunde" style="margin-bottom:10px;"> 
+                    <p:messages id="messages" />  
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="Firmenname:" for="firmenname" />
+                            <p:inputText id="firmenname" value="#{kundenNew.firmenname}" required="true" requiredMessage="Bitte geben Sie eine gultige Kundennamen ein" />
+                            
+
+                            <h:outputLabel value="Ansprechpartner:" for="ansprechpartner" />
+                            <p:inputText id="ansprechpartner" value="#{kundenNew.ansprechpartner}" required="false" />
+                            
+
+                            <h:outputLabel value="Strasse, Nr,:" for="strasseNr" />
+                            <p:inputText id="strasseNr" value="#{kundenNew.strasseNr}" required="true" requiredMessage="Bitte geben Sie eine gultige Strasse, Nr ein"/>
+                            
+
+                            <h:outputLabel value="PLZ:" for="plz" />
+                            <p:inputText id="plz" value="#{kundenNew.plz}" required="true" requiredMessage="Bitte geben Sie eine gultige PLZ ein"/>
+                            
+                            
+                            <h:outputLabel value="Ort:" for="ort" />
+                            <p:inputText id="ort" value="#{kundenNew.ort}" required="true" requiredMessage="Bitte geben Sie eine gultige Ort ein"/>
+                            
+                            
+                            <h:outputLabel value="Land:" for="land" />
+                            <p:inputText id="land" value="#{kundenNew.land}" required="false" />
+                           
+                            
+                            <h:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{kundenNew.fax}" required="false" />
+                           
+
+                            <h:outputLabel value="Telefon:" for="telefon" />
+                            <p:inputText id="telefon" value="#{kundenNew.telefon}" required="false" />
+                           
+
+                            <h:outputLabel value="E-Mail:" for="email" />
+                            <p:inputText id="email" value="#{kundenNew.email}" required="false" />
+                           
+                            
+                            <h:outputLabel value="Bemerkung:" for="bemerkung" />
+                            <p:inputTextarea id="bemerkung" value="#{kundenNew.bemerkung}" required="false" />
+                           
+
+                            <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
+                            <p:inputTextarea id="interneNotiz" value="#{kundenNew.interneNotiz}" required="false" />
+                           
+                    
+                            <h:outputLabel value="Buchungskreis:" for="buchungskreis" />
+                            <p:inputText id="buchungskreis" value="#{kundenNew.buchungskreis}" required="false" />
+                           
+                            
+                    
+                            <h:outputLabel value="Steuernr. / USt-IdNr." for="steuerNr" />
+                            <p:inputText id="steuerNr" value="#{kundenNew.steuerNr}" required="false" />
+                            
+
+                            <p:commandButton action="#{kundenNew.add}" value="Hinzufügen" update="panel" id="ajax"  />
+                </h:panelGrid>
+              </p:panel>
+            </h:form>
+        </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

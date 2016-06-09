@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="de.reichel.domain.model.Teile" 
+    table="TEILE"
+>
+
+    <id
+        name="id"
+        type="java.lang.Integer"
+        column="ID"
+    >
+        <generator class="increment" />
+    </id>
+
+    <property
+        name="intern"
+        type="java.lang.String"
+        column="INTERN"
+        length="50"
+    />
+    <property
+        name="idGruppe"
+        type="java.lang.Short"
+        column="ID_GRUPPE"
+        length="5"
+    />
+    <property
+        name="bezeichnung"
+        type="java.lang.String"
+        column="BEZEICHNUNG"
+        length="255"
+    />
+    <property
+        name="einheit"
+        type="java.lang.String"
+        column="EINHEIT"
+        length="50"
+    />
+    <property
+        name="vk"
+        type="java.lang.Double"
+        column="VK"
+        length="22"
+    />
+    <property
+        name="ek"
+        type="java.lang.Double"
+        column="EK"
+        length="22"
+    />
+    <property
+        name="hk"
+        type="java.lang.Double"
+        column="HK"
+        length="22"
+    />
+    <property
+        name="idLieferant"
+        type="java.lang.Short"
+        column="ID_LIEFERANT"
+        length="5"
+    />
+    <property
+        name="bestellnummer"
+        type="java.lang.String"
+        column="BESTELLNUMMER"
+        length="50"
+    />
+    <property
+        name="lagerbestand"
+        type="java.lang.Short"
+        column="LAGERBESTAND"
+        length="5"
+    />
+    <property
+        name="bemerkung"
+        type="java.lang.String"
+        column="BEMERKUNG"
+        length="65535"
+    />
+    <property
+        name="angebotstext"
+        type="java.lang.String"
+        column="ANGEBOTSTEXT"
+        length="65535"
+    />
+    <property
+        name="rabatt"
+        type="java.lang.Integer"
+        column="RABATT"
+        length="10"
+    />
+    <property
+        name="timestamp"
+        type="java.sql.Timestamp"
+        column="TIMESTAMP"
+        not-null="true"
+        length="19"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <!-- Search Anlage and Load it -->
+                <h:form>
+                    <p:panel id="panel" header="Betreiber Wählen" style="margin-bottom:10px;"> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Betreibername" for="selectableBetreiber" />
+                            <h:selectOneMenu value="#{betreiberEdit.idBetreiber}">
+                                <f:selectItems id="selectableBetreiber" value="#{betreiberSearch.allBetreiber}" var="betreiber" itemValue="#{betreiber.idBetreiber}" itemLabel="#{betreiber.betreibername}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <p:commandButton actionListener="#{betreiberEdit.load}" update="display" value="Wählen" id="ajax"/>
+                    
+                    <p:panel id="display" header="Information" style="margin-top:10px;"> 
+                        <h:panelGrid columns="2">
+                            
+                            <h:outputLabel value="Betreibername" for="betreibername" />
+                            <p:inputText id="betreibername" value="#{betreiberEdit.betreibername}"  />
+                            
+                            <h:outputLabel value="Ansprechpartner" for="ansprechpartner" />
+                            <p:inputText id="ansprechpartner" value="#{betreiberEdit.ansprechpartner}"  />
+                            
+                            <h:outputLabel value="Strasse, Nr." for="strasseNr" />
+                            <p:inputText id="strasseNr" value="#{betreiberEdit.strasseNr}"  />
+                            
+
+                            <h:outputLabel value="PLZ:" for="plz" />
+                            <p:inputText id="plz" value="#{betreiberEdit.plz}" />
+                            
+                            
+                            <h:outputLabel value="Ort:" for="ort" />
+                            <p:inputText id="ort" value="#{betreiberEdit.ort}" />
+                            
+                            
+                            <h:outputLabel value="Land:" for="land" />
+                            <p:inputText id="land" value="#{betreiberEdit.land}" required="false" />
+                           
+                            <h:outputLabel value="Telefon:" for="telefon" />
+                            <p:inputText id="telefon" value="#{betreiberEdit.telefon}" required="false" />
+                           
+                            <h:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{betreiberEdit.fax}" required="false" />
+                           
+                            <h:outputLabel value="Bemerkung:" for="bemerkung" />
+                            <p:inputTextarea id="bemerkung" value="#{betreiberEdit.bemerkung}" required="false" />
+                           
+                            <h:outputLabel value="Interne Notiz:" for="interneNotiz" />
+                            <p:inputTextarea id="interneNotiz" value="#{betreiberEdit.interneNotiz}" required="false" />
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton action="#{betreiberEdit.update}" update="display" value="Update" />
+                </h:form>
+                            
+
+        
+       
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

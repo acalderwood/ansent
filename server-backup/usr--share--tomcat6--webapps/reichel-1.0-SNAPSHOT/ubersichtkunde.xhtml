@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+<!-- View Kunde -->
+        <h:panelGrid columns="1">
+                <h:outputLabel value="Firmenname:" for="firmenname" />
+                <h:outputText value="#{kundenView.firmenname}" />
+                <h:outputText value="#{kundenView.idKunden}" rendered="false"/>
+            </h:panelGrid>
+
+<!-- Search for view -->
+        <h:dataTable id="resultaten" value="#{kundenSearch.selectableKunden}" var="kunde" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" first="0" width="100%" dir="LTR" frame="hsides" rules="all">
+
+            <f:facet name="header">
+                <h:outputText value="Search results" />
+            </f:facet> 
+
+            <h:outputText binding="#{kundenSearch.idSingleKunden}" value="#{kunde.idKunden}" rendered="false"></h:outputText>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Firmenname:" />
+                </f:facet> 
+                <h:outputText value="#{kunde.firmenname}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <h:form>
+                    <h:commandButton action="#{kundenSearch.fetchView}" value="Holen"/>
+                </h:form>
+            </h:column>    
+
+        </h:dataTable>
+        <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
+    </h:body>
+</html>

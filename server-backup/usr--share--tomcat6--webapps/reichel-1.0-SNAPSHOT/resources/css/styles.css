@@ -1,0 +1,59 @@
+/* background-image has been commented out for now, as company name will be changing soon */
+body {
+    background: #eee;
+    font-family: Verdana, serif;
+    font-size:12px;
+/*    background-image:url(../resources/images/Ansent_Logo.jpg);*/
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+
+}
+
+table.search {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.search th,
+table.search td {
+	padding: 5px;
+	text-align: left;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+.work {
+	margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 30px;
+}
+.heading {
+    background: #ddd;
+    border-bottom: thin solid #aaa;
+    border-left: thin solid #aaa;
+    border-top: thin solid #ccc;
+    border-right: thin solid #ccc;
+    width: 97%;
+    padding: 10px;
+    font-size: 1.2em;
+}
+.subheading {
+    background: #ffe;
+    font-size: 1.0em;
+    width: 93%;
+    border-left: thin solid #aaa;
+    border-bottom: thin solid #aaa;
+    border-top: thin solid #ccc;
+    border-right: thin solid #ccc;
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 10px;
+}
+.controls {
+    font-size: 0.8em;
+}
+
+
+.panelColumns td {
+    vertical-align: top; 
+} 

@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <f:view>
+            <h4>Resultaten</h4>
+            <h:dataTable id="resultaten" value="#{anlageSearch.anlagen}" var="anlage" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" first="0" width="100%" dir="LTR" frame="hsides" rules="all">
+
+                <f:facet name="header">
+                    <h:outputText value="Search results" />
+                </f:facet> 
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Interne ID" />
+                    </f:facet> 
+                    <h:outputText binding="#{anlageSearch.idSingleAnlagen}" value="#{anlage[0].interneNr}"></h:outputText>
+                </h:column>
+
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Art" />
+                    </f:facet> 
+                    <h:outputText  value="#{anlage[1].art}"></h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Holen" />
+                    </f:facet> 
+
+                    <h:form>
+                        <h:commandButton action="#{anlageSearch.fetch}" value="Holen"/>
+                    </h:form>
+
+                </h:column>        
+
+
+
+            </h:dataTable>
+            <input type="button" onclick="history.go(-1)" value="Zuruck"></input>
+
+        </f:view>
+    </h:body>
+</html>
