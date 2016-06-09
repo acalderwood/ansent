@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reparatur" pageWidth="595" pageHeight="842" columnWidth="505" leftMargin="48" rightMargin="42" topMargin="20" bottomMargin="20" uuid="474487c2-06a9-4c5a-9afe-e6372378934f">
 	<property name="ireport.zoom" value="1.2418426461183354"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="147"/>
+	<property name="ireport.y" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<field name="repair_ID_REPAIR" class="java.lang.String"/>
 	<field name="user_VORNAME" class="java.lang.String"/>
@@ -60,7 +60,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="115" splitType="Stretch">
+		<band height="131" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="49" y="23" width="261" height="24" forecolor="#808080"/>
 				<textElement verticalAlignment="Middle">
@@ -82,7 +82,14 @@
 				<text><![CDATA[Planung   -   Anlagenverkauf   -  Vermietung   -   Service]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="52" width="96" height="10" forecolor="#0000FF"/>
+				<reportElement uuid="fc72a16c-f76a-442a-a313-7b15a9bafafb" x="2" y="111" width="318" height="10" forecolor="#0000FF"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[MTB Reichel Entsorgungstechnik KG – Birkenweg 1 - D-86567 Hilgertshausen ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="57" width="96" height="10" forecolor="#0000FF"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="false"/>
 				</textElement>
@@ -90,14 +97,14 @@
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="61" width="97" height="13" forecolor="#0000FF"/>
+				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="66" width="97" height="13" forecolor="#0000FF"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="false"/>
 				</textElement>
 				<text><![CDATA[D – 86567 Hilgertshausen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="79" width="97" height="36" forecolor="#0000FF"/>
+				<reportElement uuid="41a3d1f4-9095-4197-84b3-d213d3e81351" x="408" y="84" width="97" height="44" forecolor="#0000FF"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="false" isUnderline="false"/>
 				</textElement>
@@ -109,7 +116,7 @@ e-mail:	mtb@eneutec.de
 			</staticText>
 			<image>
 				<reportElement uuid="87e03a63-25d1-4772-96a4-8824896e0559" x="360" y="0" width="144" height="42"/>
-				<imageExpression><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance(new java.io.File("C:/reichel/mtb_highres.svg"))]]></imageExpression>
+				<imageExpression class="net.sf.jasperreports.engine.JRRenderable"><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance(new java.io.File("C:/reichel/mtb_highres.svg"))]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -120,9 +127,9 @@ e-mail:	mtb@eneutec.de
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="681" splitType="Stretch">
+		<band height="671" splitType="Stretch">
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="58" width="404" height="30"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="69" width="404" height="30"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 					<paragraph leftIndent="4"/>
@@ -130,14 +137,14 @@ e-mail:	mtb@eneutec.de
 				<textFieldExpression><![CDATA[$F{standorte_STANDORTNAME} + "\n" + $F{standorte_STRASSE_NR} + ", " + $F{standorte_PLZ} + " " + $F{standorte_ORT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="1" y="135" width="237" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="1" y="146" width="237" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{anlagen_art_ART} + " " + $F{anlagen_hersteller_HERSTELLER} + " " + $F{anlagen_TYP}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="28" width="404" height="34"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="39" width="404" height="34"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 					<paragraph leftIndent="4"/>
@@ -145,34 +152,34 @@ e-mail:	mtb@eneutec.de
 				<textFieldExpression><![CDATA[$F{kunden_FIRMENNAME} + "\n" + $F{kunden_STRASSE_NR} + ", " + $F{kunden_PLZ} + " " + $F{kunden_ORT}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="0" y="189" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
+				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="0" y="200" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="30" width="63" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="41" width="63" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Kunde: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="59" width="67" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="70" width="67" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Standort:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="150" width="67" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="161" width="67" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Anlage Nr:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="67" y="150" width="169" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="67" y="161" width="169" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph leftIndent="4"/>
@@ -180,7 +187,7 @@ e-mail:	mtb@eneutec.de
 				<textFieldExpression><![CDATA[$F{anlagen_INTERNE_NR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="66" y="165" width="221" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="66" y="176" width="221" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 					<paragraph leftIndent="4"/>
@@ -188,96 +195,91 @@ e-mail:	mtb@eneutec.de
 				<textFieldExpression><![CDATA[$F{anlagen_FABRIKATIONSNUMMER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="383" y="133" width="120" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="383" y="144" width="120" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{anlagen_BAUJAHR}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="165" width="67" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="176" width="67" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Fab Nr:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="308" y="133" width="67" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="308" y="144" width="67" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Baujahr:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="308" y="149" width="67" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="308" y="160" width="67" height="16"/>
 				<textElement>
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[UVV-fällig:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="308" y="165" width="67" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="308" y="176" width="67" height="16"/>
 				<textElement>
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Betr.Std.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0eb01c89-3e04-4516-a5e6-eaf4ecff5582" x="383" y="148" width="122" height="16"/>
+				<reportElement uuid="0eb01c89-3e04-4516-a5e6-eaf4ecff5582" x="383" y="159" width="122" height="16"/>
 				<textElement>
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<text><![CDATA[__________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0eb01c89-3e04-4516-a5e6-eaf4ecff5582" x="383" y="163" width="122" height="16"/>
+				<reportElement uuid="0eb01c89-3e04-4516-a5e6-eaf4ecff5582" x="383" y="174" width="122" height="16"/>
 				<textElement>
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<text><![CDATA[__________________]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="169" y="197" width="335" height="54"/>
+				<reportElement uuid="524a1b07-7895-430b-b899-0897441b9df7" x="169" y="208" width="335" height="54"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{repair_FAX_TEXT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="195" width="168" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="206" width="168" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Auszuführende Arbeiten:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ebd14ace-c714-4486-8932-5e90ac9609c4" x="2" y="257" width="502" height="382"/>
+				<reportElement uuid="ebd14ace-c714-4486-8932-5e90ac9609c4" x="2" y="286" width="502" height="304"/>
 				<textElement>
 					<font fontName="Arial" size="11" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Reparaturdatum: ______________________	 Monteur:  _________________________________
 
 Durchgeführte Arbeiten:  _____________________________________________________________
-
 _________________________________________________________________________________
-
+_________________________________________________________________________________
+_________________________________________________________________________________
 _________________________________________________________________________________
 
 Bemerkungen: _____________________________________________________________________
-
 _________________________________________________________________________________
-
+_________________________________________________________________________________
 _________ Std. Arbeitszeit, von: _________		bis: _________
-
 _________ Std. Fahrzeit				Ersatzteile   _________________________
-
 _________ km 						___________________________________
-
 _________ Anfahrtspauschale				___________________________________
-
 _________ Verschm. Zuschlag 20%			___________________________________
-
-Datum: ______________________________                   ___________________________________
+							___________________________________
+Datum: ______________________________
 
 
 
@@ -286,21 +288,21 @@ ______________________________			__________________________
 Unterschrift und Stempel des Kunden			Name in Druckschrift des Kunden]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="27405402-4d66-4f14-b314-8dd8ff4d5713" x="1" y="-10" width="359" height="18"/>
+				<reportElement uuid="27405402-4d66-4f14-b314-8dd8ff4d5713" x="1" y="1" width="359" height="18"/>
 				<textElement>
 					<font size="13" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Reparatur- / Wartungsauftrag Nr. " + $F{repair_ID_REPAIR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="482a4d7c-dff2-4e37-8e98-6541810c03c3" x="1" y="6" width="356" height="13"/>
+				<reportElement uuid="482a4d7c-dff2-4e37-8e98-6541810c03c3" x="1" y="17" width="356" height="13"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["erfasst durch Claudia Sabat-Mindreau am " + $F{rechnungen_LIEFERDATUM}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["erfasst durch Claudia Sabat am " + $F{rechnungen_LIEFERDATUM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="87" width="359" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="98" width="359" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph leftIndent="4"/>
@@ -308,28 +310,28 @@ Unterschrift und Stempel des Kunden			Name in Druckschrift des Kunden]]></text>
 				<textFieldExpression><![CDATA[$F{standorte_ANSPRECHPARTNER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="87" width="98" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="98" width="98" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Ansprechpartner:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="101" width="98" height="16"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="112" width="98" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Tel-Nr.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="117" width="98" height="14"/>
+				<reportElement uuid="cdd69af7-a666-4b57-a8f2-e828e58e290f" x="1" y="128" width="98" height="14"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Fax-Nr.]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="101" width="169" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="112" width="169" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph leftIndent="4"/>
@@ -337,7 +339,7 @@ Unterschrift und Stempel des Kunden			Name in Druckschrift des Kunden]]></text>
 				<textFieldExpression><![CDATA[$F{standorte_TEL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="116" width="169" height="16"/>
+				<reportElement uuid="a13cc211-1fbe-483a-8707-8707e875eaa9" x="99" y="127" width="169" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph leftIndent="4"/>
@@ -345,13 +347,13 @@ Unterschrift und Stempel des Kunden			Name in Druckschrift des Kunden]]></text>
 				<textFieldExpression><![CDATA[$F{standorte_FAX}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="0" y="22" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
+				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="0" y="33" width="505" height="1" forecolor="#333333" backcolor="#333333"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="293" y="252" width="205" height="16"/>
+				<reportElement uuid="f48c13b3-410b-4c70-80f3-b0c40260a18f" x="293" y="281" width="205" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 					<paragraph leftIndent="4"/>
@@ -359,18 +361,18 @@ Unterschrift und Stempel des Kunden			Name in Druckschrift des Kunden]]></text>
 				<textFieldExpression><![CDATA[$F{techniker_NAME_TECHNIKER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="023eb0cb-c6bc-48fc-a03b-98c2a6f5f509" x="3" y="634" width="205" height="47" forecolor="#0000FF"/>
+				<reportElement uuid="023eb0cb-c6bc-48fc-a03b-98c2a6f5f509" x="3" y="608" width="205" height="52" forecolor="#0000FF"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[HRA 1167 Amtsgericht München
+				<text><![CDATA[HRA 1167 Amtsgericht Passau
 Persönlich haftender Gesellschafter:
 Klaus-Dieter Reichel
 USt.-Id.: DE 241001220
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="023eb0cb-c6bc-48fc-a03b-98c2a6f5f509" x="308" y="634" width="197" height="47" forecolor="#0000FF"/>
+				<reportElement uuid="023eb0cb-c6bc-48fc-a03b-98c2a6f5f509" x="308" y="608" width="197" height="52" forecolor="#0000FF"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
@@ -381,7 +383,7 @@ BIC:  GENODEF1RGS
 ]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="3" y="632" width="502" height="2" forecolor="#0000CC" backcolor="#0000FF"/>
+				<reportElement uuid="a26d913f-8055-43a5-bb82-758ca461ec8e" x="3" y="605" width="502" height="2" forecolor="#0000CC" backcolor="#0000FF"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>

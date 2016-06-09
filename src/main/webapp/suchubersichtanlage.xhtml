@@ -92,10 +92,11 @@
                     </p:panel>
                     <p:commandButton actionListener="#{anlageSearch.searchAnlagen}" update="resultPanel" value="Suchen" id="ajax2"/>
 
-                    <p:panel id="resultPanel" header="Suchergebnis" style="margin-bottom:10px;"> 
+                   <p:panel id="resultPanel" header="Suchergebnis" style="margin-bottom:10px;"> 
                         <t:panelGrid columns="2">
-                            <h:outputLabel value="Interne Nr." for="selectableAnlage" />
-                            <h:selectOneMenu value="#{anlageEdit.idAnlagen}">
+                            <h:outputLabel value="Kein Treffer gefunden" rendered="#{empty anlageSearch.anlagenResultList}"/>
+                            <h:outputLabel value="Interne Nr." for="selectableAnlage" rendered="#{not empty anlageSearch.anlagenResultList}"/>
+                            <h:selectOneMenu value="#{anlageEdit.idAnlagen}" rendered="#{not empty anlageSearch.anlagenResultList}">
                                 <f:selectItems id="selectableAnlage" value="#{anlageSearch.anlagenResultList}" var="anlagen" itemValue="#{anlagen.idAnlagen}" itemLabel="#{anlagen.interneNr}" />
                             </h:selectOneMenu>
                         </t:panelGrid>
@@ -160,7 +161,10 @@
                             <h:outputLabel value="Nächste Wartung" for="naechsteWartung" />
                             <p:calendar id="naechsteWartung" value="#{anlageEdit.naechsteWartung}" required="false" locale="de" pattern="dd.MM.yyyy" />
 
-
+                            <p:column headerText="">
+                                <p:commandButton ajax="false" id="geschichte" action="#{anlageEdit.geschichte}" value="Geschichte Anlagen"/>
+                            </p:column>
+                            
                         </h:panelGrid>
                     </p:panel>
                 </h:form>

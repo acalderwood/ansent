@@ -12,10 +12,8 @@ import de.reichel.domain.model.Betreiber;
 import de.reichel.domain.model.Kunden;
 import de.reichel.domain.model.Standorte;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 
 /**
@@ -26,7 +24,7 @@ public class AnlageBean implements Serializable {
 
     @Inject
     protected AnlagenDAO anlagenDAO;
-    private Integer idAnlagen;
+    protected Integer idAnlagen;
     protected Integer idArt;
     private String art;
     protected Integer idHersteller;

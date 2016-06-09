@@ -2,11 +2,20 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="FlatFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="append" value="true" />
+        <param name="encoding" value="UTF-8" />
+        <param name="file" value="C:/reichel/log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%r [%t] %p %c %x - %m%n %d"/>
+        </layout>
+    </appender>
 
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="[reichel-appfuse] %p [%t] %c{1}.%M(%L) | %m%n"/>
+                       value="[reichel-appfuse] %p [%t] %c{1}.%M(%L) | %m%n"/>
         </layout>
     </appender>
 
@@ -14,29 +23,20 @@
         <level value="ERROR"/>
     </logger>
 
-    <!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
     <logger name="org.springframework.security">
         <level value="ERROR"/>
     </logger>
 
     <logger name="org.apache">
-        <level value="WARN"/>
-    </logger>
-
-    <logger name="org.apache.velocity">
-        <level value="FATAL"/>
+        <level value="ERROR"/>
     </logger>
 
     <logger name="org.hibernate">
         <level value="ERROR"/>
     </logger>
-  
-    <!--logger name="org.hibernate.SQL">
-        <level value="DEBUG"/>
-    </logger-->
 
     <logger name="org.springframework">
-        <level value="WARN"/>
+        <level value="ERROR"/>
     </logger>
 
     <!-- Suppress warnings from Commons Validator -->
@@ -49,7 +49,7 @@
     </logger>
 
     <logger name="org.appfuse">
-        <level value="INFO"/>
+        <level value="ERROR"/>
     </logger>
     
     <logger name="de.reichel">
@@ -59,6 +59,7 @@
     <root>
         <level value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FlatFileAppender"/>
     </root>
 
 </log4j:configuration>

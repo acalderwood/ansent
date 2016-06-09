@@ -83,7 +83,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
     public List<Techniker> getAllTechniker() {
         Query query = entityManager.createQuery("from Techniker techniker order by techniker.nameTechniker");
         query.setHint("org.hibernate.cacheable", true);
-        List<Techniker> list = (List<Techniker>)query.getResultList();
+        List<Techniker> list = (List<Techniker>) query.getResultList();
         Techniker techniker = new Techniker();
         techniker.setNameTechniker("");
         techniker.setIdTechniker(-1);
@@ -280,108 +280,116 @@ public class ReparaturDAOImpl implements ReparaturDAO {
     @Transactional(readOnly = false)
     public void updateRepair(RepairEdit backingBean) {
         try {
-        Query query = entityManager.createQuery("from Repair repair where repair.idRepair = :idRepair");
-        query.setParameter("idRepair", backingBean.getIdRepair());
+            Query anlagenQuery = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
+            anlagenQuery.setParameter("idAnlagen", backingBean.getIdAnlagen());
+            Anlagen anlagen = (Anlagen) anlagenQuery.getSingleResult();
+            if (backingBean.getNextUVV() != null) {
+                anlagen.setNUvv(backingBean.getNextUVV());
+            }
+            entityManager.merge(anlagen);
 
-        Repair repair = (Repair) query.getSingleResult();
-        repair.setIdAnlagen(backingBean.getIdAnlagen());
-        repair.setIdFirma(backingBean.getIdFirma());
-        repair.setErledigt(backingBean.getState());
-        repair.setIdSatz(backingBean.getIdRates());
-        repair.setFaxText(backingBean.getWorkDescription());
-        repair.setInterneBemerkung(backingBean.getInternalRemarks());
-        repair.setBetriebsstunden(backingBean.getHoursOperation());
-        repair.setReparaturDatum(backingBean.getRepairDate());
-        if (backingBean.getIdTechnician() != -1) {
-            repair.setIdTechniker(backingBean.getIdTechnician());
-        }
-        repair.setArbeitszeitStunden(getHours(backingBean.getTimeWorked()));
-        repair.setArbeitszeitMinuten(getMins(backingBean.getTimeWorked()));
-        repair.setArbzeitHelferStunden(getHours(backingBean.getHelperTimeWorked()));
-        repair.setArbzeitHelferMinuten(getMins(backingBean.getHelperTimeWorked()));
-        //set either travel time or travel distance but not both - should already have been handled in the view
+            Query query = entityManager.createQuery("from Repair repair where repair.idRepair = :idRepair");
+            query.setParameter("idRepair", backingBean.getIdRepair());
 
-        repair.setFahrzeitStunden(getHours(backingBean.getTravelTime()));
-        repair.setFahrzeitMinuten(getMins(backingBean.getTravelTime()));
-        repair.setFahrzeitHelferStunden(getHours(backingBean.getTravelTimeHelper()));
-        repair.setFahrzeitHelferMinuten(getMins(backingBean.getTravelTimeHelper()));
-        repair.setKilometer(backingBean.getTravelDistanceKm());
-        repair.setKilometerPauschaleBetrag(backingBean.getTravelRatePerKm());
+            Repair repair = (Repair) query.getSingleResult();
+            repair.setIdAnlagen(backingBean.getIdAnlagen());
+            repair.setIdFirma(backingBean.getIdFirma());
+            repair.setErledigt(backingBean.getState());
+            repair.setIdSatz(backingBean.getIdRates());
+            repair.setFaxText(backingBean.getWorkDescription());
+            repair.setInterneBemerkung(backingBean.getInternalRemarks());
+            repair.setBetriebsstunden(backingBean.getHoursOperation());
+            repair.setReparaturDatum(backingBean.getRepairDate());
+            if (backingBean.getIdTechnician() != -1) {
+                repair.setIdTechniker(backingBean.getIdTechnician());
+            }
+            repair.setArbeitszeitStunden(getHours(backingBean.getTimeWorked()));
+            repair.setArbeitszeitMinuten(getMins(backingBean.getTimeWorked()));
+            repair.setArbzeitHelferStunden(getHours(backingBean.getHelperTimeWorked()));
+            repair.setArbzeitHelferMinuten(getMins(backingBean.getHelperTimeWorked()));
+            //set either travel time or travel distance but not both - should already have been handled in the view
 
-        repair.setAusloeseStunden(getHours(backingBean.getAccommodationTime()));
-        repair.setAusloeseMinuten(getMins(backingBean.getAccommodationTime()));
-        repair.setUeberzeitStunden(getHours(backingBean.getOvertimeTime()));
-        repair.setUeberzeitMinuten(getMins(backingBean.getOvertimeTime()));
-        repair.setZuschlagVmStunden(getHours(backingBean.getDirtyTime()));
-        repair.setZuschlagVmMinuten(getMins(backingBean.getDirtyTime()));
+            repair.setFahrzeitStunden(getHours(backingBean.getTravelTime()));
+            repair.setFahrzeitMinuten(getMins(backingBean.getTravelTime()));
+            repair.setFahrzeitHelferStunden(getHours(backingBean.getTravelTimeHelper()));
+            repair.setFahrzeitHelferMinuten(getMins(backingBean.getTravelTimeHelper()));
+            repair.setKilometer(backingBean.getTravelDistanceKm());
+            repair.setKilometerPauschaleBetrag(backingBean.getTravelRatePerKm());
 
-        entityManager.merge(repair);
+            repair.setAusloeseStunden(getHours(backingBean.getAccommodationTime()));
+            repair.setAusloeseMinuten(getMins(backingBean.getAccommodationTime()));
+            repair.setUeberzeitStunden(getHours(backingBean.getOvertimeTime()));
+            repair.setUeberzeitMinuten(getMins(backingBean.getOvertimeTime()));
+            repair.setZuschlagVmStunden(getHours(backingBean.getDirtyTime()));
+            repair.setZuschlagVmMinuten(getMins(backingBean.getDirtyTime()));
 
-        for (TeileBean partBean : backingBean.getParts()) {
+            entityManager.merge(repair);
 
-            Query removePartsQuery = entityManager.createQuery("from RepairTeile repairTeile where repairTeile.idRepairTeile = :idRepairTeile");
-            removePartsQuery.setParameter("idRepairTeile", partBean.getIdRepairTeile());
-            RepairTeile repairTeileToRemove = (RepairTeile)removePartsQuery.getSingleResult();
-            entityManager.remove(repairTeileToRemove);
-            
-            RepairTeile repairTeile = new RepairTeile();
-            repairTeile.setAnzahl(partBean.getAnzahl());
-            log.debug(partBean.getAnzahl());
-            repairTeile.setIdRepair(backingBean.getIdRepair());
-            log.debug(backingBean.getIdRepair());
-            repairTeile.setIdSub(partBean.getIdSub());
-            log.debug(partBean.getIdSub());
-            repairTeile.setIdTeile(partBean.getIdTeile());
-            log.debug(partBean.getIdTeile());
-            repairTeile.setTeileEk(partBean.getTeileEk());
-            log.debug(partBean.getTeileEk());
-            repairTeile.setTeileEinheit(partBean.getTeileEinheit());
-            log.debug(partBean.getTeileEinheit());
-            repairTeile.setTeilePreis(partBean.getTeilePreis());
-            log.debug(partBean.getTeilePreis());
-            repairTeile.setTeileRabatt(partBean.getTeileRabatt());
-            log.debug(partBean.getTeileRabatt());
+            for (TeileBean partBean : backingBean.getParts()) {
+
+                Query removePartsQuery = entityManager.createQuery("from RepairTeile repairTeile where repairTeile.idRepairTeile = :idRepairTeile");
+                removePartsQuery.setParameter("idRepairTeile", partBean.getIdRepairTeile());
+                RepairTeile repairTeileToRemove = (RepairTeile) removePartsQuery.getSingleResult();
+                entityManager.remove(repairTeileToRemove);
+
+                RepairTeile repairTeile = new RepairTeile();
+                repairTeile.setAnzahl(partBean.getAnzahl());
+                log.debug(partBean.getAnzahl());
+                repairTeile.setIdRepair(backingBean.getIdRepair());
+                log.debug(backingBean.getIdRepair());
+                repairTeile.setIdSub(partBean.getIdSub());
+                log.debug(partBean.getIdSub());
+                repairTeile.setIdTeile(partBean.getIdTeile());
+                log.debug(partBean.getIdTeile());
+                repairTeile.setTeileEk(partBean.getTeileEk());
+                log.debug(partBean.getTeileEk());
+                repairTeile.setTeileEinheit(partBean.getTeileEinheit());
+                log.debug(partBean.getTeileEinheit());
+                repairTeile.setTeilePreis(partBean.getTeilePreis());
+                log.debug(partBean.getTeilePreis());
+                repairTeile.setTeileRabatt(partBean.getTeileRabatt());
+                log.debug(partBean.getTeileRabatt());
 //                String partDesc = getPartDescription(partBean.getIdTeile());
 //                if (partDesc != null) {
 //                    repairTeile.setTeileName(partDesc);
 //                } else {
-            repairTeile.setTeileName(partBean.getTeileName());
+                repairTeile.setTeileName(partBean.getTeileName());
 //                }
-            repairTeile.setTimestamp(Calendar.getInstance().getTime());
+                repairTeile.setTimestamp(Calendar.getInstance().getTime());
 
-            entityManager.persist(repairTeile);
-            log.debug("Part added");
-        }
-        log.debug("Repair updated");
+                entityManager.persist(repairTeile);
+                log.debug("Part added");
+            }
+            log.debug("Repair updated");
         } catch (Throwable t) {
             log.error(t.getMessage());
             t.printStackTrace();
         }
     }
 
-    @Transactional(readOnly = true)    
+    @Transactional(readOnly = true)
     public byte[] generateAuftrag(RepairEdit backingBean) {
-            
-        RepairReportBean auftrag = new RepairReportBean();        
-      
+
+        RepairReportBean auftrag = new RepairReportBean();
+
         Query queryAnlagen = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         queryAnlagen.setParameter("idAnlagen", backingBean.getIdAnlagen());
         log.debug("idAnlagen for invoice: " + backingBean.getIdAnlagen());
         Anlagen anlagen = (Anlagen) queryAnlagen.getSingleResult();
-        log.debug("Got Anlagen for invoice");  
-        
+        log.debug("Got Anlagen for invoice");
+
         Query anlagenStandorteQuery = entityManager.createQuery("from AnlagenStandorte anlagenStandorte where anlagenStandorte.idAnlagen = :idAnlagen");
         anlagenStandorteQuery.setParameter("idAnlagen", backingBean.getIdAnlagen());
 
         log.debug("Anlagen " + backingBean.getIdAnlagen() + " has " + anlagenStandorteQuery.getResultList().size() + " results");
-        
+
         AnlagenStandorte anlagenStandorte = null;
         try {
             anlagenStandorte = (AnlagenStandorte) anlagenStandorteQuery.getSingleResult();
         } catch (Exception e) {
             log.debug("Could not set ID Betreiber, ID Kunden or ID Standorte for Repair");
-        }              
-        
+        }
+
         Query queryStandorte = entityManager.createQuery("from Standorte standorte where standorte.idStandorte = :idStandorte");
         queryStandorte.setParameter("idStandorte", anlagenStandorte.getIdStandorte());
         log.debug("idStandort for invoice: " + anlagenStandorte.getIdStandorte());
@@ -392,7 +400,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         queryKunden.setParameter("idKunden", anlagenStandorte.getIdKunden());
         log.debug("idKunden for invoice: " + anlagenStandorte.getIdKunden());
         Kunden kunden = (Kunden) queryKunden.getSingleResult();
-        log.debug("Got Kunden for invoice");    
+        log.debug("Got Kunden for invoice");
 
         Query queryAnlagenArt = entityManager.createQuery("from AnlagenArt anlagenArt where anlagenArt.idAnlagenArt = :idAnlagenArt");
         queryAnlagenArt.setParameter("idAnlagenArt", anlagen.getIdAnlagenArt());
@@ -405,7 +413,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         log.debug("idAnlagenHersteller for invoice: " + anlagen.getIdAnlagenHersteller());
         AnlagenHersteller anlagenHersteller = (AnlagenHersteller) queryAnlagenHersteller.getSingleResult();
         log.debug("Got AnlagenHersteller for invoice");
-        
+
         auftrag.setAnlagen_FABRIKATIONSNUMMER(anlagen.getFabrikationsnummer());
         auftrag.setAnlagen_INTERNE_NR(anlagen.getInterneNr());
         if (anlagen.getBaujahr() != null) {
@@ -416,9 +424,9 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         auftrag.setRepair_FAX_TEXT(backingBean.getWorkDescription());
         log.debug("********* " + Utils.dateFormat.format(backingBean.getRepairDate()));
         auftrag.setRechnungen_LIEFERDATUM(Utils.dateFormat.format(backingBean.getRepairDate()));
-        
+
         auftrag.setRepair_ID_REPAIR(backingBean.getIdRepair() + "");
-        
+
         Query queryTechniker = entityManager.createQuery("from Techniker techniker where techniker.idTechniker = :idTechniker");
         queryTechniker.setParameter("idTechniker", backingBean.getIdTechnician());
         log.debug("idTechniker for invoice: " + backingBean.getIdTechnician());
@@ -431,7 +439,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         } else {
             techniker = technikerList.get(0);
         }
-        log.debug("Got Techniker for invoice");   
+        log.debug("Got Techniker for invoice");
         auftrag.setTechniker_NAME_TECHNIKER(techniker.getNameTechniker());
 
         auftrag.setStandorte_STANDORTNAME(standorte.getStandortname());
@@ -441,7 +449,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         auftrag.setStandorte_ANSPRECHPARTNER(standorte.getAnsprechpartner());
         auftrag.setStandorte_TEL(standorte.getTelefon());
         auftrag.setStandorte_FAX(standorte.getFax());
-        
+
         auftrag.setAnlagen_art_ART(anlagenArt.getArt());
         auftrag.setAnlagen_hersteller_HERSTELLER(anlagenHersteller.getHersteller());
         auftrag.setAnlagen_TYP(anlagen.getTyp());
@@ -453,6 +461,10 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         List<RepairReportBean> auftraege = new ArrayList<RepairReportBean>();
         auftraege.add(auftrag);
 
+        // keep these for the way home (generating the file name in RepairEdit)
+        backingBean.setKundenName(kunden.getFirmenname());
+        backingBean.setAnlageInterneNr(anlagen.getInterneNr());
+
         try {
             log.debug("Generating auftrag: PLZ: " + auftraege.get(0).getStandorte_PLZ());
             InputStream is = this.getClass().getClassLoader().getResourceAsStream("reports/auftrag.jasper");
@@ -461,9 +473,9 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         } catch (Throwable t) {
             t.printStackTrace();
             throw new RuntimeException(t.getMessage());
-        }        
-    }    
-    
+        }
+    }
+
     @Transactional(readOnly = true)
     public byte[] generateInvoice(RepairEdit backingBean) {
 
@@ -496,7 +508,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         log.debug("Got Techniker for invoice");
 
         invoice.setTechniker_NAME_TECHNIKER(techniker.getNameTechniker().equals("") ? "" : "Techniker: " + techniker.getNameTechniker());
-        
+
         Query queryAnlagen = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         queryAnlagen.setParameter("idAnlagen", backingBean.getIdAnlagen());
         log.debug("idAnlagen for invoice: " + backingBean.getIdAnlagen());
@@ -544,14 +556,14 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         invoice.setRechnungen_RECHNUNGSNUMMERINTERN(backingBean.getRechnungsnummer());
         invoice.setRechnungen_AUFTRAGGEBER(backingBean.getAuftraggeber());
         invoice.setRechnungen_ANGEBOTSNUMMER(backingBean.getLieferantenNr());
-        
-        if(anlagen.getBaujahr() != null) {        
+
+        if (anlagen.getBaujahr() != null) {
             invoice.setAnlagen_BAUJAHR(Utils.yearFormat.format(anlagen.getBaujahr()));
         } else {
             invoice.setAnlagen_BAUJAHR("");
         }
-        
-        
+
+
         invoice.setRepair_FAX_TEXT(backingBean.getWorkDescription());
 
         invoice.setKunden_PLZ(kunden.getPlz());
@@ -569,12 +581,12 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         invoice.setLine_EXTRA_KEY_2(backingBean.getExtraKey2());
         invoice.setLine_EXTRA_KEY_3(backingBean.getExtraKey3());
         invoice.setLine_EXTRA_KEY_4(backingBean.getExtraKey4());
-        
+
         invoice.setLine_EXTRA_VALUE_1(backingBean.getExtraValue1());
         invoice.setLine_EXTRA_VALUE_2(backingBean.getExtraValue2());
         invoice.setLine_EXTRA_VALUE_3(backingBean.getExtraValue3());
         invoice.setLine_EXTRA_VALUE_4(backingBean.getExtraValue4());
-        
+
         List<InvoiceItem> invoiceItems = new ArrayList<InvoiceItem>();
 
         for (TeileBean part : backingBean.getParts()) {
@@ -819,12 +831,19 @@ public class ReparaturDAOImpl implements ReparaturDAO {
     @Transactional(readOnly = true)
     public void loadRepair(RepairEdit backingBean) {
         long startTime = new Date().getTime();
+
         Query query = entityManager.createQuery("from Repair repair where repair.idRepair = :idRepair");
         log.debug("ID_REPAIR=" + backingBean.getIdRepair());
         query.setParameter("idRepair", backingBean.getIdRepair());
         Repair repair = (Repair) query.getSingleResult();
         backingBean.setIdAnlagen(repair.getIdAnlagen());
         log.debug("ID_ANLAGEN=" + backingBean.getIdAnlagen());
+        
+        Query anlagenQuery = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
+        anlagenQuery.setParameter("idAnlagen", backingBean.getIdAnlagen());
+        Anlagen anlagen = (Anlagen) anlagenQuery.getSingleResult();
+        backingBean.setNextUVV(anlagen.getNUvv());
+        
         backingBean.setIdBetreiber(repair.getIdBetreiber());
         backingBean.setIdKunden(repair.getIdKunden());
         backingBean.setIdStandorte(repair.getIdStandorte());
@@ -904,7 +923,7 @@ public class ReparaturDAOImpl implements ReparaturDAO {
         log.debug("Anlage ID for repairs " + backingBean.getIdAnlagen());
 
         if (backingBean.getIdAnlagen() == null) {
-            log.debug("TIME: " + (new Date().getTime() - startTime));            
+            log.debug("TIME: " + (new Date().getTime() - startTime));
             return new ArrayList<Repair>();
         } else {
             log.debug("Anlage ID is not null");

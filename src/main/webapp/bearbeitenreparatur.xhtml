@@ -19,16 +19,17 @@
                             <h:outputLabel value="Anlage" for="selectableAnlage" />
                             <h:selectOneMenu value="#{repairEdit.idAnlagen}">
                                 <f:selectItems id="selectableAnlage" value="#{repairSearch.selectableAnlagen}" var="anlage" itemValue="#{anlage.idAnlagen}" itemLabel="#{anlage.interneNr}" />
+                                <p:ajax update="repairPanel" event="change" listener="#{repairEdit.loadRepairs}" />                                 
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton actionListener="#{repairEdit.loadRepairs}" update="repairPanel" value="Anlage Wählen" id="ajax"/>
 
                     <p:panel id="repairPanel" header="Reparatur eingeben" style="margin-bottom:10px;"> 
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Reparatur" for="selectableRepair" />
                             <h:selectOneMenu value="#{repairEdit.idRepair}">
                                 <f:selectItems id="selectableRepair" value="#{repairEdit.selectableRepairsByID}" var="repair" itemValue="#{repair.idRepair}" itemLabel="#{repair.reparaturDatum}" />
+                                <p:ajax update="repairPanel" event="change" listener="#{repairEdit.loadRepairs}" />                                                             
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>

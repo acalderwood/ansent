@@ -4,8 +4,10 @@
  */
 package de.reichel.dao;
 
+import de.reichel.bean.UvvBean;
 import de.reichel.domain.model.Uvv;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +23,8 @@ public interface UvvDAO extends Serializable {
     public List<Object[]> getUvvPunkte(int idUvv);
 
     public List<Object[]> getUvvMangel(int idUvv);
+    
+    public List<Uvv> getUvvForMonthAndPlz(Date month, String plz);    
+    
+    public void loadUvvs(UvvBean uvvBean);
 }

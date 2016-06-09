@@ -52,19 +52,59 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.idAnlagen = :idAnlagen");
         query.setParameter("idAnlagen", backingBean.getIdAnlagen());
 
-        Anlagen anlagen = (Anlagen) query.getResultList().get(0);
-        log.debug("Anlagen successfully restored");
-        anlagen.setInterneNr(backingBean.getInterneNr());
-        log.debug("Getting Internal Number");
+        Anlagen anlagen = (Anlagen)query.getResultList().get(0);
+
+        anlagen.setBemerkung(backingBean.getBemerkung());
+        log.debug("Bemerkung is set: " + backingBean.getBemerkung());
+
+        try {
+            anlagen.setBaujahr(backingBean.getBaujahr());
+        } catch (Exception e) {
+            log.debug("Date was empty for Baujahr " + e.getMessage());
+        }
+
+
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
-        log.debug("Getting Fabrikation Number");
+        anlagen.setIdAnlagenArt(backingBean.getIdArt());
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
-        log.debug("Getting Hersteller ID");
+        anlagen.setInterneNotiz(backingBean.getInterneNotiz());
+        anlagen.setInterneNr(backingBean.getInterneNr());
+
+        //@TODO: validate and accept different formats
+        //DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            anlagen.setNUvv(backingBean.getNaechsteUVV());
+        } catch (Exception e) {
+            log.debug("Date was empty for NUvv " + e.getMessage());
+        }
+
+        try {
+            anlagen.setNWart(backingBean.getNaechsteWartung());
+        } catch (Exception e) {
+            log.debug("Date was empty for NUvv " + e.getMessage());
+        }
+
+
+        anlagen.setTyp(backingBean.getTyp());
+        log.debug("Typ is set");
         
         this.entityManager.merge(anlagen);
+        
+        log.debug("Persisted Anlagen with ID " + anlagen.getIdAnlagen());
+
+        AnlagenStandorte anlagenStandort = new AnlagenStandorte();
+        anlagenStandort.setIdAnlagen(anlagen.getIdAnlagen());
+        anlagenStandort.setIdStandorte(backingBean.getIdStandort());
+        anlagenStandort.setIdBetreiber(backingBean.getIdBetreiber());
+        anlagenStandort.setIdKunden(backingBean.getIdKunden());
+
+        this.entityManager.merge(anlagenStandort);
+
+        log.debug("Persisted AnlagenStandorte with ID " + anlagenStandort.getIdAnlagenStandorte());        
+
 //        this.entityManager.persist(anlagen);
         //@TODO: finish fields
-    }
+    } 
 
     @Transactional(readOnly = true)
     public long getNumberAnlagen(AnlageSearch anlageSearch) {
@@ -82,64 +122,33 @@ public class AnlagenDAOImpl implements AnlagenDAO {
         log.debug("Bemerkung is set: " + backingBean.getBemerkung());
 
         try {
-            Date cal;
-            if (backingBean.getBaujahr() == null) {
-                Calendar calen = new GregorianCalendar(0, 0, 0, 0, 0, 0);
-                cal = calen.getTime();
-            } else {
-                cal = backingBean.getBaujahr();
-            }
-            log.debug("Baujahr is set");
-            anlagen.setBaujahr(cal);
+            anlagen.setBaujahr(backingBean.getBaujahr());
         } catch (Exception e) {
             log.debug("Date was empty for Baujahr " + e.getMessage());
         }
 
 
         anlagen.setFabrikationsnummer(backingBean.getFabrikationsnr());
-        log.debug("Fabriknum is set: " + backingBean.getFabrikationsnr());
         anlagen.setIdAnlagenArt(backingBean.getIdArt());
-        log.debug("ArtId is set");
         anlagen.setIdAnlagenHersteller(backingBean.getIdHersteller());
-        log.debug("Hersteller is set");
         anlagen.setInterneNotiz(backingBean.getInterneNotiz());
-        log.debug("InterneNotiz is set");
         anlagen.setInterneNr(backingBean.getInterneNr());
-        log.debug("InterneNum is set");
 
         //@TODO: validate and accept different formats
         //DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {
-            Date date;
-            if (backingBean.getNaechsteUVV() == null) {
-                Calendar calen = new GregorianCalendar(0, 0, 0, 0, 0, 0);
-                date = calen.getTime();
-            } else {
-                date = backingBean.getNaechsteUVV();
-            }
-            log.debug("NUvv is set");
-            anlagen.setNUvv(date);
+            anlagen.setNUvv(backingBean.getNaechsteUVV());
         } catch (Exception e) {
             log.debug("Date was empty for NUvv " + e.getMessage());
         }
 
         try {
-            Date date;
-            if (backingBean.getNaechsteWartung() == null) {
-                Calendar calen = new GregorianCalendar(0, 0, 0, 0, 0, 0);
-                date = calen.getTime();
-            } else {
-                date = backingBean.getNaechsteWartung();
-            }
-            log.debug("NUvv is set");
-            anlagen.setNWart(date);
+            anlagen.setNWart(backingBean.getNaechsteWartung());
         } catch (Exception e) {
             log.debug("Date was empty for NUvv " + e.getMessage());
         }
 
-
         anlagen.setTyp(backingBean.getTyp());
-        log.debug("Typ is set");
 
         this.entityManager.persist(anlagen);
         backingBean.setIdAnlagen(anlagen.getIdAnlagen());

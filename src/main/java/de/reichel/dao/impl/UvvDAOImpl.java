@@ -4,8 +4,13 @@
  */
 package de.reichel.dao.impl;
 
+import de.reichel.bean.UvvBean;
 import de.reichel.dao.UvvDAO;
+import de.reichel.domain.model.Anlagen;
+import de.reichel.domain.model.Standorte;
 import de.reichel.domain.model.Uvv;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -70,4 +75,62 @@ public class UvvDAOImpl implements UvvDAO {
         query.setParameter("idUvv", idUvv);
         return query.getResultList();
     }
+    
+    //get UVV for a month
+    public List<Uvv> getUvvForMonthAndPlz(Date month, String plz) {
+        Date startMonth = new Date();
+        startMonth.setMonth(month.getMonth());
+        startMonth.setDate(1);
+        startMonth.setYear(month.getYear());
+        Date endMonth = new Date();
+        if (startMonth.getMonth() == 11) {
+            endMonth.setMonth(0);
+            endMonth.setYear(startMonth.getYear() + 1);
+        } else {
+            endMonth.setMonth(month.getMonth() + 1);
+            endMonth.setYear(month.getYear());
+        }
+        Query query = entityManager.createQuery("from Anlagen anlagen where anlagen.start >= :start "
+                + "and anlagen.end < :end and anlagen.plz = :plz");
+        query.setParameter("start", startMonth);
+        query.setParameter("end", endMonth);
+        query.setParameter("plz", plz);
+        return query.getResultList();
+    }
+    
+    //get UVV for a period    
+    @Transactional(readOnly = true) 
+    public void loadUvvs(UvvBean uvvBean) {
+        System.out.println("getUvvDue");
+        Query query = entityManager.createQuery("from Anlagen anlagen, AnlagenStandorte anlagen_standorte, Standorte standorte "
+                + " where anlagen.NUvv >= :start "
+                + "and anlagen.NUvv <= :end and anlagen_standorte.idAnlagen = anlagen.idAnlagen "
+                + "and anlagen_standorte.idStandorte = standorte.idStandorte and standorte.plz like '%" + uvvBean.getPlz() + "%'");
+        query.setParameter("start", uvvBean.getUvvVon());
+        query.setParameter("end", uvvBean.getUvvBis());
+        List<Object[]> objs = query.getResultList();
+        
+        //Object = [Anlagen, AnlagenStandorte, 
+        
+        List<Anlagen> uvvAnlagen = new ArrayList<Anlagen>();
+        for (Object[] obj: objs) {
+            Anlagen anlagen = (Anlagen)obj[0];
+            uvvAnlagen.add(anlagen);
+            uvvBean.setIdStandort(getIdStandort(anlagen.getIdAnlagen()));
+        }
+        System.out.println("uvvs = " + uvvAnlagen.size());
+        uvvBean.setUvvList(uvvAnlagen);
+    }
+    
+    @Transactional(readOnly = true)
+    public int getIdStandort(int idAnlagen) {
+        Query query = entityManager.createQuery("from Standorte standorte, AnlagenStandorte anlagenStandorte where standorte.idStandorte = anlagenStandorte.idStandorte and anlagenStandorte.idAnlagen = :idAnlagen");
+        query.setParameter("idAnlagen", idAnlagen);
+        List<Object[]> standorte = query.getResultList();
+        if (standorte.isEmpty()) {
+            return 203108;
+        } else {
+            return ((Standorte) standorte.get(0)[0]).getIdStandorte();
+        }
+    }    
 }

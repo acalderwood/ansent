@@ -8,6 +8,7 @@ import de.reichel.domain.model.Repair;
 import de.reichel.util.Utils;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Scope;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +38,7 @@ public class RepairEdit extends RepairBean {
 
     @PostConstruct
     public void refreshData() {
+        
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
         RepairEdit repairEdit = (RepairEdit) flash.get("repairEdit");
         if (repairEdit != null) {
@@ -61,6 +64,7 @@ public class RepairEdit extends RepairBean {
             this.setNewTechnicianName(repairEdit.getNewTechnicianName());
             this.setOvertimeTime(repairEdit.getOvertimeTime());
             this.setParts(repairEdit.getParts());
+            this.setNextUVV(repairEdit.getNextUVV());
             this.setRechnungsnummer(repairEdit.getRechnungsnummer());
             this.setRepairDate(repairEdit.getRepairDate());
             this.setState(repairEdit.getState());
@@ -103,17 +107,22 @@ public class RepairEdit extends RepairBean {
         return "index";
     }
     
-    public String generateAuftrag() {
+    public void generateAuftrag() throws IOException {
         log.debug("Adding new repair");
         if (this.getIdRepair() == null) {
             repairDAO.addRepair(this);        
         } else {
             repairDAO.updateRepair(this);
         }
+        
+        String filename = "";
         try {
             byte[] invoiceBytes = repairDAO.generateAuftrag(this);
             log.debug("JasperPrint object created");
-            File pdf = new File(Utils.getAuftragDirPath() + File.separator + "reparatur-auftrag-" + Utils.fileDateFormat.format(this.getRepairDate()) + "-" + this.getIdRepair() + ".pdf");
+      
+            filename = "Reparaturauftrag__" + this.getIdRepair() + "__" + Utils.fileDateFormat.format(this.getRepairDate()) + "__" + this.getAnlageInterneNr() + "__" + this.getKundenName().replaceAll(" ", "_").replaceAll("&", "und") + ".pdf";
+            
+            File pdf = new File(Utils.getAuftragDirPath() + File.separator + filename);
             log.debug("Jasper file created at: " + pdf.getAbsolutePath());
             OutputStream os = new FileOutputStream(pdf);
             os.write(invoiceBytes);
@@ -123,7 +132,9 @@ public class RepairEdit extends RepairBean {
             e.printStackTrace();
         }
 
-        return "index";
+        HttpServletRequest req = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest());
+        String pdfLink = "http://" + req.getServerName() + ":" + req.getLocalPort() + req.getContextPath() + "/auftraege/" + filename;
+        FacesContext.getCurrentInstance().getExternalContext().redirect(pdfLink);
     }
 
     public String loadRepairRedirect() {

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,11 +35,15 @@ public class RepairBean implements Serializable {
     protected TeileDAO teileDAO;
     protected Integer idRepairTeile;
     protected Integer idRepair;
+    
+    @ManagedProperty("#{idAnlagen}")
     protected Integer idAnlagen;
     protected Integer idFirma;
     protected Integer idStandorte;
     protected Integer idKunden;
-    private Integer idBetreiber;
+    protected String kundenName;
+    protected String anlageInterneNr;
+    protected Integer idBetreiber;
     protected Integer idRates;
     protected short state;
     protected String workDescription;
@@ -75,6 +80,7 @@ public class RepairBean implements Serializable {
     protected List<TeileBean> parts = new ArrayList<TeileBean>();
     protected List<String> invoiceFileNames = new ArrayList<String>();
     protected String newTechnicianName;
+    protected Date nextUVV;
     
     private String rechnungsnummer;
     private String auftraggeber;
@@ -836,5 +842,47 @@ public class RepairBean implements Serializable {
      */
     public void setExtraValue4(String extraValue4) {
         this.extraValue4 = extraValue4;
+    }
+
+    /**
+     * @return the kundenName
+     */
+    public String getKundenName() {
+        return kundenName;
+    }
+
+    /**
+     * @param kundenName the kundenName to set
+     */
+    public void setKundenName(String kundenName) {
+        this.kundenName = kundenName;
+    }
+
+    /**
+     * @return the anlageInterneNr
+     */
+    public String getAnlageInterneNr() {
+        return anlageInterneNr;
+    }
+
+    /**
+     * @param anlageInterneNr the anlageInterneNr to set
+     */
+    public void setAnlageInterneNr(String anlageInterneNr) {
+        this.anlageInterneNr = anlageInterneNr;
+    }
+
+    /**
+     * @return the nextUVV
+     */
+    public Date getNextUVV() {
+        return nextUVV;
+    }
+
+    /**
+     * @param nextUVV the nextUVV to set
+     */
+    public void setNextUVV(Date nextUVV) {
+        this.nextUVV = nextUVV;
     }
 }

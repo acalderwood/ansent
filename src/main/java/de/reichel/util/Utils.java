@@ -56,7 +56,7 @@ public class Utils {
             return "/var/ansent/rechnungen";
         }
         if (isWindows()) {
-            return "C:\\temp\\rechnungen";
+            return "C:\\reichel\\rechnungen";
         }
         return "/tmp";
     }
@@ -67,7 +67,7 @@ return "/var/ansent/auftraege";
             //            return "/share/MD0_DATA/Public/MTB-Eneutec/Claudia/ENEUTEC-MTB/Auftragsbestätigungen/2013-Aufträge";
         }
         if (isWindows()) {
-            return "C:\\temp\\auftraege";
+            return "C:\\reichel\\auftraege";
         }
         return "/tmp";
     }    

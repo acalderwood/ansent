@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/common-layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+
+                    <p:panel id="panel" header="Edit Reparatur" style="margin-bottom:10px;"> 
+                        <p:messages id="messages" />  
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="UVV von" for="uvvVon" />
+                            <p:calendar id="uvvVon" value="#{uvvBean.uvvVon}" required="false" locale="de" pattern="dd.MM.yyyy" />
+
+                            <h:outputLabel value="UVV bis" for="uvvBis" />
+                            <p:calendar id="uvvBis" value="#{uvvBean.uvvBis}" required="false" locale="de" pattern="dd.MM.yyyy" />
+
+                            <h:outputLabel value="Plz:" for="plz" />
+                            <p:inputTextarea rows="1" cols="50" id="plz" value="#{uvvBean.plz}" required="false" />                            
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:commandButton actionListener="#{uvvBean.loadUvvs}" update="display" value="UVV holen" id="ajax"/>
+
+                    <p:panel id="display" header="Anlage Information" style="margin-top:10px;">                
+
+                        <p:dataTable id="uvvTable" var="anlage" value="#{uvvBean.uvvList}">  
+                            <f:facet name="header">  
+                                UVV #{uvvBean.uvvVon}-#{uvvBean.uvvBis}  #{uvvBean.plz}
+                            </f:facet>
+
+                            <p:column headerText="Interne nr.">  
+                                <h:outputText value="#{anlage.interneNr}" />  
+                            </p:column>                                                 
+
+                            <p:column sortBy="#{anlage.typ}" headerText="Typ">  
+                                <h:outputText id="typ" value="#{anlage.typ}" />
+                            </p:column>  
+
+                            <p:column sortBy="#{anlage.fabrikationsnr}" headerText="Fabrikationsnr.">  
+                                <h:outputText id="fabrikationsnr" value="#{anlage.fabrikationsnr}" />
+                            </p:column>  
+
+                            <p:column sortBy="#{anlage.baujahr}" headerText="Baujahr">  
+                                <h:outputText id="baujahr" value="#{anlage.baujahr}" />
+                            </p:column>
+
+                            <p:column sortBy="#{anlage.naechsteUVV}" headerText="Nächste UVV">  
+                                <h:outputText id="naechsteUVV" value="#{anlage.naechsteUVV}"   />
+                            </p:column>
+
+                            <p:column sortBy="#{anlage.naechsteWartung}" headerText="Nächste Wartung">  
+                                <h:outputText id="naechsteWartung" value="#{anlage.naechsteWartung}" />
+                            </p:column>
+
+                        </p:dataTable>  
+                    </p:panel>                    
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

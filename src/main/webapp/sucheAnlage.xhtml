@@ -82,11 +82,12 @@
 
                         </h:panelGrid>
                     </p:panel>
+                    
+                    <p:commandButton ajax="false" id="auftrag" action="#{anlageEdit.auftrag}" value="Auftrag machen">
+                        <f:setPropertyActionListener target="#{anlageEdit.idAnlagen}" value="#{anlageEdit.idAnlagen}"/>
+                    </p:commandButton>  
 
                 </h:form>
-
-
-
 
             </ui:define>
         </ui:composition>

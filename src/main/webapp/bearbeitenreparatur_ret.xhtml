@@ -49,11 +49,14 @@
                                 <f:selectItems id="selectableTechnikerList" value="#{repairSearch.selectableTechniker}" var="tech" itemValue="#{tech.idTechniker}" itemLabel="#{tech.nameTechniker}" />
                             </p:selectOneMenu>                                
 
+                            <h:outputLabel value="Nächste UVV:" for="dateNextUVV" />
+                            <p:calendar id="dateNextUVV" value="#{repairEdit.nextUVV}" required="false" locale="de" pattern="dd.MM.yyyy" />
+                                                        
                             <h:outputLabel value="Reparaturdatum:" for="dateRepaired" />
                             <p:calendar id="dateRepaired" value="#{repairEdit.repairDate}" required="false" locale="de" pattern="dd.MM.yyyy" />
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton action="#{repairEdit.update}" value="Repair Hinzufügen" />
+                    <p:commandButton action="#{repairEdit.update}" value="Nächste UVV  hinzüfugen" />
                 </h:form>
             </ui:define>
         </ui:composition>

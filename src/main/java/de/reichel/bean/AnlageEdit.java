@@ -4,12 +4,10 @@
  */
 package de.reichel.bean;
 
-import de.reichel.dao.AnlagenDAO;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionListener;
-import javax.inject.Inject;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Scope;
@@ -28,7 +26,7 @@ public class AnlageEdit extends AnlageBean {
     private static final Log log = LogFactory.getLog(AnlageEdit.class);
 
     public String update() {
-        log.debug("Update Angale called");
+        log.debug("Update Anlage called");
         anlagenDAO.updateAnlagen(this);
         return "index";
     }
@@ -39,4 +37,29 @@ public class AnlageEdit extends AnlageBean {
         anlagenDAO.loadAnlagen(this);
 //        return "index";
     }
+ 
+    public String geschichte() {
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        RepairEdit repairEdit = new RepairEdit();
+        repairEdit.setIdAnlagen(this.getIdAnlagen());
+        flash.put("repairEdit", repairEdit);
+        return "geschichteanlagen?faces-redirect=true";
+    }
+    
+    public String reparatur() {
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        RepairEdit repairEdit = new RepairEdit();
+        repairEdit.setIdAnlagen(this.getIdAnlagen());
+        flash.put("repairEdit", repairEdit);
+        return "geschichteanlagen?faces-redirect=true";
+    }  
+    
+    public String auftrag() {
+        log.debug("Load Repair is called");
+        RepairEdit repairEdit = new RepairEdit();
+        repairEdit.setIdAnlagen(this.getIdAnlagen());
+        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        flash.put("repairEdit", repairEdit);
+        return "neuereparatur?faces-redirect=true";
+    }    
 }

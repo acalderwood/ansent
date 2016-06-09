@@ -35,7 +35,7 @@ public class UvvBean implements Serializable {
 
     private static final Log log = LogFactory.getLog(UvvBean.class);
     @Inject
-    private UvvDAO uvvDAO;  
+    private UvvDAO uvvDAO;
     @Inject
     private AnlagenDAO anlagenDAO;
     private Object[] anlage;
@@ -43,6 +43,7 @@ public class UvvBean implements Serializable {
     private Kunden kunden;
     private Betreiber betreiber;
     private Integer idAnlagen;
+    protected Integer idStandort;
     private Integer idUvv;
     private Object[] uvv;
     private List<Object[]> uvvPunkte;
@@ -57,9 +58,19 @@ public class UvvBean implements Serializable {
     private String erledigtDurch;
     private String erledigtAm;
     private String bemerkung;
+    protected String plz;
+    protected Date uvvVon;
+    protected Date uvvBis;
+    protected List<Anlagen> uvvList;
     
     
-    
+    public List<Uvv> getUvvForMonthAndPlz() {
+        if (this.naechsteUvv != null) {
+            return uvvDAO.getUvvForMonthAndPlz(this.naechsteUvv, this.plz);
+        } else {
+            return new ArrayList<Uvv>();
+        }
+    }
 
     public List<Uvv> getSelectableUvv() {
         if (this.idAnlagen != null) {
@@ -67,6 +78,10 @@ public class UvvBean implements Serializable {
         } else {
             return new ArrayList<Uvv>();
         }
+    }
+    
+    public void loadUvvs() {
+        uvvDAO.loadUvvs(this);
     }
 
     public void processSelectedUvv() {
@@ -240,5 +255,75 @@ public class UvvBean implements Serializable {
      */
     public void setNaechsteUvv(Date naechsteUvv) {
         this.naechsteUvv = naechsteUvv;
+    }
+
+    /**
+     * @return the plz
+     */
+    public String getPlz() {
+        return plz;
+    }
+
+    /**
+     * @param plz the plz to set
+     */
+    public void setPlz(String plz) {
+        this.plz = plz;
+    }
+
+    /**
+     * @return the uvvVon
+     */
+    public Date getUvvVon() {
+        return uvvVon;
+    }
+
+    /**
+     * @param uvvVon the uvvVon to set
+     */
+    public void setUvvVon(Date uvvVon) {
+        this.uvvVon = uvvVon;
+    }
+
+    /**
+     * @return the uvvBis
+     */
+    public Date getUvvBis() {
+        return uvvBis;
+    }
+
+    /**
+     * @param uvvBis the uvvBis to set
+     */
+    public void setUvvBis(Date uvvBis) {
+        this.uvvBis = uvvBis;
+    }
+
+    /**
+     * @return the uvvList
+     */
+    public List<Anlagen> getUvvList() {
+        return uvvList;
+    }
+
+    /**
+     * @param uvvList the uvvList to set
+     */
+    public void setUvvList(List<Anlagen> uvvList) {
+        this.uvvList = uvvList;
+    }
+
+    /**
+     * @return the idStandort
+     */
+    public Integer getIdStandort() {
+        return idStandort;
+    }
+
+    /**
+     * @param idStandort the idStandort to set
+     */
+    public void setIdStandort(Integer idStandort) {
+        this.idStandort = idStandort;
     }
 }
